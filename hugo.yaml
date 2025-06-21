@@ -1,5 +1,5 @@
-baseURL: https://example.docsy.dev
-title: Goldydocs
+baseURL: https://api.seasalt.ai
+title: Seasalt.ai API Documentation
 
 # cSpell:ignore goldmark github hugo readingtime docsy subdir lastmod pygments linenos catmullrom norsk gu
 
@@ -30,7 +30,8 @@ pygmentsUseClasses: false
 pygmentsUseClassic: false
 # pygmentsOptions: "linenos=table"
 # See https://help.farbox.com/pygments.html
-pygmentsStyle: tango
+# https://richleland.github.io/pygments-css/
+pygmentsStyle: friendly
 
 # Configure how URLs look like per section.
 permalinks:
@@ -46,27 +47,27 @@ imaging:
 languages:
   en:
     languageName: English
-    title: Goldydocs
+    title: Seasalt.ai API Documentation
     params:
-      description: A Docsy example site
+      description: SeaChat API, SeaMeet API, SeaX API
   # cSpell:disable
-  'no':
-    languageName: Norsk
-    contentDir: content/no
-    title: Gulldoks
-    params:
-      description: Docsy er operativsystem for skyen
-      time_format_default: 02.01.2006
-      time_format_blog: 02.01.2006
-  fa:
-    languageDirection: rtl
-    languageName: "فارسی (Persian)"
-    contentDir: content/fa
-    title: "اسناد گلدی"
-    params:
-      description: "یک نمونه برای پوسته داکسی"
-      time_format_default: 2006.01.02
-      time_format_blog: 2006.01.02
+  # 'no':
+  #   languageName: Norsk
+  #   contentDir: content/no
+  #   title: Gulldoks
+  #   params:
+  #     description: Docsy er operativsystem for skyen
+  #     time_format_default: 02.01.2006
+  #     time_format_blog: 02.01.2006
+  # fa:
+  #   languageDirection: rtl
+  #   languageName: "فارسی (Persian)"
+  #   contentDir: content/fa
+  #   title: "اسناد گلدی"
+  #   params:
+  #     description: "یک نمونه برای پوسته داکسی"
+  #     time_format_default: 2006.01.02
+  #     time_format_blog: 2006.01.02
   # cSpell:enable
 
 markup:
@@ -78,7 +79,7 @@ markup:
       unsafe: true
   highlight:
     # See a complete list of available styles at https://xyproto.github.io/splash/docs/all.html
-    style: tango
+    style: friendly
     # Uncomment if you want your chosen highlight style used for code blocks without a specified language
     # guessSyntax: true
 
@@ -99,7 +100,7 @@ params:
     # set taxonomyPageHeader = [] to hide taxonomies on the page headers
     taxonomyPageHeader: [tags, categories]
 
-  privacy_policy: https://policies.google.com/privacy
+  privacy_policy: https://seasalt.ai/privacy
 
   # First one is picked as the Twitter card image if not set on page.
   # images: [images/project-illustration.png]
@@ -150,12 +151,13 @@ params:
 
   # User interface configuration
   ui:
+    showLightDarkModeMenu: true
     # Set to true to disable breadcrumb navigation.
     breadcrumb_disable: false
     # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top navbar
     navbar_logo: true
     # Set to true if you don't want the top navbar to be translucent when over a `block/cover`, like on the homepage.
-    navbar_translucent_over_cover_disable: false
+    navbar_translucent_over_cover_disable: true
     # Enable to show the side bar menu in its compact state.
     sidebar_menu_compact: false
     # Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
