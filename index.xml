@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/</link><description>Recent content on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Overview</title><link>https://api.seasalt.ai/docs/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/overview/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page that shows you how to use this template site.&lt;/p>
+
+&lt;/div>
+
+&lt;p>The Overview is where your users find out about your project. Depending on the
+size of your docset, you can have a separate overview page (like this one) or
+put your overview contents in the Documentation landing page (like in the Docsy
+User Guide).&lt;/p>
+&lt;p>Try answering these questions for your user in this page:&lt;/p>
+&lt;h2 id="what-is-it">What is it?&lt;a class="td-heading-self-link" href="#what-is-it" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Introduce your project, including what it does or lets you do, why you would use
+it, and its primary goal (and how it achieves it). This should be similar to
+your README description, though you can go into a little more detail here if you
+want.&lt;/p></description></item><item><title>SeaChat Swagger API</title><link>https://api.seasalt.ai/docs/getting-started/seachat-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/seachat-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;script>
+ window.onload = function () {
+ const ui = SwaggerUIBundle({
+ url: "/openapi/seachat.json",
+ dom_id: '#docsy_swagger_ui',
+ presets: [
+ SwaggerUIBundle.presets.apis,
+ SwaggerUIStandalonePreset
+ ]
+ });
+ window.ui = ui;
+ };
+&lt;/script></description></item><item><title>Bed and Chair Metrics</title><link>https://api.seasalt.ai/docs/tasks/beds/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tasks/beds/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Configuring Ponycopters</title><link>https://api.seasalt.ai/docs/tasks/ponycopters/configuring-ponycopters/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tasks/ponycopters/configuring-ponycopters/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>SeaChat Redoc API</title><link>https://api.seasalt.ai/docs/getting-started/seachat-redoc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/seachat-redoc/</guid><description>&lt;style>
+ #redoc input { height: 64px; }
+ #redoc span[type="put"], span[type="get"], span[type="delete"], span[type="post"], span[type="options"], span[type="patch"], span[type="basic"], span[type="link"], span[type="head"] {
+ border-radius: 4px;
+ }
+ #redoc h2 { margin-top: 0px;}
+ &lt;/style>
+ 
+ 
+ &lt;style>
+ #myBtn {
+ display: none;
+ position: fixed;
+ bottom: 20px;
+ right: 30px;
+ z-index: 99;
+ font-size: 18px;
+ border: none;
+ outline: none;
+ background-color: #30638E;
+ color: white;
+ cursor: pointer;
+ padding: 15px;
+ border-radius: 4px;
+ }
+ 
+ #myBtn:hover {
+ background-color: #555;
+ }
+ &lt;/style>
+ &lt;button onclick="topFunction()" id="myBtn" title="Go to top">Top&lt;/button>
+ &lt;script>
+ 
+ var mybutton = document.getElementById("myBtn");
+ 
+ 
+ window.onscroll = function() {scrollFunction()};
+ 
+ function scrollFunction() {
+ if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+ mybutton.style.display = "block";
+ } else {
+ mybutton.style.display = "none";
+ }
+ }
+ 
+ 
+ function topFunction() {
+ document.body.scrollTop = 0;
+ document.documentElement.scrollTop = 0;
+ }
+ &lt;/script>
+ 
+
+ 
+ &lt;style>
+ body {
+ margin: 0;
+ padding: 0;
+ }
+ &lt;/style>
+
+ 
+ &lt;div id="redoc-container">
+ &lt;redoc spec-url='https://api.seasalt.ai/openapi/seachat.json' hide-hostname="true" suppress-warnings="true" lazy-rendering native-scrollbars scroll-y-offset=".js-navbar-scroll" ZgotmplZ>&lt;/redoc>
+ &lt;/div>
+ 
+ &lt;script src="https://cdn.jsdelivr.net/npm/redoc@latest/bundles/redoc.standalone.js">&lt;/script>
+
+&lt;!-- see issue here: https://github.com/google/docsy/issues/1628 ></description></item><item><title>SeaChat Redoc API (iFrame)</title><link>https://api.seasalt.ai/docs/getting-started/seachat-iframe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/seachat-iframe/</guid><description>&lt;iframe width="100%" height=6000px src="https://chat.seasalt.ai/redoc" title="W3Schools Free Online Web Tutorials">&lt;/iframe></description></item><item><title>Examples</title><link>https://api.seasalt.ai/docs/examples/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/examples/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page that shows you how to use this template site.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Do you have any example &lt;strong>applications&lt;/strong> or &lt;strong>code&lt;/strong> for your users in your repo
+or elsewhere? Link to your examples here.&lt;/p></description></item><item><title>Launching Ponycopters</title><link>https://api.seasalt.ai/docs/tasks/ponycopters/launching-ponycopters/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tasks/ponycopters/launching-ponycopters/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Multi-Bear Domicile Setup</title><link>https://api.seasalt.ai/docs/tutorials/multi-bear/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tutorials/multi-bear/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Porridge Assessment</title><link>https://api.seasalt.ai/docs/tasks/porridge/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tasks/porridge/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Concepts</title><link>https://api.seasalt.ai/docs/concepts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/concepts/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page that shows you how to use this template site.&lt;/p>
+
+&lt;/div>
+
+&lt;p>For many projects, users may not need much information beyond the information in the &lt;a href="https://api.seasalt.ai/docs/overview/">Overview&lt;/a>, so this section is &lt;strong>optional&lt;/strong>. However if there are areas where your users will need a more detailed understanding of a given term or feature in order to do anything useful with your project (or to not make mistakes when using it) put that information in this section. For example, you may want to add some conceptual pages if you have a large project with many components and a complex architecture.&lt;/p></description></item><item><title>Another Task</title><link>https://api.seasalt.ai/docs/tasks/task/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tasks/task/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Another Tutorial</title><link>https://api.seasalt.ai/docs/tutorials/tutorial2/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tutorials/tutorial2/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Contribution Guidelines</title><link>https://api.seasalt.ai/docs/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/contribution-guidelines/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>These basic sample guidelines assume that your Docsy site is deployed using Netlify and your files are stored in GitHub. You can use the guidelines &amp;ldquo;as is&amp;rdquo; or adapt them with your own instructions: for example, other deployment options, information about your doc project&amp;rsquo;s file structure, project-specific review guidelines, versioning guidelines, or any other information your users might find useful when updating your site. &lt;a href="https://github.com/kubeflow/website/blob/master/README.md">Kubeflow&lt;/a> has a great example.&lt;/p>
+&lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p></description></item><item><title>Easy documentation with Docsy</title><link>https://api.seasalt.ai/blog/2018/10/06/easy-documentation-with-docsy/</link><pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/blog/2018/10/06/easy-documentation-with-docsy/</guid><description>&lt;p>&lt;strong>This is a typical blog post that includes images.&lt;/strong>&lt;/p>
+&lt;p>The front matter specifies the date of the blog post, its title, a short description that will be displayed on the blog landing page, and its author.&lt;/p>
+&lt;h2 id="including-images">Including images&lt;a class="td-heading-self-link" href="#including-images" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Here&amp;rsquo;s an image (&lt;code>featured-sunset-get.png&lt;/code>) that includes a byline and a caption.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 610px">
+&lt;img class="card-img-top" src="https://api.seasalt.ai/blog/2018/10/06/easy-documentation-with-docsy/featured-sunset-get_hu_ec172e7b7ea555c1.png" width="600" height="300">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+
+
+Fetch and scale an image in the upcoming Hugo 0.43.
+&lt;small class="text-body-secondary">&lt;br/>Photo: Riona MacNamara / CC-BY-CA&lt;/small>
+&lt;/p></description></item><item><title>Second blog post</title><link>https://api.seasalt.ai/blog/2018/10/06/second-blog-post/</link><pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/blog/2018/10/06/second-blog-post/</guid><description>&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://github.com">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs.&lt;/p>
+&lt;p>There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs.&lt;/p>
+&lt;blockquote>
+&lt;p>There should be no margin above this first sentence.&lt;/p></description></item><item><title>Another Great Release</title><link>https://api.seasalt.ai/blog/2018/01/04/another-great-release/</link><pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/blog/2018/01/04/another-great-release/</guid><description>&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://github.com">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs.&lt;/p>
+&lt;p>There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs.&lt;/p>
+&lt;blockquote>
+&lt;p>There should be no margin above this first sentence.&lt;/p></description></item><item><title>Example Page</title><link>https://api.seasalt.ai/docs/getting-started/example-page/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/example-page/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Parameter Reference</title><link>https://api.seasalt.ai/docs/reference/parameter-reference/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/reference/parameter-reference/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Search Results</title><link>https://api.seasalt.ai/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/search/</guid><description/></item></channel></rss>

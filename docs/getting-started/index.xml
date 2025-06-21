@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Getting Started on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/docs/getting-started/</link><description>Recent content in Getting Started on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/docs/getting-started/index.xml" rel="self" type="application/rss+xml"/><item><title>SeaChat Swagger API</title><link>https://api.seasalt.ai/docs/getting-started/seachat-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/seachat-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;script>
+ window.onload = function () {
+ const ui = SwaggerUIBundle({
+ url: "/openapi/seachat.json",
+ dom_id: '#docsy_swagger_ui',
+ presets: [
+ SwaggerUIBundle.presets.apis,
+ SwaggerUIStandalonePreset
+ ]
+ });
+ window.ui = ui;
+ };
+&lt;/script></description></item><item><title>SeaChat Redoc API</title><link>https://api.seasalt.ai/docs/getting-started/seachat-redoc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/seachat-redoc/</guid><description>&lt;style>
+ #redoc input { height: 64px; }
+ #redoc span[type="put"], span[type="get"], span[type="delete"], span[type="post"], span[type="options"], span[type="patch"], span[type="basic"], span[type="link"], span[type="head"] {
+ border-radius: 4px;
+ }
+ #redoc h2 { margin-top: 0px;}
+ &lt;/style>
+ 
+ 
+ &lt;style>
+ #myBtn {
+ display: none;
+ position: fixed;
+ bottom: 20px;
+ right: 30px;
+ z-index: 99;
+ font-size: 18px;
+ border: none;
+ outline: none;
+ background-color: #30638E;
+ color: white;
+ cursor: pointer;
+ padding: 15px;
+ border-radius: 4px;
+ }
+ 
+ #myBtn:hover {
+ background-color: #555;
+ }
+ &lt;/style>
+ &lt;button onclick="topFunction()" id="myBtn" title="Go to top">Top&lt;/button>
+ &lt;script>
+ 
+ var mybutton = document.getElementById("myBtn");
+ 
+ 
+ window.onscroll = function() {scrollFunction()};
+ 
+ function scrollFunction() {
+ if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+ mybutton.style.display = "block";
+ } else {
+ mybutton.style.display = "none";
+ }
+ }
+ 
+ 
+ function topFunction() {
+ document.body.scrollTop = 0;
+ document.documentElement.scrollTop = 0;
+ }
+ &lt;/script>
+ 
+
+ 
+ &lt;style>
+ body {
+ margin: 0;
+ padding: 0;
+ }
+ &lt;/style>
+
+ 
+ &lt;div id="redoc-container">
+ &lt;redoc spec-url='https://api.seasalt.ai/openapi/seachat.json' hide-hostname="true" suppress-warnings="true" lazy-rendering native-scrollbars scroll-y-offset=".js-navbar-scroll" ZgotmplZ>&lt;/redoc>
+ &lt;/div>
+ 
+ &lt;script src="https://cdn.jsdelivr.net/npm/redoc@latest/bundles/redoc.standalone.js">&lt;/script>
+
+&lt;!-- see issue here: https://github.com/google/docsy/issues/1628 ></description></item><item><title>SeaChat Redoc API (iFrame)</title><link>https://api.seasalt.ai/docs/getting-started/seachat-iframe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/seachat-iframe/</guid><description>&lt;iframe width="100%" height=6000px src="https://chat.seasalt.ai/redoc" title="W3Schools Free Online Web Tutorials">&lt;/iframe></description></item><item><title>Example Page</title><link>https://api.seasalt.ai/docs/getting-started/example-page/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/example-page/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+
+&lt;/div>
+
+&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item></channel></rss>
