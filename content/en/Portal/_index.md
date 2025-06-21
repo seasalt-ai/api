@@ -1,7 +1,8 @@
 ---
 title: Documentation
-linkTitle: Docs
-menu: {main: {weight: 50}}
+linkTitle: Portal API
+type: docs
+menu: {main: {weight: 40}}
 ---
 
 {{% pageinfo %}}

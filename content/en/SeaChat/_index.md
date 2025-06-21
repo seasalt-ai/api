@@ -2,7 +2,7 @@
 title: Documentation
 linkTitle: SeaChat API
 type: docs
-menu: {main: {weight: 20}}
+menu: {main: {weight: 10}}
 ---
 
 {{% pageinfo %}}
