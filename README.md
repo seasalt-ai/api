@@ -13,6 +13,8 @@ If you have missing dependencies, then [install Hugo](https://gohugo.io/getting-
 
 To develop, follow [Docsy's Get Started](https://www.docsy.dev/docs/get-started/).
 
+CICD is setup, so as soon as a PR is merged to `main`, it'll deploy to api.seasalt.ai through `gh-pages`.
+
 # Docsy Example
 
 [Docsy][] is a [Hugo theme module][] for technical documentation sites, providing easy
