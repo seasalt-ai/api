@@ -121,13 +121,13 @@ params:
 
   # A link to latest version of the docs. Used in the "version-banner" partial to
   # point people to the main doc site.
-  url_latest_version: https://example.com
+  url_latest_version: https://api.seasalt.ai
 
   # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-  github_repo: https://github.com/google/docsy-example
+  github_repo: https://github.com/seasalt-ai/api
 
   # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-  github_project_repo: https://github.com/google/docsy
+  github_project_repo: https://github.com/seasalt-ai/api
 
   # Specify a value here if your content directory is not in your repo's root directory
   # github_subdir: ""
@@ -189,25 +189,17 @@ params:
         icon: fa fa-envelope
         desc: Discussion and help from your fellow users
       - name: Twitter
-        url: https://example.org/twitter
+        url: https://x.com/seasaltai
         icon: fab fa-twitter
         desc: Follow us on Twitter to get the latest news!
-      - name: Stack Overflow
-        url: https://example.org/stack
-        icon: fab fa-stack-overflow
-        desc: Practical questions and curated answers
     # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
     developer:
       - name: GitHub
-        url: https://github.com/google/docsy
+        url: https://github.com/seasalt-ai/api
         icon: fab fa-github
         desc: Development takes place here!
-      - name: Slack
-        url: https://example.org/slack
-        icon: fab fa-slack
-        desc: Chat with other project developers
       - name: Developer mailing list
-        url: https://example.org/mail
+        url: mailto:info@seasalt.ai
         icon: fa fa-envelope
         desc: Discuss development issues around the project
 

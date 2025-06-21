@@ -1,3 +1,18 @@
+# Get Started
+
+This repo reuses Google's Docsy, which is built on top of [Hugo](https://gohugo.io/). 
+
+You can simply run it with:
+
+```
+hugo server -w
+```
+
+If you have missing dependencies, then [install Hugo](https://gohugo.io/getting-started/quick-start/) first.
+
+
+To develop, follow [Docsy's Get Started](https://www.docsy.dev/docs/get-started/).
+
 # Docsy Example
 
 [Docsy][] is a [Hugo theme module][] for technical documentation sites, providing easy
