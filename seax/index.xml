@@ -1,1 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeaX API Wiki on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/seax/</link><description>Recent content in SeaX API Wiki on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/seax/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeaX API Wiki on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/seax/</link><description>Recent content in SeaX API Wiki on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/seax/index.xml" rel="self" type="application/rss+xml"/><item><title>Refeactored SeaX Multi-Channel Messaging API Wiki (Refactored)</title><link>https://api.seasalt.ai/seax/refactored/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/refactored/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The SeaX Multi-Channel Messaging API is a comprehensive communication platform that enables businesses to integrate and automate messaging across SMS, WhatsApp, and voice channels. Built for scalability and enterprise use, SeaX provides unified tools for multi-channel campaigns, contact management, and conversational workflows across all major messaging platforms.&lt;/p>
+&lt;h2 id="supported-channels">Supported Channels&lt;a class="td-heading-self-link" href="#supported-channels" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h3 id="-sms--mms-messaging">📱 SMS &amp;amp; MMS Messaging&lt;a class="td-heading-self-link" href="#-sms--mms-messaging" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Bulk SMS Campaigns&lt;/strong>: Send text messages to large contact lists&lt;/li>
+&lt;li>&lt;strong>MMS Support&lt;/strong>: Share images, videos, and rich media content&lt;/li>
+&lt;li>&lt;strong>Two-Way Messaging&lt;/strong>: Receive replies and engage in SMS conversations&lt;/li>
+&lt;li>&lt;strong>Delivery Reports&lt;/strong>: Track message delivery status and engagement&lt;/li>
+&lt;/ul>
+&lt;h3 id="-whatsapp-business-platform">💬 WhatsApp Business Platform&lt;a class="td-heading-self-link" href="#-whatsapp-business-platform" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Rich Media Messages&lt;/strong>: Send images, documents, videos, and audio&lt;/li>
+&lt;li>&lt;strong>Template Messages&lt;/strong>: Use pre-approved templates for notifications&lt;/li>
+&lt;li>&lt;strong>Interactive Messages&lt;/strong>: Buttons, lists, and quick reply options&lt;/li>
+&lt;li>&lt;strong>Business API Compliance&lt;/strong>: Full WhatsApp Business API integration&lt;/li>
+&lt;li>&lt;strong>Highly Structured Messages (HSM)&lt;/strong>: Certified template messaging&lt;/li>
+&lt;/ul>
+&lt;h3 id="-voice--phone-calls">📞 Voice &amp;amp; Phone Calls&lt;a class="td-heading-self-link" href="#-voice--phone-calls" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Auto Dialer Campaigns&lt;/strong>: Automated outbound call campaigns&lt;/li>
+&lt;li>&lt;strong>Custom Call Scripts&lt;/strong>: Dynamic call flows and interactions&lt;/li>
+&lt;li>&lt;strong>Interactive Voice Response (IVR)&lt;/strong>: Menu-driven call handling&lt;/li>
+&lt;li>&lt;strong>Call Recording&lt;/strong>: Record and analyze call interactions&lt;/li>
+&lt;li>&lt;strong>Callback Management&lt;/strong>: Handle inbound calls and callbacks&lt;/li>
+&lt;/ul>
+&lt;h2 id="key-features">Key Features&lt;a class="td-heading-self-link" href="#key-features" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Unified Contact Management&lt;/strong>: Manage contacts across all channels from one platform&lt;/li>
+&lt;li>&lt;strong>Multi-Channel Campaigns&lt;/strong>: Coordinate messaging across SMS, WhatsApp, and voice&lt;/li>
+&lt;li>&lt;strong>Advanced Analytics&lt;/strong>: Track performance metrics across all channels&lt;/li>
+&lt;li>&lt;strong>Webhook Integrations&lt;/strong>: Real-time notifications for all channel events&lt;/li>
+&lt;li>&lt;strong>Template Management&lt;/strong>: Consistent messaging templates across channels&lt;/li>
+&lt;li>&lt;strong>Conversation Threading&lt;/strong>: Unified conversation views across channels&lt;/li>
+&lt;/ul>
+&lt;h2 id="authentication">Authentication&lt;a class="td-heading-self-link" href="#authentication" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>SeaX API uses API key authentication. To obtain your API key:&lt;/p></description></item><item><title>Refactoring Guide - From Bulk SMS to Multi-Channel Messaging</title><link>https://api.seasalt.ai/seax/refactoring-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/refactoring-guide/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>This document outlines the refactoring of the SeaX API from a &amp;ldquo;Bulk SMS&amp;rdquo; focused service to a comprehensive &amp;ldquo;Multi-Channel Messaging API&amp;rdquo; that accurately represents its support for SMS, WhatsApp, and voice communications.&lt;/p>
+&lt;h2 id="problem-statement">Problem Statement&lt;a class="td-heading-self-link" href="#problem-statement" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The original SeaX API specification presented itself as &amp;ldquo;SeaX Bulk SMS&amp;rdquo; despite supporting:&lt;/p>
+&lt;ul>
+&lt;li>📱 SMS &amp;amp; MMS messaging&lt;/li>
+&lt;li>💬 WhatsApp Business Platform integration&lt;/li>
+&lt;li>📞 Voice calls and auto-dialer campaigns&lt;/li>
+&lt;/ul>
+&lt;p>This created confusion for developers who weren&amp;rsquo;t aware of the full multi-channel capabilities.&lt;/p></description></item></channel></rss>
