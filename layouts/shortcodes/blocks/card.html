@@ -1,0 +1,17 @@
+<div class="card custom-api-card mb-4" style="border-radius: 16px; background: #23272b; color: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border: 1px solid #444;">
+  <div class="card-body p-4">
+    <h3 class="card-title mb-2" style="color: #1ec6e6;">{{ .Get "title" }}</h3>
+    <div class="card-subtitle mb-3 text-muted" style="font-size: 1.1rem; color: #b0b0b0;">{{ .Get "subtitle" }}</div>
+    <ul class="list-unstyled mb-4">
+      {{ .Inner }}
+    </ul>
+    <div class="d-flex gap-2">
+      {{ with .Get "primary_url" }}
+        <a href="{{ . }}" class="btn btn-info" style="color: #fff;">{{ $.Get "primary_text" }}</a>
+      {{ end }}
+      {{ with $.Get "secondary_url" }}
+        <a href="{{ . }}" class="btn btn-outline-light">{{ $.Get "secondary_text" }}</a>
+      {{ end }}
+    </div>
+  </div>
+</div>
