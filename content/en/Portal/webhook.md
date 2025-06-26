@@ -25,25 +25,7 @@ You can also access the RESTful API docs of SeaNotify here:
 
 ## Prerequisites
 
-Before you can interact with the SeaNotify API, ensure the following are in
-place:
-
-### **1\. A Seasuite Portal Account**
-
-Sign up or log into your [Seasuite Portal](https://portal.seasalt.ai/).
-
-### **2\. Generate Your API Key**
-
-All APIs require a valid API key issued from your workspace.
-
-- Go to **Settings → API Key** tab.
-
-- Click **Add New Key**.
-
-- Copy the key and keep it safe. This key is required in the `X-API-KEY` header
-  for **all requests**.
-
-### **3\. Prepare Your Webhook Receiver**
+**Prepare Your Webhook Receiver**
 
 Your server must:
 
@@ -84,7 +66,7 @@ You must provide your API key in the `X-API-KEY` header.
 | `is_enabled`  | `boolean`         | ✅       | Whether the subscription is active (`true`) or paused (`false`).      |
 | `type`        | `string`          |          | Subscription source. Options: `"SEASALT"` (default), `"ZAPIER"`       |
 
-#### Supported Event Types
+**Supported Event Types**
 
 To get a list of supported event types, you can use
 [this endpoint](#get-all-supported-event-types).
