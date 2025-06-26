@@ -59,7 +59,7 @@ Your server must:
 
 This section explains how to manage webhook subscriptions in your workspace.
 
-### Create a Subscription
+### **Create a Subscription**
 
 Create a new webhook subscription in your SeaNotify workspace.
 
@@ -107,7 +107,7 @@ To get a list of supported event types, you can use
 
 #### Sample Request
 
-```bash
+```javascript
 curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription" \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -120,9 +120,9 @@ curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/
   }'
 ```
 
-#### Successful Response
+#### Sample Successful Response
 
-```bash
+```javascript
 {
   "webhook_url": "https://api.example.com/webhook",
   "event_types": [
@@ -135,7 +135,7 @@ curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/
 }
 ```
 
-### Retrieve a Subscription
+### **Retrieve a Subscription**
 
 This endpoint retrieves the details of a specific webhook subscription by its
 ID.
@@ -150,14 +150,14 @@ You must provide your API key in the `X-API-KEY` header.
 
 #### Sample Request
 
-```bash
+```javascript
 curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}" \
   -H "X-API-KEY: <your_api_key>"
 ```
 
-#### Successful Response
+#### Sample Successful Response
 
-```bash
+```javascript
 {
   "webhook_url": "https://api.example.com/webhook",
   "event_types": [
@@ -192,16 +192,16 @@ not provided, we will return the all the subscriptions for the workspace.
 
 ##### Sample Request
 
-```bash
+```javascript
 curl -X GET
 https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription
 -H 'X-API-KEY: <your_api_key>'
 
 ```
 
-##### Successful Response
+##### Sample Successful Response
 
-```bash
+```javascript
 {
   "subscriptions": [
     {
@@ -223,7 +223,7 @@ https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription
 
 ```
 
-### Update a Subscription
+### **Update a Subscription**
 
 Modify an existing webhook subscription to update its webhook URL, event types,
 status, or type.
@@ -236,7 +236,7 @@ status, or type.
 
 This endpoint requires an API key passed in the `X-API-KEY` header.
 
-#### Request Body / Query Parameter
+#### Request Body
 
 | Field       | Type     | Required | Description                                        |
 | ----------- | -------- | -------- | -------------------------------------------------- |
@@ -248,7 +248,7 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 
 #### Sample Request
 
-```bash
+```javascript
 curl -X PATCH "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}" \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -261,9 +261,9 @@ curl -X PATCH "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}
 
 ```
 
-##### Successful Response
+##### Sample Successful Response
 
-```bash
+```javascript
 {
   "webhook_url": "https://api.example.com/webhook",
   "event_types": [
@@ -281,7 +281,7 @@ curl -X PATCH "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}
 
 ```
 
-### Remove a Subscription
+### **Remove a Subscription**
 
 Delete an existing webhook subscription from your workspace. This action
 permanently disables event delivery to the specified webhook URL.
@@ -294,27 +294,18 @@ permanently disables event delivery to the specified webhook URL.
 
 This endpoint requires an API key passed in the `X-API-KEY` header.
 
-#### Request Body / Query Parameter
-
-No request body is required.
-
 #### Sample Request
 
-```bash
+```javascript
 curl -X DELETE "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}" \
   -H "X-API-KEY: <your_api_key>"
 ```
 
-##### Successful Response
+##### Sample Successful Response
 
 HTTP Status Code: 204 No Content
 
-## Get a List of Supported Events
-
-Lists and explains all available event types supported. This helps you
-understand which events your webhook can listen to
-
-### Get All Supported Event Types
+## **Get a List of Supported Events**
 
 Retrieve a list of all event types that can be used when creating or updating
 webhook subscriptions. Each event type includes a brief description of when it
@@ -328,86 +319,81 @@ is triggered.
 
 This endpoint requires an API key passed in the `X-API-KEY` header.
 
-#### Request Body / Query Parameter
-
-No request body or query parameters are required.
-
 #### Sample Request
 
-```bash
+```javascript
 curl -X GET "https://portal.seasalt.ai/notify/api/v1/event_types" \
   -H "X-API-KEY: <your_api_key>"
 ```
 
-##### Successful Response
+##### Sample Successful Response
 
-```bash
+```javascript
 [
   {
-    "event_type": "conversation.new",
-    "description": "Triggered when a new conversation is created"
+    event_type: 'conversation.new',
+    description: 'Triggered when a new conversation is created',
   },
   {
-    "event_type": "conversation.updated",
-    "description": "Triggered when a conversation is updated"
+    event_type: 'conversation.updated',
+    description: 'Triggered when a conversation is updated',
   },
   {
-    "event_type": "message.new",
-    "description": "Triggered when a message is sent"
+    event_type: 'message.new',
+    description: 'Triggered when a message is sent',
   },
   {
-    "event_type": "conversation.ended",
-    "description": "Triggered when a conversation is ended"
+    event_type: 'conversation.ended',
+    description: 'Triggered when a conversation is ended',
   },
   {
-    "event_type": "conversation.label.added",
-    "description": "Triggered when a label is added to a conversation"
+    event_type: 'conversation.label.added',
+    description: 'Triggered when a label is added to a conversation',
   },
   {
-    "event_type": "conversation.label.deleted",
-    "description": "Triggered when a label is removed from a conversation"
+    event_type: 'conversation.label.deleted',
+    description: 'Triggered when a label is removed from a conversation',
   },
   {
-    "event_type": "call.new",
-    "description": "Triggered when a call starts"
+    event_type: 'call.new',
+    description: 'Triggered when a call starts',
   },
   {
-    "event_type": "call.ended",
-    "description": "Triggered when a call ends"
+    event_type: 'call.ended',
+    description: 'Triggered when a call ends',
   },
   {
-    "event_type": "call.updated",
-    "description": "Triggered when a call summary is generated"
+    event_type: 'call.updated',
+    description: 'Triggered when a call summary is generated',
   },
   {
-    "event_type": "call.missed",
-    "description": "Triggered when a call is missed"
+    event_type: 'call.missed',
+    description: 'Triggered when a call is missed',
   },
   {
-    "event_type": "contact.new",
-    "description": "Triggered when a contact is created"
+    event_type: 'contact.new',
+    description: 'Triggered when a contact is created',
   },
   {
-    "event_type": "contact.updated",
-    "description": "Triggered when a contact is updated"
+    event_type: 'contact.updated',
+    description: 'Triggered when a contact is updated',
   },
   {
-    "event_type": "contact.deleted",
-    "description": "Triggered when a contact is deleted"
+    event_type: 'contact.deleted',
+    description: 'Triggered when a contact is deleted',
   },
   {
-    "event_type": "contact.label.added",
-    "description": "Triggered when a label is added to a contact"
+    event_type: 'contact.label.added',
+    description: 'Triggered when a label is added to a contact',
   },
   {
-    "event_type": "contact.label.deleted",
-    "description": "Triggered when a label is removed from a contact"
-  }
-]
-
+    event_type: 'contact.label.deleted',
+    description: 'Triggered when a label is removed from a contact',
+  },
+];
 ```
 
-## Test Your Webhook and know what will be sent
+## **Test Your Webhook and Know What Will Be Sent**
 
 Simulate different types of events to validate your webhook endpoint. This
 section walks you through:
@@ -432,7 +418,7 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 
 #### Sample Request
 
-```bash
+```javascript
 curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/test" \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -442,7 +428,62 @@ curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/
   }'
 ```
 
-## View Delivery Logs
+##### Sample Successful Response
+
+The actual response body sent to your webhook_url depends on the `event_type`
+provided. Below is an example response for the `conversation.new` event type:
+
+```javascript
+{
+  "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
+  "affect": "add",
+  "version": "0.0.1",
+  "timestamp": "2025-06-20T23:44:30.000000",
+  "event_type": "conversation.new",
+  "workspace": {
+    "id": "workspace-123",
+    "name": "Test Workspace"
+  },
+  "source": {
+    "id": "source-456",
+    "type": "WEBCHAT",
+    "identifier": "Test AI Agent"
+  },
+  "data": {
+    "conversation_id": "conv-789",
+    "conversation_title": "Example Conversation",
+    "channel": "WEBCHAT",
+    "customer": {
+      "id": "cust-001",
+      "name": "Test User",
+      "email": "Test@example.com",
+      "phone": "+123456789",
+      "address": "Test AI Agent",
+      "channel": "WEBCHAT"
+    },
+    "latest_inbound_message": {
+      "id": "msg-in-123456",
+      "direction": "INBOUND",
+      "text": "Hello, I need help!",
+      "type": "text",
+      "created_at": "2025-06-20T23:44:00.000000"
+    },
+    "latest_outbound_message": {
+      "id": "msg-out-123456",
+      "direction": "OUTBOUND",
+      "text": "Sure, how can I assist?",
+      "type": "text",
+      "created_at": "2025-06-20T23:44:30.000000"
+    }
+  },
+  "subscription_created_by": "Test_user",
+  "subscription_updated_by": "Test_user"
+}
+
+
+```
+
+## **View Delivery Logs**
 
 Learn how to retrieve delivery logs for your webhooks and what you can expect in
 logs.
@@ -460,6 +501,10 @@ filter results by event type, delivery status, date range, and more.
 
 This endpoint requires an API key passed in the `X-API-KEY` header.
 
+#### Query Parameter
+
+The following optional query parameters are supported.
+
 | Name              | Type     | Description                                                          |
 | ----------------- | -------- | -------------------------------------------------------------------- |
 | `event_type`      | string   | Filter logs by event type (e.g. `conversation.new`)                  |
@@ -470,14 +515,14 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 | `limit`           | integer  | Maximum number of results (default: 0 for unlimited)                 |
 | `offset`          | integer  | Number of results to skip (default: 0)                               |
 
-#### Order By Options
+_Order By Options_
 
 The `order_by` query parameter allows you to sort the delivery logs by a
 specific field and direction.  
 The format is `field:direction`, where direction can be either `asc` for
 ascending or `desc` for descending.
 
-**Supported fields for ordering:**
+**Supported fields for Order By:**
 
 | `order_by` Value       | Description                                     |
 | ---------------------- | ----------------------------------------------- |
@@ -494,15 +539,15 @@ If not specified, the default is `created_at:desc`.
 
 #### Sample Request
 
-```bash
+```javascript
 curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/logs?event_type=conversation.new&delivery_status=success&order_by=created_at:desc&limit=10&offset=0" \
   -H "X-API-KEY: <your_api_key>"
 
 ```
 
-##### Successful Response
+##### Sample Successful Response
 
-```bash
+```javascript
 {
   "total": 1,
   "data": [
@@ -543,7 +588,7 @@ curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/l
 
 ```
 
-### Get Webhook Delivery Logs for a Subscription
+### **Get Webhook Delivery Logs for a Subscription**
 
 Retrieve webhook delivery logs tied to a specific subscription. Supports
 optional filtering by event type, delivery status, date range, ordering, and
@@ -591,15 +636,15 @@ If not specified, the default is `created_at:desc`.
 
 #### Sample Request
 
-```bash
+```javascript
 curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/logs/{subscription_id}?event_type=conversation.new&delivery_status=success&order_by=created_at:desc&limit=10&offset=0" \
   -H "X-API-KEY: <your_api_key>"
 
 ```
 
-##### Successful Response
+##### Sample Successful Response
 
-```bash
+```javascript
 {
   "total": 1,
   "data": [
@@ -640,7 +685,7 @@ curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/l
 
 ```
 
-### Export Webhook Delivery Logs to Email
+### **Export Webhook Delivery Logs to Email**
 
 Export webhook delivery logs for a workspace within a specific date range and
 receive a download link via email.
@@ -668,7 +713,7 @@ as: en-US, zh-TW, zh-CN, ja-JP, fr-FR, de-DE, es, vi-VN, etc.
 
 ##### Sample Request
 
-```bash
+```javascript
 curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/logs/export" \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -680,9 +725,9 @@ curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/
   }'
 ```
 
-##### Successful Response
+##### Sample Successful Response
 
-```bash
+```javascript
 {
   "job_id": "export_job_abc123",
   "message": "Log export job started. You will receive an email once the file is ready."
