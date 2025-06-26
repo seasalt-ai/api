@@ -12,7 +12,7 @@ real-time updates from Seasalt products like SeaChat. Whether you want to track
 new conversations, missed calls, or contact changes, SeaNotify ensures you stay
 informed the moment it happens. With support for multiple event types and
 delivery modes (immediate, delayed, batched), SeaNotify is ideal for diverse
-automation and integration need This section introduces the SeaNotify API, a
+automation and integration needs. This section introduces the SeaNotify API, a
 webhook-based notification system that allows your application to receive
 real-time updates when specific events occur within the Seasalt platform. You'll
 learn how SeaNotify fits into the broader Seasalt architecture and what problems
@@ -164,8 +164,8 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 
 #### Query Parameter
 
-We supports the following optional queries so you can retrieve subscriptions. If
-not provided, we will return the all the subscriptions for the workspace.
+We support the following optional queries to retrieve subscriptions. If
+not provided, all subscriptions for the workspace will be returned.
 
 | Name       | Type   | Required | Default           | Description                                                   |
 | ---------- | ------ | -------- | ----------------- | ------------------------------------------------------------- |
