@@ -1,8 +1,8 @@
 ---
-title: Webhook
-linkTitle: Webhook API
+title: Analytics
+linkTitle: Analytics API
 type: docs
-weight: 1
+weight: 2
 ---
 
 ## Heading
