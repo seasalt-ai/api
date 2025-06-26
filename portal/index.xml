@@ -2,7 +2,10 @@
 &lt;p>Edit this template to create your new page.&lt;/p>
 &lt;ul>
 &lt;li>Give it a good name, ending in &lt;code>.md&lt;/code> - e.g. &lt;code>getting-started.md&lt;/code>&lt;/li>
-&lt;li>Edit the &amp;ldquo;front matter&amp;rdquo; section at the top of the page (weight controls how its ordered amongst other pages in the same directory; lowest number first).&lt;/li>
-&lt;li>Add a good commit message at the bottom of the page (&amp;lt;80 characters; use the extended description field for more detail).&lt;/li>
-&lt;li>Create a new branch so you can preview your new file and request a review via Pull Request.&lt;/li>
+&lt;li>Edit the &amp;ldquo;front matter&amp;rdquo; section at the top of the page (weight controls how
+its ordered amongst other pages in the same directory; lowest number first).&lt;/li>
+&lt;li>Add a good commit message at the bottom of the page (&amp;lt;80 characters; use the
+extended description field for more detail).&lt;/li>
+&lt;li>Create a new branch so you can preview your new file and request a review via
+Pull Request.&lt;/li>
 &lt;/ul></description></item></channel></rss>
