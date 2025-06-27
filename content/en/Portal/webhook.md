@@ -1,25 +1,24 @@
 ---
-title: Webhook
-linkTitle: Webhook API
+title: Event Webhooks 
+linkTitle: Event Webhooks API Tutorial
 type: docs
 weight: 1
 ---
 
 ## Overview
 
-SeaNotify is a webhook-based notification system that lets your services receive
+A webhook-based notification system that lets your services receive
 real-time updates from Seasalt products like SeaChat. Whether you want to track
-new conversations, missed calls, or contact changes, SeaNotify ensures you stay
+new conversations, missed calls, or contact changes, using the following endpoints ensures you stay
 informed the moment it happens. With support for multiple event types and
-delivery modes (immediate, delayed, batched), SeaNotify is ideal for diverse
-automation and integration needs. This section introduces the SeaNotify API, a
+delivery modes (immediate, delayed, batched), Portal's Event Webhooks are ideal for diverse
+automation and integration needs. This section introduces the Event Webhooks API, a
 webhook-based notification system that allows your application to receive
 real-time updates when specific events occur within the Seasalt platform. You'll
-learn how SeaNotify fits into the broader Seasalt architecture and what problems
+learn how Event Webhooks fits into the broader Seasalt architecture and what problems
 it solves.
 
-You can also access the RESTful API docs of SeaNotify here:  
-[https://portal.seasalt.ai/notify/redoc](https://portal.seasalt.ai/notify/redoc)
+You can also access the RESTful API docs of Event Webhooks [here](./Docs/notify-api/)
 
 ---
 
@@ -43,14 +42,14 @@ This section explains how to manage webhook subscriptions in your workspace.
 
 ### **Create a Subscription**
 
-Create a new webhook subscription in your SeaNotify workspace.
+Create a new webhook subscription in your Portal workspace.
 
 #### Endpoint
 
 `POST /api/v1/workspaces/{workspace_id}/subscription`
 
 Use this endpoint to register a webhook that will receive event notifications
-from SeaNotify.
+from Portal.
 
 #### Authorization
 

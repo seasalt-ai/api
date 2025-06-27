@@ -1,6 +1,6 @@
 ---
 title: Analytics
-linkTitle: Analytics API
+linkTitle: Analytics API Tutorial
 type: docs
 weight: 2
 ---
