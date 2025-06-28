@@ -46,7 +46,7 @@ Create a new webhook subscription in your Portal workspace.
 
 #### Endpoint
 
-`POST /api/v1/workspaces/{workspace_id}/subscription`
+`POST https://portal.seasalt.ai/notify-api/api/v1/workspaces/{workspace_id}/subscription`
 
 Use this endpoint to register a webhook that will receive event notifications
 from Portal.
@@ -123,7 +123,7 @@ ID.
 
 #### Endpoint
 
-`GET /api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
+`GET https://portal.seasalt.ai/notify-api/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
 
 #### Authorization
 
@@ -155,7 +155,7 @@ curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/s
 
 #### Endpoint
 
-`GET /api/v1/workspaces/{workspace_id}/subscription`
+`GET https://portal.seasalt.ai/notify-api/api/v1/workspaces/{workspace_id}/subscription`
 
 #### Authorization
 
@@ -211,7 +211,7 @@ status, or type.
 
 #### Endpoint
 
-`PATCH /api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
+`PATCH https://portal.seasalt.ai/notify-api/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
 
 #### Authorization
 
@@ -269,7 +269,7 @@ permanently disables event delivery to the specified webhook URL.
 
 #### Endpoint
 
-`DELETE /api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
+`DELETE https://portal.seasalt.ai/notify-api/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
 
 #### Authorization
 
@@ -294,7 +294,7 @@ is triggered.
 
 #### Endpoint
 
-`GET /api/v1/event_types`
+`GET https://portal.seasalt.ai/notify-api/api/v1/event_types`
 
 #### Authorization
 
@@ -384,7 +384,7 @@ section walks you through:
 
 #### Endpoint
 
-`POST /api/v1/workspaces/{workspace_id}/test`
+`POST https://portal.seasalt.ai/notify-api/api/v1/workspaces/{workspace_id}/test`
 
 #### Authorization
 
@@ -476,7 +476,7 @@ filter results by event type, delivery status, date range, and more.
 
 #### Endpoint
 
-`GET /api/v1/workspaces/{workspace_id}/logs`
+`GET https://portal.seasalt.ai/notify-api/api/v1/workspaces/{workspace_id}/logs`
 
 #### Authorization
 
@@ -577,7 +577,7 @@ pagination.
 
 #### Endpoint
 
-`GET /api/v1/workspaces/{workspace_id}/logs/{subscription_id}`
+`GET https://portal.seasalt.ai/notify-api/api/v1/workspaces/{workspace_id}/logs/{subscription_id}`
 
 #### Authorization
 
@@ -673,7 +673,7 @@ receive a download link via email.
 
 #### Endpoint
 
-`POST /api/v1/workspaces/{workspace_id}/logs/export`
+`POST https://portal.seasalt.ai/notify-api/api/v1/workspaces/{workspace_id}/logs/export`
 
 #### Authorization
 
