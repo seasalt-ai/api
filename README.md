@@ -15,6 +15,10 @@ To develop, follow [Docsy's Get Started](https://www.docsy.dev/docs/get-started/
 
 CICD is setup, so as soon as a PR is merged to `main`, it'll deploy to api.seasalt.ai through `gh-pages`.
 
+# OpenAPI advanced usage
+
+checkout the `demo-openapi-callbacks` folder to see how to make OpenAPI generate the Swagger UI for requests made to 3rd party callbacks.
+
 # Docsy Example
 
 [Docsy][] is a [Hugo theme module][] for technical documentation sites, providing easy
