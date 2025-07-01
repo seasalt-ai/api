@@ -9,7 +9,7 @@ weight: 2
 
 The Analytics endpoint provides a unified interface for retrieving workspace-level analytics across various metrics, including message activity, call volume, label usage, and conversation summaries. By submitting structured query parameters, you can generate detailed reports based on custom time ranges, aggregation units (day, month, year), and filters such as labels or handling status. The endpoint supports multiple metric types, each returning structured and contextualized data to help you monitor performance, identify trends, and make data-driven decisions. Authentication via API key is required to ensure secure access to workspace data.
 
-You can also access the RESTful API docs of Event Webhooks [here](./Docs/notify-api/)
+You can also access the RESTful API docs of Portal API [here](./Docs/portal-api/)
 
 ---
 
@@ -72,7 +72,7 @@ This metric provides a **summary of today’s communication activity**. It shows
 
 **Sample Request**
 ```javascript
-curl -X POST https://portal.seasalt.ai/notify/api/v1/generate_analytics \
+curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -125,7 +125,7 @@ This metric tracks **how your communication activity changes over time**. You ca
 
 **Sample Request**
 ```javascript
-curl -X POST https://portal.seasalt.ai/notify/api/v1/generate_analytics \
+curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -192,7 +192,7 @@ Returns label usage statistics over time, grouped by the specified `time_unit` (
 
 **Sample Request**
 ```javascript
-curl -X POST https://portal.seasalt.ai/notify/api/v1/generate_analytics \
+curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -250,7 +250,7 @@ Returns a **summary of total usage** over a specified time range, including tota
 
 **Sample Request**
 ```javascript
-curl -X POST https://portal.seasalt.ai/notify/api/v1/generate_analytics \
+curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -299,7 +299,7 @@ Returns the **total number of conversations** per time period (e.g., by month), 
 
 **Sample Request**
 ```javascript
-curl -X POST https://portal.seasalt.ai/notify/api/v1/generate_analytics \
+curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -365,7 +365,7 @@ Provides a comprehensive **summary of SeaChat activity** within a selected time 
 
 **Sample Request**
 ```javascript
-curl -X POST https://portal.seasalt.ai/notify/api/v1/generate_analytics \
+curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -421,7 +421,7 @@ Provides a **yearly summary** of SeaChat usage, including total conversations, m
 
 **Sample Request**
 ```javascript
-curl -X POST https://portal.seasalt.ai/notify/api/v1/generate_analytics \
+curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -472,7 +472,7 @@ This metric provides a detailed breakdown of SeaChat activity over a specified t
 
 **Sample Request**
 ```javascript
-curl -X POST https://portal.seasalt.ai/notify/api/v1/generate_analytics \
+curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
