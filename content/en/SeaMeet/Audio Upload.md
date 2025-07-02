@@ -28,15 +28,21 @@ You can also access the Swagger API docs [here](./Docs/audio-upload-api/)
 | `num_speakers` | integer | ✖️ | Number of speakers in the audio |
 | `audio_sample_rate` | integer | ✖️ | Audio sample rate (e.g. 16000) |
 | `scenario` | string | ✖️ | Processing scenario (e.g. `customer_service_call`) |
-| `scenario_parameters` | object | ✖️ | Advanced scenario configuration |
-| → `went_to_voicemail` | boolean | ✖️ | Whether the call reached voicemail |
-| → `contains_recordings` | boolean | ✖️ | Presence of recorded messages |
-| → `spoke_to_agent` | boolean | ✖️ | Successful agent connection |
-| → `customer_number` | string | ✖️ | Customer phone number in E.164 format |
-| → `customer_name` | string | ✖️ | Customer identifier/name |
-| → `agent_name` | string | ✖️ | Handling agent's name |
-| → `direction` | string | ✖️ | Call direction (INBOUND/OUTBOUND) |
-| → `enable_agent_recognition` | boolean | ✖️ | Enable voiceprint detection |
+| `scenario_parameters` | object | ✖️ | Advanced scenario configurations, see [more](#advanced-configuration-scenario_parameters) |
+
+### Advanced configuration (`scenario_parameters`)
+#### `customer_service_call`
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `went_to_voicemail` | boolean | ✖️ | Whether the call reached voicemail |
+| `contains_recordings` | boolean | ✖️ | Presence of recorded messages |
+| `spoke_to_agent` | boolean | ✖️ | Successful agent connection |
+| `customer_number` | string | ✖️ | Customer phone number in E.164 format |
+| `customer_name` | string | ✖️ | Customer identifier/name |
+| `agent_name` | string | ✖️ | Agent's identifier/name |
+| `direction` | string | ✖️ | Call direction (`INBOUND`/`OUTBOUND`) |
+| `enable_agent_recognition` | boolean | ✖️ | Enable AI detection of which speaker is the agent based on conversation |
+
 
 ## Sample Request
 ```bash
