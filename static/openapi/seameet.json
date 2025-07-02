@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/workspaces/{workspace_id}/meetings/audio": {
+    "/workspaces/{workspace_id}/create_meeting_by_audio": {
       "post": {
         "tags": ["Meeting"],
         "summary": "Create meeting by audio analysis",
@@ -63,21 +63,28 @@
       "CreateMeetingByAudioRequest": {
         "type": "object",
         "properties": {
+          "name": {"type": "string"},
+          "start_time": {"type": "string", "format": "date-time"},
+          "language": {"type": "string"},
           "folder_path": {"type": "string"},
           "file_name": {"type": "string"},
-          "start_time": {"type": "string", "format": "date-time"},
-          "diarization_options": {"type": "object"},
-          "audio_format": {"type": "string"},
-          "audio_encoding": {"type": "string"},
-          "audio_sample_rate": {"type": "integer"},
-          "enable_punctuation": {"type": "boolean"},
-          "enable_itn": {"type": "boolean"},
-          "scenario": {"type": "string"},
-          "scenario_parameters": {"type": "object"},
+          "diarization_options": {"type": "string"},
           "num_speakers": {"type": "integer"},
-          "max_num_speakers": {"type": "integer"}
+          "audio_sample_rate": {"type": "integer"},
+          "scenario": {"type": "string"},
+          "scenario_parameters": {
+            "type": "object",
+            "went_to_voicemail": {"type": "boolean"},
+            "contains_recordings": {"type": "boolean"},
+            "spoke_to_agent": {"type": "boolean"},
+            "customer_number": {"type": "string"},
+            "customer_name": {"type": "string"},
+            "agent_name": {"type": "string"},
+            "direction": {"type": "string"},
+            "enable_agent_recognition": {"type": "boolean"}
+          }
         },
-        "required": ["folder_path", "file_name", "start_time"]
+        "required": ["name", "start_time", "language"]
       },
       "Job": {
         "type": "object",
@@ -86,6 +93,27 @@
           "type": {"type": "string"},
           "status": {"type": "string"},
           "created_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "HTTPValidationError": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "loc": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "msg": {"type": "string"},
+                "type": {"type": "string"}
+              }
+            }
+          }
         }
       }
     },

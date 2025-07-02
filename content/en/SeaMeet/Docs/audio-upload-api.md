@@ -6,4 +6,4 @@ description: Reference for the Audio Upload APIs
 ---
 
 {{< swaggerui src="openapi/seameet.json" >}}
-- 🚀 [Getting Started with the Audio Upload API](/Portal/Docs/audio-upload-api)
+- 🚀 [Getting Started with the Audio Upload API]({{< relref "../Audio Upload.md" >}})
