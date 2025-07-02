@@ -1,0 +1,100 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Meeting API",
+    "description": "API for creating meetings through audio analysis",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/workspaces/{workspace_id}/meetings/audio": {
+      "post": {
+        "tags": ["Meeting"],
+        "summary": "Create meeting by audio analysis",
+        "description": "Create a new meeting and start audio analysis job",
+        "operationId": "create_meeting_by_audio",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMeetingByAudioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [{"JWTBearer": []}]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateMeetingByAudioRequest": {
+        "type": "object",
+        "properties": {
+          "folder_path": {"type": "string"},
+          "file_name": {"type": "string"},
+          "start_time": {"type": "string", "format": "date-time"},
+          "diarization_options": {"type": "object"},
+          "audio_format": {"type": "string"},
+          "audio_encoding": {"type": "string"},
+          "audio_sample_rate": {"type": "integer"},
+          "enable_punctuation": {"type": "boolean"},
+          "enable_itn": {"type": "boolean"},
+          "scenario": {"type": "string"},
+          "scenario_parameters": {"type": "object"},
+          "num_speakers": {"type": "integer"},
+          "max_num_speakers": {"type": "integer"}
+        },
+        "required": ["folder_path", "file_name", "start_time"]
+      },
+      "Job": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "created_at": {"type": "string", "format": "date-time"}
+        }
+      }
+    },
+    "securitySchemes": {
+      "JWTBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

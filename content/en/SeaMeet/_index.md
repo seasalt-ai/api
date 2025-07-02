@@ -1,29 +1,52 @@
 ---
-title: Documentation
+title: SeaMeet API Documentation
 linkTitle: SeaMeet API
 type: docs
 menu: {main: {weight: 30}}
 ---
 
-{{% pageinfo %}}
-This is a placeholder page that shows you how to use this template site.
-{{% /pageinfo %}}
+## Overview
+SeaMeet API provides powerful tools for managing meetings, processing audio recordings, and generating intelligent meeting insights. This API enables developers to integrate advanced meeting management features including real-time transcription, speaker diarization, and automated meeting summarization.
 
-This section is where the user documentation for your project lives - all the
-information your users need to understand and successfully use your project.
+## Key Features
 
-For large documentation sets we recommend adding content under the headings in
-this section, though if some or all of them don’t apply to your project feel
-free to remove them or add your own. You can see an example of a smaller Docsy
-documentation site in the [Docsy User Guide](https://docsy.dev/docs/), which
-lives in the [Docsy theme
-repo](https://github.com/google/docsy/tree/master/userguide) if you'd like to
-copy its docs section.
+### Meeting Management
+- Create and manage meetings from audio recordings
+- Support for Google Meet integration and uploaded audio files
+- Automatic detection of meeting participants and speakers
 
-Other content such as marketing material, case studies, and community updates
-should live in the [About](/about/) and [Community](/community/) pages.
+### Audio Processing
+- High-accuracy speech-to-text transcription
+- Multi-language support with dialect recognition
+- Speaker separation and identification (diarization)
 
-Find out how to use the Docsy theme in the [Docsy User
-Guide](https://docsy.dev/docs/). You can learn more about how to organize your
-documentation (and how we organized this site) in [Organizing Your
-Content](https://docsy.dev/docs/best-practices/organizing-content/).
+### Intelligent Insights
+- Automated meeting summaries with action items
+- Conversation analytics and participation metrics
+- Customizable summary templates
+
+### Integration Support
+- Webhook notifications for meeting status updates
+- Real-time transcription streaming
+- Export capabilities for transcripts and summaries
+
+## Getting Started
+
+### Prerequisites
+1. Create a SeaMeet workspace through the [SeaMeet Dashboard](https://meet.seasalt.ai)
+2. Follow steps [here]({{< relref "Portal/_index.md#Prerequisites" >}}) to generate your API key (make sure to select `SeaMeet` in the `Scope` when adding new keys)
+3. Install required client libraries or use REST API directly
+
+## Authentication
+
+All interactions with the SeaMeet API require proper authentication using Bearer token authentication. This security mechanism ensures that only authorized applications and users can access your workspace and agent data.
+
+### Bearer Token Authentication
+
+Every API request must include an Authorization header with your API key formatted as a Bearer token. The header format is:
+
+```
+Authorization: Bearer [your-access-token]
+```
+
+Replace `[your-access-token]` with your actual API key. This token provides full access to your workspace, so it should be treated as a sensitive credential.
