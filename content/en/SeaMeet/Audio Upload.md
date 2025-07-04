@@ -45,7 +45,7 @@ Prepare the audio to be uploaded. Not the following limitations:
 | `zh-CN` | Chinese (China) |
 | `zh-TW` | Chinese (Taiwan) |
 #### Supported formats
-MP3, WAV/PCM, WAV/ALAW, WAV/MULAW, MP3, OGG/OPUS, FLAC, WMA, AAC, AMR, WebM, SPEEX.
+WAV/PCM, WAV/ALAW, WAV/MULAW, MP3, OGG/OPUS, FLAC, WMA, AAC, AMR, WebM, SPEEX.
 #### Audio duration
 Maximum of 2 hours.
 
