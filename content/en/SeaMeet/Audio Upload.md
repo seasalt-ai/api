@@ -1,6 +1,6 @@
 ---
 title: Audio Upload
-linkTitle: Audio Upload API Tutorial
+linkTitle: Audio Upload Tutorial
 description: API endpoint for creating meetings from audio recordings
 categories: [API, Audio Processing]
 tags: [meeting, audio, diarization]
@@ -12,6 +12,50 @@ weight: 30
 Create a new meeting by analyzing audio recordings. This endpoint handles audio uploads, initiates processing, and returns a job ID for tracking analysis progress.
 
 You can also access the Swagger API docs [here](./Docs/audio-upload-api/)
+
+## Quick Start
+
+### Step 0: Authentication
+Make sure you have completed prerequisites [here]({{< relref "SeaMeet/_index.md#Prerequisites" >}})
+
+### Step 1: Prepare Audio File
+Prepare the audio to be uploaded. Not the following limitations:
+#### Supported Languages
+| Language Code | Language |
+|---------------|-------------|
+| `da-DK` | Danish (Denmark) |
+| `de-DE` | German (Germany) |
+| `en-GB` | English (United Kingdom) |
+| `en-IN` | English (India) |
+| `en-US` | English (United States) |
+| `es-ES` | Spanish (Spain) |
+| `es-MX` | Spanish (Mexico) |
+| `fi-FI` | Finnish (Finland) |
+| `fr-FR` | French (France) |
+| `he-IL` | Hebrew (Israel) |
+| `hi-IN` | Hindi (India) |
+| `id-ID` | Indonesian (Indonesia) |
+| `it-IT` | Italian (Italy) |
+| `ja-JP` | Japanese (Japan) |
+| `ko-KR` | Korean (South Korea) |
+| `pl-PL` | Polish (Poland) |
+| `pt-BR` | Portuguese (Brazil) |
+| `pt-PT` | Portuguese (Portugal) |
+| `sv-SE` | Swedish (Sweden) |
+| `zh-CN` | Chinese (China) |
+| `zh-TW` | Chinese (Taiwan) |
+#### Supported formats
+MP3, WAV/PCM, WAV/ALAW, WAV/MULAW, MP3, OGG/OPUS, FLAC, WMA, AAC, AMR, WebM, SPEEX.
+#### Audio duration
+Maximum of 2 hours.
+
+### Step 2: Upload Audio
+Upload the audio file to the API endpoint.
+
+### Step 3: Check Meeting in SeaMeet
+Navigate to the `File List` tab from the left sidebar to verify the results of the uploaded audio file.
+
+![seameet file list](/images/seameet-file-list.png)
 
 ## Endpoint
 `POST https://meet.seasalt.ai/seameet-api/api/v1/workspaces/{workspace_id}/create_meeting_by_audio`

@@ -33,7 +33,7 @@ SeaMeet API provides powerful tools for managing meetings, processing audio reco
 ## Getting Started
 
 ### Prerequisites
-1. Create a SeaMeet workspace through the [SeaMeet Dashboard](https://meet.seasalt.ai)
+1. Create a SeaMeet workspace through the [SeaMeet Dashboard](https://meet.seasalt.ai). If you don't have an account yet, sign up [here](https://meet.seasalt.ai/signup)
 2. Follow steps [here]({{< relref "Portal/_index.md#Prerequisites" >}}) to generate your API key (make sure to select `SeaMeet` in the `Scope` when adding new keys)
 3. Install required client libraries or use REST API directly
 
