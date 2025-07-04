@@ -17,7 +17,7 @@ CICD is setup, so as soon as a PR is merged to `main`, it'll deploy to api.seasa
 
 # OpenAPI advanced usage
 
-checkout the `demo-openapi-callbacks` folder to see how to make OpenAPI generate the Swagger UI for requests made to 3rd party callbacks.
+checkout the `demo-openapi-callbacks` folder to see how to make OpenAPI generate the Swagger UI for requests made to 3rd party callbacks. There are two versions for pydantic v1 and v2.
 
 # Docsy Example
 
