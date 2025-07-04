@@ -1,9 +1,10 @@
 ---
-title: 'Event Webhooks Swagger'
+title: 'Webhook Notification Swagger'
 type: swagger
 weight: 4
-description: Reference for the Event Webhooks APIs
+description: Reference for the Webhook Notification APIs
 ---
 
 {{< swaggerui src="openapi/seanotify.json" >}}
-- 🚀 [Getting Started with Event Webhooks API](/Portal/Docs/notify-api)
+
+- 🚀 [Getting Started with Webhook Notification API](/Portal/Docs/notify-api)

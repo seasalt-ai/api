@@ -7,8 +7,7 @@ type: docs
 weight: 10
 ---
 
-
 <!-- ## Quick Links
 
-- [Event Webhooks Swagger`](/portal/docs/seanotify-api/)
-- [Event Webhooks Redoc`](/portal/docs/seanotify-iframe/) -->
+- [Webhook Notification Swagger`](/portal/docs/seanotify-api/)
+- [Webhook Notification Redoc`](/portal/docs/seanotify-iframe/) -->

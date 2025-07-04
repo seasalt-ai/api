@@ -1,30 +1,47 @@
 ---
-title: Event Webhooks 
-linkTitle: Event Webhooks API Tutorial
+title: Webhook Notification
+linkTitle: Webhook Notification API Tutorial
+description:
+  Overview and documentation entry point for the Webhook Notification API.
 type: docs
 weight: 1
 ---
 
 ## Overview
 
-A webhook-based notification system that lets your services receive
-real-time updates from Seasalt products like SeaChat. Whether you want to track
-new conversations, missed calls, or contact changes, using the following endpoints ensures you stay
-informed the moment it happens. With support for multiple event types and
-delivery modes (immediate, delayed, batched), Portal's Event Webhooks are ideal for diverse
-automation and integration needs. This section introduces the Event Webhooks API, a
-webhook-based notification system that allows your application to receive
-real-time updates when specific events occur within the Seasalt platform. You'll
-learn how Event Webhooks fits into the broader Seasalt architecture and what problems
-it solves.
+A webhook-based notification system that lets your services receive real-time
+updates from Seasalt products like SeaChat. Whether you want to track new
+conversations, missed calls, or contact changes, using the following endpoints
+ensures you stay informed the moment it happens. With support for multiple event
+types and delivery modes (immediate, delayed, batched), Portal's Webhook
+Notification are ideal for diverse automation and integration needs. This
+section introduces the Webhook Notification API, a webhook-based notification
+system that allows your application to receive real-time updates when specific
+events occur within the Seasalt platform. You'll learn how Webhook Notification
+fits into the broader Seasalt architecture and what problems it solves.
 
-You can also access the RESTful API docs of Event Webhooks [here](./Docs/notify-api/)
+You can also access the RESTful API docs of Webhook Notification
+[here](./Docs/notify-api/)
 
 ---
 
 ## Prerequisites
 
-**Prepare Your Webhook Receiver**
+Ensure the following are in place:
+
+### **1\. Generate Your API Key**
+
+All APIs require a valid API key issued from your workspace. All requests must
+include a valid API key in the request header (`X-API-Key`).
+
+- Go to **Settings → API Key** tab.
+
+- Click **Add New Key** and check `SeaNotify` as the scope.
+
+- Copy the key and keep it safe. This key is required in the `X-API-KEY` header
+  for **all requests**.
+
+### **2\. Prepare Your Webhook Receiver**
 
 Your server must:
 
@@ -163,8 +180,8 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 
 #### Query Parameter
 
-We support the following optional queries to retrieve subscriptions. If
-not provided, all subscriptions for the workspace will be returned.
+We support the following optional queries to retrieve subscriptions. If not
+provided, all subscriptions for the workspace will be returned.
 
 | Name       | Type   | Required | Default           | Description                                                   |
 | ---------- | ------ | -------- | ----------------- | ------------------------------------------------------------- |
