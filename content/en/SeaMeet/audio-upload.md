@@ -68,7 +68,7 @@ There are two ways to check the results:
 - Check results on [SeaMeet](https://meet.seasalt.ai/)
 
 
-## Create Meeting {.tabset}
+## Create Meeting
 
 ### API
 
