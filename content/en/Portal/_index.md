@@ -2,6 +2,10 @@
 title: Portal API Wiki
 linkTitle: Portal API
 type: docs
+description:
+  Complete reference for Seasalt.ai Portal APIs, including webhook, analytics,
+  subscription management, and integration endpoints for building custom
+  workflows.
 menu: { main: { weight: 40 } }
 ---
 
@@ -34,7 +38,7 @@ You can also access the RESTful API docs here:
 
 Before you can interact with the Portal APIs, ensure the following are in place:
 
-### **1\. A Seasuite Portal Account**
+### **1\. A Seasalt.ai Portal Account**
 
 Sign up or log into your [Seasuite Portal](https://portal.seasalt.ai/).
 

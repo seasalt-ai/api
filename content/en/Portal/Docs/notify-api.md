@@ -1,8 +1,8 @@
 ---
-title: 'Webhook Notification Swagger'
+title: 'Webhook Notification API Swagger'
 type: swagger
 weight: 4
-description: Reference for the Webhook Notification APIs
+description: Seasalt.ai Webhook Notification API Tutorial
 ---
 
 {{< swaggerui src="openapi/seanotify.json" >}}
