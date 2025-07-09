@@ -1,3 +1,13 @@
+---
+title: Auto Dialer Campaign
+linkTitle: Auto Dialer Campaign Tutorial
+description: API endpoints for configuring and initiating bulk outbound call campaigns.
+categories: [API, Auto Dialer Campaign, AI Agent Campaign]
+tags: [auto dialer, ai agent, campaign]
+type: docs
+weight: 30
+---
+
 # Auto Dialer Campaign: 
 
 ## Overview
