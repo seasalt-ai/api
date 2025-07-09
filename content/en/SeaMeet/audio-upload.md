@@ -62,7 +62,7 @@ First obtain a presigned s3 url and then upload audio to the provided url. [See 
 
 ### Step 5: Get Results
 There are two ways to check the results:
-- Receive results via callback, make sure you have followed steps [here](#callback-schema) before submitting the analysis job.
+- Receive results via callback, make sure you have followed steps [here](#callback-api) before submitting the analysis job.
 - Check results on [SeaMeet](https://meet.seasalt.ai/)
 
 
