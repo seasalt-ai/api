@@ -11,13 +11,11 @@ weight: 30
 ## Overview
 Create a new meeting by analyzing audio recordings. This endpoint handles audio uploads, initiates processing, and returns a job ID for tracking analysis progress.
 
-You can also access the Swagger API docs [here](./Docs/audio-upload-api/)
-
 ## Quick Start
 
 ### Step 0: Authentication and Set up
 1. Make sure you have completed prerequisites [here]({{< relref "SeaMeet/_index.md#Prerequisites" >}})
-2. If you would like to receive results via callback, you need to follow steps [here](#callback-schema)
+2. If you would like to receive results via callback, you need to follow steps [here]({{< relref "SeaMeet/audio-upload.md#callback-api" >}})
 
 ### Step 1: Prepare Audio File
 Prepare the audio to be uploaded. Not the following limitations:
@@ -53,10 +51,10 @@ wav/pcm, wav/alaw, wav/mulaw, mp3, mp4, ogg/opus, flac, wma, aac, amr, webm, spe
 Maximum of 2 hours.
 
 ### Step 2: Create Meeting
-Create SeaMeet meeting instance. [See API](#create-meeting)
+Create SeaMeet meeting instance. [See API]({{< relref "SeaMeet/audio-upload.md#create-meeting" >}})
 
-### Step 3: [Upload Audio](#generate-audio-upload-url)
-First obtain a presigned s3 url and then upload audio to the provided url. [See API](#generate-audio-upload-url)
+### Step 3: Upload Audio
+First obtain a presigned s3 url and then upload audio to the provided url. [See API]({{< relref "SeaMeet/audio-upload.md#generate-audio-upload-url" >}})
 
 ### Step 4: Run Analysis
 1. Start the transcription and analysis job. [See API](#run-analysis)
