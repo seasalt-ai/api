@@ -378,7 +378,7 @@ This parameter is **only required if any of the `phone_ids` have a default recip
 ```
 
 ### `any_contact_label_ids` and `exclude_contact_ids`
-By default, the campaign will call every contact that matchest the label ids under `any_contact_label_ids`. To exclude contacts you must include the contact ids in the `exclude_contact_ids` list. 
+By default, the campaign will call every contact that matches the label ids under `any_contact_label_ids`. To exclude contacts you must include the contact ids in the `exclude_contact_ids` list. 
 
 #### Format:
 ```
