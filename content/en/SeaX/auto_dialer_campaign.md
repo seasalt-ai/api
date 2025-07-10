@@ -33,13 +33,13 @@ First you must find the available phone numbers. You will need to collect the `i
 
 | Field           | Type               | Description                                                                                                      | Allowed Values / Example                                                   | Required |
 |-----------------|--------------------|------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|----------|
+| `X-API-Key`     | `string (header)`   | API key for authorization. Required in header. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                           | ✅        |
 | `workspace_id`  | `string (path)`     | Unique identifier of the workspace                                                                               | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                        | ✅        |
 | `offset`        | `integer (query)`   | Number of results to skip before starting to return.<br>Minimum: 0<br>Default: 0                                 | `0`                                                                         |          |
 | `limit`         | `integer (query)`   | Max number of results to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: 10             | `10`                                                                        |          |
 | `is_owned`      | `boolean (query)`   | Filter for owned records only.<br>Default: `false`                                                               | `true`, `false`                                                             |          |
 | `enabled`       | `boolean (query)`   | Filter by whether the item is enabled.<br>Default: `true`                                                        | `true`, `false`                                                             |          |
 | `voice_available` | `boolean (query)` | Filter by voice capability availability                                                                          | `true`, `false`                                                             |          |
-| `X-API-Key`     | `string (header)`   | API key for authorization. Required in header. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                           | ✅        |
 
 ###### Example
 
@@ -182,6 +182,7 @@ Use this endpoint to retrieve the set of contacts you’d like to call during th
 
 | Field                          | Type               | Description                                                                                                                     | Allowed Values / Example                                                                                             | Required |
 |-------------------------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|----------|
+| `X-API-Key`    | `string (header)`   | Authorization with API key. See [Authorization Guide](#authorization)  | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                   | ✅        |
 | `workspace_id`                | `string (path)`     | Unique identifier of the workspace                                                                                              | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                                                                       | ✅        |
 | `offset`                      | `integer (query)`   | Number of rows to skip.<br>Minimum: 0<br>Default: `0`                                                                            | `0`                                                                                                                    |          |
 | `limit`                       | `integer (query)`   | Number of rows to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: `10`                                 | `10`                                                                                                                   |          |
@@ -249,12 +250,12 @@ Use this endpoint to get a list of available ai agents to use during the call. Y
 
 | Field        | Type               | Description                                                                                                     | Allowed Values / Example                                             | Required |
 |--------------|--------------------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|----------|
+| `X-API-Key`    | `string (header)`   | Authorization with API key.  See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                   | ✅        |
 | `workspace_id` | `string (path)`     | Unique identifier of the workspace                                                                             | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                   | ✅        |
 | `types`        | `string (query)`    | Optional filter for AI agent integration types (comma-separated).                                              | `SEAX_CALL`, `SEAX_SMS`, `SEAX_WABP`                                 |          |
 | `limit`        | `integer (query)`   | Optional. Number of rows to return after offset. `0` returns all.                                              | Default: `10` <br> Example: `10`                                     |          |
 | `offset`       | `integer (query)`   | Optional. Number of rows to skip before returning results.                                                     | Default: `0` <br> Example: `0`                                       |          |
 | `order_by`     | `string (query)`    | Optional. Order items by ascending/descending fields (`:` separated, comma-delimited list).                    | Default: `created_time:desc` <br> Example: `created_time:desc`       |          |
-| `X-API-Key`    | `string (header)`   | Authorization with API key.  See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                   | ✅        |
 
 ###### Example
 
@@ -299,6 +300,7 @@ Use this endpoint to trigger an outbound auto dialer campaign.
 
 | Field                          | Type                  | Description                                                                 | Allowed Values / Example                                                   | Required |
 |--------------------------------|-----------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------|----------|
+| `X-API-Key`    | `string (header)`   | Authorization with API key.  See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                   | ✅        |
 | `name`                         | `string`              | Campaign name                                                               | `Test`                                                                       | ✅        |
 | `phone_ids`                    | `array[string]`       | Phone ID(s) to use for the campaign                                         | `["020086f5-fb0e-4a0c-920a-bbdd04f4381c"]`                                   | ✅        |
 | `attach_contact_label_ids`     | `array[string]`       | Labels to attach to contacts after campaign                                 | `[]`                                                                         |          |
@@ -320,7 +322,6 @@ Use this endpoint to trigger an outbound auto dialer campaign.
 | `overwrite_phone_recipient.receiver` | `string`         | Receiver identifier for overwrite                                           | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`                                                            | ✅        |
 | `exclude_contact_ids`          | `array[string]`       | Contact IDs to exclude                                                      | `["4667298e-8d5b-468e-8218-6a47925fe5f2","aa145964-6d17-488d-a9be-09a43191f329"]`                                                                         |          |
 | `any_contact_label_ids`        | `array[string]`       | Include contacts with any of these labels                                   | `["dd20f7cd-03fb-4c79-9f3e-998372d1bec6"]`                                   |          |
-| `X-API-Key`    | `string (header)`   | Authorization with API key.  See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                   | ✅        |
 
 ###### Example
 
@@ -397,12 +398,11 @@ Allowed query parameters.
 
 | Field                          | Type                | Description                                                                                      | Allowed Values / Example                                                                                      | Required |
 | ----------------------------- | ------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | -------- |
-| `workspace_id`                | `string (path)`      | Unique identifier of the workspace                                                              | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                                                                   | ✅       |
 | `X-API-Key`                   | `string (header)`    | API key used for authenticating requests                                                         | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                                                             | ✅       |
+| `workspace_id`                | `string (path)`      | Unique identifier of the workspace                                                              | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                                                                   | ✅       |
 | `types`                       | `string (query)`     | Filter by one or more auto dialer campaign types (comma-separated)                              | `VOICE_DROP`, `PROGRESSIVE_DIALER`, `AI_AGENT`                                                                |          |
 | `phone_numbers`               | `string (query)`     | Filter by one or more phone numbers (comma-separated)                                            | `+15555550100,+15555550101`                                                                                   |          |
 | `ai_agent_conversation_config_id` | `string (query)`     | Filter by AI agent conversation config ID                                                        | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`| |
-| `X-API-Key`    | `string (header)`   | Authorization with API key. See [Authorization Guide](#authorization)  | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                   | ✅        |
 
 
 ###### Example
@@ -536,9 +536,9 @@ Get the information of a campaign given the workspace_id and the desired campaig
 
 | Field                    | Type             | Description                                                                                          | Allowed Values / Example                                           | Required |
 |--------------------------|------------------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|----------|
+| `X-API-Key`              | `string (header)`| Authorization with API key.  See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                  | ✅        |
 | `workspace_id`           | `string (path)`  | Unique identifier of the workspace                                                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                 | ✅        |
 | `auto_dialer_campaign_id`| `string (path)`  | Unique identifier of the auto dialer campaign                                                        | `01e14e9e-ddd8-4e63-bad2-e026d5aa5698`                                                  | ✅        |
-| `X-API-Key`              | `string (header)`| Authorization with API key.  See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                  | ✅        |
 
 ###### Example
 
