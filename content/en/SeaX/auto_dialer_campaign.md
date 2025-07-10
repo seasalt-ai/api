@@ -244,7 +244,7 @@ Response:
 
 GET /api/v1/workspace/{workspace_id}/ai_agents
 
-Use this endpoint to get a list of available ai agents to use during the call. You’ll need to conversation_config_id in order to select a particular agent for the campaign creation.
+Use this endpoint to get a list of available ai agents to use during the call. You’ll need the `conversation_config_id` in order to select a particular agent for the campaign creation.
 
 
 | Field        | Type               | Description                                                                                                     | Allowed Values / Example                                             | Required |
