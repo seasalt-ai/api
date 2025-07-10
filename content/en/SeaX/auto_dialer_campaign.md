@@ -1,5 +1,5 @@
 ---
-title: Auto Dialer Campaign
+title: Bulk SMS Campaign
 linkTitle: Auto Dialer Campaign Tutorial
 description: API endpoints for configuring and initiating bulk outbound call campaigns.
 categories: [API, Auto Dialer Campaign, AI Agent Campaign]
@@ -310,7 +310,7 @@ Use this endpoint to trigger an outbound auto dialer campaign.
 | `is_timezone_aware`           | `boolean`             | Whether the schedule is timezone aware                                      | `false`                                                                      |          |
 | `mode`                         | `string`              | Campaign execution mode                                                     | `WEB`                                                                        | ✅        |
 | `stage`                        | `string`              | Processing stage of the campaign                                            | `INSTANCE`                                                                   | ✅        |
-| `message`                      | `string`              | Message to be delivered (used by TTS or AI agent)                           | `您好，請問您現在方便講話嗎?`                                                  |          |
+| `message`                      | `string`              | Message to be delivered (used by TTS or AI agent)                           | `Hi, do you have a few minutes to take our survey?`                                                  |          |
 | `tts_language`                 | `string`              | TTS language code                                                           | `""` (Recommended to leave as empty string to use default configured on seachat)                                                                 |          |
 | `tts_voice`                    | `string`              | TTS voice type                                                              | `default`                                                                    |          |
 | `audio_url`                    | `string`              | Optional audio URL (if not using TTS)                                       | `""` (Recommended to leave as empty string to use default configured on seachat)                                                              |          |
