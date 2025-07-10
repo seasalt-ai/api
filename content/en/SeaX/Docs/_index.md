@@ -8,4 +8,4 @@ weight: 10
 ---
 
 <!-- ## Quick Links
-- [Bulk SMS Campaign Swagger`](/seax/docs/bulk-sms-api/)
+- [Bulk SMS Campaign Swagger](/seax/docs/bulk-sms-api)
