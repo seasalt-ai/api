@@ -542,7 +542,7 @@ Get the information of a campaign given the workspace_id and the desired campaig
 
 ###### Example
 
-Requeste4xf:
+Request:
 ```
 curl -X 'GET' \
   'http://bulk-sms.dev.svc.cluster.local/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns/448ea794-0368-4604-a56f-f2350229d9e5' \
