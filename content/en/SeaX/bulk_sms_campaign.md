@@ -14,6 +14,8 @@ weight: 30
 
 The Bulk SMS Campaigns endpoint enables automated placement of bulk outbound calls to selected contact lists, supporting both AI-powered conversational agents and pre-recorded voice drops. Through a structured configuration interface, users can define campaign parameters such as target groups, call scripts, scheduling windows, and fallback behaviors. The endpoint facilitates scalable outreach by handling call queuing, delivery tracking, and engagement logging. Each campaign instance generates detailed execution metrics and outcomes, enabling real-time monitoring and performance analysis. Secure access to campaign operations requires authentication via API key. Below we will cover the endpoints needed to customize, create, and monitor your own call campaigns. Note: in this tutorial we are assuming you have configured a phone number, contacts, and ai agents in your workspace.
 
+After reading through this tutorial, try out the endpoints [here](./Docs/bulk-sms-api/)
+
 #### Authorization
 
 You must provide your API key in the `X-API-KEY` header.
