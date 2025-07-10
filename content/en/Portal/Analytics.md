@@ -1,7 +1,10 @@
 ---
-title: Analytics
+title: Seasalt.ai Analytics API Tutorial
 linkTitle: Analytics API Tutorial
-description: Overview and documentation entry point for the Analytics API.
+description:
+  Explore the Seasalt.ai Analytics API for tracking communication metrics,
+  generating reports, and gaining insights into chat and call performance across
+  your workspace.
 type: docs
 weight: 2
 ---
@@ -18,7 +21,7 @@ and contextualized data to help you monitor performance, identify trends, and
 make data-driven decisions. Authentication via API key is required to ensure
 secure access to workspace data.
 
-You can also access the RESTful API docs [here](./Docs/portal-api/)
+You can also access the RESTful API docs [here](./Docs/analytics-api/)
 
 ---
 
@@ -28,6 +31,17 @@ You can also access the RESTful API docs [here](./Docs/portal-api/)
 
 Use this endpoint to register a webhook that will receive event notifications
 from Portal.
+
+**Sample Request**
+
+```bash
+curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
+  -H "X-API-KEY: <your_api_key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metric": "today_communication_volume"
+  }'
+```
 
 #### Allowed Fields in Request Body
 
@@ -52,11 +66,11 @@ which fields are required or optional for each case:
 | `metric`                 | `string`                     | ✅       | Type of analytics data to retrieve                          | `today_communication_volume`, `activity_trend`, `label_usage`, `conversation_overview`, `total_usage`, `conversation_overview`, `conversation_overview_yearly`, `conversation_breakdown` |
 | `type`                   | `string`                     |          | Whether to analyze messages or calls (used in some metrics) | `messages`, `calls`                                                                                                                                                                      |
 | `time_unit`              | `string`                     |          | Aggregation level for data                                  | `day`, `month`, `year`                                                                                                                                                                   |
-| `timezone`               | `string`                     |          | Timezone used for grouping and filtering                    | Example: `UTC`, `Asia/Taipei`, see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)                                                 |
+| `timezone`               | `string`                     |          | Timezone used for grouping and filtering                    | Example: `UTC`, `Asia/Taipei`,`America/Los_Angeles` see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)                            |
 | `range_type`             | `string`                     |          | Predefined time range                                       | `last_day`, `last_7_days`, `last_30_days`, `last_90_days`, `last_180_days`                                                                                                               |
 | `exclude_empty_response` | `boolean`                    |          | Exclude conversations with no bot or agent replies          | `true`, `false`                                                                                                                                                                          |
-| `from_date`              | `string (ISO 8601 datetime)` |          | Custom start of the date range                              | Example: `2024-05-01T00:00:00`                                                                                                                                                           |
-| `to_date`                | `string (ISO 8601 datetime)` |          | Custom end of the date range                                | Example: `2024-05-31T23:59:59`                                                                                                                                                           |
+| `from_date`              | `string (ISO 8601 datetime)` |          | Custom start of the date range                              | Example: `2024-06-01T23:59:59-07:00` (America/Los_Angeles), `2024-06-01T23:59:59+08:00` (Asia/Singapore)                                                                                 |
+| `to_date`                | `string (ISO 8601 datetime)` |          | Custom end of the date range                                | Example: e.g. `2024-06-01T23:59:59-07:00` (America/Los_Angeles), `2024-06-01T23:59:59+08:00` (Asia/Singapore)                                                                            |
 | `labels`                 | `array of strings`           |          | Filter by label names                                       | Example: `["support", "sales"]`                                                                                                                                                          |
 | `handling_status`        | `string`                     |          | Filter conversations by handling status                     | `RESOLVED`, `PENDING`, `FOLLOW_UP`                                                                                                                                                       |
 | `year`                   | `string (YYYY)`              |          | Year for yearly report metrics                              | Example: `2024`                                                                                                                                                                          |
@@ -83,27 +97,33 @@ how many inbound and outbound voice calls were made, along with the number of
 non-voice (e.g., chat) messages received. Use this to get a quick snapshot of
 how busy your workspace is today.
 
-
 **What does “today” mean?**
 
-In this metric, **"Today" refers to the current day in the specified timezone**. If you pass a timezone in your API request (e.g., `"America/Los_Angeles"`), "Today" means midnight to now in that timezone. If you do **not** provide a timezone, the default is **UTC**, meaning "Today" spans from midnight UTC to the current UTC time.
+In this metric, **"Today" refers to the current day in the specified timezone**.
+If you pass a timezone in your API request (e.g., `"America/Los_Angeles"`),
+"Today" means midnight to now in that timezone. If you do **not** provide a
+timezone, the default is **UTC**, meaning "Today" spans from midnight UTC to the
+current UTC time.
 
-Using a timezone ensures the metric reflects your **local business day**, making the data more aligned with your reporting or operational needs.
+Using a timezone ensures the metric reflects your **local business day**, making
+the data more aligned with your reporting or operational needs.
 
 **How often is this metric updated?**
 
 This metric is updated **in real time** as new messages and calls are received.
 
-* For live dashboards, we recommend calling this API **every 10 to 15 minutes**.
+- For live dashboards, we recommend calling this API **every 10 to 15 minutes**.
 
-* For daily summaries or reports, calling it **once near the end of the day** (e.g., just before midnight in your local timezone provided or UTC) gives the most complete view of the day’s activity.
+- For daily summaries or reports, calling it **once near the end of the day**
+  (e.g., just before midnight in your local timezone provided or UTC) gives the
+  most complete view of the day’s activity.
 
 **Request Body**
 
-| Field    | Required | Notes                                                   |
-| -------- | -------- | ------------------------------------------------------- |
-| `metric` | ✅       | Always required. Must be `"today_communication_volume"` |
-| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`, see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| Field      | Required | Notes                                                                                                                                                                                   |
+| ---------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `metric`   | ✅       | Always required. Must be `"today_communication_volume"`                                                                                                                                 |
+| `timezone` | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`,`"America/Los_Angeles"`. See a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 
 **Response**
 
@@ -118,7 +138,7 @@ This metric is updated **in real time** as new messages and calls are received.
 
 **Sample Request**
 
-```javascript
+```bash
 curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -129,7 +149,7 @@ curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
 
 **Sample Successful Response**
 
-```javascript
+```bash
 {
   "metric": "today_communication_volume",
   "time_unit": "day",
@@ -153,14 +173,14 @@ from the previous period.
 
 **Request Body**
 
-| Field       | Required | Notes                                                                                         |
-| ----------- | -------- | --------------------------------------------------------------------------------------------- |
-| `metric`    | ✅       | Always required. Must be `"activity_trend"`.                                                  |
-| `type`      | ✅       | `messages`, `calls`                                                                           |
-| `time_unit` | ✅       | `day`, `month`, `year`                                                                        |
-| `from_date` | ✖️       | Defaults to the beginning of today. `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00Z` |
-| `to_date`   | ✖️       | Defaults to today’s end time. `string` (ISO 8601 datetime), e.g. `2024-06-01T23:59:59Z`       |
-| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`, see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| Field       | Required | Notes                                                                                                                                                                                   |
+| ----------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `metric`    | ✅       | Always required. Must be `"activity_trend"`.                                                                                                                                            |
+| `type`      | ✅       | `messages`, `calls`                                                                                                                                                                     |
+| `time_unit` | ✅       | The time unit used for grouping (Accept one of `day`, `month`, `year`)                                                                                                                  |
+| `from_date` | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00-07:00` (America/Los_Angeles), `2024-06-01T00:00:00+08:00` (Asia/Singapore).                                                     |
+| `to_date`   | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T23:59:59-07:00` (America/Los_Angeles), `2024-06-01T23:59:59+08:00` (Asia/Singapore).                                                     |
+| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`,`"America/Los_Angeles"`. See a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 
 **Response**
 
@@ -168,8 +188,8 @@ from the previous period.
 | ----------------- | ----------------- | ---------------------------------------------------------------- |
 | `metric`          | `string`          | Always `"activity_trend"`                                        |
 | `time_unit`       | `string`          | The time unit for grouping: `day`, `month`, or `year`            |
-| `data`            | `array of object` | One object per time period, grouped by `date`                  |
-| `data[].date`   | `string`          | The date or time period (e.g., `"2024-06-01"`)                   |
+| `data`            | `array of object` | One object per time period, grouped by `date`                    |
+| `data[].date`     | `string`          | The date or time period (e.g., `"2024-06-01"`)                   |
 | `data[].CUSTOMER` | `integer`         | Number of messages sent by end users                             |
 | `data[].AGENT`    | `integer`         | Number of messages sent by human agents                          |
 | `data[].BOT`      | `integer`         | Number of messages sent by bots                                  |
@@ -180,7 +200,7 @@ from the previous period.
 
 **Sample Request**
 
-```javascript
+```bash
 curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -195,7 +215,7 @@ curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
 
 **Sample Successful Response**
 
-```javascript
+```bash
 {
   "metric": "activity_trend",
   "time_unit": "day",
@@ -231,14 +251,14 @@ many times each was used.
 
 **Request Body**
 
-| Field       | Required | Notes                                                                                         |
-| ----------- | -------- | --------------------------------------------------------------------------------------------- |
-| `metric`    | ✅       | Always required. Must be `"label_usage"`                                                      |
-| `time_unit` | ✅       | `day`, `month`, `year`                                                                        |
-| `labels`    | ✖️       | Optional filtering by label names. Defaults to return all labels if not provided              |
-| `from_date` | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00Z`. Defaults to the beginning of today |
-| `to_date`   | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00Z`. Defaults to today’s end time       |
-| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`, see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| Field       | Required | Notes                                                                                                                                                                                   |
+| ----------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `metric`    | ✅       | Always required. Must be `"label_usage"`                                                                                                                                                |
+| `time_unit` | ✅       | The time unit used for grouping (Accept one of `day`, `month`, `year`)                                                                                                                  |
+| `labels`    | ✖️       | Optional filtering by label names. Defaults to return all labels if not provided                                                                                                        |
+| `from_date` | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00-07:00` (America/Los_Angeles), `2024-06-01T00:00:00+08:00` (Asia/Singapore).                                                     |
+| `to_date`   | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T23:59:59-07:00` (America/Los_Angeles), `2024-06-01T23:59:59+08:00` (Asia/Singapore).                                                     |
+| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`,`"America/Los_Angeles"`. See a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 
 **Response**
 
@@ -247,14 +267,14 @@ many times each was used.
 | `metric`                | `string`          | Always `"label_usage"`                                            |
 | `time_unit`             | `string`          | The time grouping used in the request (`day`, `month`, or `year`) |
 | `data`                  | `array of object` | Each object represents one time period                            |
-| `data[].date`         | `string`          | The time period label (e.g., `"2024-06"`)                         |
+| `data[].date`           | `string`          | The time period label (e.g., `"2024-06"`)                         |
 | `data[].labels`         | `array of object` | List of labels and their usage count during the period            |
 | `data[].labels[].name`  | `string`          | Label name (e.g., `"support"`)                                    |
 | `data[].labels[].count` | `integer`         | Number of times the label was applied in that period              |
 
 **Sample Request**
 
-```javascript
+```bash
 curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -269,7 +289,7 @@ curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
 
 **Sample Successful Response**
 
-```javascript
+```bash
 {
   "metric": "label_usage",
   "time_unit": "month",
@@ -300,26 +320,25 @@ total voice call duration and number of chat messages.
 
 **Request Body**
 
-| Field       | Required | Notes                                                                                         |
-| ----------- | -------- | --------------------------------------------------------------------------------------------- |
-| `metric`    | ✅       | Always required. Must be `"total_usage"`.                                                     |
-| `from_date` | ✖️       | Defaults to the beginning of today. `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00Z` |
-| `to_date`   | ✖️       | Defaults to today’s end time. `string` (ISO 8601 datetime), e.g. `2024-06-01T23:59:59Z`       |
-| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`, see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| Field       | Required | Notes                                                                                                                                                                                   |
+| ----------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `metric`    | ✅       | Always required. Must be `"total_usage"`.                                                                                                                                               |
+| `from_date` | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00-07:00` (America/Los_Angeles), `2024-06-01T00:00:00+08:00` (Asia/Singapore).                                                     |
+| `to_date`   | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T23:59:59-07:00` (America/Los_Angeles), `2024-06-01T23:59:59+08:00` (Asia/Singapore).                                                     |
+| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`,`"America/Los_Angeles"`. See a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 
 **Response**
 
-| Field                         | Type              | Description                                                       |
-| ----------------------------- | ----------------- | ----------------------------------------------------------------- |
-| `metric`                      | `string`          | Always `"total_usage"`.                                           |
-| `time_unit`                   | `string`          | The time unit used for aggregation (e.g., `day`, `month`, `year`) |
-| `data`                        | `array of object` | Usually contains only one object per request                      |
-| `data[].total_voice_minutes`  | `number`          | Total duration of voice calls (in minutes)                        |
-| `data[].total_chat_responses` | `integer`         | Total number of chat messages sent by bots or agents              |
+| Field                         | Type              | Description                                          |
+| ----------------------------- | ----------------- | ---------------------------------------------------- |
+| `metric`                      | `string`          | Always `"total_usage"`.                              |
+| `data`                        | `array of object` | Usually contains only one object per request         |
+| `data[].total_voice_minutes`  | `number`          | Total duration of voice calls (in minutes)           |
+| `data[].total_chat_responses` | `integer`         | Total number of chat messages sent by bots or agents |
 
 **Sample Request**
 
-```javascript
+```bash
 curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -333,7 +352,7 @@ curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
 
 **Sample Successful Response**
 
-```javascript
+```bash
 {
   "metric": "total_usage",
   "time_unit": "month",
@@ -353,28 +372,28 @@ allowing you to track conversation volume trends.
 
 **Request Body**
 
-| Field             | Required | Notes                                                                                                           |
-| ----------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
-| `metric`          | ✅       | Always required. Must be `"conversation_overview"`.                                                             |
-| `time_unit`       | ✅       | Aggregation unit                                                                                                |
-| `handling_status` | ✖️       | Defaults to return all conversations regardless of handling status. Options: `RESOLVED`, `PENDING`, `FOLLOW_UP` |
-| `from_date`       | ✖️       | Defaults to the beginning of today. `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00Z`                   |
-| `to_date`         | ✖️       | Defaults to today’s end time. `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00Z`                         |
-| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`, see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| Field             | Required | Notes                                                                                                                                                                                   |
+| ----------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `metric`          | ✅       | Always required. Must be `"conversation_overview"`.                                                                                                                                     |
+| `time_unit`       | ✅       | The time unit used for grouping (Accept one of `day`, `month`, `year`)                                                                                                                  |
+| `handling_status` | ✖️       | Defaults to return all conversations regardless of handling status. Options: `RESOLVED`, `PENDING`, `FOLLOW_UP`                                                                         |
+| `from_date`       | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00-07:00` (America/Los_Angeles), `2024-06-01T00:00:00+08:00` (Asia/Singapore).                                                     |
+| `to_date`         | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T23:59:59-07:00` (America/Los_Angeles), `2024-06-01T23:59:59+08:00` (Asia/Singapore).                                                     |
+| `timezone`        | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`,`"America/Los_Angeles"`. See a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 
 **Response**
 
-| Field           | Type              | Description                                                    |
-| --------------- | ----------------- | -------------------------------------------------------------- |
-| `metric`        | `string`          | Always `"conversation_overview"`                               |
-| `time_unit`     | `string`          | The time unit used for grouping (e.g., `day`, `month`, `year`) |
-| `data`          | `array of object` | Each object represents one time period                         |
-| `data[].date` | `string`          | The label for the time period (e.g., `"2024-06"`)              |
-| `data[].count`  | `integer`         | Number of conversations in that time period                    |
+| Field          | Type              | Description                                                       |
+| -------------- | ----------------- | ----------------------------------------------------------------- |
+| `metric`       | `string`          | Always `"conversation_overview"`                                  |
+| `time_unit`    | `string`          | The time grouping used in the request (`day`, `month`, or `year`) |
+| `data`         | `array of object` | Each object represents one time period                            |
+| `data[].date`  | `string`          | The label for the time period (e.g., `"2024-06"`)                 |
+| `data[].count` | `integer`         | Number of conversations in that time period                       |
 
 **Sample Request**
 
-```javascript
+```bash
 curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -391,7 +410,7 @@ curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
 
 **Sample Successful Response**
 
-```javascript
+```bash
 {
   "metric": "conversation_overview",
   "time_unit": "month",
@@ -434,7 +453,7 @@ conversations, message volume, and a month-by-month breakdown.
 
 **Sample Request**
 
-```javascript
+```bash
 curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -447,7 +466,7 @@ curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
 
 **Sample Successful Response**
 
-```javascript
+```bash
 {
   "metric": "conversation_overview_yearly",
   "total_conversations": 1450,
@@ -471,12 +490,12 @@ identifying peak traffic periods and understanding channel usage patterns.
 
 **Request Body**
 
-| Field       | Required | Notes                                                                                                                                                           |
-| ----------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `metric`    | ✅       | Always required. Must be `"conversation_breakdown"`                                                                                                             |
-| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`, see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
-| `from_date` | ✖️       | Defaults to the beginning of today. ISO 8601 (UTC), e.g. `2024-06-01T00:00:00Z`                                                                                 |
-| `to_date`   | ✖️       | Defaults to today’s end time. ISO 8601 (UTC), e.g. `2024-06-01T23:59:59Z`                                                                                       |
+| Field       | Required | Notes                                                                                                                                                                                   |
+| ----------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `metric`    | ✅       | Always required. Must be `"conversation_breakdown"`                                                                                                                                     |
+| `timezone`  | ✖️       | Defaults to UTC. User timezone, e.g. `"Asia/Taipei"`,`"America/Los_Angeles"`. See a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| `from_date` | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T00:00:00-07:00` (America/Los_Angeles), `2024-06-01T00:00:00+08:00` (Asia/Singapore).                                                     |
+| `to_date`   | ✖️       | `string` (ISO 8601 datetime), e.g. `2024-06-01T23:59:59-07:00` (America/Los_Angeles), `2024-06-01T23:59:59+08:00` (Asia/Singapore).                                                     |
 
 **Response**
 
@@ -493,7 +512,7 @@ identifying peak traffic periods and understanding channel usage patterns.
 
 **Sample Request**
 
-```javascript
+```bash
 curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
@@ -507,7 +526,7 @@ curl -X POST https://portal.seasalt.ai/portal-api/api/v1/generate_analytics \
 
 **Sample Successful Response**
 
-```javascript
+```bash
 {
   "metric": "conversation_breakdown",
   "channel_summary": {
