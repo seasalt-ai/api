@@ -393,7 +393,7 @@ By default, the campaign will call every contact that matchest the label ids und
 
 Use this endpoint to gather information about past and current campaigns. Filter on various attributes such as campaign type, status, mode, and date range.
 
-Allowed fields in Request Body.
+Allowed query parameters.
 
 | Field                          | Type                | Description                                                                                      | Allowed Values / Example                                                                                      | Required |
 | ----------------------------- | ------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | -------- |
