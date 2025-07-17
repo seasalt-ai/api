@@ -208,7 +208,7 @@ Request:
 ```
 curl -X 'GET' \
   'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&keyword=%2B18111222333&whatsapp_phone=%2B18111222333&all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&addition_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&order_by=phone%3Aasc%2Ccreated_time%3Adesc%2Cname%3Aasc&exclude_labels=DNC%2Cinvalid%20number%2Cunreachable&whatsapp_phone_only=false' \
-  -H 'accept: application/json'
+  -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
 ```
 
