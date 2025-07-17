@@ -195,10 +195,10 @@ Response:
 | `type`                        | `string`              | Campaign type                                                              | `SMS`, `MMS`, `AI_AGENT`, `WHATSAPP_BUSINESS_PLATFORM_MESSAGE`            | ✅       |
 | `message`                     | `string`              | Message content                                                            | `🌸 Spring Sale Alert! Get 25% off all items. Use code SPRING25. Valid until March 31st.` | ✅       |
 | `phone_ids`                   | `array[string]`       | Phone number IDs to send from                                             | `["020086f5-fb0e-4a0c-920a-bbdd04f4381c"]`                               | ✅       |
-| `any_contact_label_ids`       | `array[string]`       | Include contacts with any of these labels                                 | `["vip_customers", "newsletter_subscribers"]`                            |          |
-| `all_contact_label_ids`       | `array[string]`       | Include contacts with all of these labels                                 | `["active_customers", "us_residents"]`                                   |          |
-| `exclude_contact_ids`         | `array[string]`       | Exclude specific contact IDs                                              | `["11111111-2222-4444-3333-555555555555"]`                               |          |
-| `exclude_any_contact_label_ids` | `array[string]`     | Exclude contacts with any of these labels                                 | `["DNC", "unsubscribed"]`                                               |          |
+| `any_contact_label_ids` | `array[string]` | Include contacts with any of these labels | `["11111111-2222-4444-3333-555555555555"]` | |
+| `all_contact_label_ids` | `array[string]` | Include contacts with all of these labels | `["22222222-3333-5555-4444-666666666666"]` | |
+| `exclude_contact_ids` | `array[string]` | Exclude specific contact IDs | `["11111111-2222-4444-3333-555555555555"]` | |
+| `exclude_any_contact_label_ids` | `array[string]` | Exclude contacts with any of these labels | `["33333333-4444-6666-5555-777777777777"]` | |
 | `media_urls`                  | `array[string]`       | Media URLs for MMS campaigns                                              | `["https://example.com/image.jpg"]`                                      |          |
 | `start_time`                  | `string ($date-time)` | Campaign start time (for scheduling)                                      | `2025-07-18T10:00:00+00:00`                                               |          |
 | `end_time`                    | `string ($date-time)` | Campaign end time (for scheduling)                                        | `2025-07-18T18:00:00+00:00`                                               |          |
