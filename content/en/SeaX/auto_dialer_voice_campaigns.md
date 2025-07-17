@@ -412,7 +412,7 @@ Allowed query parameters.
 | `workspace_id`                | `string (path)`      | Unique identifier of the workspace                                                              | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                                                                   | ✅       |
 | `types`                       | `string (query)`     | Filter by one or more auto dialer campaign types (comma-separated)                              | `VOICE_DROP`, `PROGRESSIVE_DIALER`, `AI_AGENT`                                                                |          |
 | `phone_numbers`               | `string (query)`     | Filter by one or more phone numbers (comma-separated)                                            | `+15555550100,+15555550101`                                                                                   |          |
-| `ai_agent_conversation_config_id` | `string (query)`     | Filter by AI agent conversation config ID                                                        | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`| |
+| `ai_agent_conversation_config_id` | `string (query)` | Filter by AI agent conversation config ID | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`| |
 
 
 ###### Example
