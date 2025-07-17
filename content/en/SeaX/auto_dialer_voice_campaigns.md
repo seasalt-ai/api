@@ -200,7 +200,7 @@ Use this endpoint to retrieve the set of contacts you’d like to call during th
 | `addition_contact_ids`        | `string (query)`    | Include contacts explicitly by contact IDs, in addition to label-based search.<br>Comma-separated UUIDs                        | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666`                                           |          |
 | `order_by`                    | `string (query)`    | Optional sorting. Comma-separated list of `field:direction` pairs.<br>Default: `created_time:desc`                              | `phone:asc,created_time:desc,name:asc`                                                                               |          |
 | `exclude_labels`              | `string (query)`    | Exclude contacts with one or more of these label **names** (not IDs).<br>Comma-separated values                                 | `DNC,invalid number,unreachable`                                                                                      |          |
-| `whatsapp_phone_only`         | `boolean (query)`   | If true, filters to only Wh
+| `whatsapp_phone_only` | `boolean (query)`   | If true, filters to only return contacts with a WhatsApp phone number.<br>Default: `false` | `true`, `false` |
 
 ###### Example
 
