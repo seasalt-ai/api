@@ -96,7 +96,7 @@ Retrieve and filter contacts to target in your campaign.
 | `any_contact_label_ids`       | `string (query)`   | Include contacts with any of these label IDs.<br>Comma-separated UUIDs   | `11111111-2222-4444-3333-555555555555,22222222-3333-5555-4444-666666666666` |          |
 | `all_contact_label_ids`       | `string (query)`   | Include contacts with all of these label IDs.<br>Comma-separated UUIDs   | `11111111-2222-4444-3333-555555555555,22222222-3333-5555-4444-666666666666` |          |
 | `exclude_contact_ids`         | `string (query)`   | Exclude specific contact IDs.<br>Comma-separated UUIDs                   | `11111111-2222-4444-3333-555555555555,22222222-3333-5555-4444-666666666666` |          |
-| `exclude_labels`              | `string (query)`   | Exclude contacts with these label names.<br>Comma-separated values       | `DNC,invalid number,unreachable`                                         |          |
+| `exclude_labels`              | `string (query)`   | Exclude contacts with these label IDs.<br>Comma-separated values       | `f47ac10b-58cc-4372-a567-0e02b2c3d479,550e8400-e29b-41d4-a716-446655440000`                                         |          |
 | `order_by`                    | `string (query)`   | Sort order. Default: `created_time:desc`                                 | `phone:asc,created_time:desc,name:asc`                                   |          |
 
 ###### Example
@@ -104,7 +104,7 @@ Retrieve and filter contacts to target in your campaign.
 Request:
 ```bash
 curl -X 'GET' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&any_contact_label_ids=11111111-2222-4444-3333-555555555555&exclude_labels=DNC,invalid number' \
+  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&any_contact_label_ids=11111111-2222-4444-3333-555555555555&exclude_labels=47ac10b-58cc-4372-a567-0e02b2c3d479,550e8400-e29b-41d4-a716-446655440000' \
   -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
 ```
