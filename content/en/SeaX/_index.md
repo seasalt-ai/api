@@ -39,7 +39,7 @@ With bulk voice drops, you can upload your audio, select your audience, and send
 #### AI Agent Campaigns
 SeaX empowers you to connect your customers with AI agents you've tailored to your business. SeaX makes it easy to place bulk call campaigns that drive real-time, automated conversations.
 
-Customers can speak freely with your automated agents through natural, two-way voice conversations. perfect for lead qualification, appointment scheduling, surveys, and more.
+Customers can speak freely with your automated agents through natural, two-way voice conversations. Perfect for lead qualification, appointment scheduling, surveys, and more.
 
 #### Do Not Contact Compliance
 SeaX automatically respects "Do Not Contact" (DNC) preferences and maintains comprehensive opt-out management. The system automatically processes standard opt-out keywords like "STOP," "UNSUBSCRIBE," and "REMOVE ME," ensuring compliance with telecommunications regulations and customer preferences.
