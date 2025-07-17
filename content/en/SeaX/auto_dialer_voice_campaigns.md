@@ -1,18 +1,18 @@
 ---
-title: Bulk SMS Campaign
-linkTitle: Bulk SMS Campaign Tutorial
-description: API endpoints for configuring and initiating bulk outbound call campaigns.
-categories: [API, Bulk SMS Campaign, AI Agent Campaign]
-tags: [bulk sms, ai agent, campaign]
+title: Auto-Dialer Voice Campaigns
+linkTitle: Auto-Dialer Voice Campaigns
+description: API endpoints for configuring and initiating bulk outbound voice call campaigns with AI agents.
+categories: [API, Auto-Dialer Campaign, AI Agent Campaign, Voice Campaigns]
+tags: [auto dialer, voice calls, ai agent, campaign, bulk calls]
 type: docs
 weight: 30
 ---
 
-# Bulk SMS Campaign: 
+# Auto-Dialer Voice Campaigns:
 
 ## Overview
 
-The Bulk SMS Campaigns endpoint enables automated placement of bulk outbound calls to selected contact lists, supporting both AI-powered conversational agents and pre-recorded voice drops. Through a structured configuration interface, users can define campaign parameters such as target groups, call scripts, scheduling windows, and fallback behaviors. The endpoint facilitates scalable outreach by handling call queuing, delivery tracking, and engagement logging. Each campaign instance generates detailed execution metrics and outcomes, enabling real-time monitoring and performance analysis. Secure access to campaign operations requires authentication via API key. Below we will cover the endpoints needed to customize, create, and monitor your own call campaigns. Note: in this tutorial we are assuming you have configured a phone number, contacts, and ai agents in your workspace.
+The Auto-Dialer Voice Campaigns endpoint enables automated placement of bulk outbound voice calls to selected contact lists, supporting both AI-powered conversational agents and pre-recorded voice drops. Through a structured configuration interface, users can define campaign parameters such as target groups, call scripts, scheduling windows, and fallback behaviors. The endpoint facilitates scalable voice outreach by handling call queuing, delivery tracking, and engagement logging. Each campaign instance generates detailed execution metrics and outcomes, enabling real-time monitoring and performance analysis. Secure access to campaign operations requires authentication via API key. Below we will cover the endpoints needed to customize, create, and monitor your own voice call campaigns. Note: in this tutorial we are assuming you have configured a phone number, contacts, and AI agents in your workspace.
 
 After reading through this tutorial, try out the endpoints [here](./Docs/bulk-sms-api/)
 
@@ -294,11 +294,11 @@ Response:
 }
 ```
 
-#### Initiate Bulk SMS Campaign
+#### Initiate Auto-Dialer Voice Campaign
 
 1. POST /api/v1/workspace/{workspace_id}/auto_dialer_campaigns
 
-Use this endpoint to trigger an outbound auto dialer campaign. 
+Use this endpoint to trigger an outbound auto dialer voice campaign.
 
 | Field                          | Type                  | Description                                                                 | Allowed Values / Example                                                   | Required |
 |--------------------------------|-----------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------|----------|
