@@ -8,7 +8,7 @@ type: docs
 weight: 20
 ---
 
-# Bulk SMS/MMS Campaigns:
+# Bulk SMS/MMS Campaigns
 
 ## Overview
 
