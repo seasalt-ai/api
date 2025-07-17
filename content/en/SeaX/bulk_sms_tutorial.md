@@ -220,10 +220,10 @@ curl -X 'POST' \
     "type": "SMS",
     "message": "🌸 Spring Sale Alert! Get 25% off all items. Use code SPRING25. Valid until March 31st. Shop now: https://example.com/sale",
     "phone_ids": ["020086f5-fb0e-4a0c-920a-bbdd04f4381c"],
-    "any_contact_label_ids": ["vip_customers", "newsletter_subscribers"],
-    "exclude_any_contact_label_ids": ["DNC", "unsubscribed"],
+    "any_contact_label_ids": ["11111111-2222-4444-3333-555555555555"],
+    "exclude_any_contact_label_ids": ["22222222-3333-5555-4444-666666666666"],
     "enable_link_shortening": true,
-    "attach_contact_label_ids": ["spring_campaign_2025"],
+    "attach_contact_label_ids": ["33333333-4444-6666-5555-777777777777"],
     "is_schedule": false
   }'
 ```
