@@ -8,7 +8,7 @@ type: docs
 weight: 30
 ---
 
-# Auto-Dialer Voice Campaigns:
+# Auto-Dialer Voice Campaigns
 
 ## Overview
 
@@ -16,7 +16,9 @@ The Auto-Dialer Voice Campaigns endpoint enables automated placement of bulk out
 
 After reading through this tutorial, try out the endpoints [here](./Docs/bulk-sms-api/)
 
-#### Authorization
+## Getting Started
+
+### Authorization
 
 You must provide your API key in the `X-API-KEY` header.
 
@@ -27,7 +29,7 @@ To set up your API Key
 - Copy the key and keep it safe. This key is required in the `X-API-KEY` header
   for **all requests**.
 
-#### Get Phone Numbers
+### Get Phone Numbers
 
 `GET /api/v1/workspace/{workspace_id}/phones`
 
@@ -176,7 +178,7 @@ Response:
 }
 ```
 
-#### Get Contacts
+### Get Contacts
 
 `GET /api/v1/workspace/{workspace_id}/contacts`
 
@@ -243,7 +245,7 @@ Response:
 }
 ```
 
-#### Get Configured AI agents
+### Get Configured AI agents
 
 GET /api/v1/workspace/{workspace_id}/ai_agents
 
@@ -293,6 +295,10 @@ Response:
   "total": 1
 }
 ```
+
+## Campaign Management
+
+### Create Campaign
 
 #### Initiate Auto-Dialer Voice Campaign
 
@@ -368,11 +374,11 @@ curl -X 'POST' \
 }'
 ```
 
-### `overwrite_phone_recipient`
+#### `overwrite_phone_recipient`
 
 This parameter is **only required if any of the `phone_ids` have a default recipient that does not match the campaign recipient**. It allows you to explicitly override the default recipient setting for those phone numbers. You must include the `type` (in this example AI_AGENT) and the `receiver` (in this example the conversation config of the ai agent)
 
-#### Format:
+##### Format:
 ```
 "overwrite_phone_recipient": {
   "type": "AI_AGENT",
@@ -380,10 +386,10 @@ This parameter is **only required if any of the `phone_ids` have a default recip
 }
 ```
 
-### `any_contact_label_ids` and `exclude_contact_ids`
+#### `any_contact_label_ids` and `exclude_contact_ids`
 By default, the campaign will call every contact that matches the label ids under `any_contact_label_ids`. To exclude contacts you must include the contact ids in the `exclude_contact_ids` list. 
 
-#### Format:
+##### Format:
 ```
   "exclude_contact_ids": [
       "4667298e-8d5b-468e-8218-6a47925fe5f2",
@@ -392,7 +398,9 @@ By default, the campaign will call every contact that matches the label ids unde
 ```
  
 
-2. `GET /api/v1/workspace/{workspace_id}/auto_dialer_campaigns`
+### List Campaigns
+
+`GET /api/v1/workspace/{workspace_id}/auto_dialer_campaigns`
 
 Use this endpoint to gather information about past and current campaigns. Filter on various attributes such as campaign type, status, mode, and date range.
 
@@ -532,7 +540,9 @@ Response:
 ```
 
 
-3. `GET /api/v1/workspace/{workspace_id}/auto_dialer_campaigns/{auto_dialer_campaign_id}`
+### Get Campaign Details
+
+`GET /api/v1/workspace/{workspace_id}/auto_dialer_campaigns/{auto_dialer_campaign_id}`
 
 Get the information of a campaign given the workspace_id and the desired campaign_id
 
