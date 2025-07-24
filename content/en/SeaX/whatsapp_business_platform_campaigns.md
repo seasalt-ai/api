@@ -66,7 +66,7 @@ Begin by retrieving available phone numbers linked to your WhatsApp Business acc
 **Example Request**:
 ```bash
 curl -X 'GET' \
-  'https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/phones?offset=0&limit=10' \
+  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/{workspace_id}/phones?offset=0&limit=10' \
   -H 'accept: application/json' \
   -H 'X-API-Key: your_api_key_here'
 ```
