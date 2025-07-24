@@ -430,7 +430,7 @@ Understanding typical error responses is key to troubleshooting:
 
 ### 8. Send Individual WhatsApp Messages
 
-**Endpoint**: `POST /api/v1/workspace/{workspace_id}/send_whatsapp_message`
+**Endpoint**: `POST /api/v1/workspace/{workspace_id}/send_message/wabp_template_message`
 
 For sending individual WhatsApp messages to specific contacts (not bulk campaigns).
 
