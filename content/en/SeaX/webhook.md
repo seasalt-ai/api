@@ -1,13 +1,13 @@
 ---
 title: Seasalt.ai Webhook Notification API Tutorial
-linkTitle: Webhook Notification API Tutorial
+linkTitle: Workspace Event Notification
 description:
   Learn how to use Seasalt.ai's Webhook Notification API to receive real-time
   event updates for conversations, calls, and user actions. Ideal for
   integrations with Zapier and custom automation workflows.
 
 type: docs
-weight: 1
+weight: 6
 ---
 
 ## Overview
@@ -16,10 +16,8 @@ A webhook-based notification system that lets your services receive real-time
 updates from Seasalt.ai products like SeaChat. Whether you want to track new
 conversations, missed calls, or contact changes, using the following endpoints
 ensures you stay informed the moment it happens. With support for multiple event
-types and delivery modes (immediate, delayed, batched), Portal's Webhook
-Notification are ideal for diverse automation and integration needs. You can
-also access the RESTful API docs of Webhook Notification
-[here](./Docs/notify-api/)
+types and delivery modes (immediate, delayed, batched), SeaX's Webhook
+Notification are ideal for diverse automation and integration needs.
 
 One powerful use case built on top of this webhook system is our Zapier
 integration. When an event is emitted via webhook, it can immediately trigger a
@@ -41,9 +39,9 @@ Ensure the following are in place:
 All APIs require a valid API key issued from your workspace. All requests must
 include a valid API key in the request header (`X-API-Key`).
 
-- Go to **Settings → API Key** tab.
+- Go to **Workspace → API Key** tab.
 
-- Click **Add New Key** and check `SeaNotify` as the scope.
+- Click **Add New Key** and check `Workspace Events Notification` as the scope.
 
 - Copy the key and keep it safe. This key is required in the `X-API-KEY` header
   for **all requests**.
@@ -66,14 +64,14 @@ This section explains how to manage webhook subscriptions in your workspace.
 
 ### **Create a Subscription**
 
-Create a new webhook subscription in your Portal workspace.
+Create a new webhook subscription in your SeaX workspace.
 
 #### Endpoint
 
-`POST https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription`
+`POST https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription`
 
 Use this endpoint to register a webhook that will receive event notifications
-from Portal.
+from SeaX.
 
 #### Authorization
 
@@ -113,7 +111,7 @@ your application.
 **Sample Request**
 
 ```bash
-curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription" \
+curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription" \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -147,7 +145,7 @@ ID.
 
 #### Endpoint
 
-`GET https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
+`GET https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
 
 #### Authorization
 
@@ -156,7 +154,7 @@ You must provide your API key in the `X-API-KEY` header.
 **Sample Request**
 
 ```bash
-curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}" \
+curl -X GET "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}" \
   -H "X-API-KEY: <your_api_key>"
 ```
 
@@ -179,7 +177,7 @@ curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/s
 
 #### Endpoint
 
-`GET https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription`
+`GET https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription`
 
 #### Authorization
 
@@ -226,7 +224,7 @@ If not specified, the default is `created_at:desc`.
 **Sample Request**
 
 ```bash
-curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription?order_by=created_at:asc&type=SEASALT" \
+curl -X GET "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription?order_by=created_at:asc&type=SEASALT" \
   -H "X-API-KEY: <your_api_key>"
 ```
 
@@ -261,7 +259,7 @@ status, or type.
 
 #### Endpoint
 
-`PATCH https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
+`PATCH https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
 
 #### Authorization
 
@@ -280,7 +278,7 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 **Sample Request**
 
 ```bash
-curl -X PATCH "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}" \
+curl -X PATCH "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}" \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -319,7 +317,7 @@ permanently disables event delivery to the specified webhook URL.
 
 #### Endpoint
 
-`DELETE https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
+`DELETE https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
 
 #### Authorization
 
@@ -328,7 +326,7 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 **Sample Request**
 
 ```bash
-curl -X DELETE "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}" \
+curl -X DELETE "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}" \
   -H "X-API-KEY: <your_api_key>"
 ```
 
@@ -344,7 +342,7 @@ is triggered.
 
 #### Endpoint
 
-`GET https://portal.seasalt.ai/notify/api/v1/event_types`
+`GET https://seax.seasalt.ai/notify-api/v1/event_types`
 
 #### Authorization
 
@@ -353,7 +351,7 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 **Sample Request**
 
 ```bash
-curl -X GET "https://portal.seasalt.ai/notify/api/v1/event_types" \
+curl -X GET "https://seax.seasalt.ai/notify-api/v1/event_types" \
   -H "X-API-KEY: <your_api_key>"
 ```
 
@@ -410,7 +408,7 @@ section walks you through:
 
 #### Endpoint
 
-`POST https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/test`
+`POST https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/test`
 
 #### Authorization
 
@@ -426,7 +424,7 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 **Sample Request**
 
 ```bash
-curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/test" \
+curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/test" \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -502,7 +500,7 @@ filter results by event type, delivery status, date range, and more.
 
 #### Endpoint
 
-`GET https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/logs`
+`GET https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/logs`
 
 #### Authorization
 
@@ -547,7 +545,7 @@ If not specified, the default is `created_at:desc`.
 **Sample Request**
 
 ```bash
-curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/logs?event_type=conversation.new&delivery_status=success&order_by=created_at:desc&limit=10&offset=0" \
+curl -X GET "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/logs?event_type=conversation.new&delivery_status=success&order_by=created_at:desc&limit=10&offset=0" \
   -H "X-API-KEY: <your_api_key>"
 
 ```
@@ -574,7 +572,7 @@ curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/l
         "workspace_name": "seasalt.ai bot",
         "value": {
           "event_type": "conversation.new",
-          "event_source": "portal",
+          "event_source": "seax",
           "event_triggered_by": "kelly@seasalt.ai",
           "payload": {
             "conversation": {
@@ -603,7 +601,7 @@ pagination.
 
 #### Endpoint
 
-`GET https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/logs/{subscription_id}`
+`GET https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/logs/{subscription_id}`
 
 #### Authorization
 
@@ -644,7 +642,7 @@ If not specified, the default is `created_at:desc`.
 **Sample Request**
 
 ```bash
-curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/logs/{subscription_id}?event_type=conversation.new&delivery_status=success&order_by=created_at:desc&limit=10&offset=0" \
+curl -X GET "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/logs/{subscription_id}?event_type=conversation.new&delivery_status=success&order_by=created_at:desc&limit=10&offset=0" \
   -H "X-API-KEY: <your_api_key>"
 
 ```
@@ -671,7 +669,7 @@ curl -X GET "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/l
         "workspace_name": "seasalt.ai bot",
         "value": {
           "event_type": "conversation.new",
-          "event_source": "portal",
+          "event_source": "seax",
           "event_triggered_by": "kelly@seasalt.ai",
           "payload": {
             "conversation": {
@@ -699,7 +697,7 @@ receive a download link via email.
 
 #### Endpoint
 
-`POST https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/logs/export`
+`POST https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/logs/export`
 
 #### Authorization
 
@@ -717,7 +715,7 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 **Sample Request**
 
 ```bash
-curl -X POST "https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/logs/export" \
+curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/logs/export" \
   -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
