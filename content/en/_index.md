@@ -52,7 +52,7 @@ title: Seasalt.ai API Documentation
       <li><i class="fas fa-check text-info"></i> Enterprise-grade scalability and productivity features</li>
     {{< /blocks/card >}}
   </div>
-  <div class="col-md-5">
+  <!-- <div class="col-md-5">
     {{< blocks/card
       title="Portal API"
       subtitle="Integrate real-time notifications, messaging, and analytics with your business workflows."
@@ -66,7 +66,7 @@ title: Seasalt.ai API Documentation
       <li><i class="fas fa-check text-info"></i> Access analytics APIs for actionable insights</li>
       <li><i class="fas fa-check text-info"></i> Flexible endpoints for workflow automation and third-party integrations</li>
     {{< /blocks/card >}}
-  </div>
+  </div> -->
 </div>
 
 {{% blocks/section color="dark" type="row" %}}
