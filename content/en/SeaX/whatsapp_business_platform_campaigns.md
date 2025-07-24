@@ -49,7 +49,7 @@ Example Header:
 -H 'X-API-Key: your_api_key_here'
 ```
 
-For more details on authorization, refer to the [Authorization Guide](#authorization-guide).
+For more details on authorization, refer to the [Authorization Guide](#authorization).
 
 ## Step-by-Step Guide
 
