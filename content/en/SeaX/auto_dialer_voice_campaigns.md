@@ -73,9 +73,7 @@ Response:
       "type": "LOCAL",
       "source": "TWILIO",
       "phone_capability": {
-        "sms": false,
-        "mms": false,
-        "voice": false,
+        "voice": true,
         "fax": false,
         "whatsapp": false,
         "whatsapp_business_platform": false
