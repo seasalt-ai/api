@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>API Docs on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/seax/docs/</link><description>Recent content in API Docs on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/seax/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Bulk SMS Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/bulk-sms-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/bulk-sms-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;script>
+ window.onload = function () {
+ const ui = SwaggerUIBundle({
+ url: "/openapi/seax_openapi.json",
+ dom_id: '#docsy_swagger_ui',
+ presets: [
+ SwaggerUIBundle.presets.apis,
+ SwaggerUIStandalonePreset
+ ]
+ });
+ window.ui = ui;
+ };
+&lt;/script>
+
+&lt;p>🚀 &lt;a href="https://api.seasalt.ai/seax/bulk_sms_tutorial/">Getting Started with the Bulk SMS Campaign API&lt;/a>&lt;/p></description></item></channel></rss>

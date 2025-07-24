@@ -203,9 +203,52 @@ or elsewhere? Link to your examples here.&lt;/p></description></item><item><titl
 &lt;/div>
 
 &lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Contribution Guidelines</title><link>https://api.seasalt.ai/docs/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/contribution-guidelines/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Bulk SMS Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/bulk-sms-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/bulk-sms-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;script>
+ window.onload = function () {
+ const ui = SwaggerUIBundle({
+ url: "/openapi/seax_openapi.json",
+ dom_id: '#docsy_swagger_ui',
+ presets: [
+ SwaggerUIBundle.presets.apis,
+ SwaggerUIStandalonePreset
+ ]
+ });
+ window.ui = ui;
+ };
+&lt;/script>
+
+&lt;p>🚀 &lt;a href="https://api.seasalt.ai/seax/bulk_sms_tutorial/">Getting Started with the Bulk SMS Campaign API&lt;/a>&lt;/p></description></item><item><title>Contribution Guidelines</title><link>https://api.seasalt.ai/docs/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/contribution-guidelines/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>These basic sample guidelines assume that your Docsy site is deployed using Netlify and your files are stored in GitHub. You can use the guidelines &amp;ldquo;as is&amp;rdquo; or adapt them with your own instructions: for example, other deployment options, information about your doc project&amp;rsquo;s file structure, project-specific review guidelines, versioning guidelines, or any other information your users might find useful when updating your site. &lt;a href="https://github.com/kubeflow/website/blob/master/README.md">Kubeflow&lt;/a> has a great example.&lt;/p>
-&lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p></description></item><item><title>Easy documentation with Docsy</title><link>https://api.seasalt.ai/blog/2018/10/06/easy-documentation-with-docsy/</link><pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/blog/2018/10/06/easy-documentation-with-docsy/</guid><description>&lt;p>&lt;strong>This is a typical blog post that includes images.&lt;/strong>&lt;/p>
+&lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p></description></item><item><title>Bulk SMS/MMS Campaigns</title><link>https://api.seasalt.ai/seax/bulk_sms_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/bulk_sms_tutorial/</guid><description>&lt;h1 id="bulk-smsmms-campaigns">Bulk SMS/MMS Campaigns&lt;a class="td-heading-self-link" href="#bulk-smsmms-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The Bulk SMS/MMS Campaigns API enables you to send messages at scale to targeted contact lists. This comprehensive guide covers contact management, campaign creation, and monitoring. The API supports SMS, MMS, and WhatsApp Business Platform messages with advanced targeting, scheduling, and delivery tracking capabilities.&lt;/p>
+&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p>
+&lt;h2 id="authorization">Authorization&lt;a class="td-heading-self-link" href="#authorization" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>You must provide your API key in the &lt;code>X-API-KEY&lt;/code> header.&lt;/p></description></item><item><title>WhatsApp Business Platform Campaigns</title><link>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</guid><description>&lt;h1 id="whatsapp-business-platform-campaigns">WhatsApp Business Platform Campaigns&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The WhatsApp Business Platform Campaigns API empowers organizations to design and implement effective messaging campaigns targeting contacts on WhatsApp. By leveraging this platform, businesses can engage their audience on a widely-used messaging app, increasing open rates and enhancing customer interactions.&lt;/p>
+&lt;h3 id="key-benefits">Key Benefits&lt;a class="td-heading-self-link" href="#key-benefits" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Wider Reach&lt;/strong>: Connect with billions of users worldwide.&lt;/li>
+&lt;li>&lt;strong>Personalization&lt;/strong>: Customize messages to maximize engagement.&lt;/li>
+&lt;li>&lt;strong>Rich Media&lt;/strong>: Send images, videos, and documents.&lt;/li>
+&lt;li>&lt;strong>Automation&lt;/strong>: Schedule and automate messaging workflows.&lt;/li>
+&lt;/ul>
+&lt;h3 id="use-cases">Use Cases&lt;a class="td-heading-self-link" href="#use-cases" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>Product Promotions&lt;/li>
+&lt;li>Customer Feedback Campaigns&lt;/li>
+&lt;li>Announcements and Updates&lt;/li>
+&lt;/ul>
+&lt;h3 id="limitations">Limitations&lt;a class="td-heading-self-link" href="#limitations" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>Requires a verified business account.&lt;/li>
+&lt;li>Limited to contacts who have opted-in.&lt;/li>
+&lt;/ul>
+&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p></description></item><item><title>Auto-Dialer Voice Campaigns</title><link>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</guid><description>&lt;h1 id="auto-dialer-voice-campaigns">Auto-Dialer Voice Campaigns&lt;a class="td-heading-self-link" href="#auto-dialer-voice-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The Auto-Dialer Voice Campaigns endpoint enables automated placement of bulk outbound voice calls to selected contact lists, supporting both AI-powered conversational agents and pre-recorded voice drops. Through a structured configuration interface, users can define campaign parameters such as target groups, call scripts, scheduling windows, and fallback behaviors. The endpoint facilitates scalable voice outreach by handling call queuing, delivery tracking, and engagement logging. Each campaign instance generates detailed execution metrics and outcomes, enabling real-time monitoring and performance analysis. Secure access to campaign operations requires authentication via API key. Below we will cover the endpoints needed to customize, create, and monitor your own voice call campaigns. Note: in this tutorial we are assuming you have configured a phone number, contacts, and AI agents in your workspace.&lt;/p></description></item><item><title>Easy documentation with Docsy</title><link>https://api.seasalt.ai/blog/2018/10/06/easy-documentation-with-docsy/</link><pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/blog/2018/10/06/easy-documentation-with-docsy/</guid><description>&lt;p>&lt;strong>This is a typical blog post that includes images.&lt;/strong>&lt;/p>
 &lt;p>The front matter specifies the date of the blog post, its title, a short description that will be displayed on the blog landing page, and its author.&lt;/p>
 &lt;h2 id="including-images">Including images&lt;a class="td-heading-self-link" href="#including-images" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>Here&amp;rsquo;s an image (&lt;code>featured-sunset-get.png&lt;/code>) that includes a byline and a caption.&lt;/p>

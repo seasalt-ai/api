@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Messaging on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/tags/messaging/</link><description>Recent content in Messaging on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/tags/messaging/index.xml" rel="self" type="application/rss+xml"/><item><title>Bulk SMS/MMS Campaigns</title><link>https://api.seasalt.ai/seax/bulk_sms_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/bulk_sms_tutorial/</guid><description>&lt;h1 id="bulk-smsmms-campaigns">Bulk SMS/MMS Campaigns&lt;a class="td-heading-self-link" href="#bulk-smsmms-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The Bulk SMS/MMS Campaigns API enables you to send messages at scale to targeted contact lists. This comprehensive guide covers contact management, campaign creation, and monitoring. The API supports SMS, MMS, and WhatsApp Business Platform messages with advanced targeting, scheduling, and delivery tracking capabilities.&lt;/p>
+&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p>
+&lt;h2 id="authorization">Authorization&lt;a class="td-heading-self-link" href="#authorization" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>You must provide your API key in the &lt;code>X-API-KEY&lt;/code> header.&lt;/p></description></item><item><title>WhatsApp Business Platform Campaigns</title><link>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</guid><description>&lt;h1 id="whatsapp-business-platform-campaigns">WhatsApp Business Platform Campaigns&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The WhatsApp Business Platform Campaigns API empowers organizations to design and implement effective messaging campaigns targeting contacts on WhatsApp. By leveraging this platform, businesses can engage their audience on a widely-used messaging app, increasing open rates and enhancing customer interactions.&lt;/p>
+&lt;h3 id="key-benefits">Key Benefits&lt;a class="td-heading-self-link" href="#key-benefits" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Wider Reach&lt;/strong>: Connect with billions of users worldwide.&lt;/li>
+&lt;li>&lt;strong>Personalization&lt;/strong>: Customize messages to maximize engagement.&lt;/li>
+&lt;li>&lt;strong>Rich Media&lt;/strong>: Send images, videos, and documents.&lt;/li>
+&lt;li>&lt;strong>Automation&lt;/strong>: Schedule and automate messaging workflows.&lt;/li>
+&lt;/ul>
+&lt;h3 id="use-cases">Use Cases&lt;a class="td-heading-self-link" href="#use-cases" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>Product Promotions&lt;/li>
+&lt;li>Customer Feedback Campaigns&lt;/li>
+&lt;li>Announcements and Updates&lt;/li>
+&lt;/ul>
+&lt;h3 id="limitations">Limitations&lt;a class="td-heading-self-link" href="#limitations" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>Requires a verified business account.&lt;/li>
+&lt;li>Limited to contacts who have opted-in.&lt;/li>
+&lt;/ul>
+&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p></description></item></channel></rss>
