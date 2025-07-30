@@ -26,9 +26,37 @@ data.
 
 ---
 
-#### Endpoint
+## Prerequisites
 
-`POST /generate_metric_report`
+Ensure the following are in place:
+
+### **1\. Generate Your API Key**
+
+All APIs require a valid API key issued from your workspace. All requests must
+include a valid API key in the request header (`X-API-Key`).
+
+- Go to **Workspace → API Key** tab.
+
+- Click **Add New Key** and check `Workspace Events Notification` as the scope.
+
+- Copy the key and keep it safe. This key is required in the `X-API-KEY` header
+  for **all requests**.
+
+### **2\. Prepare Your Webhook Receiver**
+
+Your server must:
+
+- Be publicly accessible over **HTTPS**
+
+- Accept **POST** requests
+
+- Handle **application/json** payloads
+
+---
+
+## Endpoint
+
+`POST https://seax.seasalt.ai/analytics-api/v1/generate_metric_report`
 
 Use this endpoint to generate multiple analytics metrics in a single request,
 providing a comprehensive view of your workspace performance across various
@@ -49,7 +77,7 @@ curl -X POST https://seax.seasalt.ai/analytics-api/v1/generate_metric_report
   }'
 ```
 
-#### Request Body Schema
+### Request Fields
 
 The request body uses the `AnalyticsRequestType` schema with the following
 fields:
@@ -71,22 +99,7 @@ fields:
 | `labels`                 | `array of strings`           |          | `label_usage`                               | Filter by specific label names                         | Example: `["support", "sales"]`                                                                                                                                                 |
 | `year`                   | `string (YYYY)`              |          | `conversation_overview_yearly`              | Year for yearly report metrics                         | Example: `2024`                                                                                                                                                                 |
 
-#### Field Dependencies & Default Values
-
-**Important Notes:**
-
-- **Date Ranges:** Most metrics accept either `range_type` OR custom
-  `start_date`/`end_date`. Custom dates take precedence.
-- **Timezone Handling:** If timezone is not specified in datetime strings, the
-  `timezone` field is used (defaults to UTC).
-- **Default Values:**
-  - `message_type`: `"messages"`
-  - `time_unit`: `"month"`
-  - `timezone`: `"UTC"`
-  - `exclude_empty_response`: `false`
-  - `year`: Current year
-
-#### Metric Compatibility Matrix
+### Metrics Use Case
 
 | Metric                         | Compatible With         | Best Use Case                         |
 | ------------------------------ | ----------------------- | ------------------------------------- |
@@ -98,7 +111,7 @@ fields:
 | `total_usage`                  | Any metric              | High-level usage summaries            |
 | `conversation_overview_yearly` | Standalone recommended  | Annual reporting (resource intensive) |
 
-#### Authorization
+### Authorization
 
 You must provide your API key in the `X-API-KEY` header.
 
@@ -109,7 +122,7 @@ To set up your API Key:
 - Copy the key and keep it safe. This key is required in the `X-API-KEY` header
   for **all requests**.
 
-#### Available Metrics
+## Available Metrics
 
 The following metrics are available through this endpoint. Each metric has
 specific requirements and returns structured data:
@@ -119,7 +132,7 @@ specific requirements and returns structured data:
 > resource-intensive metrics like `conversation_overview_yearly` with others
 > unless necessary.
 
-##### Metric: CONVERSATION_OVERVIEW
+### CONVERSATION_OVERVIEW
 
 Provides comprehensive conversation statistics over a specified time range,
 including message counts, user interactions, and percentage changes compared to
@@ -193,7 +206,7 @@ curl -X POST https://seax.seasalt.ai/seax-api/api/v1/analytics/generate_metric_r
 }
 ```
 
-##### Metric: CONVERSATION_OVERVIEW_YEARLY
+### CONVERSATION_OVERVIEW_YEARLY
 
 Provides yearly conversation statistics with monthly breakdown and average
 calculations.
@@ -259,7 +272,7 @@ curl -X POST https://seax.seasalt.ai/seax-api/api/v1/analytics/generate_metric_r
 }
 ```
 
-##### Metric: CONVERSATION_BREAKDOWN
+### CONVERSATION_BREAKDOWN
 
 Provides detailed breakdown of conversation activity by channel, day of week,
 and hour of day, useful for identifying peak activity periods and channel
@@ -363,7 +376,7 @@ curl -X POST https://seax.seasalt.ai/seax-api/api/v1/analytics/generate_metric_r
 }
 ```
 
-##### Metric: LABEL_OVERVIEW
+###  LABEL_OVERVIEW
 
 Returns comprehensive information about all labels in the workspace, including
 usage counts and label metadata.
@@ -425,7 +438,7 @@ curl -X POST https://seax.seasalt.ai/seax-api/api/v1/analytics/generate_metric_r
 }
 ```
 
-##### Metric: COMMUNICATION_VOLUME
+### COMMUNICATION_VOLUME
 
 Provides counts of inbound/outbound voice calls and non-voice messages for a
 specified time period.
@@ -478,7 +491,7 @@ curl -X POST https://seax.seasalt.ai/seax-api/api/v1/analytics/generate_metric_r
 }
 ```
 
-##### Metric: ACTIVITY_TREND
+### ACTIVITY_TREND
 
 Tracks communication activity changes over time, with breakdowns by sender type
 or call direction, including percentage change calculations.
@@ -565,7 +578,7 @@ curl -X POST https://seax.seasalt.ai/seax-api/api/v1/analytics/generate_metric_r
 }
 ```
 
-##### Metric: LABEL_USAGE
+### LABEL_USAGE
 
 Returns label usage statistics over time, grouped by the specified time unit.
 
@@ -650,7 +663,7 @@ curl -X POST https://seax.seasalt.ai/seax-api/api/v1/analytics/generate_metric_r
 }
 ```
 
-##### Metric: TOTAL_USAGE
+### TOTAL_USAGE
 
 Returns summary of total voice call duration and chat message counts over a
 specified period.
@@ -714,7 +727,7 @@ curl -X POST https://your-seax-domain.com/api/v1/analytics/generate_metric_repor
 }
 ```
 
-#### Complete Sample Request and Response
+## Complete Sample Request and Response
 
 **Sample Request with Multiple Metrics:**
 
@@ -784,7 +797,7 @@ curl -X POST https://your-seax-domain.com/api/v1/analytics/generate_metric_repor
 }
 ```
 
-#### Error Responses
+## Error Responses
 
 The API returns specific error messages to help you troubleshoot issues:
 
@@ -847,7 +860,7 @@ _Solution: Verify your API key is correct and has the appropriate permissions._
 
 _Solution: Ensure all required fields are included in your request body._
 
-#### Common Error Scenarios
+## Common Error Scenarios
 
 | Error                                  | Cause                                | Solution                                 |
 | -------------------------------------- | ------------------------------------ | ---------------------------------------- |
@@ -928,7 +941,7 @@ _Solution: Ensure all required fields are included in your request body._
    - Handle edge cases like month boundaries and leap years
    - Consider business calendar vs calendar dates for reporting
 
-##### Real-World Usage Examples
+##  Real-World Usage Examples
 
 **Dashboard Overview (Most Common)**
 
@@ -972,37 +985,3 @@ curl -X POST https://api.example.com/v1/analytics/generate_metric_report \
     "labels": ["support", "sales", "billing"]
   }'
 ```
-
-#### Rate Limits & Performance
-
-**Rate Limits:**
-
-- Standard rate limits apply per API key (typically 100 requests per minute)
-- Complex queries with large date ranges may consume more quota
-- Some metrics count as "heavy" requests (see table below)
-
-**Performance Characteristics:**
-
-| Metric                         | Performance | Typical Response Time | Resource Usage |
-| ------------------------------ | ----------- | --------------------- | -------------- |
-| `conversation_overview`        | Fast        | < 2 seconds           | Low            |
-| `communication_volume`         | Fast        | < 2 seconds           | Low            |
-| `label_overview`               | Fast        | < 3 seconds           | Low            |
-| `total_usage`                  | Fast        | < 2 seconds           | Low            |
-| `activity_trend`               | Medium      | 2-10 seconds          | Medium         |
-| `label_usage`                  | Medium      | 2-8 seconds           | Medium         |
-| `conversation_breakdown`       | Medium      | 3-15 seconds          | Medium         |
-| `conversation_overview_yearly` | Slow        | 10-30 seconds         | High           |
-
-**Optimization Tips:**
-
-- Limit concurrent requests to 5 or fewer
-- Implement exponential backoff for rate limit errors
-- Cache results for dashboard displays (5-15 minute TTL recommended)
-- Use webhooks for real-time updates instead of frequent polling
-
-#### Related Endpoints
-
-- Individual metric endpoints for specific analytics needs
-- Webhook endpoints for real-time analytics updates
-- Export endpoints for downloading analytics data in various formats

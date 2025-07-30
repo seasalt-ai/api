@@ -1,26 +1,36 @@
 {
   "openapi": "3.0.2",
-  "info": { "title": "Webhook Notification Server", "version": "0.1.0" },
+  "info": {
+    "title": "SeaNotify API Server",
+    "description": "- [Overview](#section/Overview)\n- [Getting Started](#Getting-Started)\n- [Authorization](#section/Authorization)\n- [Response Codes](#section/Response-Codes)\n- [Error Message Format](#section/Error-Message-Format)\n\n## Overview\n\nWelcome to the SeaNotify API integration guide. SeaNotify is a webhook-based event subscription system designed to help your system receive real-time notifications when specific events occur in Seasalt products. These events are grouped by **workspace**, and a valid **API key** is required for authentication.\n\nThis document walks you through how to register, manage, and receive webhook events via API. SeaNotify supports multiple event types and scheduling modes (e.g., immediate, delayed, batched), making it suitable for diverse integration needs.\n\nIf you encounter any issues or have questions, contact us at [seanotify@seasalt.ai](mailto:seanotify@seasalt.ai).\n\n## Getting Started\n\nBefore using Event Webhooks API, complete the following steps:\n\n1. **Prepare Your Workspace**:\n\n   - You need an active SeaChat or Seasalt workspace.\n   - Locate your workspace ID from the workspace settings or dashboard URL.\n\n2. **Generate an API Key**:\n\n   - Login to [Seasalt Portal](https://portal.seasalt.ai)\n   - Go to the Settings → API Key tab.\n   - Click Add New Key and create a new API key.\n   - Enable API access and copy your key. This key will be required for all API requests and please protect it with extreme caution.\n\n3. **Design Your Webhook Receiver**:\n\n   - Make sure your webhook URL is publicly accessible and supports HTTPS.\n   - Your endpoint should be able to handle POST requests with JSON payloads.\n\n4. **Register a Subscription**:\n\n   - Use the `POST /api/v1/workspaces/{workspace_id}/subscription` endpoint to create a new webhook subscription.\n   - You can specify the event type(s). See the corresponding section for request and response format.\n\n5. **Test Delivery**:\n   - Use the `POST /api/v1/workspaces/{workspace_id}/test` endpoint to trigger a sample event. See the corresponding section for request and response format.\n\n## Authorization\n\nAll API requests must include a valid SeaNotify Workspace API key using the custom X-API-Key header.\n\n```bash\nX-API-Key: \u003Cyour_workspace_api_key\u003E\n```\n\nThis key uniquely identifies your workspace and must be included in every request to access protected endpoints. You can find or regenerate this key in the Workspace Settings → API Key tab.\n\n## Example Curl\n\n```bash\ncurl -X 'POST' \\\n  'https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/test' \\\n  -H 'accept: application/json' \\\n  -H 'X-API-Key: \u003Cyour_workspace_api_key\u003E' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"event_type\": \"message.new\",\n    \"webhook_url\": \"https://example.com/webhook\",\n    \"event_type\": \"message.new\"\n  }'\n```\n\n## Response Codes\n\nFor success responses, SeaNotify only use two codes to indicate success:\n\n1. `200`, indicating that the operation was successful, with a response body attached.\n2. `204`, indicating that the operation was successful but no response body.\n\n## Error Message Format\n\nWhen the response code is a value above 400, the request body will be a fixed format content with the following structure\n\n| Name       | Type   | Description                                                                                                           | Example |\n| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------- | ------- |\n| detail     | string | Description of the error that occurred                                                                                |         |\n| code       | number | The error code can be used to confirm the error type                                                                  |         |\n| parameters | object | The error message may contain parameter information. If there is no parameter information, it will be an empty object |         |\n\nExample of the request body in case of error\n\n```json\n{\n  \"detail\": \"The token: testtoken decoding failed.\",\n  \"code\": 40007,\n  \"parameters\": {\n    \"token\": \"testtoken\"\n  }\n}\n```\n\n```json\n{\n  \"detail\": \"The account: related to the passed in workspace API key does not have the permission to perform this action\",\n  \"code\": 40001,\n  \"parameters\": {\n    \"account_id\": \"related to the passed in workspace API key\"\n  }\n}\n```\n",
+    "version": "Beta"
+  },
   "paths": {
-    "/api/v1/workspaces/{workspace_id}/subscription": {
+    "/notify/v1/workspaces/{workspace_id}/subscription": {
       "get": {
-        "tags": ["Webhook Subscriptions"],
+        "tags": [
+          "Webhook Subscriptions"
+        ],
         "summary": "Retrieves all notification subscriptions for a specific workspace",
-        "operationId": "list_subscriptions_api_v1_workspaces__workspace_id__subscription_get",
+        "description": "List all subscriptions for a workspace.",
+        "operationId": "list_subscriptions_v1_workspaces__workspace_id__subscription_get",
         "parameters": [
           {
             "required": true,
-            "schema": { "title": "Workspace Id", "type": "string" },
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
             "name": "workspace_id",
             "in": "path"
           },
           {
-            "description": "Order items by field and direction, format: <field>:<direction> (e.g., created_at:desc)",
+            "description": "Order items by field and direction, format: \u003Cfield\u003E:\u003Cdirection\u003E (e.g., created_at:desc)",
             "required": false,
             "schema": {
               "title": "Order By",
               "type": "string",
-              "description": "Order items by field and direction, format: <field>:<direction> (e.g., created_at:desc)",
+              "description": "Order items by field and direction, format: \u003Cfield\u003E:\u003Cdirection\u003E (e.g., created_at:desc)",
               "default": "created_at:desc"
             },
             "name": "order_by",
@@ -30,7 +40,11 @@
             "description": "Filter subscriptions by type (e.g., seasalt, zapier)",
             "required": false,
             "schema": {
-              "allOf": [{ "$ref": "#/components/schemas/SubscriptionType" }],
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/SubscriptionType"
+                }
+              ],
               "description": "Filter subscriptions by type (e.g., seasalt, zapier)"
             },
             "name": "type",
@@ -52,22 +66,33 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       },
       "post": {
-        "tags": ["Webhook Subscriptions"],
+        "tags": [
+          "Webhook Subscriptions"
+        ],
         "summary": "Creates a new notification subscription",
         "description": "Create a new subscription with events.",
-        "operationId": "create_subscription_api_v1_workspaces__workspace_id__subscription_post",
+        "operationId": "create_subscription_v1_workspaces__workspace_id__subscription_post",
         "parameters": [
           {
             "required": true,
-            "schema": { "title": "Workspace Id", "type": "string" },
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
             "name": "workspace_id",
             "in": "path"
           }
@@ -75,7 +100,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/SubscriptionPostType" }
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionPostType"
+              }
             }
           },
           "required": true
@@ -95,87 +122,47 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
-              }
-            }
-          }
-        },
-        "callbacks": {
-          "eventWebhook": {
-            "{$request.body#/webhook_url}": {
-              "post": {
-                "summary": "Webhook Event Notification",
-                "description": "The event payload depends on the event type.",
-                "requestBody": {
-                  "description": "The event data sent by webhook notification system.",
-                  "required": true,
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "oneOf": [
-                          {
-                            "$ref": "#/components/schemas/ConversationNewEvent"
-                          },
-                          {
-                            "$ref": "#/components/schemas/ConversationUpdateEvent"
-                          },
-                          {
-                            "$ref": "#/components/schemas/ConversationEndedEvent"
-                          },
-                          {
-                            "$ref": "#/components/schemas/MessageNewEvent"
-                          },
-                          {
-                            "$ref": "#/components/schemas/ConversationLabelAddedEvent"
-                          },
-                          {
-                            "$ref": "#/components/schemas/ConversationLabelDeletedEvent"
-                          },
-                          {
-                            "$ref": "#/components/schemas/CallNewEvent"
-                          },
-                          {
-                            "$ref": "#/components/schemas/CallEndedEvent"
-                          },
-                          {
-                            "$ref": "#/components/schemas/CallUpdatedEvent"
-                          }
-                        ],
-                        "discriminator": {
-                          "propertyName": "event_type"
-                        }
-                      }
-                    }
-                  }
-                },
-                "responses": {
-                  "200": {
-                    "description": "The client acknowledges receipt of the event successfully."
-                  }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "callbacks": {
+
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       }
     },
-    "/api/v1/workspaces/{workspace_id}/subscription/{subscription_id}": {
+    "/notify/v1/workspaces/{workspace_id}/subscription/{subscription_id}": {
       "get": {
-        "tags": ["Webhook Subscriptions"],
+        "tags": [
+          "Webhook Subscriptions"
+        ],
         "summary": "Retrieves a specific notification subscription",
         "description": "Retrieve a subscription's webhook URL.",
-        "operationId": "get_subscription_api_v1_workspaces__workspace_id__subscription__subscription_id__get",
+        "operationId": "get_subscription_v1_workspaces__workspace_id__subscription__subscription_id__get",
         "parameters": [
           {
             "required": true,
-            "schema": { "title": "Workspace Id", "type": "string" },
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
             "name": "workspace_id",
             "in": "path"
           },
           {
             "required": true,
-            "schema": { "title": "Subscription Id", "type": "string" },
+            "schema": {
+              "title": "Subscription Id",
+              "type": "string"
+            },
             "name": "subscription_id",
             "in": "path"
           }
@@ -195,28 +182,42 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       },
       "delete": {
-        "tags": ["Webhook Subscriptions"],
+        "tags": [
+          "Webhook Subscriptions"
+        ],
         "summary": "Removes a notification subscription",
         "description": "Delete a subscription given a subscription id.",
-        "operationId": "delete_subscription_api_v1_workspaces__workspace_id__subscription__subscription_id__delete",
+        "operationId": "delete_subscription_v1_workspaces__workspace_id__subscription__subscription_id__delete",
         "parameters": [
           {
             "required": true,
-            "schema": { "title": "Workspace Id", "type": "string" },
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
             "name": "workspace_id",
             "in": "path"
           },
           {
             "required": true,
-            "schema": { "title": "Subscription Id", "type": "string" },
+            "schema": {
+              "title": "Subscription Id",
+              "type": "string"
+            },
             "name": "subscription_id",
             "in": "path"
           }
@@ -224,34 +225,54 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       },
       "patch": {
-        "tags": ["Webhook Subscriptions"],
+        "tags": [
+          "Webhook Subscriptions"
+        ],
         "summary": "Updates an existing subscription",
         "description": "Update a subscription's webhook URL and/or event types.",
-        "operationId": "update_subscription_api_v1_workspaces__workspace_id__subscription__subscription_id__patch",
+        "operationId": "update_subscription_v1_workspaces__workspace_id__subscription__subscription_id__patch",
         "parameters": [
           {
             "required": true,
-            "schema": { "title": "Workspace Id", "type": "string" },
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
             "name": "workspace_id",
             "in": "path"
           },
           {
             "required": true,
-            "schema": { "title": "Subscription Id", "type": "string" },
+            "schema": {
+              "title": "Subscription Id",
+              "type": "string"
+            },
             "name": "subscription_id",
             "in": "path"
           }
@@ -281,47 +302,66 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       }
     },
-    "/api/v1/event_types": {
+    "/notify/v1/event_types": {
       "get": {
-        "tags": ["Webhook Event Types"],
+        "tags": [
+          "Webhook Event Types"
+        ],
         "summary": "Get all supported event types",
         "description": "Get all available event types.\n\nArgs:\n    db (AsyncSession): The database session\n\nReturns:\n    List[EventTypeResponse]: List of all available event types\n\nRaises:\n    HTTPException: If there's a database error",
-        "operationId": "list_events_api_v1_event_types_get",
+        "operationId": "list_events_v1_event_types_get",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response List Events Api V1 Event Types Get",
+                  "title": "Response List Events V1 Event Types Get",
                   "type": "array",
-                  "items": { "$ref": "#/components/schemas/EventTypeCreate" }
+                  "items": {
+                    "$ref": "#/components/schemas/EventTypeCreate"
+                  }
                 }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       }
     },
-    "/api/v1/workspaces/{workspace_id}/test": {
+    "/notify/v1/workspaces/{workspace_id}/test": {
       "post": {
-        "tags": ["Test Webhook"],
+        "tags": [
+          "Test Webhook"
+        ],
         "summary": "Test Send Event Data To Webhook",
         "description": "Test sending a sample webhook event to the specified URL.",
-        "operationId": "test_send_event_data_to_webhook_api_v1_workspaces__workspace_id__test_post",
+        "operationId": "test_send_event_data_to_webhook_v1_workspaces__workspace_id__test_post",
         "parameters": [
           {
             "required": true,
-            "schema": { "title": "Workspace Id", "type": "string" },
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
             "name": "workspace_id",
             "in": "path"
           }
@@ -329,7 +369,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/WebhookTestRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/WebhookTestRequest"
+              }
             }
           },
           "required": true
@@ -339,7 +381,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/WebhookTestResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookTestResponse"
+                }
               }
             }
           },
@@ -347,24 +391,35 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       }
     },
-    "/api/v1/workspaces/{workspace_id}/logs": {
+    "/notify/v1/workspaces/{workspace_id}/logs": {
       "get": {
-        "tags": ["Webhook Delivery Event Logs"],
+        "tags": [
+          "Webhook Delivery Event Logs"
+        ],
         "summary": "Get webhook delivery logs for a workspace",
         "description": "Retrieve webhook delivery logs for a specific workspace with optional filtering and pagination.",
-        "operationId": "list_workspace_logs_api_v1_workspaces__workspace_id__logs_get",
+        "operationId": "list_workspace_logs_v1_workspaces__workspace_id__logs_get",
         "parameters": [
           {
             "required": true,
-            "schema": { "title": "Workspace Id", "type": "string" },
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
             "name": "workspace_id",
             "in": "path"
           },
@@ -431,7 +486,7 @@
             "required": false,
             "schema": {
               "title": "Limit",
-              "minimum": 0.0,
+              "minimum": 0,
               "type": "integer",
               "description": "Optional, determine the number of returned rows after skipped offset, 0 is unlimit, default is 0",
               "default": 0
@@ -445,7 +500,7 @@
             "required": false,
             "schema": {
               "title": "Offset",
-              "minimum": 0.0,
+              "minimum": 0,
               "type": "integer",
               "description": "Number of items to skip",
               "default": 0
@@ -469,30 +524,44 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       }
     },
-    "/api/v1/workspaces/{workspace_id}/logs/subscription/{subscription_id}": {
+    "/notify/v1/workspaces/{workspace_id}/logs/subscription/{subscription_id}": {
       "get": {
-        "tags": ["Webhook Delivery Event Logs"],
+        "tags": [
+          "Webhook Delivery Event Logs"
+        ],
         "summary": "Get webhook delivery logs for a subscription",
         "description": "Retrieve webhook delivery logs for a specific subscription with optional filtering and pagination.",
-        "operationId": "list_subscription_logs_api_v1_workspaces__workspace_id__logs_subscription__subscription_id__get",
+        "operationId": "list_subscription_logs_v1_workspaces__workspace_id__logs_subscription__subscription_id__get",
         "parameters": [
           {
             "required": true,
-            "schema": { "title": "Workspace Id", "type": "string" },
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
             "name": "workspace_id",
             "in": "path"
           },
           {
             "required": true,
-            "schema": { "title": "Subscription Id", "type": "string" },
+            "schema": {
+              "title": "Subscription Id",
+              "type": "string"
+            },
             "name": "subscription_id",
             "in": "path"
           },
@@ -535,7 +604,7 @@
             "required": false,
             "schema": {
               "title": "Limit",
-              "minimum": 0.0,
+              "minimum": 0,
               "type": "integer",
               "description": "Optional, determine the number of returned rows after skipped offset, 0 is unlimit, default is 0",
               "default": 0
@@ -549,7 +618,7 @@
             "required": false,
             "schema": {
               "title": "Offset",
-              "minimum": 0.0,
+              "minimum": 0,
               "type": "integer",
               "description": "Number of items to skip",
               "default": 0
@@ -573,30 +642,44 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       }
     },
-    "/api/v1/workspaces/{workspace_id}/logs/export": {
+    "/notify/v1/workspaces/{workspace_id}/logs/export": {
       "post": {
-        "tags": ["Webhook Delivery Event Logs"],
+        "tags": [
+          "Webhook Delivery Event Logs"
+        ],
         "summary": "Export Logs",
         "description": "Export logs for a workspace to an email",
-        "operationId": "export_logs_api_v1_workspaces__workspace_id__logs_export_post",
+        "operationId": "export_logs_v1_workspaces__workspace_id__logs_export_post",
         "parameters": [
           {
             "required": true,
-            "schema": { "title": "Workspace Id", "type": "string" },
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
             "name": "workspace_id",
             "in": "path"
           },
           {
             "required": true,
-            "schema": { "title": "Email", "type": "string" },
+            "schema": {
+              "title": "Email",
+              "type": "string"
+            },
             "name": "email",
             "in": "query"
           },
@@ -622,7 +705,9 @@
           },
           {
             "required": false,
-            "schema": { "$ref": "#/components/schemas/LanguageCode" },
+            "schema": {
+              "$ref": "#/components/schemas/LanguageCode"
+            },
             "name": "lang",
             "in": "query"
           }
@@ -642,16 +727,21 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "APIKeyHeader": [] }]
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
       }
     }
   },
-
   "components": {
     "schemas": {
       "EventLogResponse": {
@@ -772,7 +862,10 @@
       },
       "EventTypeCreate": {
         "title": "EventTypeCreate",
-        "required": ["event_type", "description"],
+        "required": [
+          "event_type",
+          "description"
+        ],
         "type": "object",
         "properties": {
           "event_type": {
@@ -792,7 +885,10 @@
       },
       "ExportLogsJobResponse": {
         "title": "ExportLogsJobResponse",
-        "required": ["job_id", "message"],
+        "required": [
+          "job_id",
+          "message"
+        ],
         "type": "object",
         "properties": {
           "job_id": {
@@ -805,7 +901,8 @@
             "type": "string",
             "description": "The message marks the start of the downloading job running"
           }
-        }
+        },
+        "description": "Response model for the logs export job operation."
       },
       "HTTPValidationError": {
         "title": "HTTPValidationError",
@@ -1006,7 +1103,9 @@
       },
       "ListResponse_EventLogResponse_": {
         "title": "ListResponse[EventLogResponse]",
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "type": "object",
         "properties": {
           "total": {
@@ -1028,7 +1127,6 @@
       },
       "SeaNotifyEventType": {
         "title": "SeaNotifyEventType",
-        "description": "SeaNotifyEventType enum.",
         "enum": [
           "conversation.new",
           "conversation.updated",
@@ -1046,11 +1144,14 @@
           "contact.label.added",
           "contact.label.deleted"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "SeaNotifyEventType enum."
       },
       "SubscriptionListResponse": {
         "title": "SubscriptionListResponse",
-        "required": ["subscriptions"],
+        "required": [
+          "subscriptions"
+        ],
         "type": "object",
         "properties": {
           "subscriptions": {
@@ -1066,7 +1167,11 @@
       },
       "SubscriptionPostType": {
         "title": "SubscriptionPostType",
-        "required": ["webhook_url", "event_types", "is_enabled"],
+        "required": [
+          "webhook_url",
+          "event_types",
+          "is_enabled"
+        ],
         "type": "object",
         "properties": {
           "webhook_url": {
@@ -1082,7 +1187,10 @@
               "$ref": "#/components/schemas/SeaNotifyEventType"
             },
             "description": "List of event types to subscribe to",
-            "example": ["conversation.new", "message.new"]
+            "example": [
+              "conversation.new",
+              "message.new"
+            ]
           },
           "created_by": {
             "title": "Created By",
@@ -1136,7 +1244,10 @@
               "$ref": "#/components/schemas/SeaNotifyEventType"
             },
             "description": "List of event types to subscribe to",
-            "example": ["conversation.new", "message.new"]
+            "example": [
+              "conversation.new",
+              "message.new"
+            ]
           },
           "created_by": {
             "title": "Created By",
@@ -1191,9 +1302,12 @@
       },
       "SubscriptionType": {
         "title": "SubscriptionType",
-        "enum": ["SEASALT", "ZAPIER"],
+        "enum": [
+          "SEASALT",
+          "ZAPIER"
+        ],
         "type": "string",
-        "description": "An enumeration."
+        "description": "Enumeration of subscription types."
       },
       "SubscriptionUpdateType": {
         "title": "SubscriptionUpdateType",
@@ -1212,7 +1326,10 @@
               "$ref": "#/components/schemas/SeaNotifyEventType"
             },
             "description": "New list of event types to subscribe to",
-            "example": ["conversation.new", "message.new"]
+            "example": [
+              "conversation.new",
+              "message.new"
+            ]
           },
           "updated_by": {
             "title": "Updated By",
@@ -1241,7 +1358,11 @@
       },
       "ValidationError": {
         "title": "ValidationError",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "loc": {
@@ -1270,7 +1391,10 @@
       },
       "WebhookTestRequest": {
         "title": "WebhookTestRequest",
-        "required": ["event_type", "webhook_url"],
+        "required": [
+          "event_type",
+          "webhook_url"
+        ],
         "type": "object",
         "properties": {
           "event_type": {
@@ -1288,7 +1412,9 @@
       },
       "WebhookTestResponse": {
         "title": "WebhookTestResponse",
-        "required": ["status"],
+        "required": [
+          "status"
+        ],
         "type": "object",
         "properties": {
           "status": {
@@ -1313,1985 +1439,6 @@
           }
         },
         "description": "Response model for webhook test results including status and error information."
-      },
-      "ZapierEventTypesBase": {
-        "title": "ZapierEventTypesBase",
-        "type": "object",
-        "properties": {
-          "event_types": {
-            "title": "Event Types",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "description": "Event types to subscribe to. Can be a comma-separated string or list of strings",
-            "example": ["message.new", "conversation.label.added", "call.new"]
-          }
-        },
-        "description": "Base model for Zapier event type handling with flexible input format."
-      },
-      "ZapierSubscriptionPostType": {
-        "title": "ZapierSubscriptionPostType",
-        "required": ["webhook_url", "zap_id"],
-        "type": "object",
-        "properties": {
-          "event_types": {
-            "title": "Event Types",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "description": "Event types to subscribe to. Can be a comma-separated string or list of strings",
-            "example": ["message.new", "conversation.label.added", "call.new"]
-          },
-          "webhook_url": {
-            "title": "Webhook Url",
-            "maxLength": 2083,
-            "minLength": 1,
-            "type": "string",
-            "description": "The URL where webhook notifications will be sent",
-            "format": "uri",
-            "example": "https://hooks.zapier.com/hooks/catch/123456/abcdef/"
-          },
-          "created_by": {
-            "title": "Created By",
-            "type": "string",
-            "description": "Email or identifier of the user creating the subscription",
-            "default": "zapier_user",
-            "example": "user@example.com"
-          },
-          "zap_id": {
-            "title": "Zap Id",
-            "type": "string",
-            "description": "Unique identifier for the Zapier Zap",
-            "example": "1234-abcd-5678-efgh"
-          }
-        },
-        "description": "Request model for creating a new Zapier webhook subscription."
-      },
-      "ZapierSubscriptionResponseType": {
-        "title": "ZapierSubscriptionResponseType",
-        "required": [
-          "id",
-          "workspace_id",
-          "webhook_url",
-          "created_by",
-          "updated_by",
-          "created_at",
-          "type"
-        ],
-        "type": "object",
-        "properties": {
-          "event_types": {
-            "title": "Event Types",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "description": "Event types to subscribe to. Can be a comma-separated string or list of strings",
-            "example": ["message.new", "conversation.label.added", "call.new"]
-          },
-          "id": {
-            "title": "Id",
-            "type": "string",
-            "description": "The id of this subscription",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "workspace_id": {
-            "title": "Workspace Id",
-            "type": "string",
-            "description": "Identifier of the workspace this subscription belongs to",
-            "example": "ws_123456"
-          },
-          "webhook_url": {
-            "title": "Webhook Url",
-            "type": "string",
-            "description": "URL where webhook notifications are sent",
-            "example": "https://hooks.zapier.com/hooks/catch/123456/abcdef/"
-          },
-          "created_by": {
-            "title": "Created By",
-            "type": "string",
-            "description": "Email or identifier of the user who created the subscription",
-            "example": "user@example.com"
-          },
-          "updated_by": {
-            "title": "Updated By",
-            "type": "string",
-            "description": "Email or identifier of the user who last updated the subscription",
-            "example": "user@example.com"
-          },
-          "created_at": {
-            "title": "Created At",
-            "type": "string",
-            "description": "Timestamp when the subscription was created",
-            "format": "date-time",
-            "example": "2024-03-15T10:30:00Z"
-          },
-          "updated_at": {
-            "title": "Updated At",
-            "type": "string",
-            "description": "Timestamp when the subscription was last updated",
-            "format": "date-time",
-            "example": "2024-03-15T11:45:00Z"
-          },
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubscriptionType"
-              }
-            ],
-            "description": "Type of subscription (always zapier for Zapier integrations)",
-            "example": "ZAPIER"
-          }
-        },
-        "description": "Response model for Zapier subscription details including metadata and timestamps."
-      },
-      "SeaNotifyWorkspaceSchema": {
-        "title": "SeaNotifyWorkspaceSchema",
-        "description": "Workspace information in a event.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          }
-        },
-        "required": ["id", "name"]
-      },
-      "ConversationChannelType": {
-        "title": "ConversationChannelType",
-        "description": "Channel type of conversation",
-        "enum": [
-          "WEBCHAT",
-          "LINE",
-          "WHATSAPP",
-          "MESSENGER",
-          "INSTAGRAM",
-          "VOICE",
-          "THIRD_PARTY_CLIENT",
-          "SEAX_SMS",
-          "SEAX_CALL",
-          "SEAX_WABP"
-        ],
-        "type": "string"
-      },
-      "SeaNotifySourceSchema": {
-        "title": "SeaNotifySourceSchema",
-        "description": "Source of a event.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "type": {
-            "$ref": "#/components/schemas/ConversationChannelType"
-          },
-          "identifier": {
-            "title": "Identifier",
-            "type": "string"
-          }
-        },
-        "required": ["id", "type", "identifier"]
-      },
-      "SeaNotifyCustomerSchema": {
-        "title": "SeaNotifyCustomerSchema",
-        "description": "Customer information in a event.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "email": {
-            "title": "Email",
-            "type": "string"
-          },
-          "phone": {
-            "title": "Phone",
-            "type": "string"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ConversationChannelType"
-          },
-          "address": {
-            "title": "Address",
-            "type": "string"
-          }
-        },
-        "required": ["id", "channel"]
-      },
-      "ConversationMessageDirection": {
-        "title": "ConversationMessageDirection",
-        "description": "Direction of conversation message",
-        "enum": ["INBOUND", "OUTBOUND"],
-        "type": "string"
-      },
-      "SeaNotifyMessageSchema": {
-        "title": "SeaNotifyMessageSchema",
-        "description": "Message schema in a event.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "direction": {
-            "$ref": "#/components/schemas/ConversationMessageDirection"
-          },
-          "text": {
-            "title": "Text",
-            "type": "string"
-          },
-          "type": {
-            "title": "Type",
-            "type": "string"
-          },
-          "created_at": {
-            "title": "Created At",
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "required": ["id", "direction", "text", "type", "created_at"]
-      },
-      "SeaNotifyConversationNewEventDataSchemaBase": {
-        "title": "SeaNotifyConversationNewEventDataSchemaBase",
-        "description": "New conversation event data schema. ",
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "title": "Conversation Id",
-            "type": "string"
-          },
-          "conversation_title": {
-            "title": "Conversation Title",
-            "type": "string"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ConversationChannelType"
-          },
-          "customer": {
-            "$ref": "#/components/schemas/SeaNotifyCustomerSchema"
-          },
-          "latest_inbound_message": {
-            "$ref": "#/components/schemas/SeaNotifyMessageSchema"
-          },
-          "latest_outbound_message": {
-            "$ref": "#/components/schemas/SeaNotifyMessageSchema"
-          }
-        },
-        "required": [
-          "conversation_id",
-          "conversation_title",
-          "channel",
-          "customer"
-        ]
-      },
-      "ConversationNewEvent": {
-        "title": "ConversationNewEvent",
-        "description": "New conversation event schema.\n\nThis event is triggered when a new conversation is created.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "description": "Unique ID of the event.",
-            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "type": "string"
-          },
-          "version": {
-            "title": "Version",
-            "description": "Version of the event schema.",
-            "example": "0.0.1",
-            "type": "string"
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "description": "Timestamp event is sent",
-            "example": "2025-06-20T23:44:30.000000",
-            "type": "string"
-          },
-          "event_type": {
-            "description": "Event type name",
-            "example": "conversation.new",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyEventType"
-              }
-            ]
-          },
-          "workspace": {
-            "title": "Workspace",
-            "description": "Workspace Information",
-            "example": {
-              "id": "ws_12345",
-              "name": "Test Name"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyWorkspaceSchema"
-              }
-            ]
-          },
-          "source": {
-            "title": "Source",
-            "description": "Workspace Information",
-            "example": {
-              "id": "source-456",
-              "type": "WEBCHAT",
-              "identifier": "Test AI Agent"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifySourceSchema"
-              }
-            ]
-          },
-          "data": {
-            "$ref": "#/components/schemas/SeaNotifyConversationNewEventDataSchemaBase"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "timestamp",
-          "event_type",
-          "workspace",
-          "source",
-          "data"
-        ],
-        "example": {
-          "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-          "affect": "add",
-          "version": "0.0.1",
-          "timestamp": "2025-06-20T23:44:30.000000",
-          "event_type": "conversation.new",
-          "workspace": {
-            "id": "workspace-123",
-            "name": "Test Workspace"
-          },
-          "source": {
-            "id": "source-456",
-            "type": "WEBCHAT",
-            "identifier": "Test AI Agent"
-          },
-          "data": {
-            "conversation_id": "conv-789",
-            "conversation_title": "Example Conversation",
-            "channel": "WEBCHAT",
-            "customer": {
-              "id": "cust-001",
-              "name": "Test User",
-              "email": "Test@example.com",
-              "phone": "+123456789",
-              "address": "Test AI Agent",
-              "channel": "WEBCHAT"
-            },
-            "latest_inbound_message": {
-              "id": "msg-in-123456",
-              "direction": "INBOUND",
-              "text": "Hello, I need help!",
-              "type": "text",
-              "created_at": "2025-06-20T23:44:00.000000"
-            },
-            "latest_outbound_message": {
-              "id": "msg-out-123456",
-              "direction": "OUTBOUND",
-              "text": "Sure, how can I assist?",
-              "type": "text",
-              "created_at": "2025-06-20T23:44:30.000000"
-            }
-          },
-          "subscription_created_by": "Test_user",
-          "subscription_updated_by": "Test_user"
-        }
-      },
-      "SeaNotifyConversationUpdateEntitySchema": {
-        "title": "SeaNotifyConversationUpdateEntitySchema",
-        "description": "The schema of who triggered this event.",
-        "type": "object",
-        "properties": {
-          "type": {
-            "title": "Type",
-            "type": "string"
-          },
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          }
-        }
-      },
-      "SeaNotifyConversationUpdateEventDataSchema": {
-        "title": "SeaNotifyConversationUpdateEventDataSchema",
-        "description": "Update conversation data schema.",
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "title": "Conversation Id",
-            "type": "string"
-          },
-          "conversation_title": {
-            "title": "Conversation Title",
-            "type": "string"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ConversationChannelType"
-          },
-          "customer": {
-            "$ref": "#/components/schemas/SeaNotifyCustomerSchema"
-          },
-          "updated_fields": {
-            "title": "Updated Fields",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "previous": {
-            "title": "Previous",
-            "type": "object"
-          },
-          "current": {
-            "title": "Current",
-            "type": "object"
-          },
-          "updated_by": {
-            "$ref": "#/components/schemas/SeaNotifyConversationUpdateEntitySchema"
-          },
-          "updated_at": {
-            "title": "Updated At",
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "required": [
-          "conversation_id",
-          "conversation_title",
-          "channel",
-          "customer",
-          "updated_fields",
-          "updated_at"
-        ]
-      },
-      "ConversationUpdateEvent": {
-        "title": "ConversationUpdateEvent",
-        "description": "Update conversation event schema.\n\nThis event is triggered when a conversation is updated.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "description": "Unique ID of the event.",
-            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "type": "string"
-          },
-          "version": {
-            "title": "Version",
-            "description": "Version of the event schema.",
-            "example": "0.0.1",
-            "type": "string"
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "description": "Timestamp event is sent",
-            "example": "2025-06-20T23:44:30.000000",
-            "type": "string"
-          },
-          "event_type": {
-            "description": "Event type name",
-            "example": "conversation.new",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyEventType"
-              }
-            ]
-          },
-          "workspace": {
-            "title": "Workspace",
-            "description": "Workspace Information",
-            "example": {
-              "id": "ws_12345",
-              "name": "Test Name"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyWorkspaceSchema"
-              }
-            ]
-          },
-          "source": {
-            "title": "Source",
-            "description": "Workspace Information",
-            "example": {
-              "id": "source-456",
-              "type": "WEBCHAT",
-              "identifier": "Test AI Agent"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifySourceSchema"
-              }
-            ]
-          },
-          "data": {
-            "$ref": "#/components/schemas/SeaNotifyConversationUpdateEventDataSchema"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "timestamp",
-          "event_type",
-          "workspace",
-          "source",
-          "data"
-        ],
-        "example": {
-          "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-          "affect": "change",
-          "version": "0.0.1",
-          "timestamp": "2025-06-20T23:44:30.000000",
-          "event_type": "conversation.updated",
-          "workspace": {
-            "id": "workspace-123",
-            "name": "Test Workspace"
-          },
-          "source": {
-            "id": "source-456",
-            "type": "WEBCHAT",
-            "identifier": "Test AI Agent"
-          },
-          "data": {
-            "conversation_id": "conv-789",
-            "conversation_title": "Example Conversation",
-            "channel": "WEBCHAT",
-            "customer": {
-              "id": "fb0b4af0-ad6a-48a3-ad3c-d10b237b432c",
-              "name": "Test User",
-              "email": "Test@example.com",
-              "phone": "+123456789",
-              "address": "Test AI Agent",
-              "channel": "WEBCHAT"
-            },
-            "updated_fields": ["is_unread"],
-            "previous": {
-              "is_unread": "false"
-            },
-            "current": {
-              "is_unread": "true"
-            },
-            "updated_by": {
-              "type": "USER",
-              "id": "user-abc-123",
-              "name": "Test User"
-            },
-            "updated_at": "2025-06-20T23:57:30.000000"
-          },
-          "subscription_created_by": "Test_user",
-          "subscription_updated_by": "Test_user"
-        }
-      },
-      "ConversationEndedEvent": {
-        "title": "ConversationEndedEvent",
-        "description": "Conversation ended event schema.\n\nThis event is triggered when a conversation is ended.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "description": "Unique ID of the event.",
-            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "type": "string"
-          },
-          "version": {
-            "title": "Version",
-            "description": "Version of the event schema.",
-            "example": "0.0.1",
-            "type": "string"
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "description": "Timestamp event is sent",
-            "example": "2025-06-20T23:44:30.000000",
-            "type": "string"
-          },
-          "event_type": {
-            "description": "Event type name",
-            "example": "conversation.new",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyEventType"
-              }
-            ]
-          },
-          "workspace": {
-            "title": "Workspace",
-            "description": "Workspace Information",
-            "example": {
-              "id": "ws_12345",
-              "name": "Test Name"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyWorkspaceSchema"
-              }
-            ]
-          },
-          "source": {
-            "title": "Source",
-            "description": "Workspace Information",
-            "example": {
-              "id": "source-456",
-              "type": "WEBCHAT",
-              "identifier": "Test AI Agent"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifySourceSchema"
-              }
-            ]
-          },
-          "data": {
-            "$ref": "#/components/schemas/SeaNotifyConversationUpdateEventDataSchema"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "timestamp",
-          "event_type",
-          "workspace",
-          "source",
-          "data"
-        ],
-        "example": {
-          "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-          "affect": "change",
-          "version": "0.0.1",
-          "timestamp": "2025-06-20T23:44:30.000000",
-          "event_type": "conversation.ended",
-          "workspace": {
-            "id": "workspace-123",
-            "name": "Test Workspace"
-          },
-          "source": {
-            "id": "source-456",
-            "type": "WEBCHAT",
-            "identifier": "Test AI Agent"
-          },
-          "data": {
-            "conversation_id": "conv-789",
-            "conversation_title": "Example Conversation",
-            "channel": "WEBCHAT",
-            "customer": {
-              "id": "fb0b4af0-ad6a-48a3-ad3c-d10b237b432c",
-              "name": "Test User",
-              "email": "Test@example.com",
-              "phone": "+123456789",
-              "address": "Test AI Agent",
-              "channel": "WEBCHAT"
-            },
-            "updated_fields": ["CSAT_SUBMISSION"],
-            "previous": "null",
-            "current": {
-              "rating": 5,
-              "comment": "Quick and accurate response. Nice experience!"
-            },
-            "updated_by": {
-              "type": "USER",
-              "id": "user-abc-123",
-              "name": "Test User"
-            },
-            "updated_at": "2025-06-20T23:57:30.000000"
-          },
-          "subscription_created_by": "Test_user",
-          "subscription_updated_by": "Test_user"
-        }
-      },
-      "SenderType": {
-        "title": "SenderType",
-        "description": "Sender type enum.",
-        "enum": ["CUSTOMER", "AGENT", "BOT", "SYSTEM"],
-        "type": "string"
-      },
-      "SeaNotifyMessageNewEventSenderSchema": {
-        "title": "SeaNotifyMessageNewEventSenderSchema",
-        "description": "New message sender schema.",
-        "type": "object",
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/SenderType"
-          },
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          }
-        },
-        "required": ["type", "id"]
-      },
-      "SeaNotifyMessageNewEventContentSchema": {
-        "title": "SeaNotifyMessageNewEventContentSchema",
-        "description": "New message content schema.",
-        "type": "object",
-        "properties": {
-          "type": {
-            "title": "Type",
-            "type": "string"
-          },
-          "text": {
-            "title": "Text",
-            "type": "string"
-          },
-          "data": {
-            "title": "Data",
-            "type": "object"
-          }
-        },
-        "required": ["type", "text"]
-      },
-      "SeaNotifyMessageNewEventDataSchema": {
-        "title": "SeaNotifyMessageNewEventDataSchema",
-        "description": "New message data schema.",
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "title": "Conversation Id",
-            "type": "string"
-          },
-          "conversation_title": {
-            "title": "Conversation Title",
-            "type": "string"
-          },
-          "message_id": {
-            "title": "Message Id",
-            "type": "string"
-          },
-          "direction": {
-            "$ref": "#/components/schemas/ConversationMessageDirection"
-          },
-          "created_at": {
-            "title": "Created At",
-            "type": "string",
-            "format": "date-time"
-          },
-          "sender": {
-            "$ref": "#/components/schemas/SeaNotifyMessageNewEventSenderSchema"
-          },
-          "content": {
-            "$ref": "#/components/schemas/SeaNotifyMessageNewEventContentSchema"
-          }
-        },
-        "required": [
-          "conversation_id",
-          "conversation_title",
-          "message_id",
-          "direction",
-          "created_at",
-          "sender",
-          "content"
-        ]
-      },
-      "MessageNewEvent": {
-        "title": "MessageNewEvent",
-        "description": "New Message event schema.\n\nThis event is triggered when a message is created.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "description": "Unique ID of the event.",
-            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "type": "string"
-          },
-          "version": {
-            "title": "Version",
-            "description": "Version of the event schema.",
-            "example": "0.0.1",
-            "type": "string"
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "description": "Timestamp event is sent",
-            "example": "2025-06-20T23:44:30.000000",
-            "type": "string"
-          },
-          "event_type": {
-            "description": "Event type name",
-            "example": "conversation.new",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyEventType"
-              }
-            ]
-          },
-          "workspace": {
-            "title": "Workspace",
-            "description": "Workspace Information",
-            "example": {
-              "id": "ws_12345",
-              "name": "Test Name"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyWorkspaceSchema"
-              }
-            ]
-          },
-          "source": {
-            "title": "Source",
-            "description": "Workspace Information",
-            "example": {
-              "id": "source-456",
-              "type": "WEBCHAT",
-              "identifier": "Test AI Agent"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifySourceSchema"
-              }
-            ]
-          },
-          "data": {
-            "$ref": "#/components/schemas/SeaNotifyMessageNewEventDataSchema"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "timestamp",
-          "event_type",
-          "workspace",
-          "source",
-          "data"
-        ],
-        "example": {
-          "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-          "affect": "add",
-          "version": "0.0.1",
-          "timestamp": "2025-06-20T23:44:30.000000",
-          "event_type": "message.new",
-          "workspace": {
-            "id": "workspace-123",
-            "name": "Test Workspace"
-          },
-          "source": {
-            "id": "source-456",
-            "type": "WEBCHAT",
-            "identifier": "Test AI Agent"
-          },
-          "data": {
-            "message_id": "8e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "conversation_id": "9e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "conversation_title": "Test Conversation Example",
-            "direction": "OUTBOUND",
-            "created_at": "2025-06-20T23:44:30.000000",
-            "sender": {
-              "id": "FREE_NOTIFY",
-              "name": "Test AI Agent",
-              "type": "AGENT"
-            },
-            "content": {
-              "type": "text",
-              "text": "Hello, how can I assist you today?",
-              "data": null
-            }
-          },
-          "subscription_created_by": "Test_user",
-          "subscription_updated_by": "Test_user"
-        }
-      },
-      "LabelType": {
-        "title": "LabelType",
-        "description": "Type of label.",
-        "enum": ["CONTACT", "CONVERSATION", "MEETING", "WORKSPACE"],
-        "type": "string"
-      },
-      "Label": {
-        "title": "Label",
-        "description": "Schema of label.",
-        "type": "object",
-        "properties": {
-          "name": {
-            "title": "name",
-            "description": "The name of label.",
-            "example": "Label Name",
-            "type": "string"
-          },
-          "color": {
-            "title": "color",
-            "description": "The color of label.",
-            "example": "#FF8964",
-            "type": "string"
-          },
-          "description": {
-            "title": "description",
-            "description": "The description of label.",
-            "default": "",
-            "example": "Label Description",
-            "type": "string"
-          },
-          "is_system": {
-            "title": "is_system",
-            "description": "Is system label?",
-            "default": false,
-            "example": false,
-            "type": "boolean"
-          },
-          "id": {
-            "title": "id",
-            "description": "The id of label.",
-            "example": "xxxxx",
-            "type": "string"
-          },
-          "type": {
-            "title": "type",
-            "description": "The type of label.",
-            "example": "CONTACT",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LabelType"
-              }
-            ]
-          }
-        },
-        "required": ["name", "color", "id", "type"]
-      },
-      "SeaNotifyConversationLabelAddEventDataSchema": {
-        "title": "SeaNotifyConversationLabelAddEventDataSchema",
-        "description": "Add label data schema.",
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "title": "Conversation Id",
-            "type": "string"
-          },
-          "conversation_title": {
-            "title": "Conversation Title",
-            "type": "string"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ConversationChannelType"
-          },
-          "customer": {
-            "$ref": "#/components/schemas/SeaNotifyCustomerSchema"
-          },
-          "updated_fields": {
-            "title": "Updated Fields",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "previous": {
-            "title": "Previous",
-            "type": "object"
-          },
-          "current": {
-            "title": "Current",
-            "type": "object"
-          },
-          "added_by": {
-            "$ref": "#/components/schemas/SeaNotifyConversationUpdateEntitySchema"
-          },
-          "added_at": {
-            "title": "Added At",
-            "type": "string",
-            "format": "date-time"
-          },
-          "labels": {
-            "title": "Labels",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Label"
-            }
-          }
-        },
-        "required": [
-          "conversation_id",
-          "conversation_title",
-          "channel",
-          "customer",
-          "updated_fields",
-          "added_at",
-          "labels"
-        ]
-      },
-      "ConversationLabelAddedEvent": {
-        "title": "ConversationLabelAddedEvent",
-        "description": "New label attached to conversation event schema.\n\nThis event is triggered when a new label is attached to a conversation .",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "description": "Unique ID of the event.",
-            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "type": "string"
-          },
-          "version": {
-            "title": "Version",
-            "description": "Version of the event schema.",
-            "example": "0.0.1",
-            "type": "string"
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "description": "Timestamp event is sent",
-            "example": "2025-06-20T23:44:30.000000",
-            "type": "string"
-          },
-          "event_type": {
-            "description": "Event type name",
-            "example": "conversation.new",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyEventType"
-              }
-            ]
-          },
-          "workspace": {
-            "title": "Workspace",
-            "description": "Workspace Information",
-            "example": {
-              "id": "ws_12345",
-              "name": "Test Name"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyWorkspaceSchema"
-              }
-            ]
-          },
-          "source": {
-            "title": "Source",
-            "description": "Workspace Information",
-            "example": {
-              "id": "source-456",
-              "type": "WEBCHAT",
-              "identifier": "Test AI Agent"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifySourceSchema"
-              }
-            ]
-          },
-          "data": {
-            "$ref": "#/components/schemas/SeaNotifyConversationLabelAddEventDataSchema"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "timestamp",
-          "event_type",
-          "workspace",
-          "source",
-          "data"
-        ],
-        "example": {
-          "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-          "affect": "add",
-          "version": "0.0.1",
-          "timestamp": "2025-06-20T23:44:30.000000",
-          "event_type": "conversation.label.added",
-          "workspace": {
-            "id": "workspace-123",
-            "name": "Test Workspace"
-          },
-          "source": {
-            "id": "source-456",
-            "type": "WEBCHAT",
-            "identifier": "Test AI Agent"
-          },
-          "data": {
-            "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "conversation_title": "Test Label Add Conversation",
-            "channel": "WEBCHAT",
-            "customer": {
-              "id": "fb0b4af0-ad6a-48a3-ad3c-d10b237b432c",
-              "name": "Beveled Narrows bf511090ea",
-              "email": "",
-              "phone": "",
-              "address": "Test bot 2",
-              "channel": "WEBCHAT"
-            },
-            "updated_fields": ["labels"],
-            "previous": {
-              "labels": [
-                {
-                  "id": "8d99e9b041f04447858cde7506cee4d5",
-                  "color": "#565e9c",
-                  "label": "newUser",
-                  "created_at": "2025-04-08T02:48:25.059243",
-                  "updated_at": "2025-04-08T02:48:25.059243",
-                  "description": "this is a new user",
-                  "workspace_id": "ws_12345"
-                }
-              ]
-            },
-            "current": {
-              "labels": [
-                {
-                  "id": "8d99e9b041f04447858cde7506cee4d5",
-                  "color": "#565e9c",
-                  "label": "newUser",
-                  "created_at": "2025-04-08T02:48:25.059243",
-                  "updated_at": "2025-04-08T02:48:25.059243",
-                  "description": "this is a new user",
-                  "workspace_id": "ws_12345"
-                },
-                {
-                  "id": "90c51757408941e2834f76392249b10f",
-                  "color": "#a7927f",
-                  "label": "solved",
-                  "created_at": "2025-05-10T00:20:38.834259",
-                  "updated_at": "2025-05-10T00:20:38.834259",
-                  "description": "",
-                  "workspace_id": "ws_12345"
-                }
-              ]
-            },
-            "labels": [
-              {
-                "id": "90c51757408941e2834f76392249b10f",
-                "name": "solved",
-                "type": "CONVERSATION",
-                "color": "#a7927f",
-                "is_system": false,
-                "description": ""
-              }
-            ],
-            "added_by": {
-              "type": "USER",
-              "id": "user-12345",
-              "name": "Test User"
-            },
-            "added_at": "2025-05-10T00:20:38.834259"
-          },
-          "subscription_created_by": "Test_user",
-          "subscription_updated_by": "Test_user"
-        }
-      },
-      "SeaNotifyConversationLabelRemoveEventDataSchema": {
-        "title": "SeaNotifyConversationLabelRemoveEventDataSchema",
-        "description": "Remove label data schema.",
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "title": "Conversation Id",
-            "type": "string"
-          },
-          "conversation_title": {
-            "title": "Conversation Title",
-            "type": "string"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ConversationChannelType"
-          },
-          "customer": {
-            "$ref": "#/components/schemas/SeaNotifyCustomerSchema"
-          },
-          "updated_fields": {
-            "title": "Updated Fields",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "previous": {
-            "title": "Previous",
-            "type": "object"
-          },
-          "current": {
-            "title": "Current",
-            "type": "object"
-          },
-          "removed_by": {
-            "$ref": "#/components/schemas/SeaNotifyConversationUpdateEntitySchema"
-          },
-          "removed_at": {
-            "title": "Removed At",
-            "type": "string",
-            "format": "date-time"
-          },
-          "labels": {
-            "title": "Labels",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Label"
-            }
-          }
-        },
-        "required": [
-          "conversation_id",
-          "conversation_title",
-          "channel",
-          "customer",
-          "updated_fields",
-          "removed_at",
-          "labels"
-        ]
-      },
-      "ConversationLabelDeletedEvent": {
-        "title": "ConversationLabelDeletedEvent",
-        "description": "A label removed from conversation event schema.\n\nThis event is triggered when a label is removed from a conversation .",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "description": "Unique ID of the event.",
-            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "type": "string"
-          },
-          "version": {
-            "title": "Version",
-            "description": "Version of the event schema.",
-            "example": "0.0.1",
-            "type": "string"
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "description": "Timestamp event is sent",
-            "example": "2025-06-20T23:44:30.000000",
-            "type": "string"
-          },
-          "event_type": {
-            "description": "Event type name",
-            "example": "conversation.new",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyEventType"
-              }
-            ]
-          },
-          "workspace": {
-            "title": "Workspace",
-            "description": "Workspace Information",
-            "example": {
-              "id": "ws_12345",
-              "name": "Test Name"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyWorkspaceSchema"
-              }
-            ]
-          },
-          "source": {
-            "title": "Source",
-            "description": "Workspace Information",
-            "example": {
-              "id": "source-456",
-              "type": "WEBCHAT",
-              "identifier": "Test AI Agent"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifySourceSchema"
-              }
-            ]
-          },
-          "data": {
-            "$ref": "#/components/schemas/SeaNotifyConversationLabelRemoveEventDataSchema"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "timestamp",
-          "event_type",
-          "workspace",
-          "source",
-          "data"
-        ],
-        "example": {
-          "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-          "affect": "delete",
-          "version": "0.0.1",
-          "timestamp": "2025-06-20T23:44:30.000000",
-          "event_type": "conversation.label.deleted",
-          "workspace": {
-            "id": "workspace-123",
-            "name": "Test Workspace"
-          },
-          "source": {
-            "id": "source-456",
-            "type": "WEBCHAT",
-            "identifier": "Test AI Agent"
-          },
-          "data": {
-            "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "conversation_title": "Test Label Test Conversation",
-            "channel": "WEBCHAT",
-            "customer": {
-              "id": "fb0b4af0-ad6a-48a3-ad3c-d10b237b432c",
-              "name": "Beveled Narrows bf511090ea",
-              "email": "",
-              "phone": "",
-              "address": "Test bot 2",
-              "channel": "WEBCHAT"
-            },
-            "updated_fields": ["labels"],
-            "previous": {
-              "labels": [
-                {
-                  "id": "8d99e9b041f04447858cde7506cee4d5",
-                  "color": "#565e9c",
-                  "label": "newUser",
-                  "created_at": "2025-04-08T02:48:25.059243",
-                  "updated_at": "2025-04-08T02:48:25.059243",
-                  "description": "this is a new user",
-                  "workspace_id": "ws_12345"
-                },
-                {
-                  "id": "90c51757408941e2834f76392249b10f",
-                  "color": "#a7927f",
-                  "label": "solved",
-                  "created_at": "2025-05-10T00:20:38.834259",
-                  "updated_at": "2025-05-10T00:20:38.834259",
-                  "description": "",
-                  "workspace_id": "ws_12345"
-                }
-              ]
-            },
-            "current": {
-              "labels": [
-                {
-                  "id": "8d99e9b041f04447858cde7506cee4d5",
-                  "color": "#565e9c",
-                  "label": "newUser",
-                  "created_at": "2025-04-08T02:48:25.059243",
-                  "updated_at": "2025-04-08T02:48:25.059243",
-                  "description": "this is a new user",
-                  "workspace_id": "ws_12345"
-                }
-              ]
-            },
-            "labels": [
-              {
-                "id": "90c51757408941e2834f76392249b10f",
-                "name": "solved",
-                "type": "CONVERSATION",
-                "color": "#a7927f",
-                "is_system": false,
-                "description": ""
-              }
-            ],
-            "removed_by": {
-              "type": "USER",
-              "id": "user-12345",
-              "name": "Kelly Kang"
-            },
-            "removed_at": "2025-04-08T02:48:25.059243"
-          },
-          "subscription_created_by": "Test_user",
-          "subscription_updated_by": "Test_user"
-        }
-      },
-      "SeaNotifyCallEventEntitySchema": {
-        "title": "SeaNotifyCallEventEntitySchema",
-        "description": "Schema of caller and callee.",
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "title": "Conversation Id",
-            "type": "string"
-          },
-          "conversation_title": {
-            "title": "Conversation Title",
-            "type": "string"
-          },
-          "type": {
-            "$ref": "#/components/schemas/SenderType"
-          },
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "address": {
-            "title": "Address",
-            "type": "string"
-          }
-        },
-        "required": [
-          "conversation_id",
-          "conversation_title",
-          "type",
-          "id",
-          "address"
-        ]
-      },
-      "SeaNotifyCallNewEventDataSchema": {
-        "title": "SeaNotifyCallNewEventDataSchema",
-        "description": "New call data schema.",
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "title": "Conversation Id",
-            "type": "string"
-          },
-          "conversation_title": {
-            "title": "Conversation Title",
-            "type": "string"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ConversationChannelType"
-          },
-          "direction": {
-            "$ref": "#/components/schemas/ConversationMessageDirection"
-          },
-          "call_from": {
-            "$ref": "#/components/schemas/SeaNotifyCallEventEntitySchema"
-          },
-          "call_to": {
-            "$ref": "#/components/schemas/SeaNotifyCallEventEntitySchema"
-          },
-          "started_at": {
-            "title": "Started At",
-            "type": "string",
-            "format": "date-time"
-          },
-          "metadata": {
-            "title": "Metadata",
-            "type": "object"
-          }
-        },
-        "required": [
-          "conversation_id",
-          "conversation_title",
-          "channel",
-          "direction",
-          "call_from",
-          "call_to",
-          "started_at"
-        ]
-      },
-      "CallNewEvent": {
-        "title": "CallNewEvent",
-        "description": "New call event schema.\n\nThis event is triggered when a call starts.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "description": "Unique ID of the event.",
-            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "type": "string"
-          },
-          "version": {
-            "title": "Version",
-            "description": "Version of the event schema.",
-            "example": "0.0.1",
-            "type": "string"
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "description": "Timestamp event is sent",
-            "example": "2025-06-20T23:44:30.000000",
-            "type": "string"
-          },
-          "event_type": {
-            "description": "Event type name",
-            "example": "conversation.new",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyEventType"
-              }
-            ]
-          },
-          "workspace": {
-            "title": "Workspace",
-            "description": "Workspace Information",
-            "example": {
-              "id": "ws_12345",
-              "name": "Test Name"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyWorkspaceSchema"
-              }
-            ]
-          },
-          "source": {
-            "title": "Source",
-            "description": "Workspace Information",
-            "example": {
-              "id": "source-456",
-              "type": "WEBCHAT",
-              "identifier": "Test AI Agent"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifySourceSchema"
-              }
-            ]
-          },
-          "data": {
-            "$ref": "#/components/schemas/SeaNotifyCallNewEventDataSchema"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "timestamp",
-          "event_type",
-          "workspace",
-          "source",
-          "data"
-        ],
-        "example": {
-          "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-          "affect": "add",
-          "version": "0.0.1",
-          "timestamp": "2025-06-20T23:44:30.000000",
-          "event_type": "call.new",
-          "workspace": {
-            "id": "workspace-123",
-            "name": "Test Workspace"
-          },
-          "source": {
-            "id": "source-456",
-            "type": "WEBCHAT",
-            "identifier": "Test AI Agent"
-          },
-          "data": {
-            "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "conversation_title": "+123456789",
-            "channel": "SEAX_CALL",
-            "direction": "OUTBOUND",
-            "started_at": "2025-06-20T23:44:30.000000",
-            "call_from": {
-              "id": "+123456789",
-              "name": "Test AI Agent",
-              "type": "AGENT",
-              "address": "+123456789",
-              "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-              "conversation_title": "+123456789"
-            },
-            "call_to": {
-              "id": "9e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-              "name": "+123456789",
-              "type": "CUSTOMER",
-              "address": "+123456789",
-              "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-              "conversation_title": "+123456789"
-            },
-            "metadata": null
-          },
-          "subscription_created_by": "Test_user",
-          "subscription_updated_by": "Test_user"
-        }
-      },
-      "SeaNotifyCallFinishReason": {
-        "title": "SeaNotifyCallFinishReason",
-        "description": "Reasons for a call finished enum.",
-        "enum": ["unanswered", "missed", "voicemail", "completed"],
-        "type": "string"
-      },
-      "SeaNotifyCallEndEventDataSchema": {
-        "title": "SeaNotifyCallEndEventDataSchema",
-        "description": "End call data schema.",
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "title": "Conversation Id",
-            "type": "string"
-          },
-          "conversation_title": {
-            "title": "Conversation Title",
-            "type": "string"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ConversationChannelType"
-          },
-          "direction": {
-            "$ref": "#/components/schemas/ConversationMessageDirection"
-          },
-          "duration_seconds": {
-            "title": "Duration Seconds",
-            "type": "integer"
-          },
-          "finish_reason": {
-            "$ref": "#/components/schemas/SeaNotifyCallFinishReason"
-          },
-          "call_from": {
-            "$ref": "#/components/schemas/SeaNotifyCallEventEntitySchema"
-          },
-          "call_to": {
-            "$ref": "#/components/schemas/SeaNotifyCallEventEntitySchema"
-          },
-          "finished_at": {
-            "title": "Finished At",
-            "type": "string",
-            "format": "date-time"
-          },
-          "finished_by": {
-            "title": "Finished By",
-            "type": "string",
-            "format": "date-time"
-          },
-          "recording_available": {
-            "title": "Recording Available",
-            "type": "boolean"
-          },
-          "recording_url": {
-            "title": "Recording Url",
-            "type": "string"
-          }
-        },
-        "required": [
-          "conversation_id",
-          "conversation_title",
-          "channel",
-          "direction",
-          "duration_seconds",
-          "finish_reason",
-          "call_from",
-          "call_to",
-          "finished_at",
-          "finished_by",
-          "recording_available"
-        ]
-      },
-      "CallEndedEvent": {
-        "title": "CallEndedEvent",
-        "description": "A call end event schema.\n\nThis event is triggered when a call ends.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "description": "Unique ID of the event.",
-            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "type": "string"
-          },
-          "version": {
-            "title": "Version",
-            "description": "Version of the event schema.",
-            "example": "0.0.1",
-            "type": "string"
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "description": "Timestamp event is sent",
-            "example": "2025-06-20T23:44:30.000000",
-            "type": "string"
-          },
-          "event_type": {
-            "description": "Event type name",
-            "example": "conversation.new",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyEventType"
-              }
-            ]
-          },
-          "workspace": {
-            "title": "Workspace",
-            "description": "Workspace Information",
-            "example": {
-              "id": "ws_12345",
-              "name": "Test Name"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyWorkspaceSchema"
-              }
-            ]
-          },
-          "source": {
-            "title": "Source",
-            "description": "Workspace Information",
-            "example": {
-              "id": "source-456",
-              "type": "WEBCHAT",
-              "identifier": "Test AI Agent"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifySourceSchema"
-              }
-            ]
-          },
-          "data": {
-            "$ref": "#/components/schemas/SeaNotifyCallEndEventDataSchema"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "timestamp",
-          "event_type",
-          "workspace",
-          "source",
-          "data"
-        ],
-        "example": {
-          "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-          "affect": "change",
-          "version": "0.0.1",
-          "timestamp": "2025-06-20T23:44:30.000000",
-          "event_type": "call.ended",
-          "workspace": {
-            "id": "workspace-123",
-            "name": "Test Workspace"
-          },
-          "source": {
-            "id": "source-456",
-            "type": "WEBCHAT",
-            "identifier": "Test AI Agent"
-          },
-          "data": {
-            "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "conversation_title": "+123456789",
-            "channel": "SEAX_CALL",
-            "direction": "OUTBOUND",
-            "duration_seconds": 4,
-            "finish_reason": "completed",
-            "finished_at": "2025-06-20T23:44:30.000000",
-            "finished_by": "2025-06-20T23:44:30.000000",
-            "recording_url": null,
-            "recording_available": false,
-            "call_from": {
-              "id": "8e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-              "name": "SeaChatGPT Demo",
-              "type": "AGENT",
-              "address": "+123456789",
-              "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-              "conversation_title": "+123456789"
-            },
-            "call_to": {
-              "id": "9e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-              "name": "+123456789",
-              "type": "CUSTOMER",
-              "address": "+123456789",
-              "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-              "conversation_title": "+123456789"
-            }
-          },
-          "subscription_created_by": "Test_user",
-          "subscription_updated_by": "Test_user"
-        }
-      },
-      "SeaNotifyCallUpdateEventDataSchema": {
-        "title": "SeaNotifyCallUpdateEventDataSchema",
-        "description": "Update call data schema.",
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "title": "Conversation Id",
-            "type": "string"
-          },
-          "conversation_title": {
-            "title": "Conversation Title",
-            "type": "string"
-          },
-          "call_id": {
-            "title": "Call Id",
-            "type": "string"
-          },
-          "update_reason": {
-            "title": "Update Reason",
-            "type": "string"
-          },
-          "previous": {
-            "title": "Previous",
-            "type": "object"
-          },
-          "current": {
-            "title": "Current",
-            "type": "object"
-          },
-          "updated_at": {
-            "title": "Updated At",
-            "type": "string",
-            "format": "date-time"
-          },
-          "resources": {
-            "title": "Resources",
-            "type": "object"
-          }
-        },
-        "required": ["conversation_id", "conversation_title", "updated_at"]
-      },
-      "CallUpdatedEvent": {
-        "title": "CallUpdatedEvent",
-        "description": "A call update event schema.\n\nThis event is triggered when a call is updated.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "description": "Unique ID of the event.",
-            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "type": "string"
-          },
-          "version": {
-            "title": "Version",
-            "description": "Version of the event schema.",
-            "example": "0.0.1",
-            "type": "string"
-          },
-          "timestamp": {
-            "title": "Timestamp",
-            "description": "Timestamp event is sent",
-            "example": "2025-06-20T23:44:30.000000",
-            "type": "string"
-          },
-          "event_type": {
-            "description": "Event type name",
-            "example": "conversation.new",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyEventType"
-              }
-            ]
-          },
-          "workspace": {
-            "title": "Workspace",
-            "description": "Workspace Information",
-            "example": {
-              "id": "ws_12345",
-              "name": "Test Name"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifyWorkspaceSchema"
-              }
-            ]
-          },
-          "source": {
-            "title": "Source",
-            "description": "Workspace Information",
-            "example": {
-              "id": "source-456",
-              "type": "WEBCHAT",
-              "identifier": "Test AI Agent"
-            },
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SeaNotifySourceSchema"
-              }
-            ]
-          },
-          "data": {
-            "$ref": "#/components/schemas/SeaNotifyCallUpdateEventDataSchema"
-          }
-        },
-        "required": [
-          "id",
-          "version",
-          "timestamp",
-          "event_type",
-          "workspace",
-          "source",
-          "data"
-        ],
-        "example": {
-          "id": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-          "affect": "change",
-          "version": "0.0.1",
-          "timestamp": "2025-06-20T23:44:30.000000",
-          "event_type": "call.updated",
-          "workspace": {
-            "id": "workspace-123",
-            "name": "Test Workspace"
-          },
-          "source": {
-            "id": "source-456",
-            "type": "WEBCHAT",
-            "identifier": "Test AI Agent"
-          },
-          "data": {
-            "id": "+123456789",
-            "updated_at": "2025-06-20T23:44:30.000000",
-            "update_reason": "recording_ready",
-            "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-            "conversation_title": "+123456789",
-            "current": {
-              "recording_url": "www.exmapledownloadurl.map3"
-            },
-            "previous": {
-              "recording_url": null
-            },
-            "resources": {
-              "session_id": "8e74c661-4c66-4d1e-81b0-64b2f4dcac98",
-              "channel_type": "SEAX_CALL",
-              "conversation_id": "7e74c661-4c66-4d1e-81b0-64b2f4dcac98"
-            }
-          },
-          "subscription_created_by": "Test_user",
-          "subscription_updated_by": "Test_user"
-        }
-      },
-      "WebhookEventResponse": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ConversationNewEvent"
-          },
-          {
-            "$ref": "#/components/schemas/ConversationUpdateEvent"
-          },
-          {
-            "$ref": "#/components/schemas/ConversationEndedEvent"
-          },
-          {
-            "$ref": "#/components/schemas/MessageNewEvent"
-          },
-          {
-            "$ref": "#/components/schemas/ConversationLabelAddedEvent"
-          },
-          {
-            "$ref": "#/components/schemas/ConversationLabelDeletedEvent"
-          },
-          {
-            "$ref": "#/components/schemas/CallNewEvent"
-          },
-          {
-            "$ref": "#/components/schemas/CallEndedEvent"
-          },
-          {
-            "$ref": "#/components/schemas/CallUpdatedEvent"
-          }
-        ],
-        "title": "WebhookEventResponse",
-        "description": "All possible event types the webhook can deliver."
       }
     },
     "securitySchemes": {

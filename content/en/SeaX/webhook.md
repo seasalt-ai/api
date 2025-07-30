@@ -488,7 +488,7 @@ provided. Below is an example response for the `conversation.new` event type:
 
 ```
 
-## **View Delivery Logs**
+## **Delivery Logs**
 
 Learn how to retrieve delivery logs for your webhooks and what you can expect in
 logs.
@@ -746,7 +746,7 @@ file once the export is complete.
 This is an asynchronous export. Processing time varies depending on the data
 volume.
 
-### Event Payload Schema Reference
+## Event Payload Schema Reference
 
 This section provides a detailed breakdown of the payload schema for each
 supported event type in the Webhook Notification API. Each event includes
