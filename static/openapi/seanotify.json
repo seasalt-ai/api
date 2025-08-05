@@ -1,12 +1,12 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "SeaNotify API Server",
-    "description": "- [Overview](#section/Overview)\n- [Getting Started](#Getting-Started)\n- [Authorization](#section/Authorization)\n- [Response Codes](#section/Response-Codes)\n- [Error Message Format](#section/Error-Message-Format)\n\n## Overview\n\nWelcome to the SeaNotify API integration guide. SeaNotify is a webhook-based event subscription system designed to help your system receive real-time notifications when specific events occur in Seasalt products. These events are grouped by **workspace**, and a valid **API key** is required for authentication.\n\nThis document walks you through how to register, manage, and receive webhook events via API. SeaNotify supports multiple event types and scheduling modes (e.g., immediate, delayed, batched), making it suitable for diverse integration needs.\n\nIf you encounter any issues or have questions, contact us at [seanotify@seasalt.ai](mailto:seanotify@seasalt.ai).\n\n## Getting Started\n\nBefore using Event Webhooks API, complete the following steps:\n\n1. **Prepare Your Workspace**:\n\n   - You need an active SeaChat or Seasalt workspace.\n   - Locate your workspace ID from the workspace settings or dashboard URL.\n\n2. **Generate an API Key**:\n\n   - Login to [Seasalt Portal](https://portal.seasalt.ai)\n   - Go to the Settings → API Key tab.\n   - Click Add New Key and create a new API key.\n   - Enable API access and copy your key. This key will be required for all API requests and please protect it with extreme caution.\n\n3. **Design Your Webhook Receiver**:\n\n   - Make sure your webhook URL is publicly accessible and supports HTTPS.\n   - Your endpoint should be able to handle POST requests with JSON payloads.\n\n4. **Register a Subscription**:\n\n   - Use the `POST /api/v1/workspaces/{workspace_id}/subscription` endpoint to create a new webhook subscription.\n   - You can specify the event type(s). See the corresponding section for request and response format.\n\n5. **Test Delivery**:\n   - Use the `POST /api/v1/workspaces/{workspace_id}/test` endpoint to trigger a sample event. See the corresponding section for request and response format.\n\n## Authorization\n\nAll API requests must include a valid SeaNotify Workspace API key using the custom X-API-Key header.\n\n```bash\nX-API-Key: \u003Cyour_workspace_api_key\u003E\n```\n\nThis key uniquely identifies your workspace and must be included in every request to access protected endpoints. You can find or regenerate this key in the Workspace Settings → API Key tab.\n\n## Example Curl\n\n```bash\ncurl -X 'POST' \\\n  'https://portal.seasalt.ai/notify/api/v1/workspaces/{workspace_id}/test' \\\n  -H 'accept: application/json' \\\n  -H 'X-API-Key: \u003Cyour_workspace_api_key\u003E' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"event_type\": \"message.new\",\n    \"webhook_url\": \"https://example.com/webhook\",\n    \"event_type\": \"message.new\"\n  }'\n```\n\n## Response Codes\n\nFor success responses, SeaNotify only use two codes to indicate success:\n\n1. `200`, indicating that the operation was successful, with a response body attached.\n2. `204`, indicating that the operation was successful but no response body.\n\n## Error Message Format\n\nWhen the response code is a value above 400, the request body will be a fixed format content with the following structure\n\n| Name       | Type   | Description                                                                                                           | Example |\n| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------- | ------- |\n| detail     | string | Description of the error that occurred                                                                                |         |\n| code       | number | The error code can be used to confirm the error type                                                                  |         |\n| parameters | object | The error message may contain parameter information. If there is no parameter information, it will be an empty object |         |\n\nExample of the request body in case of error\n\n```json\n{\n  \"detail\": \"The token: testtoken decoding failed.\",\n  \"code\": 40007,\n  \"parameters\": {\n    \"token\": \"testtoken\"\n  }\n}\n```\n\n```json\n{\n  \"detail\": \"The account: related to the passed in workspace API key does not have the permission to perform this action\",\n  \"code\": 40001,\n  \"parameters\": {\n    \"account_id\": \"related to the passed in workspace API key\"\n  }\n}\n```\n",
+    "title": "Event Notification API Server",
+    "description": "- [Overview](#section/Overview)\n- [Getting Started](#Getting-Started)\n- [Authorization](#section/Authorization)\n- [Response Codes](#section/Response-Codes)\n- [Error Message Format](#section/Error-Message-Format)\n\n## Overview\n\nWelcome to the SeaX Event Notification API integration guide. This is a webhook-based event subscription system designed to help your system receive real-time notifications when specific events occur in Seasalt products. These events are grouped by **workspace**, and a valid **API key** is required for authentication.\n\nThis document walks you through how to register, manage, and receive webhook events via API. SeaX Event Notification API supports multiple event types and scheduling modes (e.g., immediate, delayed, batched), making it suitable for diverse integration needs.\n\nIf you encounter any issues or have questions, contact us at [seax@seasalt.ai](mailto:seax@seasalt.ai).\n\n## Getting Started\n\nEnsure the following are in place:\n\n### **1\\. Generate Your API Key**\n\nAll APIs require a valid API key issued from your workspace. All requests must\ninclude a valid API key in the request header (`X-API-Key`).\n\n- Go to **Workspace → API Key** tab.\n- Click **Add New Key** and check `Workspace Events Notification` as the scope.\n- Copy the key and keep it safe. This key is required in the `X-API-KEY` header\n  for **all requests**.\n\n### **2\\. Prepare Your Webhook Receiver**\n\nYour server must:\n- Be publicly accessible over **HTTPS**\n- Accept **POST** requests\n- Handle **application/json** payloads\n\n### **3\\. Register a Subscription**\n\n- Use the `POST /api/v1/workspaces/{workspace_id}/subscription` endpoint to create a new webhook subscription.\n- You can specify the event type(s). See the corresponding section for request and response format.\n\n### **4\\. Test Delivery**\n\n- Use the `POST /api/v1/workspaces/{workspace_id}/test` endpoint to trigger a sample event. See the corresponding section for request and response format.\n\n## Authorization\n\nAll API requests must include a valid SeaX Workspace API key using the custom X-API-Key header.\n\n```bash\nX-API-Key: \u003Cyour_workspace_api_key\u003E\n```\n\nThis key uniquely identifies your workspace and must be included in every request to access protected endpoints. You can find or regenerate this key in the Workspace Settings → API Key tab.\n\n## Example Curl\n\n```bash\ncurl -X 'POST' \\\n  'https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/test' \\\n  -H 'accept: application/json' \\\n  -H 'X-API-Key: \u003Cyour_workspace_api_key\u003E' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"event_type\": \"message.new\",\n    \"webhook_url\": \"https://example.com/webhook\",\n    \"event_type\": \"message.new\"\n  }'\n```\n\n## Response Codes\n\nFor success responses, SeaX only use two codes to indicate success:\n\n1. `200`, indicating that the operation was successful, with a response body attached.\n2. `204`, indicating that the operation was successful but no response body.\n\n## Error Message Format\n\nWhen the response code is a value above 400, the request body will be a fixed format content with the following structure\n\n| Name       | Type   | Description                                                                                                           | Example |\n| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------- | ------- |\n| detail     | string | Description of the error that occurred                                                                                |         |\n| code       | number | The error code can be used to confirm the error type                                                                  |         |\n| parameters | object | The error message may contain parameter information. If there is no parameter information, it will be an empty object |         |\n\nExample of the request body in case of error\n\n```json\n{\n  \"detail\": \"The token: testtoken decoding failed.\",\n  \"code\": 40007,\n  \"parameters\": {\n    \"token\": \"testtoken\"\n  }\n}\n```\n\n```json\n{\n  \"detail\": \"The account: related to the passed in workspace API key does not have the permission to perform this action\",\n  \"code\": 40001,\n  \"parameters\": {\n    \"account_id\": \"related to the passed in workspace API key\"\n  }\n}\n```\n",
     "version": "Beta"
   },
   "paths": {
-    "/notify/v1/workspaces/{workspace_id}/subscription": {
+    "/v1/workspaces/{workspace_id}/subscription": {
       "get": {
         "tags": [
           "Webhook Subscriptions"
@@ -130,7 +130,27 @@
           }
         },
         "callbacks": {
-
+          "webhook": {
+            "{$request.body#/webhook_url}": {
+              "post": {
+                "requestBody": {
+                  "required": true,
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/WebhookEventResponse"
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "200": {
+                    "description": "Webhook received successfully"
+                  }
+                }
+              }
+            }
+          }
         },
         "security": [
           {
@@ -139,7 +159,7 @@
         ]
       }
     },
-    "/notify/v1/workspaces/{workspace_id}/subscription/{subscription_id}": {
+    "/v1/workspaces/{workspace_id}/subscription/{subscription_id}": {
       "get": {
         "tags": [
           "Webhook Subscriptions"
@@ -316,7 +336,7 @@
         ]
       }
     },
-    "/notify/v1/event_types": {
+    "/v1/event_types": {
       "get": {
         "tags": [
           "Webhook Event Types"
@@ -347,7 +367,7 @@
         ]
       }
     },
-    "/notify/v1/workspaces/{workspace_id}/test": {
+    "/v1/workspaces/{workspace_id}/test": {
       "post": {
         "tags": [
           "Test Webhook"
@@ -405,7 +425,7 @@
         ]
       }
     },
-    "/notify/v1/workspaces/{workspace_id}/logs": {
+    "/v1/workspaces/{workspace_id}/logs": {
       "get": {
         "tags": [
           "Webhook Delivery Event Logs"
@@ -538,7 +558,7 @@
         ]
       }
     },
-    "/notify/v1/workspaces/{workspace_id}/logs/subscription/{subscription_id}": {
+    "/v1/workspaces/{workspace_id}/logs/subscription/{subscription_id}": {
       "get": {
         "tags": [
           "Webhook Delivery Event Logs"
@@ -656,7 +676,7 @@
         ]
       }
     },
-    "/notify/v1/workspaces/{workspace_id}/logs/export": {
+    "/v1/workspaces/{workspace_id}/logs/export": {
       "post": {
         "tags": [
           "Webhook Delivery Event Logs"
@@ -744,701 +764,461 @@
   },
   "components": {
     "schemas": {
-      "EventLogResponse": {
-        "title": "EventLogResponse",
-        "required": [
-          "id",
-          "workspace_id",
-          "event_id",
-          "subscription_id",
-          "event_type",
-          "webhook_url",
-          "delivery_status",
-          "delivered_event_obj",
-          "created_at"
-        ],
+      "ConversationNewEvent": {
+        "title": "ConversationNewEvent",
         "type": "object",
         "properties": {
           "id": {
             "title": "Id",
             "type": "string",
-            "description": "Unique identifier of the webhook delivery log",
-            "example": "log_1234567890abcdef"
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
           },
-          "workspace_id": {
-            "title": "Workspace Id",
+          "version": {
+            "title": "Version",
             "type": "string",
-            "description": "ID of the workspace",
-            "example": "ws_123456"
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
           },
-          "event_id": {
-            "title": "Event Id",
+          "timestamp": {
+            "title": "Timestamp",
             "type": "string",
-            "description": "ID of the event that triggered the webhook",
-            "example": "evt_987654321"
-          },
-          "subscription_id": {
-            "title": "Subscription Id",
-            "type": "string",
-            "description": "ID of the subscription that received the webhook",
-            "example": "29efe26f-eb8a-4ee8-9abf-d8651a31283e"
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
           },
           "event_type": {
             "title": "Event Type",
             "type": "string",
-            "description": "Type of event that was delivered",
+            "description": "Event type name",
             "example": "conversation.new"
           },
-          "webhook_url": {
-            "title": "Webhook Url",
-            "type": "string",
-            "description": "URL where the webhook was delivered",
-            "example": "https://api.example.com/webhooks/incoming"
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
           },
-          "delivery_status": {
-            "title": "Delivery Status",
-            "type": "string",
-            "description": "Status of the webhook delivery",
-            "example": "success"
-          },
-          "status_code": {
-            "title": "Status Code",
-            "type": "string",
-            "description": "HTTP status code of the webhook response",
-            "example": "200"
-          },
-          "response_body": {
-            "title": "Response Body",
-            "type": "string",
-            "description": "Response body from the webhook endpoint",
-            "example": "{\"status\": \"received\", \"message\": \"Webhook processed successfully\"}"
-          },
-          "delivered_event_obj": {
-            "title": "Delivered Event Obj",
-            "type": "string",
-            "description": "The event object that was delivered",
-            "example": {
-              "id": "123456789abcdefg",
-              "event_type": "message.new",
-              "affect": "add",
-              "version": "0.0.1",
-              "timestamp": "2024-03-11T04:18:13.558258",
-              "workspace": {
-                "id": "ws_123456",
-                "name": "MyWorksapce Name"
-              },
-              "source": {
-                "id": "src_123456",
-                "type": "WEBCHAT",
-                "identifier": "Zapier AI Agent"
-              },
-              "data": {
-                "message_id": "msg_123456",
-                "conversation_id": "conv_123456",
-                "conversation_title": "Zapier Conversation Example",
-                "direction": "OUTBOUND",
-                "created_at": "2024-03-11T04:18:13.558258",
-                "sender": {
-                  "id": "FREE_NOTIFY",
-                  "name": "Zapier AI Agent",
-                  "type": "AGENT"
-                },
-                "content": {
-                  "type": "text",
-                  "text": "Hello, how can I assist you today?"
-                }
-              }
-            }
-          },
-          "created_at": {
-            "title": "Created At",
-            "type": "string",
-            "description": "When the webhook delivery was attempted",
-            "format": "date-time",
-            "example": "2024-03-11T04:18:13.558258"
-          }
-        },
-        "description": "Pydantic model for webhook delivery log response containing delivery details and status."
-      },
-      "EventTypeCreate": {
-        "title": "EventTypeCreate",
-        "required": [
-          "event_type",
-          "description"
-        ],
-        "type": "object",
-        "properties": {
-          "event_type": {
-            "title": "Event Type",
-            "type": "string",
-            "description": "The unique identifier for the event type",
-            "example": "call.ended"
-          },
-          "description": {
-            "title": "Description",
-            "type": "string",
-            "description": "A detailed description of when this event is triggered",
-            "example": "Triggers when a call ends"
-          }
-        },
-        "description": "Pydantic model for creating a new event type with its identifier and description."
-      },
-      "ExportLogsJobResponse": {
-        "title": "ExportLogsJobResponse",
-        "required": [
-          "job_id",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "job_id": {
-            "title": "Job Id",
-            "type": "string",
-            "description": "The id of the job downloading and preparing the logs to be sent through email"
-          },
-          "message": {
-            "title": "Message",
-            "type": "string",
-            "description": "The message marks the start of the downloading job running"
-          }
-        },
-        "description": "Response model for the logs export job operation."
-      },
-      "HTTPValidationError": {
-        "title": "HTTPValidationError",
-        "type": "object",
-        "properties": {
-          "detail": {
-            "title": "Detail",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            }
-          }
-        }
-      },
-      "LanguageCode": {
-        "title": "LanguageCode",
-        "enum": [
-          "auto",
-          "af",
-          "af-ZA",
-          "sq",
-          "ar-DZ",
-          "ar-BH",
-          "ar-EG",
-          "ar-IQ",
-          "ar-JO",
-          "ar-KW",
-          "ar-LB",
-          "ar-LY",
-          "ar-MA",
-          "ar-OM",
-          "ar-QA",
-          "ar-SA",
-          "arb",
-          "ar-SY",
-          "ar-TN",
-          "ar-AE",
-          "ar-YE",
-          "eu",
-          "eu-ES",
-          "be",
-          "bg",
-          "bg-BG",
-          "ca",
-          "ca-ES",
-          "zh-HK",
-          "zh-CN",
-          "zh-SG",
-          "zh-TW",
-          "yue-CN",
-          "yue-HK",
-          "cmn-CN",
-          "cmn-TW",
-          "hr",
-          "cs",
-          "cs-CZ",
-          "da",
-          "da-DK",
-          "nl-BE",
-          "nl-NL",
-          "nl",
-          "en",
-          "en-AU",
-          "en-BZ",
-          "en-CA",
-          "en-IN",
-          "en-IE",
-          "en-JM",
-          "en-NZ",
-          "en-ZA",
-          "en-TT",
-          "en-GB",
-          "en-US",
-          "en-GB-WLS",
-          "en-SG",
-          "et",
-          "fo",
-          "fa",
-          "fil-PH",
-          "fi",
-          "fi-FI",
-          "fr-BE",
-          "fr-CA",
-          "fr-FR",
-          "fr-LU",
-          "fr",
-          "fr-CH",
-          "gd",
-          "gl-ES",
-          "de-AT",
-          "de-DE",
-          "de-LI",
-          "de-LU",
-          "de",
-          "de-CH",
-          "el",
-          "el-GR",
-          "he",
-          "he-IL",
-          "hi",
-          "hi-IN",
-          "hu",
-          "hu-HU",
-          "is",
-          "is-IS",
-          "id",
-          "id-ID",
-          "ga",
-          "it-IT",
-          "it",
-          "it-CH",
-          "ja",
-          "ja-JP",
-          "ko",
-          "ko-KR",
-          "ku",
-          "lv",
-          "lv-LV",
-          "lt",
-          "lt-LT",
-          "mk",
-          "ms-MY",
-          "ml",
-          "ml-IN",
-          "ms",
-          "mt",
-          "mr-IN",
-          "no",
-          "nb",
-          "nb-NO",
-          "nn",
-          "pl",
-          "pl-PL",
-          "pt-BR",
-          "pt",
-          "pt-PT",
-          "pa",
-          "pa-IN",
-          "rm",
-          "ro",
-          "ro-MD",
-          "ro-RO",
-          "ru",
-          "ru-MD",
-          "ru-RU",
-          "sr",
-          "sr-RS",
-          "sk",
-          "sk-SK",
-          "sl",
-          "sb",
-          "es-AR",
-          "es-BO",
-          "es-CL",
-          "es-CO",
-          "es-CR",
-          "es-DO",
-          "es-EC",
-          "es-SV",
-          "es-GT",
-          "es-HN",
-          "es-MX",
-          "es-NI",
-          "es-PA",
-          "es-PY",
-          "es-PE",
-          "es-PR",
-          "es",
-          "es-ES",
-          "es-US",
-          "es-UY",
-          "es-VE",
-          "sv",
-          "sv-FI",
-          "sv-SE",
-          "ta-IN",
-          "te-IN",
-          "th",
-          "th-TH",
-          "ts",
-          "tn",
-          "tr",
-          "tr-TR",
-          "ua",
-          "uk-UA",
-          "ur",
-          "ve",
-          "vi",
-          "vi-VN",
-          "cy",
-          "cy-GB",
-          "xh",
-          "ji",
-          "zu"
-        ],
-        "type": "string",
-        "description": "Language Code ISO 639-1 merged from\n\n1. https://www.andiamo.co.uk/resources/iso-language-codes/\n\n2. https://www.twilio.com/docs/voice/twiml/say/text-speech#available-voices-and-languages"
-      },
-      "ListResponse_EventLogResponse_": {
-        "title": "ListResponse[EventLogResponse]",
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "total": {
-            "title": "total",
-            "type": "integer",
-            "description": "The total count of entries.",
-            "example": 0
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
           },
           "data": {
-            "title": "data",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventLogResponse"
-            },
-            "description": "The entry list."
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
           }
         },
-        "description": "ListResponse schema."
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "New conversation event schema. This event is triggered when a new conversation is created."
       },
-      "SeaNotifyEventType": {
-        "title": "SeaNotifyEventType",
-        "enum": [
-          "conversation.new",
-          "conversation.updated",
-          "message.new",
-          "conversation.ended",
-          "conversation.label.added",
-          "conversation.label.deleted",
-          "call.new",
-          "call.ended",
-          "call.updated",
-          "call.missed",
-          "contact.new",
-          "contact.updated",
-          "contact.deleted",
-          "contact.label.added",
-          "contact.label.deleted"
-        ],
-        "type": "string",
-        "description": "SeaNotifyEventType enum."
-      },
-      "SubscriptionListResponse": {
-        "title": "SubscriptionListResponse",
-        "required": [
-          "subscriptions"
-        ],
+      "ConversationUpdateEvent": {
+        "title": "ConversationUpdateEvent",
         "type": "object",
         "properties": {
-          "subscriptions": {
-            "title": "Subscriptions",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SubscriptionResponseType"
-            },
-            "description": "List of subscriptions for the workspace"
-          }
-        },
-        "description": "Response model containing a list of subscriptions for a workspace."
-      },
-      "SubscriptionPostType": {
-        "title": "SubscriptionPostType",
-        "required": [
-          "webhook_url",
-          "event_types",
-          "is_enabled"
-        ],
-        "type": "object",
-        "properties": {
-          "webhook_url": {
-            "title": "Webhook URL",
-            "type": "string",
-            "description": "The URL where notifications will be sent",
-            "example": "https://api.example.com/webhook"
-          },
-          "event_types": {
-            "title": "Event Types",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SeaNotifyEventType"
-            },
-            "description": "List of event types to subscribe to",
-            "example": [
-              "conversation.new",
-              "message.new"
-            ]
-          },
-          "created_by": {
-            "title": "Created By",
-            "type": "string",
-            "description": "The identifier of the user creating the subscription",
-            "example": "user_12345"
-          },
-          "is_enabled": {
-            "title": "Is Enabled",
-            "type": "boolean",
-            "description": "Whether the subscription is currently active",
-            "example": true
-          },
-          "type": {
-            "title": "Subscription Type",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubscriptionType"
-              }
-            ],
-            "description": "The type of subscription (seasalt or Test)",
-            "default": "SEASALT",
-            "example": "SEASALT"
-          }
-        },
-        "description": "Pydantic model for creating a new webhook subscription."
-      },
-      "SubscriptionResponseType": {
-        "title": "SubscriptionResponseType",
-        "required": [
-          "webhook_url",
-          "event_types",
-          "is_enabled",
-          "id",
-          "created_at",
-          "updated_at",
-          "updated_by"
-        ],
-        "type": "object",
-        "properties": {
-          "webhook_url": {
-            "title": "Webhook URL",
-            "type": "string",
-            "description": "The URL where notifications will be sent",
-            "example": "https://api.example.com/webhook"
-          },
-          "event_types": {
-            "title": "Event Types",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SeaNotifyEventType"
-            },
-            "description": "List of event types to subscribe to",
-            "example": [
-              "conversation.new",
-              "message.new"
-            ]
-          },
-          "created_by": {
-            "title": "Created By",
-            "type": "string",
-            "description": "The identifier of the user creating the subscription",
-            "example": "user_12345"
-          },
-          "is_enabled": {
-            "title": "Is Enabled",
-            "type": "boolean",
-            "description": "Whether the subscription is currently active",
-            "example": true
-          },
-          "type": {
-            "title": "Subscription Type",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubscriptionType"
-              }
-            ],
-            "description": "The type of subscription (seasalt or Test)",
-            "example": "SEASALT"
-          },
           "id": {
-            "title": "Subscription ID",
+            "title": "Id",
             "type": "string",
-            "description": "The unique identifier of the subscription",
-            "example": "sub_12345"
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
           },
-          "created_at": {
-            "title": "Created At",
+          "version": {
+            "title": "Version",
             "type": "string",
-            "description": "Timestamp when the subscription was created",
-            "format": "date-time",
-            "example": "2024-03-10T15:30:00Z"
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
           },
-          "updated_at": {
-            "title": "Updated At",
+          "timestamp": {
+            "title": "Timestamp",
             "type": "string",
-            "description": "Timestamp when the subscription was last updated",
-            "format": "date-time",
-            "example": "2024-03-10T15:30:00Z"
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
           },
-          "updated_by": {
-            "title": "Updated By",
-            "type": "string",
-            "description": "The identifier of the user who last updated the subscription",
-            "example": "user_12345"
-          }
-        },
-        "description": "Extended response model for subscription details including timestamps and subscribed events."
-      },
-      "SubscriptionType": {
-        "title": "SubscriptionType",
-        "enum": [
-          "SEASALT",
-          "ZAPIER"
-        ],
-        "type": "string",
-        "description": "Enumeration of subscription types."
-      },
-      "SubscriptionUpdateType": {
-        "title": "SubscriptionUpdateType",
-        "type": "object",
-        "properties": {
-          "webhook_url": {
-            "title": "Webhook URL",
-            "type": "string",
-            "description": "The new URL where notifications will be sent",
-            "example": "https://api.example.com/new-webhook"
-          },
-          "event_types": {
-            "title": "Event Types",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SeaNotifyEventType"
-            },
-            "description": "New list of event types to subscribe to",
-            "example": [
-              "conversation.new",
-              "message.new"
-            ]
-          },
-          "updated_by": {
-            "title": "Updated By",
-            "type": "string",
-            "description": "The identifier of the user making the update",
-            "example": "user_12345"
-          },
-          "is_enabled": {
-            "title": "Is Enabled",
-            "type": "boolean",
-            "description": "Whether the subscription is currently active",
-            "example": true
-          },
-          "type": {
-            "title": "Subscription Type",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubscriptionType"
-              }
-            ],
-            "description": "The type of subscription (seasalt or Test)",
-            "example": "SEASALT"
-          }
-        },
-        "description": "Model for updating an existing webhook subscription with optional fields."
-      },
-      "ValidationError": {
-        "title": "ValidationError",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "type": "object",
-        "properties": {
-          "loc": {
-            "title": "Location",
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
-          },
-          "msg": {
-            "title": "Message",
-            "type": "string"
-          },
-          "type": {
-            "title": "Error Type",
-            "type": "string"
-          }
-        }
-      },
-      "WebhookTestRequest": {
-        "title": "WebhookTestRequest",
-        "required": [
-          "event_type",
-          "webhook_url"
-        ],
-        "type": "object",
-        "properties": {
           "event_type": {
             "title": "Event Type",
             "type": "string",
-            "description": "The type of event to test with the webhook."
+            "description": "Event type name",
+            "example": "conversation.updated"
           },
-          "webhook_url": {
-            "title": "Webhook URL",
-            "type": "string",
-            "description": "The URL of the webhook to test."
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
           }
         },
-        "description": "Request model for testing a webhook with a specific event type."
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "Update conversation event schema. This event is triggered when a conversation is updated."
       },
-      "WebhookTestResponse": {
-        "title": "WebhookTestResponse",
-        "required": [
-          "status"
-        ],
+      "ConversationEndedEvent": {
+        "title": "ConversationEndedEvent",
         "type": "object",
         "properties": {
-          "status": {
-            "title": "Status",
+          "id": {
+            "title": "Id",
             "type": "string",
-            "description": "The status of the webhook test, indicating success or error."
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
           },
-          "status_code": {
-            "title": "Status Code",
-            "type": "integer",
-            "description": "The HTTP status code returned by the webhook."
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
           },
-          "response_body": {
-            "title": "Response Body",
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "conversation.ended"
+          },
+          "workspace": {
+            "title": "Workspace",
             "type": "object",
-            "description": "The body of the response returned by the webhook."
+            "description": "Workspace Information"
           },
-          "error_msg": {
-            "title": "Error Message",
-            "type": "string",
-            "description": "A message describing any error that occurred during the webhook test."
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
           }
         },
-        "description": "Response model for webhook test results including status and error information."
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "Conversation ended event schema. This event is triggered when a conversation is ended."
+      },
+      "MessageNewEvent": {
+        "title": "MessageNewEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "message.new"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "New Message event schema. This event is triggered when a message is created."
+      },
+      "ConversationLabelAddedEvent": {
+        "title": "ConversationLabelAddedEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "conversation.label.added"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "New label attached to conversation event schema. This event is triggered when a new label is attached to a conversation."
+      },
+      "ConversationLabelDeletedEvent": {
+        "title": "ConversationLabelDeletedEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "conversation.label.deleted"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "A label removed from conversation event schema. This event is triggered when a label is removed from a conversation."
+      },
+      "CallNewEvent": {
+        "title": "CallNewEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "call.new"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "New call event schema. This event is triggered when a call starts."
+      },
+      "CallEndedEvent": {
+        "title": "CallEndedEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "call.ended"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "A call end event schema. This event is triggered when a call ends."
+      },
+      "CallUpdatedEvent": {
+        "title": "CallUpdatedEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "call.updated"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "A call update event schema. This event is triggered when a call is updated."
+      },
+      "WebhookEventResponse": {
+        "title": "WebhookEventResponse",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ConversationNewEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationUpdateEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationEndedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/MessageNewEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationLabelAddedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationLabelDeletedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/CallNewEvent"
+          },
+          {
+            "$ref": "#/components/schemas/CallEndedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/CallUpdatedEvent"
+          }
+        ],
+        "description": "All possible event types the webhook can deliver."
       }
     },
     "securitySchemes": {
