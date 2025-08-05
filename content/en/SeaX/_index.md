@@ -42,6 +42,16 @@ The scheduling system takes into account time zones, business hours, and custome
 
 Advanced scheduling features include the ability to modify or cancel scheduled messages before they're sent, bulk scheduling operations, and integration with external calendar systems for complex campaign coordination.
 
+#### Bulk Voice Drops
+SeaX makes it easy to deliver pre-recorded voice messages to large groups of contacts with just a few clicks. This powerful feature is ideal for announcements, reminders, emergency alerts, or any campaign where a personal touch via voice is more effective than text.
+
+With bulk voice drops, you can upload your audio, select your audience, and send out thousands of voice messages in a highly scalable and efficient way. The system handles call distribution automatically, ensuring high deliverability and minimal manual effort.
+
+#### AI Agent Campaigns
+SeaX empowers you to connect your customers with AI agents you've tailored to your business. SeaX makes it easy to place bulk call campaigns that drive real-time, automated conversations.
+
+Customers can speak freely with your automated agents through natural, two-way voice conversations. Perfect for lead qualification, appointment scheduling, surveys, and more.
+
 #### Do Not Contact Compliance
 SeaX automatically respects "Do Not Contact" (DNC) preferences and maintains comprehensive opt-out management. The system automatically processes standard opt-out keywords like "STOP," "UNSUBSCRIBE," and "REMOVE ME," ensuring compliance with telecommunications regulations and customer preferences.
 
