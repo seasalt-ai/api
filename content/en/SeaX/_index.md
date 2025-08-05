@@ -7,13 +7,24 @@ menu: {main: {weight: 20}}
 
 ## Overview
 
-SeaX Bulk SMS API provides comprehensive SMS/MMS communication management capabilities designed to help businesses effectively manage customer communications through text messaging. This powerful platform enables organizations to send bulk messages, manage contact databases, execute sophisticated campaigns, and handle both inbound and outbound communications with advanced automation and analytics capabilities.
+Welcome to the **SeaX API Wiki**. This site serves as the central hub for all developer documentation related to the Seasalt.ai SeaX platform. The SeaX API provides secure access to workspace-level data and comprehensive communication management capabilities, enabling you to build powerful integrations and automated workflows.
 
-The SeaX platform is built to scale with your business needs, whether you're sending a few hundred messages per month or managing millions of communications across multiple campaigns. The API provides robust features for compliance management, delivery tracking, and customer engagement optimization, making it an ideal solution for businesses of all sizes that rely on SMS/MMS communications.
+SeaX offers a complete suite of communication tools including bulk SMS/MMS messaging, webhook notifications for real-time event updates, and advanced analytics for monitoring and optimization. Whether you're building a simple messaging integration or a complex multi-channel communication platform, SeaX provides the tools and insights you need.
 
-With SeaX Bulk SMS API, you can create sophisticated messaging workflows that respect customer preferences, comply with regulatory requirements, and deliver measurable results. The platform supports advanced features like scheduled messaging, keyword-based auto-responses, contact segmentation, and comprehensive analytics to help you optimize your messaging strategies.
+The SeaX platform is built to scale with your business needs, whether you're sending a few hundred messages per month or managing millions of communications across multiple campaigns. The API provides robust features for compliance management, delivery tracking, customer engagement optimization, real-time event notifications, and comprehensive analytics to help you make data-driven decisions.
+
+Whether you're just getting started or looking to integrate advanced features, this documentation will guide you through everything you need to know.
 
 ## Key Features
+
+Currently supported core features include:
+
+- **Bulk SMS/MMS Messaging**: Send thousands or millions of messages efficiently with advanced delivery optimization
+- **Webhook Notifications**: Receive real-time event notifications from Seasalt.ai, enabling instant updates and seamless system integration
+- **Analytics**: Access insights and usage metrics to help you monitor activity and make data-driven decisions
+- **Contact Management**: Robust import/export capabilities with sophisticated labeling and segmentation
+- **Compliance Management**: Automatic Do Not Contact handling and comprehensive opt-out management
+- **Delivery Tracking**: Real-time status updates and detailed analytics for all messaging operations
 
 ### Sending Capabilities
 

@@ -1,0 +1,1232 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Event Notification API Server",
+    "description": "- [Overview](#section/Overview)\n- [Getting Started](#Getting-Started)\n- [Authorization](#section/Authorization)\n- [Response Codes](#section/Response-Codes)\n- [Error Message Format](#section/Error-Message-Format)\n\n## Overview\n\nWelcome to the SeaX Event Notification API integration guide. This is a webhook-based event subscription system designed to help your system receive real-time notifications when specific events occur in Seasalt products. These events are grouped by **workspace**, and a valid **API key** is required for authentication.\n\nThis document walks you through how to register, manage, and receive webhook events via API. SeaX Event Notification API supports multiple event types and scheduling modes (e.g., immediate, delayed, batched), making it suitable for diverse integration needs.\n\nIf you encounter any issues or have questions, contact us at [seax@seasalt.ai](mailto:seax@seasalt.ai).\n\n## Getting Started\n\nEnsure the following are in place:\n\n### **1\\. Generate Your API Key**\n\nAll APIs require a valid API key issued from your workspace. All requests must\ninclude a valid API key in the request header (`X-API-Key`).\n\n- Go to **Workspace → API Key** tab.\n- Click **Add New Key** and check `Workspace Events Notification` as the scope.\n- Copy the key and keep it safe. This key is required in the `X-API-KEY` header\n  for **all requests**.\n\n### **2\\. Prepare Your Webhook Receiver**\n\nYour server must:\n- Be publicly accessible over **HTTPS**\n- Accept **POST** requests\n- Handle **application/json** payloads\n\n### **3\\. Register a Subscription**\n\n- Use the `POST /api/v1/workspaces/{workspace_id}/subscription` endpoint to create a new webhook subscription.\n- You can specify the event type(s). See the corresponding section for request and response format.\n\n### **4\\. Test Delivery**\n\n- Use the `POST /api/v1/workspaces/{workspace_id}/test` endpoint to trigger a sample event. See the corresponding section for request and response format.\n\n## Authorization\n\nAll API requests must include a valid SeaX Workspace API key using the custom X-API-Key header.\n\n```bash\nX-API-Key: \u003Cyour_workspace_api_key\u003E\n```\n\nThis key uniquely identifies your workspace and must be included in every request to access protected endpoints. You can find or regenerate this key in the Workspace Settings → API Key tab.\n\n## Example Curl\n\n```bash\ncurl -X 'POST' \\\n  'https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/test' \\\n  -H 'accept: application/json' \\\n  -H 'X-API-Key: \u003Cyour_workspace_api_key\u003E' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"event_type\": \"message.new\",\n    \"webhook_url\": \"https://example.com/webhook\",\n    \"event_type\": \"message.new\"\n  }'\n```\n\n## Response Codes\n\nFor success responses, SeaX only use two codes to indicate success:\n\n1. `200`, indicating that the operation was successful, with a response body attached.\n2. `204`, indicating that the operation was successful but no response body.\n\n## Error Message Format\n\nWhen the response code is a value above 400, the request body will be a fixed format content with the following structure\n\n| Name       | Type   | Description                                                                                                           | Example |\n| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------- | ------- |\n| detail     | string | Description of the error that occurred                                                                                |         |\n| code       | number | The error code can be used to confirm the error type                                                                  |         |\n| parameters | object | The error message may contain parameter information. If there is no parameter information, it will be an empty object |         |\n\nExample of the request body in case of error\n\n```json\n{\n  \"detail\": \"The token: testtoken decoding failed.\",\n  \"code\": 40007,\n  \"parameters\": {\n    \"token\": \"testtoken\"\n  }\n}\n```\n\n```json\n{\n  \"detail\": \"The account: related to the passed in workspace API key does not have the permission to perform this action\",\n  \"code\": 40001,\n  \"parameters\": {\n    \"account_id\": \"related to the passed in workspace API key\"\n  }\n}\n```\n",
+    "version": "Beta"
+  },
+  "paths": {
+    "/v1/workspaces/{workspace_id}/subscription": {
+      "get": {
+        "tags": [
+          "Webhook Subscriptions"
+        ],
+        "summary": "Retrieves all notification subscriptions for a specific workspace",
+        "description": "List all subscriptions for a workspace.",
+        "operationId": "list_subscriptions_v1_workspaces__workspace_id__subscription_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
+            "name": "workspace_id",
+            "in": "path"
+          },
+          {
+            "description": "Order items by field and direction, format: \u003Cfield\u003E:\u003Cdirection\u003E (e.g., created_at:desc)",
+            "required": false,
+            "schema": {
+              "title": "Order By",
+              "type": "string",
+              "description": "Order items by field and direction, format: \u003Cfield\u003E:\u003Cdirection\u003E (e.g., created_at:desc)",
+              "default": "created_at:desc"
+            },
+            "name": "order_by",
+            "in": "query"
+          },
+          {
+            "description": "Filter subscriptions by type (e.g., seasalt, zapier)",
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/SubscriptionType"
+                }
+              ],
+              "description": "Filter subscriptions by type (e.g., seasalt, zapier)"
+            },
+            "name": "type",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Webhook Subscriptions"
+        ],
+        "summary": "Creates a new notification subscription",
+        "description": "Create a new subscription with events.",
+        "operationId": "create_subscription_v1_workspaces__workspace_id__subscription_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
+            "name": "workspace_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionPostType"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponseType"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "callbacks": {
+          "webhook": {
+            "{$request.body#/webhook_url}": {
+              "post": {
+                "requestBody": {
+                  "required": true,
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/WebhookEventResponse"
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "200": {
+                    "description": "Webhook received successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/v1/workspaces/{workspace_id}/subscription/{subscription_id}": {
+      "get": {
+        "tags": [
+          "Webhook Subscriptions"
+        ],
+        "summary": "Retrieves a specific notification subscription",
+        "description": "Retrieve a subscription's webhook URL.",
+        "operationId": "get_subscription_v1_workspaces__workspace_id__subscription__subscription_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
+            "name": "workspace_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Subscription Id",
+              "type": "string"
+            },
+            "name": "subscription_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponseType"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Webhook Subscriptions"
+        ],
+        "summary": "Removes a notification subscription",
+        "description": "Delete a subscription given a subscription id.",
+        "operationId": "delete_subscription_v1_workspaces__workspace_id__subscription__subscription_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
+            "name": "workspace_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Subscription Id",
+              "type": "string"
+            },
+            "name": "subscription_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Webhook Subscriptions"
+        ],
+        "summary": "Updates an existing subscription",
+        "description": "Update a subscription's webhook URL and/or event types.",
+        "operationId": "update_subscription_v1_workspaces__workspace_id__subscription__subscription_id__patch",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
+            "name": "workspace_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Subscription Id",
+              "type": "string"
+            },
+            "name": "subscription_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionUpdateType"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponseType"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/v1/event_types": {
+      "get": {
+        "tags": [
+          "Webhook Event Types"
+        ],
+        "summary": "Get all supported event types",
+        "description": "Get all available event types.\n\nArgs:\n    db (AsyncSession): The database session\n\nReturns:\n    List[EventTypeResponse]: List of all available event types\n\nRaises:\n    HTTPException: If there's a database error",
+        "operationId": "list_events_v1_event_types_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response List Events V1 Event Types Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventTypeCreate"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/v1/workspaces/{workspace_id}/test": {
+      "post": {
+        "tags": [
+          "Test Webhook"
+        ],
+        "summary": "Test Send Event Data To Webhook",
+        "description": "Test sending a sample webhook event to the specified URL.",
+        "operationId": "test_send_event_data_to_webhook_v1_workspaces__workspace_id__test_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
+            "name": "workspace_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookTestRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookTestResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/v1/workspaces/{workspace_id}/logs": {
+      "get": {
+        "tags": [
+          "Webhook Delivery Event Logs"
+        ],
+        "summary": "Get webhook delivery logs for a workspace",
+        "description": "Retrieve webhook delivery logs for a specific workspace with optional filtering and pagination.",
+        "operationId": "list_workspace_logs_v1_workspaces__workspace_id__logs_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
+            "name": "workspace_id",
+            "in": "path"
+          },
+          {
+            "description": "Filter by event type",
+            "required": false,
+            "schema": {
+              "title": "Event Type",
+              "type": "string",
+              "description": "Filter by event type"
+            },
+            "name": "event_type",
+            "in": "query"
+          },
+          {
+            "description": "Filter by delivery status",
+            "required": false,
+            "schema": {
+              "title": "Delivery Status",
+              "type": "string",
+              "description": "Filter by delivery status"
+            },
+            "name": "delivery_status",
+            "in": "query"
+          },
+          {
+            "description": "Filter logs after this date (inclusive)",
+            "required": false,
+            "schema": {
+              "title": "Start Date",
+              "type": "string",
+              "description": "Filter logs after this date (inclusive)",
+              "format": "date-time"
+            },
+            "name": "start_date",
+            "in": "query"
+          },
+          {
+            "description": "Filter logs before this date (inclusive)",
+            "required": false,
+            "schema": {
+              "title": "End Date",
+              "type": "string",
+              "description": "Filter logs before this date (inclusive)",
+              "format": "date-time"
+            },
+            "name": "end_date",
+            "in": "query"
+          },
+          {
+            "description": "Order items by field and direction. Example: created_at:desc",
+            "required": false,
+            "schema": {
+              "title": "Order By",
+              "type": "string",
+              "description": "Order items by field and direction. Example: created_at:desc",
+              "default": "created_at:desc"
+            },
+            "name": "order_by",
+            "in": "query"
+          },
+          {
+            "description": "Optional, determine the number of returned rows after skipped offset, 0 is unlimit, default is 0",
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "minimum": 0,
+              "type": "integer",
+              "description": "Optional, determine the number of returned rows after skipped offset, 0 is unlimit, default is 0",
+              "default": 0
+            },
+            "example": 0,
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "description": "Number of items to skip",
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0,
+              "type": "integer",
+              "description": "Number of items to skip",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponse_EventLogResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/v1/workspaces/{workspace_id}/logs/subscription/{subscription_id}": {
+      "get": {
+        "tags": [
+          "Webhook Delivery Event Logs"
+        ],
+        "summary": "Get webhook delivery logs for a subscription",
+        "description": "Retrieve webhook delivery logs for a specific subscription with optional filtering and pagination.",
+        "operationId": "list_subscription_logs_v1_workspaces__workspace_id__logs_subscription__subscription_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
+            "name": "workspace_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Subscription Id",
+              "type": "string"
+            },
+            "name": "subscription_id",
+            "in": "path"
+          },
+          {
+            "description": "Filter by event type",
+            "required": false,
+            "schema": {
+              "title": "Event Type",
+              "type": "string",
+              "description": "Filter by event type"
+            },
+            "name": "event_type",
+            "in": "query"
+          },
+          {
+            "description": "Filter by delivery status",
+            "required": false,
+            "schema": {
+              "title": "Delivery Status",
+              "type": "string",
+              "description": "Filter by delivery status"
+            },
+            "name": "delivery_status",
+            "in": "query"
+          },
+          {
+            "description": "Order items by field and direction (e.g., created_at:desc)",
+            "required": false,
+            "schema": {
+              "title": "Order By",
+              "type": "string",
+              "description": "Order items by field and direction (e.g., created_at:desc)",
+              "default": "created_at:desc"
+            },
+            "name": "order_by",
+            "in": "query"
+          },
+          {
+            "description": "Optional, determine the number of returned rows after skipped offset, 0 is unlimit, default is 0",
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "minimum": 0,
+              "type": "integer",
+              "description": "Optional, determine the number of returned rows after skipped offset, 0 is unlimit, default is 0",
+              "default": 0
+            },
+            "example": 0,
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "description": "Number of items to skip",
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0,
+              "type": "integer",
+              "description": "Number of items to skip",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponse_EventLogResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/v1/workspaces/{workspace_id}/logs/export": {
+      "post": {
+        "tags": [
+          "Webhook Delivery Event Logs"
+        ],
+        "summary": "Export Logs",
+        "description": "Export logs for a workspace to an email",
+        "operationId": "export_logs_v1_workspaces__workspace_id__logs_export_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Workspace Id",
+              "type": "string"
+            },
+            "name": "workspace_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Email",
+              "type": "string"
+            },
+            "name": "email",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Start Date",
+              "type": "string",
+              "format": "date-time"
+            },
+            "name": "start_date",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "End Date",
+              "type": "string",
+              "format": "date-time"
+            },
+            "name": "end_date",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/LanguageCode"
+            },
+            "name": "lang",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportLogsJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConversationNewEvent": {
+        "title": "ConversationNewEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "conversation.new"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "New conversation event schema. This event is triggered when a new conversation is created."
+      },
+      "ConversationUpdateEvent": {
+        "title": "ConversationUpdateEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "conversation.updated"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "Update conversation event schema. This event is triggered when a conversation is updated."
+      },
+      "ConversationEndedEvent": {
+        "title": "ConversationEndedEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "conversation.ended"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "Conversation ended event schema. This event is triggered when a conversation is ended."
+      },
+      "MessageNewEvent": {
+        "title": "MessageNewEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "message.new"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "New Message event schema. This event is triggered when a message is created."
+      },
+      "ConversationLabelAddedEvent": {
+        "title": "ConversationLabelAddedEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "conversation.label.added"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "New label attached to conversation event schema. This event is triggered when a new label is attached to a conversation."
+      },
+      "ConversationLabelDeletedEvent": {
+        "title": "ConversationLabelDeletedEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "conversation.label.deleted"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "A label removed from conversation event schema. This event is triggered when a label is removed from a conversation."
+      },
+      "CallNewEvent": {
+        "title": "CallNewEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "call.new"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "New call event schema. This event is triggered when a call starts."
+      },
+      "CallEndedEvent": {
+        "title": "CallEndedEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "call.ended"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "A call end event schema. This event is triggered when a call ends."
+      },
+      "CallUpdatedEvent": {
+        "title": "CallUpdatedEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "call.updated"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "source": {
+            "title": "Source",
+            "type": "object",
+            "description": "Source Information"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
+        "description": "A call update event schema. This event is triggered when a call is updated."
+      },
+      "WebhookEventResponse": {
+        "title": "WebhookEventResponse",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ConversationNewEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationUpdateEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationEndedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/MessageNewEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationLabelAddedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationLabelDeletedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/CallNewEvent"
+          },
+          {
+            "$ref": "#/components/schemas/CallEndedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/CallUpdatedEvent"
+          }
+        ],
+        "description": "All possible event types the webhook can deliver."
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    }
+  }
+}

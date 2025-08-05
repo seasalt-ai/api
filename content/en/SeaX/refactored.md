@@ -2,7 +2,7 @@
 title: Refeactored SeaX Multi-Channel Messaging API Wiki (Refactored)
 linkTitle: Refeactored SeaX API
 type: docs
-weight: 4
+weight: 2
 ---
 
 ## Overview
