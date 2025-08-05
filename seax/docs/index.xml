@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>API Docs on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/seax/docs/</link><description>Recent content in API Docs on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/seax/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Bulk SMS Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/bulk-sms-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/bulk-sms-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>API Docs on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/seax/docs/</link><description>Recent content in API Docs on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/seax/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Analytics API Swagger</title><link>https://api.seasalt.ai/seax/docs/analytics-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/analytics-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;script>
+ window.onload = function () {
+ const ui = SwaggerUIBundle({
+ url: "/openapi/analytics.json",
+ dom_id: '#docsy_swagger_ui',
+ presets: [
+ SwaggerUIBundle.presets.apis,
+ SwaggerUIStandalonePreset
+ ]
+ });
+ window.ui = ui;
+ };
+&lt;/script>
+
+&lt;ul>
+&lt;li>🚀 &lt;a href="https://api.seasalt.ai/seax/docs/analytics-iframe/">Getting Started with the Analytics API&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Bulk SMS Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/bulk-sms-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/bulk-sms-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
 &lt;script>
  window.onload = function () {
  const ui = SwaggerUIBundle({
@@ -13,4 +30,21 @@
  };
 &lt;/script>
 
-&lt;p>🚀 &lt;a href="https://api.seasalt.ai/seax/bulk_sms_tutorial/">Getting Started with the Bulk SMS Campaign API&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>🚀 &lt;a href="https://api.seasalt.ai/seax/bulk_sms_tutorial/">Getting Started with the Bulk SMS Campaign API&lt;/a>&lt;/p></description></item><item><title>Event Notification API Swagger</title><link>https://api.seasalt.ai/seax/docs/webhook-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/webhook-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;script>
+ window.onload = function () {
+ const ui = SwaggerUIBundle({
+ url: "/openapi/seanotify.json",
+ dom_id: '#docsy_swagger_ui',
+ presets: [
+ SwaggerUIBundle.presets.apis,
+ SwaggerUIStandalonePreset
+ ]
+ });
+ window.ui = ui;
+ };
+&lt;/script>
+
+&lt;ul>
+&lt;li>🚀 &lt;a href="https://api.seasalt.ai/seax/docs/webhook-iframe/">Getting Started with the Event Notification API&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Analytics API Redoc</title><link>https://api.seasalt.ai/seax/docs/analytics-iframe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/analytics-iframe/</guid><description>&lt;iframe width="100%" height=6000px src="https://seax-dev.seasalt.ai/analytics-api/redoc/analytics" title="SeaX Analytics API Redoc">&lt;/iframe></description></item><item><title>Event Notification API Redoc</title><link>https://api.seasalt.ai/seax/docs/webhook-iframe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/webhook-iframe/</guid><description>&lt;iframe width="100%" height=6000px src="https://seax-dev.seasalt.ai/notify-api/redoc" title="SeaX Event Notification API Redoc">&lt;/iframe></description></item></channel></rss>

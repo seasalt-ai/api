@@ -25,17 +25,7 @@ want.&lt;/p></description></item><item><title>SeaChat Swagger API</title><link>h
  });
  window.ui = ui;
  };
-&lt;/script></description></item><item><title>Webhook</title><link>https://api.seasalt.ai/portal/webhook/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/portal/webhook/</guid><description>&lt;h2 id="heading">Heading&lt;a class="td-heading-self-link" href="#heading" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>Edit this template to create your new page.&lt;/p>
-&lt;ul>
-&lt;li>Give it a good name, ending in &lt;code>.md&lt;/code> - e.g. &lt;code>getting-started.md&lt;/code>&lt;/li>
-&lt;li>Edit the &amp;ldquo;front matter&amp;rdquo; section at the top of the page (weight controls how
-its ordered amongst other pages in the same directory; lowest number first).&lt;/li>
-&lt;li>Add a good commit message at the bottom of the page (&amp;lt;80 characters; use the
-extended description field for more detail).&lt;/li>
-&lt;li>Create a new branch so you can preview your new file and request a review via
-Pull Request.&lt;/li>
-&lt;/ul></description></item><item><title>Bed and Chair Metrics</title><link>https://api.seasalt.ai/docs/tasks/beds/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tasks/beds/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;/script></description></item><item><title>Bed and Chair Metrics</title><link>https://api.seasalt.ai/docs/tasks/beds/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tasks/beds/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
 
 &lt;/div>
@@ -47,17 +37,43 @@ Pull Request.&lt;/li>
 &lt;/div>
 
 &lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Analytics</title><link>https://api.seasalt.ai/portal/analytics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/portal/analytics/</guid><description>&lt;h2 id="heading">Heading&lt;a class="td-heading-self-link" href="#heading" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>Edit this template to create your new page.&lt;/p>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Refeactored SeaX Multi-Channel Messaging API Wiki (Refactored)</title><link>https://api.seasalt.ai/seax/refactored/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/refactored/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The SeaX Multi-Channel Messaging API is a comprehensive communication platform that enables businesses to integrate and automate messaging across SMS, WhatsApp, and voice channels. Built for scalability and enterprise use, SeaX provides unified tools for multi-channel campaigns, contact management, and conversational workflows across all major messaging platforms.&lt;/p>
+&lt;h2 id="supported-channels">Supported Channels&lt;a class="td-heading-self-link" href="#supported-channels" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h3 id="-sms--mms-messaging">📱 SMS &amp;amp; MMS Messaging&lt;a class="td-heading-self-link" href="#-sms--mms-messaging" aria-label="Heading self-link">&lt;/a>&lt;/h3>
 &lt;ul>
-&lt;li>Give it a good name, ending in &lt;code>.md&lt;/code> - e.g. &lt;code>getting-started.md&lt;/code>&lt;/li>
-&lt;li>Edit the &amp;ldquo;front matter&amp;rdquo; section at the top of the page (weight controls how
-its ordered amongst other pages in the same directory; lowest number first).&lt;/li>
-&lt;li>Add a good commit message at the bottom of the page (&amp;lt;80 characters; use the
-extended description field for more detail).&lt;/li>
-&lt;li>Create a new branch so you can preview your new file and request a review via
-Pull Request.&lt;/li>
-&lt;/ul></description></item><item><title>SeaChat Redoc API</title><link>https://api.seasalt.ai/docs/getting-started/seachat-redoc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/seachat-redoc/</guid><description>&lt;style>
+&lt;li>&lt;strong>Bulk SMS Campaigns&lt;/strong>: Send text messages to large contact lists&lt;/li>
+&lt;li>&lt;strong>MMS Support&lt;/strong>: Share images, videos, and rich media content&lt;/li>
+&lt;li>&lt;strong>Two-Way Messaging&lt;/strong>: Receive replies and engage in SMS conversations&lt;/li>
+&lt;li>&lt;strong>Delivery Reports&lt;/strong>: Track message delivery status and engagement&lt;/li>
+&lt;/ul>
+&lt;h3 id="-whatsapp-business-platform">💬 WhatsApp Business Platform&lt;a class="td-heading-self-link" href="#-whatsapp-business-platform" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Rich Media Messages&lt;/strong>: Send images, documents, videos, and audio&lt;/li>
+&lt;li>&lt;strong>Template Messages&lt;/strong>: Use pre-approved templates for notifications&lt;/li>
+&lt;li>&lt;strong>Interactive Messages&lt;/strong>: Buttons, lists, and quick reply options&lt;/li>
+&lt;li>&lt;strong>Business API Compliance&lt;/strong>: Full WhatsApp Business API integration&lt;/li>
+&lt;li>&lt;strong>Highly Structured Messages (HSM)&lt;/strong>: Certified template messaging&lt;/li>
+&lt;/ul>
+&lt;h3 id="-voice--phone-calls">📞 Voice &amp;amp; Phone Calls&lt;a class="td-heading-self-link" href="#-voice--phone-calls" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Auto Dialer Campaigns&lt;/strong>: Automated outbound call campaigns&lt;/li>
+&lt;li>&lt;strong>Custom Call Scripts&lt;/strong>: Dynamic call flows and interactions&lt;/li>
+&lt;li>&lt;strong>Interactive Voice Response (IVR)&lt;/strong>: Menu-driven call handling&lt;/li>
+&lt;li>&lt;strong>Call Recording&lt;/strong>: Record and analyze call interactions&lt;/li>
+&lt;li>&lt;strong>Callback Management&lt;/strong>: Handle inbound calls and callbacks&lt;/li>
+&lt;/ul>
+&lt;h2 id="key-features">Key Features&lt;a class="td-heading-self-link" href="#key-features" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Unified Contact Management&lt;/strong>: Manage contacts across all channels from one platform&lt;/li>
+&lt;li>&lt;strong>Multi-Channel Campaigns&lt;/strong>: Coordinate messaging across SMS, WhatsApp, and voice&lt;/li>
+&lt;li>&lt;strong>Advanced Analytics&lt;/strong>: Track performance metrics across all channels&lt;/li>
+&lt;li>&lt;strong>Webhook Integrations&lt;/strong>: Real-time notifications for all channel events&lt;/li>
+&lt;li>&lt;strong>Template Management&lt;/strong>: Consistent messaging templates across channels&lt;/li>
+&lt;li>&lt;strong>Conversation Threading&lt;/strong>: Unified conversation views across channels&lt;/li>
+&lt;/ul>
+&lt;h2 id="authentication">Authentication&lt;a class="td-heading-self-link" href="#authentication" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>SeaX API uses API key authentication. To obtain your API key:&lt;/p></description></item><item><title>SeaChat Redoc API</title><link>https://api.seasalt.ai/docs/getting-started/seachat-redoc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/getting-started/seachat-redoc/</guid><description>&lt;style>
  #redoc input { height: 64px; }
  #redoc span[type="put"], span[type="get"], span[type="delete"], span[type="post"], span[type="options"], span[type="patch"], span[type="basic"], span[type="link"], span[type="head"] {
  border-radius: 4px;
@@ -138,7 +154,16 @@ or elsewhere? Link to your examples here.&lt;/p></description></item><item><titl
 &lt;/div>
 
 &lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Multi-Bear Domicile Setup</title><link>https://api.seasalt.ai/docs/tutorials/multi-bear/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tutorials/multi-bear/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Refactoring Guide - From Bulk SMS to Multi-Channel Messaging</title><link>https://api.seasalt.ai/seax/refactoring-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/refactoring-guide/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>This document outlines the refactoring of the SeaX API from a &amp;ldquo;Bulk SMS&amp;rdquo; focused service to a comprehensive &amp;ldquo;Multi-Channel Messaging API&amp;rdquo; that accurately represents its support for SMS, WhatsApp, and voice communications.&lt;/p>
+&lt;h2 id="problem-statement">Problem Statement&lt;a class="td-heading-self-link" href="#problem-statement" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The original SeaX API specification presented itself as &amp;ldquo;SeaX Bulk SMS&amp;rdquo; despite supporting:&lt;/p>
+&lt;ul>
+&lt;li>📱 SMS &amp;amp; MMS messaging&lt;/li>
+&lt;li>💬 WhatsApp Business Platform integration&lt;/li>
+&lt;li>📞 Voice calls and auto-dialer campaigns&lt;/li>
+&lt;/ul>
+&lt;p>This created confusion for developers who weren&amp;rsquo;t aware of the full multi-channel capabilities.&lt;/p></description></item><item><title>Multi-Bear Domicile Setup</title><link>https://api.seasalt.ai/docs/tutorials/multi-bear/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tutorials/multi-bear/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
 
 &lt;/div>
@@ -155,43 +180,7 @@ or elsewhere? Link to your examples here.&lt;/p></description></item><item><titl
 
 &lt;/div>
 
-&lt;p>For many projects, users may not need much information beyond the information in the &lt;a href="https://api.seasalt.ai/docs/overview/">Overview&lt;/a>, so this section is &lt;strong>optional&lt;/strong>. However if there are areas where your users will need a more detailed understanding of a given term or feature in order to do anything useful with your project (or to not make mistakes when using it) put that information in this section. For example, you may want to add some conceptual pages if you have a large project with many components and a complex architecture.&lt;/p></description></item><item><title>Refeactored SeaX Multi-Channel Messaging API Wiki (Refactored)</title><link>https://api.seasalt.ai/seax/refactored/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/refactored/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The SeaX Multi-Channel Messaging API is a comprehensive communication platform that enables businesses to integrate and automate messaging across SMS, WhatsApp, and voice channels. Built for scalability and enterprise use, SeaX provides unified tools for multi-channel campaigns, contact management, and conversational workflows across all major messaging platforms.&lt;/p>
-&lt;h2 id="supported-channels">Supported Channels&lt;a class="td-heading-self-link" href="#supported-channels" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;h3 id="-sms--mms-messaging">📱 SMS &amp;amp; MMS Messaging&lt;a class="td-heading-self-link" href="#-sms--mms-messaging" aria-label="Heading self-link">&lt;/a>&lt;/h3>
-&lt;ul>
-&lt;li>&lt;strong>Bulk SMS Campaigns&lt;/strong>: Send text messages to large contact lists&lt;/li>
-&lt;li>&lt;strong>MMS Support&lt;/strong>: Share images, videos, and rich media content&lt;/li>
-&lt;li>&lt;strong>Two-Way Messaging&lt;/strong>: Receive replies and engage in SMS conversations&lt;/li>
-&lt;li>&lt;strong>Delivery Reports&lt;/strong>: Track message delivery status and engagement&lt;/li>
-&lt;/ul>
-&lt;h3 id="-whatsapp-business-platform">💬 WhatsApp Business Platform&lt;a class="td-heading-self-link" href="#-whatsapp-business-platform" aria-label="Heading self-link">&lt;/a>&lt;/h3>
-&lt;ul>
-&lt;li>&lt;strong>Rich Media Messages&lt;/strong>: Send images, documents, videos, and audio&lt;/li>
-&lt;li>&lt;strong>Template Messages&lt;/strong>: Use pre-approved templates for notifications&lt;/li>
-&lt;li>&lt;strong>Interactive Messages&lt;/strong>: Buttons, lists, and quick reply options&lt;/li>
-&lt;li>&lt;strong>Business API Compliance&lt;/strong>: Full WhatsApp Business API integration&lt;/li>
-&lt;li>&lt;strong>Highly Structured Messages (HSM)&lt;/strong>: Certified template messaging&lt;/li>
-&lt;/ul>
-&lt;h3 id="-voice--phone-calls">📞 Voice &amp;amp; Phone Calls&lt;a class="td-heading-self-link" href="#-voice--phone-calls" aria-label="Heading self-link">&lt;/a>&lt;/h3>
-&lt;ul>
-&lt;li>&lt;strong>Auto Dialer Campaigns&lt;/strong>: Automated outbound call campaigns&lt;/li>
-&lt;li>&lt;strong>Custom Call Scripts&lt;/strong>: Dynamic call flows and interactions&lt;/li>
-&lt;li>&lt;strong>Interactive Voice Response (IVR)&lt;/strong>: Menu-driven call handling&lt;/li>
-&lt;li>&lt;strong>Call Recording&lt;/strong>: Record and analyze call interactions&lt;/li>
-&lt;li>&lt;strong>Callback Management&lt;/strong>: Handle inbound calls and callbacks&lt;/li>
-&lt;/ul>
-&lt;h2 id="key-features">Key Features&lt;a class="td-heading-self-link" href="#key-features" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;ul>
-&lt;li>&lt;strong>Unified Contact Management&lt;/strong>: Manage contacts across all channels from one platform&lt;/li>
-&lt;li>&lt;strong>Multi-Channel Campaigns&lt;/strong>: Coordinate messaging across SMS, WhatsApp, and voice&lt;/li>
-&lt;li>&lt;strong>Advanced Analytics&lt;/strong>: Track performance metrics across all channels&lt;/li>
-&lt;li>&lt;strong>Webhook Integrations&lt;/strong>: Real-time notifications for all channel events&lt;/li>
-&lt;li>&lt;strong>Template Management&lt;/strong>: Consistent messaging templates across channels&lt;/li>
-&lt;li>&lt;strong>Conversation Threading&lt;/strong>: Unified conversation views across channels&lt;/li>
-&lt;/ul>
-&lt;h2 id="authentication">Authentication&lt;a class="td-heading-self-link" href="#authentication" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>SeaX API uses API key authentication. To obtain your API key:&lt;/p></description></item><item><title>Another Task</title><link>https://api.seasalt.ai/docs/tasks/task/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tasks/task/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>For many projects, users may not need much information beyond the information in the &lt;a href="https://api.seasalt.ai/docs/overview/">Overview&lt;/a>, so this section is &lt;strong>optional&lt;/strong>. However if there are areas where your users will need a more detailed understanding of a given term or feature in order to do anything useful with your project (or to not make mistakes when using it) put that information in this section. For example, you may want to add some conceptual pages if you have a large project with many components and a complex architecture.&lt;/p></description></item><item><title>Another Task</title><link>https://api.seasalt.ai/docs/tasks/task/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tasks/task/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
 
 &lt;/div>
@@ -203,7 +192,33 @@ or elsewhere? Link to your examples here.&lt;/p></description></item><item><titl
 &lt;/div>
 
 &lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Bulk SMS Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/bulk-sms-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/bulk-sms-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Seasalt.ai Analytics API</title><link>https://api.seasalt.ai/seax/analytics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/analytics/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The Generate Metric Report endpoint provides a unified interface for retrieving
+multiple analytics metrics in a single request, streamlining the process of
+generating comprehensive reports for workspace performance analysis. Unlike
+individual metric endpoints, this bulk endpoint allows you to request multiple
+analytics types simultaneously, reducing API calls and improving efficiency for
+dashboard and reporting applications. The endpoint supports all available
+analytics metrics including conversation overviews, activity trends, label
+usage, communication volumes, and detailed breakdowns, making it ideal for
+creating unified analytics dashboards and comprehensive performance reports.&lt;/p></description></item><item><title>Analytics API Swagger</title><link>https://api.seasalt.ai/seax/docs/analytics-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/analytics-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;script>
+ window.onload = function () {
+ const ui = SwaggerUIBundle({
+ url: "/openapi/analytics.json",
+ dom_id: '#docsy_swagger_ui',
+ presets: [
+ SwaggerUIBundle.presets.apis,
+ SwaggerUIStandalonePreset
+ ]
+ });
+ window.ui = ui;
+ };
+&lt;/script>
+
+&lt;ul>
+&lt;li>🚀 &lt;a href="https://api.seasalt.ai/seax/docs/analytics-iframe/">Getting Started with the Analytics API&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Bulk SMS Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/bulk-sms-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/bulk-sms-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
 &lt;script>
  window.onload = function () {
  const ui = SwaggerUIBundle({
@@ -218,7 +233,38 @@ or elsewhere? Link to your examples here.&lt;/p></description></item><item><titl
  };
 &lt;/script>
 
-&lt;p>🚀 &lt;a href="https://api.seasalt.ai/seax/bulk_sms_tutorial/">Getting Started with the Bulk SMS Campaign API&lt;/a>&lt;/p></description></item><item><title>Contribution Guidelines</title><link>https://api.seasalt.ai/docs/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/contribution-guidelines/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>🚀 &lt;a href="https://api.seasalt.ai/seax/bulk_sms_tutorial/">Getting Started with the Bulk SMS Campaign API&lt;/a>&lt;/p></description></item><item><title>Event Notification API Swagger</title><link>https://api.seasalt.ai/seax/docs/webhook-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/webhook-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;script>
+ window.onload = function () {
+ const ui = SwaggerUIBundle({
+ url: "/openapi/seanotify.json",
+ dom_id: '#docsy_swagger_ui',
+ presets: [
+ SwaggerUIBundle.presets.apis,
+ SwaggerUIStandalonePreset
+ ]
+ });
+ window.ui = ui;
+ };
+&lt;/script>
+
+&lt;ul>
+&lt;li>🚀 &lt;a href="https://api.seasalt.ai/seax/docs/webhook-iframe/">Getting Started with the Event Notification API&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Seasalt.ai Webhook Notification API Tutorial</title><link>https://api.seasalt.ai/seax/webhook/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/webhook/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>A webhook-based notification system that lets your services receive real-time
+updates from Seasalt.ai products like SeaChat. Whether you want to track new
+conversations, missed calls, or contact changes, using the following endpoints
+ensures you stay informed the moment it happens. With support for multiple event
+types and delivery modes (immediate, delayed, batched), SeaX&amp;rsquo;s Webhook
+Notification are ideal for diverse automation and integration needs.&lt;/p>
+&lt;p>One powerful use case built on top of this webhook system is our Zapier
+integration. When an event is emitted via webhook, it can immediately trigger a
+Zap, allowing users to seamlessly connect Seasalt.ai products with tools like
+Google Sheets, Notion, Slack, and more. In this setup, webhooks act as the
+upstream event source, and Zapier serves as the downstream automation engine,
+consuming those events and turning them into custom workflows without any code.
+Explore the integration here:
+&lt;a href="https://zapier.com/apps/seasaltai/integrations">Seasalt.ai on Zapier&lt;/a>&lt;/p></description></item><item><title>Analytics API Redoc</title><link>https://api.seasalt.ai/seax/docs/analytics-iframe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/analytics-iframe/</guid><description>&lt;iframe width="100%" height=6000px src="https://seax-dev.seasalt.ai/analytics-api/redoc/analytics" title="SeaX Analytics API Redoc">&lt;/iframe></description></item><item><title>Event Notification API Redoc</title><link>https://api.seasalt.ai/seax/docs/webhook-iframe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/webhook-iframe/</guid><description>&lt;iframe width="100%" height=6000px src="https://seax-dev.seasalt.ai/notify-api/redoc" title="SeaX Event Notification API Redoc">&lt;/iframe></description></item><item><title>Contribution Guidelines</title><link>https://api.seasalt.ai/docs/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/contribution-guidelines/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>These basic sample guidelines assume that your Docsy site is deployed using Netlify and your files are stored in GitHub. You can use the guidelines &amp;ldquo;as is&amp;rdquo; or adapt them with your own instructions: for example, other deployment options, information about your doc project&amp;rsquo;s file structure, project-specific review guidelines, versioning guidelines, or any other information your users might find useful when updating your site. &lt;a href="https://github.com/kubeflow/website/blob/master/README.md">Kubeflow&lt;/a> has a great example.&lt;/p>
 &lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p></description></item><item><title>Bulk SMS/MMS Campaigns</title><link>https://api.seasalt.ai/seax/bulk_sms_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/bulk_sms_tutorial/</guid><description>&lt;h1 id="bulk-smsmms-campaigns">Bulk SMS/MMS Campaigns&lt;a class="td-heading-self-link" href="#bulk-smsmms-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
@@ -280,13 +326,4 @@ Fetch and scale an image in the upcoming Hugo 0.43.
 &lt;/div>
 
 &lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Refactoring Guide - From Bulk SMS to Multi-Channel Messaging</title><link>https://api.seasalt.ai/seax/refactoring-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/refactoring-guide/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>This document outlines the refactoring of the SeaX API from a &amp;ldquo;Bulk SMS&amp;rdquo; focused service to a comprehensive &amp;ldquo;Multi-Channel Messaging API&amp;rdquo; that accurately represents its support for SMS, WhatsApp, and voice communications.&lt;/p>
-&lt;h2 id="problem-statement">Problem Statement&lt;a class="td-heading-self-link" href="#problem-statement" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The original SeaX API specification presented itself as &amp;ldquo;SeaX Bulk SMS&amp;rdquo; despite supporting:&lt;/p>
-&lt;ul>
-&lt;li>📱 SMS &amp;amp; MMS messaging&lt;/li>
-&lt;li>💬 WhatsApp Business Platform integration&lt;/li>
-&lt;li>📞 Voice calls and auto-dialer campaigns&lt;/li>
-&lt;/ul>
-&lt;p>This created confusion for developers who weren&amp;rsquo;t aware of the full multi-channel capabilities.&lt;/p></description></item><item><title>Search Results</title><link>https://api.seasalt.ai/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/search/</guid><description/></item></channel></rss>
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Search Results</title><link>https://api.seasalt.ai/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/search/</guid><description/></item></channel></rss>

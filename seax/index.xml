@@ -34,7 +34,39 @@
 &lt;li>&lt;strong>Conversation Threading&lt;/strong>: Unified conversation views across channels&lt;/li>
 &lt;/ul>
 &lt;h2 id="authentication">Authentication&lt;a class="td-heading-self-link" href="#authentication" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>SeaX API uses API key authentication. To obtain your API key:&lt;/p></description></item><item><title>Bulk SMS/MMS Campaigns</title><link>https://api.seasalt.ai/seax/bulk_sms_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/bulk_sms_tutorial/</guid><description>&lt;h1 id="bulk-smsmms-campaigns">Bulk SMS/MMS Campaigns&lt;a class="td-heading-self-link" href="#bulk-smsmms-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;p>SeaX API uses API key authentication. To obtain your API key:&lt;/p></description></item><item><title>Refactoring Guide - From Bulk SMS to Multi-Channel Messaging</title><link>https://api.seasalt.ai/seax/refactoring-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/refactoring-guide/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>This document outlines the refactoring of the SeaX API from a &amp;ldquo;Bulk SMS&amp;rdquo; focused service to a comprehensive &amp;ldquo;Multi-Channel Messaging API&amp;rdquo; that accurately represents its support for SMS, WhatsApp, and voice communications.&lt;/p>
+&lt;h2 id="problem-statement">Problem Statement&lt;a class="td-heading-self-link" href="#problem-statement" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The original SeaX API specification presented itself as &amp;ldquo;SeaX Bulk SMS&amp;rdquo; despite supporting:&lt;/p>
+&lt;ul>
+&lt;li>📱 SMS &amp;amp; MMS messaging&lt;/li>
+&lt;li>💬 WhatsApp Business Platform integration&lt;/li>
+&lt;li>📞 Voice calls and auto-dialer campaigns&lt;/li>
+&lt;/ul>
+&lt;p>This created confusion for developers who weren&amp;rsquo;t aware of the full multi-channel capabilities.&lt;/p></description></item><item><title>Seasalt.ai Analytics API</title><link>https://api.seasalt.ai/seax/analytics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/analytics/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The Generate Metric Report endpoint provides a unified interface for retrieving
+multiple analytics metrics in a single request, streamlining the process of
+generating comprehensive reports for workspace performance analysis. Unlike
+individual metric endpoints, this bulk endpoint allows you to request multiple
+analytics types simultaneously, reducing API calls and improving efficiency for
+dashboard and reporting applications. The endpoint supports all available
+analytics metrics including conversation overviews, activity trends, label
+usage, communication volumes, and detailed breakdowns, making it ideal for
+creating unified analytics dashboards and comprehensive performance reports.&lt;/p></description></item><item><title>Seasalt.ai Webhook Notification API Tutorial</title><link>https://api.seasalt.ai/seax/webhook/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/webhook/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>A webhook-based notification system that lets your services receive real-time
+updates from Seasalt.ai products like SeaChat. Whether you want to track new
+conversations, missed calls, or contact changes, using the following endpoints
+ensures you stay informed the moment it happens. With support for multiple event
+types and delivery modes (immediate, delayed, batched), SeaX&amp;rsquo;s Webhook
+Notification are ideal for diverse automation and integration needs.&lt;/p>
+&lt;p>One powerful use case built on top of this webhook system is our Zapier
+integration. When an event is emitted via webhook, it can immediately trigger a
+Zap, allowing users to seamlessly connect Seasalt.ai products with tools like
+Google Sheets, Notion, Slack, and more. In this setup, webhooks act as the
+upstream event source, and Zapier serves as the downstream automation engine,
+consuming those events and turning them into custom workflows without any code.
+Explore the integration here:
+&lt;a href="https://zapier.com/apps/seasaltai/integrations">Seasalt.ai on Zapier&lt;/a>&lt;/p></description></item><item><title>Bulk SMS/MMS Campaigns</title><link>https://api.seasalt.ai/seax/bulk_sms_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/bulk_sms_tutorial/</guid><description>&lt;h1 id="bulk-smsmms-campaigns">Bulk SMS/MMS Campaigns&lt;a class="td-heading-self-link" href="#bulk-smsmms-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>The Bulk SMS/MMS Campaigns API enables you to send messages at scale to targeted contact lists. This comprehensive guide covers contact management, campaign creation, and monitoring. The API supports SMS, MMS, and WhatsApp Business Platform messages with advanced targeting, scheduling, and delivery tracking capabilities.&lt;/p>
 &lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p>
@@ -62,13 +94,4 @@
 &lt;/ul>
 &lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p></description></item><item><title>Auto-Dialer Voice Campaigns</title><link>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</guid><description>&lt;h1 id="auto-dialer-voice-campaigns">Auto-Dialer Voice Campaigns&lt;a class="td-heading-self-link" href="#auto-dialer-voice-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The Auto-Dialer Voice Campaigns endpoint enables automated placement of bulk outbound voice calls to selected contact lists, supporting both AI-powered conversational agents and pre-recorded voice drops. Through a structured configuration interface, users can define campaign parameters such as target groups, call scripts, scheduling windows, and fallback behaviors. The endpoint facilitates scalable voice outreach by handling call queuing, delivery tracking, and engagement logging. Each campaign instance generates detailed execution metrics and outcomes, enabling real-time monitoring and performance analysis. Secure access to campaign operations requires authentication via API key. Below we will cover the endpoints needed to customize, create, and monitor your own voice call campaigns. Note: in this tutorial we are assuming you have configured a phone number, contacts, and AI agents in your workspace.&lt;/p></description></item><item><title>Refactoring Guide - From Bulk SMS to Multi-Channel Messaging</title><link>https://api.seasalt.ai/seax/refactoring-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/refactoring-guide/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>This document outlines the refactoring of the SeaX API from a &amp;ldquo;Bulk SMS&amp;rdquo; focused service to a comprehensive &amp;ldquo;Multi-Channel Messaging API&amp;rdquo; that accurately represents its support for SMS, WhatsApp, and voice communications.&lt;/p>
-&lt;h2 id="problem-statement">Problem Statement&lt;a class="td-heading-self-link" href="#problem-statement" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The original SeaX API specification presented itself as &amp;ldquo;SeaX Bulk SMS&amp;rdquo; despite supporting:&lt;/p>
-&lt;ul>
-&lt;li>📱 SMS &amp;amp; MMS messaging&lt;/li>
-&lt;li>💬 WhatsApp Business Platform integration&lt;/li>
-&lt;li>📞 Voice calls and auto-dialer campaigns&lt;/li>
-&lt;/ul>
-&lt;p>This created confusion for developers who weren&amp;rsquo;t aware of the full multi-channel capabilities.&lt;/p></description></item></channel></rss>
+&lt;p>The Auto-Dialer Voice Campaigns endpoint enables automated placement of bulk outbound voice calls to selected contact lists, supporting both AI-powered conversational agents and pre-recorded voice drops. Through a structured configuration interface, users can define campaign parameters such as target groups, call scripts, scheduling windows, and fallback behaviors. The endpoint facilitates scalable voice outreach by handling call queuing, delivery tracking, and engagement logging. Each campaign instance generates detailed execution metrics and outcomes, enabling real-time monitoring and performance analysis. Secure access to campaign operations requires authentication via API key. Below we will cover the endpoints needed to customize, create, and monitor your own voice call campaigns. Note: in this tutorial we are assuming you have configured a phone number, contacts, and AI agents in your workspace.&lt;/p></description></item></channel></rss>
