@@ -102,17 +102,6 @@ fields:
 | `total_usage`                  | Any metric              | High-level usage summaries            |
 | `conversation_overview_yearly` | Standalone recommended  | Annual reporting (resource intensive) |
 
-### Authentication
-
-You must provide your API key in the `X-API-KEY` header.
-
-To set up your API Key:
-
-- Go to **Workspace → API Key** tab in your SeaChat dashboard.
-- Click to toggle the **Enable API Access** setting to the on position.
-- Copy the generated key and keep it safe. This key is required in the `X-API-KEY` header
-  for **all requests**.
-
 ## Available Metrics
 
 The following metrics are available through this endpoint. Each metric has
