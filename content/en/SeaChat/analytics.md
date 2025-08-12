@@ -57,7 +57,7 @@ dimensions.
 
 ```bash
 curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
-  -H "X-API-KEY <your_api_key>" \
+  -H "X-API-KEY: <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
     "metrics": ["conversation_overview", "activity_trend"],
@@ -357,7 +357,7 @@ curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
 }
 ```
 
-###  LABEL_OVERVIEW
+### LABEL_OVERVIEW
 
 Returns comprehensive information about all conversation labels in the workspace, including
 usage counts and label metadata.
