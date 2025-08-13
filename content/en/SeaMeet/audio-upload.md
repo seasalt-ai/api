@@ -73,7 +73,7 @@ There are two ways to check the results:
 
 ### API
 
-POST /api/v1/workspaces/{workspace_id}/meetings
+POST https://meet.seasalt.ai/seameet-api/api/v1/workspaces/{workspace_id}/meetings
 
 #### Header
 
@@ -119,7 +119,7 @@ Normal response with the created workspace info.
 
 ### API
 
-DELETE /api/v1/workspaces/{workspace_id}/meetings/{meeting_id}
+DELETE https://meet.seasalt.ai/seameet-api/api/v1/workspaces/{workspace_id}/meetings/{meeting_id}
 
 #### Header
 
@@ -136,7 +136,7 @@ No payload return
 
 ### API
 
-POST /api/v1/workspaces/{workspace_id}/meetings/{meeting_id}/upload_audio_url
+POST https://meet.seasalt.ai/seameet-api/api/v1/workspaces/{workspace_id}/meetings/{meeting_id}/upload_audio_url
 
 #### Header
 
@@ -198,7 +198,7 @@ Upload an audio file to create a SeaMeet meeting and run analysis on transcripti
 
 ### API
 
-POST /api/v1/workspaces/{workspace_id}/meetings/{meeting_id}/analyze_audio
+POST https://meet.seasalt.ai/seameet-api/api/v1/workspaces/{workspace_id}/meetings/{meeting_id}/analyze_audio
 
 #### Header
 
@@ -302,7 +302,7 @@ Query job information
 
 ### API
 
-GET /api/v1/workspaces/{workspace_id}/jobs/{job_id}
+GET https://meet.seasalt.ai/seameet-api/api/v1/workspaces/{workspace_id}/jobs/{job_id}
 
 #### Header
 
