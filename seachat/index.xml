@@ -1,1 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeaChat API Wiki on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/seachat/</link><description>Recent content in SeaChat API Wiki on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/seachat/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeaChat API Wiki on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/seachat/</link><description>Recent content in SeaChat API Wiki on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/seachat/index.xml" rel="self" type="application/rss+xml"/><item><title>SeaChat Analytics API</title><link>https://api.seasalt.ai/seachat/analytics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seachat/analytics/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The Generate Metric Report endpoint provides a unified interface for retrieving
+multiple conversational analytics metrics in a single request, streamlining the process of
+generating comprehensive reports for chatbot and conversation performance analysis. Unlike
+individual metric endpoints, this bulk endpoint allows you to request multiple
+analytics types simultaneously, reducing API calls and improving efficiency for
+dashboard and reporting applications. The endpoint supports all available
+analytics metrics including conversation overviews, activity trends, label
+usage, communication volumes, and detailed breakdowns, making it ideal for
+creating unified analytics dashboards and comprehensive chatbot performance reports.&lt;/p></description></item></channel></rss>
