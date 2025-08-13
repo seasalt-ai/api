@@ -50,6 +50,9 @@ wav/pcm, wav/alaw, wav/mulaw, mp3, mp4, ogg/opus, flac, wma, aac, amr, webm, spe
 #### Audio duration
 Maximum of 2 hours.
 
+#### File size
+Maximum of 300MB
+
 ### Step 2: Create Meeting
 Create SeaMeet meeting instance. [See API]({{< relref "SeaMeet/audio-upload.md#create-meeting" >}})
 
@@ -191,7 +194,7 @@ MeetingNotFoundError
 
 ## Run Analysis
 
-Upload a file as the knowledge base corpus for the bot
+Upload an audio file to run analysis.
 
 ### API
 
