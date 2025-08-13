@@ -9,7 +9,7 @@ weight: 30
 ---
 
 ## Overview
-Create a new meeting by analyzing audio recordings. This endpoint handles audio uploads, initiates processing, and returns a job ID for tracking analysis progress.
+Create a new meeting by analyzing audio recordings. The [`analyze_audio` endpoint]({{< relref "SeaMeet/audio-upload.md#run-analysis" >}}) handles audio uploads, initiates processing, and returns a job ID for tracking analysis progress.
 
 ## Quick Start
 
@@ -194,7 +194,7 @@ MeetingNotFoundError
 
 ## Run Analysis
 
-Upload an audio file to run analysis.
+Upload an audio file to create a SeaMeet meeting and run analysis on transcriptions.
 
 ### API
 
