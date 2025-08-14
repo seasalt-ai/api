@@ -50,7 +50,7 @@ The first step is to create a workspace in SeaChat. Your workspace serves as the
 To find your workspace ID, navigate to your SeaChat dashboard and look at the URL structure, which follows this format: `https://chat.seasalt.ai/gpt/workspace/{workspace-id}/bot/{bot-id}/`. The workspace ID is the alphanumeric string that appears in the workspace-id position of the URL.
 
 #### API Key Generation
-Once you have a workspace, you need to obtain an API key for authentication. Navigate to the "API Key" tab under the "Workspace" dropdown in the SeaChat interface. Click to toggle the "Enable API Access" setting to the on position, which will generate a new API key for your workspace.
+Once you have a workspace, you need to obtain an API key for authentication. Navigate to the "API Key" tab under the "Workspace" dropdown in the SeaChat interface. Click the `Generate API Key` button to generate a new API key for your workspace.
 
 Your API key is a sensitive credential that provides access to your workspace and all associated data. Protect this key carefully and never share it publicly or include it in client-side code. If you suspect your API key has been compromised, you can click the "refresh" icon to deactivate the old key and generate a new one.
 
