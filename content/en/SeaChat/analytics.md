@@ -37,7 +37,7 @@ include a valid API key in the request header (`X-API-KEY: <your_api_key>`).
 
 - Go to **Workspace → API Key** tab in your SeaChat dashboard.
 
-- Click to toggle the **Enable API Access** setting to the on position.
+- Generate your API key by clicking the **Create API Key** button and select `SeaChat API Access` as the scope.
 
 - Copy the generated API key and keep it safe. This key is required in the `X-API-KEY: <your_api_key>` header
   for **all requests**.
