@@ -89,7 +89,7 @@ fields:
 | `exclude_empty_response` | `boolean`                    |          | `conversation_overview`                     | Exclude conversations with no bot or agent replies     | `true`, `false`                                                                                                                                                                 |
 | `labels`                 | `array of strings`           |          | `label_usage`, `label_relation`             | Filter by specific label names. For `label_relation`, must contain exactly 2 labels | Example: `["support", "sales"]`. For label_relation: `["base_label", "comparison_label"]`                                                                                    |
 | `year`                   | `string (YYYY)`              |          | `conversation_overview_yearly`              | Year for yearly report metrics                         | Example: `2024`                                                                                                                                                                 |
-| `gptbot_id`              | `string`                     |          | All metrics (required for `csat`)           | Optional GPTBot ID to filter analytics data for a specific bot | Example: `"bot_12345"`. **Required** for CSAT metric to analyze satisfaction data for specific chatbot |
+| `gptbot_id`              | `string`                     |          | All metrics (required for `csat`)           | Filters analytics data for a specific bot. Optional for most metrics, but **required** for `csat`. | Example: `"bot_12345"`. **Required** for CSAT metric to analyze satisfaction data for specific chatbot |
 
 ### Metrics Use Case
 
