@@ -860,6 +860,7 @@ curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
       {
         "id": 9,
         "conversation_id": "conv-12345",
+        "form_id": "8c7458f6a27a4554bf1a3e37b7790045",
         "rating": 3,
         "created_at": "2025-05-30T01:35:11.769173",
         "data": {
@@ -872,6 +873,7 @@ curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
       {
         "id": 8,
         "conversation_id": "conv-98765",
+        "form_id": "8c7458f6a27a4554bf1a3e37b7790045",
         "rating": 4,
         "created_at": "2025-06-12T00:29:07.893663",
         "data": {
