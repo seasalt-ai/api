@@ -79,7 +79,7 @@ fields:
 
 | Field                    | Type                         | Required | Used By Metrics                             | Description                                            | Allowed Values / Example                                                                                                                                                        |
 | ------------------------ | ---------------------------- | -------- | ------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `metrics`                | `array of strings`           | ✅       | All                                         | List of analytics metrics to generate                  | `["conversation_overview", "activity_trend", "label_usage", "conversation_breakdown", "communication_volume", "total_usage", "conversation_overview_yearly", "label_overview"]` |
+| `metrics`                | `array of strings`           | ✅       | All                                         | List of analytics metrics to generate                  | `["conversation_overview", "activity_trend", "label_usage", "conversation_breakdown", "communication_volume", "total_usage", "conversation_overview_yearly", "label_overview", "label_relation", "csat"]` |
 | `message_type`           | `string`                     |          | `activity_trend`                            | Whether to analyze messages or calls                   | `messages`, `calls`                                                                                                                                                             |
 | `time_unit`              | `string`                     |          | `activity_trend`, `label_usage`             | Aggregation level for time-based data                  | `day`, `month`, `year`                                                                                                                                                          |
 | `timezone`               | `string`                     |          | All time-based metrics                      | Timezone used for grouping and filtering               | Example: `UTC`, `Asia/Taipei`, `America/Los_Angeles` see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)                  |
@@ -87,8 +87,9 @@ fields:
 | `end_date`               | `string (ISO 8601 datetime)` |          | Date range metrics (see individual metrics) | Custom end of the date range                           | Example: `2024-06-01T23:59:59` or `2024-06-01T23:59:59-07:00` (with timezone)                                                                                                   |
 | `range_type`             | `string`                     |          | `conversation_overview`                     | Predefined time range (alternative to start/end dates) | `last_day`, `last_7_days`, `last_30_days`, `last_90_days`, `last_180_days`                                                                                                      |
 | `exclude_empty_response` | `boolean`                    |          | `conversation_overview`                     | Exclude conversations with no bot or agent replies     | `true`, `false`                                                                                                                                                                 |
-| `labels`                 | `array of strings`           |          | `label_usage`                               | Filter by specific label names                         | Example: `["support", "sales"]`                                                                                                                                                 |
+| `labels`                 | `array of strings`           |          | `label_usage`, `label_relation`             | Filter by specific label names. For `label_relation`, must contain exactly 2 labels | Example: `["support", "sales"]`. For label_relation: `["base_label", "comparison_label"]`                                                                                    |
 | `year`                   | `string (YYYY)`              |          | `conversation_overview_yearly`              | Year for yearly report metrics                         | Example: `2024`                                                                                                                                                                 |
+| `gptbot_id`              | `string`                     |          | All metrics (required for `csat`)           | Optional GPTBot ID to filter analytics data for a specific bot | Example: `"bot_12345"`. **Required** for CSAT metric to analyze satisfaction data for specific chatbot |
 
 ### Metrics Use Case
 
@@ -101,6 +102,8 @@ fields:
 | `conversation_breakdown`       | `activity_trend`        | Detailed activity pattern analysis    |
 | `total_usage`                  | Any metric              | High-level usage summaries            |
 | `conversation_overview_yearly` | Standalone recommended  | Annual reporting (resource intensive) |
+| `label_relation`               | `label_overview`        | Label relationship and overlap analysis |
+| `csat`                         | Any metric              | Customer satisfaction analysis (requires gptbot_id) |
 
 ## Available Metrics
 
@@ -709,6 +712,191 @@ curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
   }
 }
 ```
+
+### LABEL_RELATION
+
+Analyzes the relationship and overlap between two specific conversation labels, showing how frequently they appear together and their individual usage patterns.
+
+**Use Cases:**
+
+- Understanding label co-occurrence patterns
+- Identifying related conversation topics
+- Optimizing label taxonomy and organization
+- Cross-category analysis (e.g., how often "support" conversations are also "billing")
+- Label performance comparison
+
+**Required Fields:**
+
+- `metrics`: Must include `"label_relation"`
+- `labels`: Must contain exactly 2 label names - the first is the base label, the second is the comparison label
+- `start_date`: Start of analysis period (ISO 8601 format)
+- `end_date`: End of analysis period (ISO 8601 format)
+
+**Optional Fields:**
+
+- **`gptbot_id`** (string): Filter results for a specific chatbot
+  - **Default:** Analyzes all conversations in the workspace
+  - **Example:** `"bot_12345"` to focus on one specific bot's conversations
+  - **Use case:** Compare label relationships across different chatbots
+
+- **`timezone`** (string): Timezone for date range filtering
+  - **Default:** `"UTC"`
+  - **Example:** `"America/Los_Angeles"`, `"Europe/Berlin"`, `"Asia/Tokyo"`
+  - **Use case:** Ensures accurate date boundaries for your analysis period
+
+> **Note:** The order of labels matters - the first label in the array is treated as the "base label" and the second as the "comparison label". This affects how overlap percentages are calculated.
+
+**Sample Request:**
+
+```bash
+curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
+  -H "X-API-KEY <your_api_key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metrics": ["label_relation"],
+    "labels": ["customer service", "solved"],
+    "start_date": "2024-01-01T00:00:00",
+    "end_date": "2024-01-31T23:59:59",
+    "gptbot_id": "bot_12345"
+  }'
+```
+
+**Sample Response:**
+
+```json
+{
+  "label_relation": {
+    "base_label": "customer service",
+    "base_count": 10,
+    "comparison_label": "solved",
+    "both_labels_count": 4,
+    "ratio": 0.4,
+  }
+}
+```
+
+**Response Fields Explanation:**
+
+- `base_label`: Name of the first label specified in the request (the base label for comparison)
+- `base_count`: Total number of conversations that have the base label
+- `comparison_label`: Name of the second label specified in the request 
+- `both_labels_count`: Number of conversations that have both labels applied
+- `ratio`: Overlap ratio calculated as both_labels_count / base_count (0.4 = 4 out of 10 base label conversations also have the comparison label)
+- `date_range`: The actual date range used for the analysis
+  - `start_date`: Beginning of the analysis period
+  - `end_date`: End of the analysis period
+
+### CSAT (Customer Satisfaction)
+
+Retrieves Customer Satisfaction survey results and ratings for conversations handled by a specific chatbot.
+
+**Use Cases:**
+
+- Monitor chatbot customer satisfaction performance
+- Track satisfaction trends over time
+- Identify periods of high/low customer satisfaction
+- Compare satisfaction across different time periods
+- Generate satisfaction reports for stakeholders
+
+**Required Fields:**
+
+- `metrics`: Must include `"csat"`
+- `gptbot_id`: The specific chatbot ID to analyze satisfaction data for
+
+**Optional Fields:**
+
+- **`start_date`** (string, ISO 8601 datetime): Beginning of the analysis period
+  - **Default:** If omitted, uses all available historical satisfaction data
+  - **Example:** `"2024-01-01T00:00:00"`, `"2024-06-15T00:00:00-07:00"`
+  - **Use case:** Specify to analyze satisfaction for a particular period
+
+- **`end_date`** (string, ISO 8601 datetime): End of the analysis period
+  - **Default:** If omitted, uses all available data up to the current time
+  - **Example:** `"2024-12-31T23:59:59"`, `"2024-06-30T23:59:59+08:00"`
+  - **Use case:** Set end boundary for period analysis
+
+- **`timezone`** (string): Timezone for date range interpretation
+  - **Default:** `"UTC"`
+  - **Example:** `"America/New_York"`, `"Europe/Amsterdam"`, `"Asia/Singapore"`
+  - **Use case:** Ensures date boundaries match your business timezone
+
+> **Important:** This metric requires `gptbot_id` because CSAT surveys are associated with specific chatbot interactions. You cannot retrieve CSAT data without specifying which bot's satisfaction ratings to analyze.
+
+**Sample Request:**
+
+```bash
+curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
+  -H "X-API-KEY <your_api_key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metrics": ["csat"],
+    "gptbot_id": "bot_12345",
+    "start_date": "2024-01-01T00:00:00",
+    "end_date": "2024-01-31T23:59:59",
+    "timezone": "America/Los_Angeles"
+  }'
+```
+
+**Sample Response:**
+
+```json
+{
+  "csat": {
+    "total_responses": 2,
+    "average_rating": 3.5,
+    "satisfaction_rate": 50.0,
+    "rating_counts": {
+      "1": 0,
+      "2": 0,
+      "3": 1,
+      "4": 1,
+      "5": 0
+    },
+    "responses": [
+      {
+        "id": 9,
+        "conversation_id": "conv-12345",
+        "rating": 3,
+        "created_at": "2025-05-30T01:35:11.769173",
+        "data": {
+          "rating": 3.0,
+          "comment": "Good bot but can be better",
+        },
+        "conversation_title": "+1206123456789",
+        "conversation_link": "https://chat-staging.seasalt.ai/gpt/workspace/ws-123/bot/bot-123/conversations/conv-123"
+      },
+      {
+        "id": 8,
+        "conversation_id": "conv-98765",
+        "rating": 4,
+        "created_at": "2025-06-12T00:29:07.893663",
+        "data": {
+          "rating": 4.0,
+          "comment": "Fast response, and accurate information. Nice!",
+        },
+        "conversation_title": "+1408123456789",
+        "conversation_link": "https://chat-staging.seasalt.ai/gpt/workspace/ws-123/bot/bot-123/conversations/conv-98765"
+      }
+    ]
+  }
+}
+```
+
+**Response Fields Explanation:**
+
+- `total_responses`: Total number of CSAT survey responses received
+- `average_rating`: Mean satisfaction rating (typically on 1-5 scale)
+- `satisfaction_rate`: Percentage of responses rated 4 or 5 (satisfied customers)
+- `rating_counts`: Breakdown of responses by rating value (1-5)
+- `responses`: Array of individual CSAT response records containing:
+  - `id`: Unique response identifier
+  - `conversation_id`: ID of the conversation this rating relates to
+  - `form_id`: ID of the CSAT form used
+  - `rating`: Numerical rating given by the customer
+  - `created_at`: Timestamp when the rating was submitted
+  - `data`: Detailed response data including rating, comment, and form metadata
+  - `conversation_title`: Display title of the conversation
+  - `conversation_link`: Direct link to view the conversation in SeaChat dashboard
 
 ## Complete Sample Request and Response
 
