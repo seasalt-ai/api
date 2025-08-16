@@ -876,7 +876,7 @@ curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
         "created_at": "2025-06-12T00:29:07.893663",
         "data": {
           "rating": 4.0,
-          "comment": "Fast response, and accurate information. Nice!",
+          "comment": "Fast response, and accurate information. Nice!"
         },
         "conversation_title": "+1408123456789",
         "conversation_link": "https://chat-staging.seasalt.ai/gpt/workspace/ws-123/bot/bot-123/conversations/conv-98765"
