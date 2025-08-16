@@ -864,7 +864,7 @@ curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
         "created_at": "2025-05-30T01:35:11.769173",
         "data": {
           "rating": 3.0,
-          "comment": "Good bot but can be better",
+          "comment": "Good bot but can be better"
         },
         "conversation_title": "+1206123456789",
         "conversation_link": "https://chat-staging.seasalt.ai/gpt/workspace/ws-123/bot/bot-123/conversations/conv-123"
