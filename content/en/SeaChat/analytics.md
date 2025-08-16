@@ -771,6 +771,10 @@ curl -X POST https://chat.seasalt.ai/api/v1/analytics/generate_metric_report \
     "comparison_label": "solved",
     "both_labels_count": 4,
     "ratio": 0.4,
+    "date_range": {
+      "start_date": "2024-01-01T00:00:00",
+      "end_date": "2024-01-31T23:59:59"
+    }
   }
 }
 ```
