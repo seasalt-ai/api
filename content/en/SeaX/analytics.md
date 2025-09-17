@@ -766,27 +766,28 @@ analysis.
   - **Use case:** Align activity timestamps with your business timezone for
     accurate shift analysis
 
-> **Note:** Activity sessions include status, start time, end time, and duration in seconds.
+**Note:** Activity sessions include status, start time, end time, and duration
+in seconds.
 
 #### Available Agent Status Values
 
 The `status` field in the response can have the following values:
 
-| Status | Description |
-|--------|-------------|
-| `AVAILABLE` | Agent is online and ready to handle conversations |
-| `OFFLINE` | Agent is not logged in or has gone offline |
-| `ON_THE_CALL` | Agent is currently handling a voice call |
-| `CALL_RINGING` | An incoming call is ringing for the agent |
-| `OUTBOUND` | Agent is making an outbound call |
-| `WRAP_UP` | Agent is in post-call wrap-up time |
-| `MEAL` | Agent is on a meal break |
-| `BREAK` | Agent is on a regular break |
-| `AWAY` | (Deprecated) Agent is temporarily away |
+| Status           | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| `AVAILABLE`      | Agent is online and ready to handle conversations  |
+| `OFFLINE`        | Agent is not logged in or has gone offline         |
+| `ON_THE_CALL`    | Agent is currently handling a voice call           |
+| `CALL_RINGING`   | An incoming call is ringing for the agent          |
+| `OUTBOUND`       | Agent is making an outbound call                   |
+| `WRAP_UP`        | Agent is in post-call wrap-up time                 |
+| `MEAL`           | Agent is on a meal break                           |
+| `BREAK`          | Agent is on a regular break                        |
+| `AWAY`           | (Deprecated) Agent is temporarily away             |
 | `DO_NOT_DISTURB` | (Deprecated) Agent has enabled do-not-disturb mode |
 
-> **Important:** The `AWAY` and `DO_NOT_DISTURB` statuses are deprecated but may appear in historical data for backward compatibility.
-> time, and duration in seconds.
+**Important:** The `AWAY` and `DO_NOT_DISTURB` statuses are deprecated but may
+appear in historical data for backward compatibility.
 
 **Sample Request with Range Type:**
 
