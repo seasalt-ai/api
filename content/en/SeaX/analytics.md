@@ -766,8 +766,8 @@ analysis.
   - **Use case:** Align activity timestamps with your business timezone for
     accurate shift analysis
 
-**Note:** Activity sessions include status, start time, end time, and duration
-in seconds.
+> **Note:** Activity sessions include status, start time, end time, and duration
+> in seconds.
 
 #### Available Agent Status Values
 
