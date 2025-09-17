@@ -786,8 +786,8 @@ The `status` field in the response can have the following values:
 | `AWAY`           | (Deprecated) Agent is temporarily away             |
 | `DO_NOT_DISTURB` | (Deprecated) Agent has enabled do-not-disturb mode |
 
-**Important:** The `AWAY` and `DO_NOT_DISTURB` statuses are deprecated but may
-appear in historical data for backward compatibility.
+> **Important:** The `AWAY` and `DO_NOT_DISTURB` statuses are deprecated but may
+> appear in historical data for backward compatibility.
 
 **Sample Request with Range Type:**
 
