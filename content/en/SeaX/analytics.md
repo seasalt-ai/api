@@ -86,30 +86,32 @@ fields:
 > certain metrics. See individual metric sections for detailed field
 > dependencies.
 
-| Field                    | Type                         | Required | Used By Metrics                             | Description                                            | Allowed Values / Example                                                                                                                                                        |
-| ------------------------ | ---------------------------- | -------- | ------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `metrics`                | `array of strings`           | ✅       | All                                         | List of analytics metrics to generate                  | `["conversation_overview", "activity_trend", "label_usage", "conversation_breakdown", "communication_volume", "total_usage", "conversation_overview_yearly", "label_overview"]` |
-| `message_type`           | `string`                     |          | `activity_trend`                            | Whether to analyze messages or calls                   | `messages`, `calls`                                                                                                                                                             |
-| `time_unit`              | `string`                     |          | `activity_trend`, `label_usage`             | Aggregation level for time-based data                  | `day`, `month`, `year`                                                                                                                                                          |
-| `timezone`               | `string`                     |          | All time-based metrics                      | Timezone used for grouping and filtering               | Example: `UTC`, `Asia/Taipei`, `America/Los_Angeles` see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)                  |
-| `start_date`             | `string (ISO 8601 datetime)` |          | Date range metrics (see individual metrics) | Custom start of the date range                         | Example: `2024-06-01T00:00:00` or `2024-06-01T23:59:59-07:00` (with timezone)                                                                                                   |
-| `end_date`               | `string (ISO 8601 datetime)` |          | Date range metrics (see individual metrics) | Custom end of the date range                           | Example: `2024-06-01T23:59:59` or `2024-06-01T23:59:59-07:00` (with timezone)                                                                                                   |
-| `range_type`             | `string`                     |          | `conversation_overview`                     | Predefined time range (alternative to start/end dates) | `last_day`, `last_7_days`, `last_30_days`, `last_90_days`, `last_180_days`                                                                                                      |
-| `exclude_empty_response` | `boolean`                    |          | `conversation_overview`                     | Exclude conversations with no bot or agent replies     | `true`, `false`                                                                                                                                                                 |
-| `labels`                 | `array of strings`           |          | `label_usage`                               | Filter by specific label names                         | Example: `["support", "sales"]`                                                                                                                                                 |
-| `year`                   | `string (YYYY)`              |          | `conversation_overview_yearly`              | Year for yearly report metrics                         | Example: `2024`                                                                                                                                                                 |
+| Field                    | Type                         | Required | Used By Metrics                             | Description                                            | Allowed Values / Example                                                                                                                                                                          |
+| ------------------------ | ---------------------------- | -------- | ------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `metrics`                | `array of strings`           | ✅       | All                                         | List of analytics metrics to generate                  | `["conversation_overview", "activity_trend", "label_usage", "conversation_breakdown", "communication_volume", "total_usage", "conversation_overview_yearly", "label_overview", "agent_activity"]` |
+| `message_type`           | `string`                     |          | `activity_trend`                            | Whether to analyze messages or calls                   | `messages`, `calls`                                                                                                                                                                               |
+| `time_unit`              | `string`                     |          | `activity_trend`, `label_usage`             | Aggregation level for time-based data                  | `day`, `month`, `year`                                                                                                                                                                            |
+| `timezone`               | `string`                     |          | All time-based metrics                      | Timezone used for grouping and filtering               | Example: `UTC`, `Asia/Taipei`, `America/Los_Angeles` see a list of tz database time zones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)                                    |
+| `start_date`             | `string (ISO 8601 datetime)` |          | Date range metrics (see individual metrics) | Custom start of the date range                         | Example: `2024-06-01T00:00:00` or `2024-06-01T23:59:59-07:00` (with timezone)                                                                                                                     |
+| `end_date`               | `string (ISO 8601 datetime)` |          | Date range metrics (see individual metrics) | Custom end of the date range                           | Example: `2024-06-01T23:59:59` or `2024-06-01T23:59:59-07:00` (with timezone)                                                                                                                     |
+| `range_type`             | `string`                     |          | `conversation_overview`, `agent_activity`   | Predefined time range (alternative to start/end dates) | `last_day`, `last_7_days`, `last_30_days`, `last_90_days`, `last_180_days`                                                                                                                        |
+| `exclude_empty_response` | `boolean`                    |          | `conversation_overview`                     | Exclude conversations with no bot or agent replies     | `true`, `false`                                                                                                                                                                                   |
+| `labels`                 | `array of strings`           |          | `label_usage`                               | Filter by specific label names                         | Example: `["support", "sales"]`                                                                                                                                                                   |
+| `agents`                 | `array of strings`           |          | `agent_activity`                            | Filter by specific agent user accounts                 | Example: `["agent_user_1", "agent_user_2"]`                                                                                                                                                       |
+| `year`                   | `string (YYYY)`              |          | `conversation_overview_yearly`              | Year for yearly report metrics                         | Example: `2024`                                                                                                                                                                                   |
 
 ### Metrics Use Case
 
-| Metric                         | Compatible With         | Best Use Case                         |
-| ------------------------------ | ----------------------- | ------------------------------------- |
-| `conversation_overview`        | Any metric              | Dashboard overview with other metrics |
-| `communication_volume`         | `conversation_overview` | Voice vs text communication analysis  |
-| `activity_trend`               | `label_usage`           | Trend analysis with label patterns    |
-| `label_overview`               | `label_usage`           | Label management and usage analysis   |
-| `conversation_breakdown`       | `activity_trend`        | Detailed activity pattern analysis    |
-| `total_usage`                  | Any metric              | High-level usage summaries            |
-| `conversation_overview_yearly` | Standalone recommended  | Annual reporting (resource intensive) |
+| Metric                         | Compatible With         | Best Use Case                                |
+| ------------------------------ | ----------------------- | -------------------------------------------- |
+| `conversation_overview`        | Any metric              | Dashboard overview with other metrics        |
+| `communication_volume`         | `conversation_overview` | Voice vs text communication analysis         |
+| `activity_trend`               | `label_usage`           | Trend analysis with label patterns           |
+| `label_overview`               | `label_usage`           | Label management and usage analysis          |
+| `conversation_breakdown`       | `activity_trend`        | Detailed activity pattern analysis           |
+| `total_usage`                  | Any metric              | High-level usage summaries                   |
+| `conversation_overview_yearly` | Standalone recommended  | Annual reporting (resource intensive)        |
+| `agent_activity`               | Any metric              | Agent availability and productivity tracking |
 
 ### Authorization
 
@@ -376,7 +378,7 @@ curl -X POST https://seax.seasalt.ai/seax-api/api/v1/analytics/generate_metric_r
 }
 ```
 
-###  LABEL_OVERVIEW
+### LABEL_OVERVIEW
 
 Returns comprehensive information about all labels in the workspace, including
 usage counts and label metadata.
@@ -727,6 +729,160 @@ curl -X POST https://your-seax-domain.com/api/v1/analytics/generate_metric_repor
 }
 ```
 
+### AGENT_ACTIVITY
+
+Provides detailed agent activity data including online/offline status sessions
+with timestamps and duration, enabling workforce management and productivity
+analysis.
+
+**Use Cases:**
+
+- Agent availability tracking
+- Workforce scheduling optimization
+- Productivity analysis and reporting
+- Agent performance monitoring
+- Shift coverage analysis
+
+**Required Fields:**
+
+- `metrics`: Must include `"agent_activity"`
+- Either `range_type` OR both `start_date` and `end_date`
+
+**Optional Fields:**
+
+- **`agents`** (array of strings): List of specific agent user accounts to
+  filter by
+
+  - **Default:** If omitted, returns data for all agents in the workspace
+  - **Example:**
+    `["agent_user_1@email.com", "agent_user_2@email.com", "agent_user_3@email.com"]`
+  - **Use case:** Monitor specific team members or department agents
+  - **Performance tip:** Filter to specific agents to reduce response size when
+    analyzing individual performance
+
+- **`timezone`** (string): Timezone for date range interpretation
+  - **Default:** `"UTC"`
+  - **Example:** `"America/Chicago"`, `"Europe/Madrid"`, `"Asia/Hong_Kong"`
+  - **Use case:** Align activity timestamps with your business timezone for
+    accurate shift analysis
+
+> **Note:** Activity sessions include status, start time, end time, and duration in seconds.
+
+#### Available Agent Status Values
+
+The `status` field in the response can have the following values:
+
+| Status | Description |
+|--------|-------------|
+| `AVAILABLE` | Agent is online and ready to handle conversations |
+| `OFFLINE` | Agent is not logged in or has gone offline |
+| `ON_THE_CALL` | Agent is currently handling a voice call |
+| `CALL_RINGING` | An incoming call is ringing for the agent |
+| `OUTBOUND` | Agent is making an outbound call |
+| `WRAP_UP` | Agent is in post-call wrap-up time |
+| `MEAL` | Agent is on a meal break |
+| `BREAK` | Agent is on a regular break |
+| `AWAY` | (Deprecated) Agent is temporarily away |
+| `DO_NOT_DISTURB` | (Deprecated) Agent has enabled do-not-disturb mode |
+
+> **Important:** The `AWAY` and `DO_NOT_DISTURB` statuses are deprecated but may appear in historical data for backward compatibility.
+> time, and duration in seconds.
+
+**Sample Request with Range Type:**
+
+```bash
+curl -X POST https://seax.seasalt.ai/analytics-api/v1/generate_metric_report \
+  -H "X-API-KEY: <your_api_key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metrics": ["agent_activity"],
+    "range_type": "last_7_days",
+    "agents": ["agent_user_1", "agent_user_2"],
+    "timezone": "America/Los_Angeles"
+  }'
+```
+
+**Sample Request with Date Range:**
+
+```bash
+curl -X POST https://seax.seasalt.ai/analytics-api/v1/generate_metric_report \
+  -H "X-API-KEY: <your_api_key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metrics": ["agent_activity"],
+    "start_date": "2024-01-15T00:00:00",
+    "end_date": "2024-01-15T23:59:59",
+    "timezone": "UTC"
+  }'
+```
+
+**Sample Response:**
+
+```json
+{
+  "agent_activity": {
+    "agents": [
+      {
+        "agent_id": "agent_user_1",
+        "status": "AVAILABLE",
+        "start_time": "2024-01-15T08:00:00Z",
+        "end_time": "2024-01-15T10:30:00Z",
+        "duration_seconds": 9000
+      },
+      {
+        "agent_id": "agent_user_1",
+        "status": "ON_THE_CALL",
+        "start_time": "2024-01-15T10:30:00Z",
+        "end_time": "2024-01-15T11:00:00Z",
+        "duration_seconds": 1800
+      },
+      {
+        "agent_id": "agent_user_1",
+        "status": "WRAP_UP",
+        "start_time": "2024-01-15T11:00:00Z",
+        "end_time": "2024-01-15T11:05:00Z",
+        "duration_seconds": 300
+      },
+      {
+        "agent_id": "agent_user_1",
+        "status": "MEAL",
+        "start_time": "2024-01-15T12:00:00Z",
+        "end_time": "2024-01-15T13:00:00Z",
+        "duration_seconds": 3600
+      },
+      {
+        "agent_id": "agent_user_1",
+        "status": "AVAILABLE",
+        "start_time": "2024-01-15T13:00:00Z",
+        "end_time": "2024-01-15T17:00:00Z",
+        "duration_seconds": 14400
+      },
+      {
+        "agent_id": "agent_user_2",
+        "status": "AVAILABLE",
+        "start_time": "2024-01-15T09:00:00Z",
+        "end_time": "2024-01-15T15:00:00Z",
+        "duration_seconds": 21600
+      },
+      {
+        "agent_id": "agent_user_2",
+        "status": "BREAK",
+        "start_time": "2024-01-15T15:00:00Z",
+        "end_time": "2024-01-15T15:15:00Z",
+        "duration_seconds": 900
+      },
+      {
+        "agent_id": "agent_user_2",
+        "status": "OFFLINE",
+        "start_time": "2024-01-15T17:00:00Z",
+        "end_time": null,
+        "duration_seconds": null
+      }
+    ]
+  }
+}
+```
+
 ## Complete Sample Request and Response
 
 **Sample Request with Multiple Metrics:**
@@ -941,7 +1097,7 @@ _Solution: Ensure all required fields are included in your request body._
    - Handle edge cases like month boundaries and leap years
    - Consider business calendar vs calendar dates for reporting
 
-##  Real-World Usage Examples
+## Real-World Usage Examples
 
 **Dashboard Overview (Most Common)**
 
