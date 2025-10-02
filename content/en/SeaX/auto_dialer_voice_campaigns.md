@@ -50,7 +50,7 @@ First you must find the available phone numbers. You will need to collect the `i
 Request:
 ```
 curl -X 'GET' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/phones?offset=0&limit=10&is_owned=false&enabled=true&voice_available=true' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/phones?offset=0&limit=10&is_owned=false&enabled=true&voice_available=true' \
   -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
 ```
@@ -205,7 +205,7 @@ Use this endpoint to retrieve the set of contacts you’d like to call during th
 Request:
 ```
 curl -X 'GET' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&keyword=%2B18111222333&whatsapp_phone=%2B18111222333&all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&addition_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&order_by=phone%3Aasc%2Ccreated_time%3Adesc%2Cname%3Aasc&exclude_labels=DNC%2Cinvalid%20number%2Cunreachable&whatsapp_phone_only=false' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&keyword=%2B18111222333&whatsapp_phone=%2B18111222333&all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&addition_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&order_by=phone%3Aasc%2Ccreated_time%3Adesc%2Cname%3Aasc&exclude_labels=DNC%2Cinvalid%20number%2Cunreachable&whatsapp_phone_only=false' \
   -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
 ```
@@ -264,7 +264,7 @@ Use this endpoint to get a list of available AI agents to use during the call. Y
 Request:
 ```
 curl -X 'GET' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/ai_agents?limit=10&offset=0&order_by=created_time%3Adesc' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/ai_agents?limit=10&offset=0&order_by=created_time%3Adesc' \
   -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
 ```
@@ -334,7 +334,7 @@ Use this endpoint to trigger an outbound auto dialer voice campaign.
 Request:
 ```
 curl -X 'POST' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \
@@ -418,7 +418,7 @@ Allowed query parameters.
 Request:
 ```
 curl -X 'GET' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/auto_dialer_campaigns?stage=INSTANCE&limit=10&offset=0&order_by=created_time%3Adesc' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/auto_dialer_campaigns?stage=INSTANCE&limit=10&offset=0&order_by=created_time%3Adesc' \
   -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
 ```
@@ -555,7 +555,7 @@ Get the information of a campaign given the workspace_id and the desired campaig
 Request:
 ```
 curl -X 'GET' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns/448ea794-0368-4604-a56f-f2350229d9e5' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns/448ea794-0368-4604-a56f-f2350229d9e5' \
   -H 'accept: application/json' \
   -H 'X-API-Key: 09a318b51673ce2e3b1c03387a7bfc8c2e9aa35f83e6295b4109402a0c65111c'
 ```
