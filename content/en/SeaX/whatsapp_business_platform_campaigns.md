@@ -66,7 +66,7 @@ Begin by retrieving available phone numbers linked to your WhatsApp Business acc
 **Example Request**:
 ```bash
 curl -X 'GET' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/{workspace_id}/phones?offset=0&limit=10' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/phones?offset=0&limit=10' \
   -H 'accept: application/json' \
   -H 'X-API-Key: your_api_key_here'
 ```
@@ -165,7 +165,7 @@ To initiate a WhatsApp Business Platform campaign, you'll need to configure vari
 Request:
 ```bash
 curl -X 'POST' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \
@@ -210,7 +210,7 @@ Response:
 Request:
 ```bash
 curl -X 'POST' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \
@@ -244,7 +244,7 @@ Get detailed information about a specific campaign to track performance and deli
 Request:
 ```bash
 curl -X 'GET' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns/campaign_12345678-abcd-efgh-ijkl-123456789012' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns/campaign_12345678-abcd-efgh-ijkl-123456789012' \
   -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
 ```
@@ -299,7 +299,7 @@ Retrieve detailed logs for individual message deliveries to understand specific 
 Request:
 ```bash
 curl -X 'GET' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns/campaign_12345678-abcd-efgh-ijkl-123456789012/logs?offset=0&limit=10&message_statuses=delivered,failed' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns/campaign_12345678-abcd-efgh-ijkl-123456789012/logs?offset=0&limit=10&message_statuses=delivered,failed' \
   -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
 ```
@@ -358,7 +358,7 @@ Import contacts from a CSV file if you need to add new contacts to your workspac
 Request:
 ```bash
 curl -X 'POST' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/import_contacts?duplicate_strategy=mark&phone_country=US' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/import_contacts?duplicate_strategy=mark&phone_country=US' \
   -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \
   -F 'file=@whatsapp_contacts.csv'
@@ -448,7 +448,7 @@ For sending individual WhatsApp messages to specific contacts (not bulk campaign
 Request:
 ```bash
 curl -X 'POST' \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/send_whatsapp_message' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/send_whatsapp_message' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \

@@ -148,7 +148,7 @@ Begin by creating an API key for authentication. This key will be used for all s
 
 ```bash
 curl -X POST \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/{workspace_id}/api_keys/reset' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/api_keys/reset' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer [access-token]' \
   -d '{"name": "My Integration API Key"}'
@@ -159,7 +159,7 @@ Upload your contact list using either the CSV import endpoint or individual cont
 
 ```bash
 curl -X POST \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/{workspace_id}/import_contacts' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/import_contacts' \
   -H 'X-API-Key: [your-api-key]' \
   -F 'file=@contacts.csv' \
   -F 'label_ids=["label1", "label2"]'
@@ -170,7 +170,7 @@ Use the job ID returned from the import request to monitor progress. The import 
 
 ```bash
 curl -X GET \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/{workspace_id}/jobs/{job_id}' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/jobs/{job_id}' \
   -H 'X-API-Key: [your-api-key]'
 ```
 
@@ -179,7 +179,7 @@ Once contacts are imported, create a campaign specifying the message content, ta
 
 ```bash
 curl -X POST \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/{workspace_id}/campaigns' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/campaigns' \
   -H 'X-API-Key: [your-api-key]' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -203,7 +203,7 @@ Retrieve the list of available phone numbers that can be used for sending messag
 
 ```bash
 curl -X GET \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/{workspace_id}/phones' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/phones' \
   -H 'X-API-Key: [your-api-key]'
 ```
 
@@ -212,7 +212,7 @@ Send an SMS or MMS message directly to a specific recipient using one of your av
 
 ```bash
 curl -X POST \
-  'https://seax.seasalt.ai/bulk-sms-api/api/v1/workspace/{workspace_id}/send_message' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/send_message' \
   -H 'X-API-Key: [your-api-key]' \
   -H 'Content-Type: application/json' \
   -d '{
