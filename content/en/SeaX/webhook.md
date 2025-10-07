@@ -1537,7 +1537,10 @@ availability, additional metadata, or corrections.
 
 #### meeting.ended
 
-This event is triggered when a meeting ends. It contains comprehensive information about the meeting including transcriptions, summary, action items, participants, and analysis results.
+This event is triggered when a meeting From SeaMeet ends. It contains comprehensive information about the meeting including transcriptions, summary, action items, participants, and analysis results. You can subscribe to this event if any of these apply:
+
+1. You are a user of SeaMeet (https://seameet.ai), you want to register a webhook when your Google Meet, Microsoft Teams or Zoom meeting ends.
+2. You have an integration with SeaMeet through SeaX (https://seasalt.ai/en/seax), you use SeaMeet to analyze all your phone calls and want to register a webhook when a call ends.
 
 **Payload Fields**
 
