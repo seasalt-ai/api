@@ -1588,7 +1588,7 @@ This event is triggered when a meeting ends. It contains comprehensive informati
 
 **Sample Event Payload**
 
-```bash
+```json
 {
   "id": "f4e6d8b2-9c1a-4f3e-8d7b-2a5c8f9e1d3a",
   "event_type": "meeting.ended",
