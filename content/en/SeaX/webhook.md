@@ -397,8 +397,8 @@ curl -X GET "https://seax.seasalt.ai/notify-api/v1/event_types" \
     description: 'Triggered when a call summary is generated',
   },
   {
-    event_type: 'meeting.ended',
-    description: 'Triggered when a meeting ends',
+    "event_type": "meeting.ended",
+    "description": "Triggered when a meeting ends"
   }
 ];
 ```
