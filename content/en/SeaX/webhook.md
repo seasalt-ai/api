@@ -107,6 +107,7 @@ your application.
 - `call.new`
 - `call.updated`
 - `call.ended`
+- `meeting.ended`
 
 **Sample Request**
 
@@ -394,6 +395,10 @@ curl -X GET "https://seax.seasalt.ai/notify-api/v1/event_types" \
   {
     event_type: 'call.updated',
     description: 'Triggered when a call summary is generated',
+  },
+  {
+    event_type: 'meeting.ended',
+    description: 'Triggered when a meeting ends',
   }
 ];
 ```
@@ -1527,5 +1532,135 @@ availability, additional metadata, or corrections.
   },
   "subscription_created_by": "Test_user",
   "subscription_updated_by": "Test_user",
+}
+```
+
+#### meeting.ended
+
+This event is triggered when a meeting ends. It contains comprehensive information about the meeting including transcriptions, summary, action items, participants, and analysis results.
+
+**Payload Fields**
+
+| Field                                          | Type                  | Description                                              |
+| ---------------------------------------------- | --------------------- | -------------------------------------------------------- |
+| `id`                                           | `string`              | Unique identifier of the event                           |
+| `event_type`                                   | `string`              | Always `"meeting.ended"`                                 |
+| `affect`                                       | `string`              | Always `"add"`                                           |
+| `version`                                      | `string`              | Event schema version, e.g., `"0.0.1"`                    |
+| `timestamp`                                    | `string`              | When the event occurred, in ISO 8601 format              |
+| `workspace.id`                                 | `string`              | Workspace ID associated with the event                   |
+| `workspace.name`                               | `string`              | Workspace name                                           |
+| `source.id`                                    | `string`              | ID of the event source                                   |
+| `source.type`                                  | `string`              | Channel type (always `"SEAMEET"`)                        |
+| `source.identifier`                            | `string`              | Identifier or name of the SeaMeet integration            |
+| `data.meeting_id`                              | `string`              | Unique identifier of the meeting                         |
+| `data.meeting_start_time`                      | `string`              | When the meeting started (ISO 8601 format)               |
+| `data.meeting_end_time`                        | `string`              | When the meeting ended (ISO 8601 format)                 |
+| `data.duration_seconds`                        | `integer`             | Duration of the meeting in seconds                       |
+| `data.transcriptions`                          | `array of object`     | Array of transcription segments                          |
+| `data.transcriptions[].id`                     | `string`              | Unique identifier of the transcription segment           |
+| `data.transcriptions[].transcription`          | `string`              | Transcribed text content                                 |
+| `data.transcriptions[].speaker`                | `string`              | Name of the speaker                                      |
+| `data.transcriptions[].anchor_start`           | `number`              | Start time of the segment in seconds                     |
+| `data.transcriptions[].duration`               | `number`              | Duration of the segment in seconds                       |
+| `data.summary`                                 | `string`              | AI-generated summary of the meeting                      |
+| `data.action_items`                            | `array of string`     | List of action items identified from the meeting         |
+| `data.participants`                            | `array of string`     | List of meeting participants                             |
+| `data.labels`                                  | `array of string`     | Labels associated with the meeting                       |
+| `data.custom_analysis_results`                 | `object`              | Custom analysis results                                  |
+| `data.custom_analysis_results.id`              | `string`              | Meeting UUID for analysis                                |
+| `data.custom_analysis_results.datetime_utc`    | `string`              | Meeting datetime in UTC                                  |
+| `data.custom_analysis_results.datetime_local`  | `string`              | Meeting datetime in local time                           |
+| `data.custom_analysis_results.timezone`        | `string`              | Timezone of the meeting                                  |
+| `data.custom_analysis_results.call_direction`  | `string`              | Direction of the call (Inbound/Outbound)                 |
+| `data.custom_analysis_results.call_duration`   | `integer`             | Call duration in seconds                                 |
+| `data.custom_analysis_results.agent_name`      | `string`              | Name of the agent                                        |
+| `data.custom_analysis_results.agent_phone`     | `string`              | Phone number of the agent                                |
+| `data.custom_analysis_results.customer_name`   | `string`              | Name of the customer                                     |
+| `data.custom_analysis_results.customer_phone`  | `string`              | Phone number of the customer                             |
+| `data.custom_analysis_results.topics`          | `string`              | Topics discussed in the meeting                          |
+| `data.custom_analysis_results.labels`          | `string`              | Analysis labels                                          |
+| `data.custom_analysis_results.summary`         | `string`              | Summary from analysis                                    |
+| `data.custom_analysis_results.analyses`        | `array of object`     | Array of analysis results                                |
+| `data.custom_analysis_results.analyses[].analysis_key`     | `string`  | Key for the analysis type                                |
+| `data.custom_analysis_results.analyses[].analysis_subkey`  | `string`  | Subkey for specific analysis aspect                      |
+| `data.custom_analysis_results.analyses[].analysis_value`   | `string`  | Value/result of the analysis                             |
+
+**Sample Event Payload**
+
+```bash
+{
+  "id": "f4e6d8b2-9c1a-4f3e-8d7b-2a5c8f9e1d3a",
+  "event_type": "meeting.ended",
+  "affect": "add",
+  "version": "0.0.1",
+  "timestamp": "2024-01-15T15:15:00.000000",
+  "workspace": {
+    "id": "workspace-789",
+    "name": "Zapier Workspace"
+  },
+  "source": {
+    "id": "seameet-source-123",
+    "type": "SEAMEET",
+    "identifier": "SeaMeet AI Agent"
+  },
+  "data": {
+    "meeting_id": "meet_456def",
+    "meeting_start_time": "2024-01-15T14:30:00Z",
+    "meeting_end_time": "2024-01-15T15:15:00Z",
+    "duration_seconds": 2700,
+    "transcriptions": [
+      {
+        "id": "trans_001",
+        "transcription": "Let's start with the quarterly review.",
+        "speaker": "John Doe",
+        "anchor_start": 15.0,
+        "duration": 3.5
+      },
+      {
+        "id": "trans_002",
+        "transcription": "I have the numbers ready for presentation.",
+        "speaker": "Jane Smith",
+        "anchor_start": 80.0,
+        "duration": 4.2
+      }
+    ],
+    "summary": "The team discussed project progress and assigned action items for the next sprint.",
+    "action_items": [
+      "Review the quarterly report",
+      "Prepare slides for the client presentation"
+    ],
+    "participants": ["John Doe", "Jane Smith", "Bob Wilson"],
+    "labels": ["followup required", "missed"],
+    "custom_analysis_results": {
+      "id": "meeting-uuid",
+      "datetime_utc": "2024-07-26T04:08:00",
+      "datetime_local": "2024-07-26T04:08:00",
+      "timezone": "US/Pacific",
+      "call_direction": "Outbound",
+      "call_duration": 61,
+      "agent_name": "Sabrina",
+      "agent_phone": "+1234567890",
+      "customer_name": "Kim",
+      "customer_phone": "+0987654321",
+      "topics": "Appointment,Scheduling",
+      "labels": "Existing Customer",
+      "summary": "Kim called in to make an appointment for her dog.",
+      "analyses": [
+        {
+          "analysis_key": "triage",
+          "analysis_subkey": "urgency_flag",
+          "analysis_value": "GREEN"
+        },
+        {
+          "analysis_key": "sentiment",
+          "analysis_subkey": "overall",
+          "analysis_value": "positive"
+        }
+      ]
+    }
+  },
+  "subscription_created_by": "Test_user",
+  "subscription_updated_by": "Test_user"
 }
 ```
