@@ -1220,7 +1220,7 @@
             "type": "object",
             "description": "Workspace Information"
           },
-          "affected": {
+          "affect": {
             "title": "Affect",
             "type": "string",
             "description": "The affect of resource.",
@@ -1238,7 +1238,7 @@
           "timestamp",
           "event_type",
           "workspace",
-          "affected",
+          "affect",
           "data"
         ],
         "description": "A meeting end event schema. This event is triggered when a meeting ends."
