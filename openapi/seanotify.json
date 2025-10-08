@@ -1187,6 +1187,62 @@
         "required": ["id", "version", "timestamp", "event_type", "workspace", "source", "data"],
         "description": "A call update event schema. This event is triggered when a call is updated."
       },
+      "MeetingEndEvent": {
+        "title": "MeetingEndEvent",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "Unique ID of the event.",
+            "example": "6e74c661-4c66-4d1e-81b0-64b2f4dcac98"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string",
+            "description": "Version of the event schema.",
+            "example": "0.0.1"
+          },
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "string",
+            "description": "Timestamp event is sent",
+            "example": "2025-06-20T23:44:30.000000"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "Event type name",
+            "example": "meeting.ended"
+          },
+          "workspace": {
+            "title": "Workspace",
+            "type": "object",
+            "description": "Workspace Information"
+          },
+          "affect": {
+            "title": "Affect",
+            "type": "string",
+            "description": "The affect of resource.",
+            "example": "add"
+          },
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "description": "Event data"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "timestamp",
+          "event_type",
+          "workspace",
+          "affect",
+          "data"
+        ],
+        "description": "A meeting end event schema. This event is triggered when a meeting ends."
+      },
       "WebhookEventResponse": {
         "title": "WebhookEventResponse",
         "oneOf": [
