@@ -13,7 +13,7 @@ title: Seasalt.ai API Documentation
       subtitle="Integrate and automate chatbot workflows with AI-powered agents."
       primary_url="/seachat"
       primary_text="View API Docs"
-      secondary_url="/seachat/wiki"
+      secondary_url="http://wiki.seasalt.ai/seachat/"
       secondary_text="Read Wiki"
     >}}
       <li><i class="fas fa-check text-info"></i> Manage AI agents programmatically</li>
@@ -28,7 +28,7 @@ title: Seasalt.ai API Documentation
       subtitle="Integrate and automate messaging campaigns with powerful bulk messaging tools."
       primary_url="/seax"
       primary_text="View API Docs"
-      secondary_url="/seax/wiki"
+      secondary_url="http://wiki.seasalt.ai/seax/"
       secondary_text="Read Wiki"
     >}}
       <li><i class="fas fa-check text-info"></i> Bulk SMS and MMS messaging</li>
@@ -43,7 +43,7 @@ title: Seasalt.ai API Documentation
       subtitle="Automate and manage video meetings with seamless integration."
       primary_url="/seameet"
       primary_text="View API Docs"
-      secondary_url="/seameet/wiki"
+      secondary_url="http://wiki.seasalt.ai/seameet/"
       secondary_text="Read Wiki"
     >}}
       <li><i class="fas fa-check text-info"></i> Schedule, start, and manage video conferences programmatically</li>

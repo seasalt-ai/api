@@ -46,7 +46,7 @@ To interact with the WhatsApp Business Platform Campaigns API, you need to autho
 
 Example Header:
 ```bash
--H 'X-API-Key: your_api_key_here'
+-H 'X-API-Key: {YOUR_API_KEY}'
 ```
 
 For more details on authorization, refer to the [Authorization Guide](#authorization).
@@ -68,7 +68,7 @@ Begin by retrieving available phone numbers linked to your WhatsApp Business acc
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/phones?offset=0&limit=10' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: your_api_key_here'
+  -H 'X-API-Key: {YOUR_API_KEY}'
 ```
 
 **Response**:
@@ -109,7 +109,7 @@ Next, access your contact list that you wish to target with your WhatsApp campai
 curl -X 'GET' \
   'https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/contacts?offset=0&limit=10' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: your_api_key_here'
+  -H 'X-API-Key: {YOUR_API_KEY}'
 ```
 
 **Response**:
