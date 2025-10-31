@@ -24,7 +24,22 @@
 &lt;li>Requires a verified business account.&lt;/li>
 &lt;li>Limited to contacts who have opted-in.&lt;/li>
 &lt;/ul>
-&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p></description></item><item><title>Audio Upload</title><link>https://api.seasalt.ai/seameet/audio-upload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/audio-upload/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p></description></item><item><title>WhatsApp Business Platform General Campaigns API Tutorial</title><link>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</guid><description>&lt;h1 id="whatsapp-business-platform-general-campaigns-api-tutorial">WhatsApp Business Platform General Campaigns API Tutorial&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-general-campaigns-api-tutorial" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The &lt;code>/api/v1/workspace/{workspace_id}/general_campaigns/wabp&lt;/code> endpoint allows
+you to send WhatsApp Business Platform (WABP) template messages to multiple
+destinations in a single API call. This is ideal for sending highly structured
+messages using approved WhatsApp templates with personalized parameters.&lt;/p>
+&lt;h3 id="key-features">Key Features&lt;a class="td-heading-self-link" href="#key-features" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Template-based Messaging&lt;/strong>: Send messages using pre-approved WhatsApp
+templates&lt;/li>
+&lt;li>&lt;strong>Multi-destination Support&lt;/strong>: Send to multiple recipients in one request&lt;/li>
+&lt;li>&lt;strong>Parameter Substitution&lt;/strong>: Personalize messages with dynamic parameters&lt;/li>
+&lt;li>&lt;strong>Language Support&lt;/strong>: Use templates in different languages&lt;/li>
+&lt;/ul>
+&lt;h2 id="prerequisites">Prerequisites&lt;a class="td-heading-self-link" href="#prerequisites" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Before using this endpoint, ensure you have:&lt;/p></description></item><item><title>Audio Upload</title><link>https://api.seasalt.ai/seameet/audio-upload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/audio-upload/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>Create a new meeting by analyzing audio recordings. The &lt;a href="https://api.seasalt.ai/seameet/audio-upload/#run-analysis">&lt;code>analyze_audio&lt;/code> endpoint&lt;/a> handles audio uploads, initiates processing, and returns a job ID for tracking analysis progress.&lt;/p>
 &lt;h2 id="quick-start">Quick Start&lt;a class="td-heading-self-link" href="#quick-start" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;h3 id="step-0-authentication-and-set-up">Step 0: Authentication and Set up&lt;a class="td-heading-self-link" href="#step-0-authentication-and-set-up" aria-label="Heading self-link">&lt;/a>&lt;/h3>

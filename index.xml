@@ -154,16 +154,7 @@ or elsewhere? Link to your examples here.&lt;/p></description></item><item><titl
 &lt;/div>
 
 &lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Refactoring Guide - From Bulk SMS to Multi-Channel Messaging</title><link>https://api.seasalt.ai/seax/refactoring-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/refactoring-guide/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>This document outlines the refactoring of the SeaX API from a &amp;ldquo;Bulk SMS&amp;rdquo; focused service to a comprehensive &amp;ldquo;Multi-Channel Messaging API&amp;rdquo; that accurately represents its support for SMS, WhatsApp, and voice communications.&lt;/p>
-&lt;h2 id="problem-statement">Problem Statement&lt;a class="td-heading-self-link" href="#problem-statement" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The original SeaX API specification presented itself as &amp;ldquo;SeaX Bulk SMS&amp;rdquo; despite supporting:&lt;/p>
-&lt;ul>
-&lt;li>📱 SMS &amp;amp; MMS messaging&lt;/li>
-&lt;li>💬 WhatsApp Business Platform integration&lt;/li>
-&lt;li>📞 Voice calls and auto-dialer campaigns&lt;/li>
-&lt;/ul>
-&lt;p>This created confusion for developers who weren&amp;rsquo;t aware of the full multi-channel capabilities.&lt;/p></description></item><item><title>Multi-Bear Domicile Setup</title><link>https://api.seasalt.ai/docs/tutorials/multi-bear/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tutorials/multi-bear/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Multi-Bear Domicile Setup</title><link>https://api.seasalt.ai/docs/tutorials/multi-bear/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/tutorials/multi-bear/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
 
 &lt;/div>
@@ -227,7 +218,7 @@ creating unified analytics dashboards and comprehensive performance reports.&lt;
 
 &lt;ul>
 &lt;li>🚀 &lt;a href="https://api.seasalt.ai/seax/docs/analytics-iframe/">Getting Started with the Analytics API&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Bulk SMS Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/bulk-sms-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/bulk-sms-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;/ul></description></item><item><title>Bulk Send Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/bulk-sms-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/bulk-sms-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
 &lt;script>
  window.onload = function () {
  const ui = SwaggerUIBundle({
@@ -301,7 +292,22 @@ Explore the integration here:
 &lt;li>Requires a verified business account.&lt;/li>
 &lt;li>Limited to contacts who have opted-in.&lt;/li>
 &lt;/ul>
-&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p></description></item><item><title>Audio Upload</title><link>https://api.seasalt.ai/seameet/audio-upload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/audio-upload/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p></description></item><item><title>WhatsApp Business Platform General Campaigns API Tutorial</title><link>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</guid><description>&lt;h1 id="whatsapp-business-platform-general-campaigns-api-tutorial">WhatsApp Business Platform General Campaigns API Tutorial&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-general-campaigns-api-tutorial" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The &lt;code>/api/v1/workspace/{workspace_id}/general_campaigns/wabp&lt;/code> endpoint allows
+you to send WhatsApp Business Platform (WABP) template messages to multiple
+destinations in a single API call. This is ideal for sending highly structured
+messages using approved WhatsApp templates with personalized parameters.&lt;/p>
+&lt;h3 id="key-features">Key Features&lt;a class="td-heading-self-link" href="#key-features" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Template-based Messaging&lt;/strong>: Send messages using pre-approved WhatsApp
+templates&lt;/li>
+&lt;li>&lt;strong>Multi-destination Support&lt;/strong>: Send to multiple recipients in one request&lt;/li>
+&lt;li>&lt;strong>Parameter Substitution&lt;/strong>: Personalize messages with dynamic parameters&lt;/li>
+&lt;li>&lt;strong>Language Support&lt;/strong>: Use templates in different languages&lt;/li>
+&lt;/ul>
+&lt;h2 id="prerequisites">Prerequisites&lt;a class="td-heading-self-link" href="#prerequisites" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Before using this endpoint, ensure you have:&lt;/p></description></item><item><title>Audio Upload</title><link>https://api.seasalt.ai/seameet/audio-upload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/audio-upload/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>Create a new meeting by analyzing audio recordings. The &lt;a href="https://api.seasalt.ai/seameet/audio-upload/#run-analysis">&lt;code>analyze_audio&lt;/code> endpoint&lt;/a> handles audio uploads, initiates processing, and returns a job ID for tracking analysis progress.&lt;/p>
 &lt;h2 id="quick-start">Quick Start&lt;a class="td-heading-self-link" href="#quick-start" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;h3 id="step-0-authentication-and-set-up">Step 0: Authentication and Set up&lt;a class="td-heading-self-link" href="#step-0-authentication-and-set-up" aria-label="Heading self-link">&lt;/a>&lt;/h3>
