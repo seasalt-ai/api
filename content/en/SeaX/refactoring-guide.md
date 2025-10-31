@@ -2,6 +2,7 @@
 title: Refactoring Guide - From Bulk SMS to Multi-Channel Messaging
 linkTitle: Refeactoring Guide for SeaX API
 type: docs
+draft: true
 weight: 3
 ---
 
