@@ -293,7 +293,7 @@ Hi Kelly Kang, get 10% off on Macbook Pro. Use the code below!
 
 ### Example 2: Template with Multiple URL Buttons
 
-This example sends the `test_info_udpate_buttons` template with a header, body
+This example sends the `test_info_update_buttons` template with a header, body
 parameters, and two URL buttons with dynamic parameters.
 
 **Template**:
@@ -317,7 +317,7 @@ curl -X 'POST' \
   "sender_whatsapp_number": "+1123456789",
   "type": "whatsapp",
   "highly_structured_message": {
-    "template": "test_info_udpate_buttons",
+    "template": "test_info_update_buttons",
     "language_code": "en_US",
     "destinations": [
       {
@@ -385,7 +385,7 @@ curl -X 'POST' \
 **Request Body Breakdown**:
 
 - **Sender**: `+1123456789`
-- **Template**: `test_info_udpate_buttons` in English (US)
+- **Template**: `test_info_update_buttons` in English (US)
 - **Recipient**: `+1987654321`
 - **Components**:
   - **Header**: Name "John Doe"
@@ -487,7 +487,7 @@ in the template ({{1}}, {{2}}, {{3}}).
 
 ### Example 4: Template without Parameters
 
-This example sends a simple template called `test_ohla` in Spanish that doesn't
+This example sends a simple template called `test_hola` in Spanish that doesn't
 require any parameters or components.
 
 **cURL Command**:
@@ -499,14 +499,14 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -H 'X-API-Key: {YOUR_API_KEY}' \
   -d '{
-  "sender_whatsapp_number": "+13867033591",
+  "sender_whatsapp_number": "+1123456789",
   "type": "whatsapp",
   "highly_structured_message": {
-    "template": "test_ohla",
+    "template": "test_hola",
     "language_code": "es",
     "destinations": [
       {
-        "destination": "+12069399609"
+        "destination": "+15552341345"
       }
     ]
   }
@@ -516,8 +516,8 @@ curl -X 'POST' \
 **Request Body Breakdown**:
 
 - **Sender**: `+13867033591`
-- **Template**: `test_ohla` in Spanish
-- **Recipient**: `+12069399609`
+- **Template**: `test_hola` in Spanish
+- **Recipient**: `+15552341345`
 - **Components**: None (template is static with no dynamic content)
 
 **Use Case**: This is ideal for simple notification templates that don't need
@@ -584,12 +584,12 @@ template in your WhatsApp Business account.
   "message": "Invalid phone number format",
   "details": {
     "field": "sender_whatsapp_number",
-    "value": "1234567890"
+    "value": "+1234567890"
   }
 }
 ```
 
-**Solution**: Use E.164 format for phone numbers (e.g., `+12069399609`).
+**Solution**: Use E.164 format for phone numbers (e.g., `+15552341345`).
 
 #### 400 Bad Request - Missing Parameters
 
