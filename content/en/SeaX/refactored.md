@@ -52,14 +52,14 @@ SeaX API uses API key authentication. To obtain your API key:
 ```bash
 curl -H "Authorization: Bearer YOUR_API_KEY" \
      -H "Content-Type: application/json" \
-     https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/campaigns
+     https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/campaigns
 ```
 
 ## Base URL
 
 All API requests should be made to:
 ```
-https://seax.seasalt.ai/api/v1/
+https://seax.seasalt.ai/seax-api/api/v1/
 ```
 
 ## Channel-Specific Implementation
@@ -68,7 +68,7 @@ https://seax.seasalt.ai/api/v1/
 
 #### Sending a Single SMS
 ```javascript
-const response = await fetch('https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/send_message', {
+const response = await fetch('https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/send_message', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY',
@@ -90,7 +90,7 @@ console.log('Message sent:', result.message_id);
 ```python
 import requests
 
-url = "https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/campaigns"
+url = "https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/campaigns"
 headers = {
     "Authorization": "Bearer YOUR_API_KEY",
     "Content-Type": "application/json"
@@ -115,7 +115,7 @@ print(f"SMS Campaign created: {response.json()}")
 
 #### Sending MMS with Media
 ```javascript
-const mmsResponse = await fetch('https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/send_message', {
+const mmsResponse = await fetch('https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/send_message', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY',
@@ -157,7 +157,7 @@ whatsapp_template = {
 }
 
 response = requests.post(
-    "https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/send_message/wabp_template_message",
+    "https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/send_message/wabp_template_message",
     headers=headers,
     json=whatsapp_template
 )
@@ -215,7 +215,7 @@ voice_campaign = {
 }
 
 response = requests.post(
-    "https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/auto_dialer_campaigns",
+    "https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/auto_dialer_campaigns",
     headers=headers,
     json=voice_campaign
 )
@@ -284,7 +284,7 @@ def create_birthday_campaign():
 ### Unified Contact Creation
 ```bash
 # Add a contact with multi-channel preferences
-curl -X POST "https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/contacts" \
+curl -X POST "https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/contacts" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -333,7 +333,7 @@ curl -X POST "https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/contacts" 
 ### Multi-Channel Analytics
 ```javascript
 // Get comprehensive campaign analytics
-const analytics = await fetch(`https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/campaigns/{campaign_id}/analytics`, {
+const analytics = await fetch(`https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/campaigns/{campaign_id}/analytics`, {
   headers: { 'Authorization': 'Bearer YOUR_API_KEY' }
 });
 
