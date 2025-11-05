@@ -474,14 +474,22 @@ new_campaign = {
 ## Support and Resources
 
 ### Getting Help
-- **API Documentation**: [https://seax.seasalt.ai/bulk-sms-api/redoc/](https://seax.seasalt.ai/bulk-sms-api/redoc/)
+
+- **API Documentation**:
+  [https://seax.seasalt.ai/seax-api/redoc/](https://seax.seasalt.ai/seax-api/redoc/)
 - **Support Email**: info@seasalt.ai
 - **Knowledge Base**: [https://wiki.seasalt.ai](https://wiki.seasalt.ai)
-- **Multi-Channel Best Practices**: [https://docs.seasalt.ai/multi-channel](https://docs.seasalt.ai/multi-channel)
+- **Multi-Channel Best Practices**:
+  [https://docs.seasalt.ai/multi-channel](https://docs.seasalt.ai/multi-channel)
 
 ### Channel-Specific Resources
-- **SMS Compliance Guide**: [https://docs.seasalt.ai/sms-compliance](https://docs.seasalt.ai/sms-compliance)
-- **WhatsApp Business Policy**: [https://docs.seasalt.ai/whatsapp-policy](https://docs.seasalt.ai/whatsapp-policy)  
-- **Voice Campaign Best Practices**: [https://docs.seasalt.ai/voice-campaigns](https://docs.seasalt.ai/voice-campaigns)
 
-For detailed implementation guides and advanced multi-channel use cases, refer to the complete API documentation or contact Seasalt.ai support.
+- **SMS Compliance Guide**:
+  [https://docs.seasalt.ai/sms-compliance](https://docs.seasalt.ai/sms-compliance)
+- **WhatsApp Business Policy**:
+  [https://docs.seasalt.ai/whatsapp-policy](https://docs.seasalt.ai/whatsapp-policy)
+- **Voice Campaign Best Practices**:
+  [https://docs.seasalt.ai/voice-campaigns](https://docs.seasalt.ai/voice-campaigns)
+
+For detailed implementation guides and advanced multi-channel use cases, refer
+to the complete API documentation or contact Seasalt.ai support.

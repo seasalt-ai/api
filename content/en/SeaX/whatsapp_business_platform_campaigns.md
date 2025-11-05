@@ -29,7 +29,8 @@ The WhatsApp Business Platform Campaigns API empowers organizations to design an
 - Requires a verified business account.
 - Limited to contacts who have opted-in.
 
-After reading through this tutorial, try out the endpoints [here](./Docs/bulk-sms-api/)
+After reading through this tutorial, try out the endpoints
+[here](./Docs/seax-api/)
 
 ## Getting Started
 

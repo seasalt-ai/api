@@ -14,7 +14,8 @@ weight: 20
 
 The Bulk SMS/MMS Campaigns API enables you to send messages at scale to targeted contact lists. This comprehensive guide covers contact management, campaign creation, and monitoring. The API supports SMS, MMS, and WhatsApp Business Platform messages with advanced targeting, scheduling, and delivery tracking capabilities.
 
-After reading through this tutorial, try out the endpoints [here](./Docs/bulk-sms-api/)
+After reading through this tutorial, try out the endpoints
+[here](./Docs/seax-api/)
 
 ## Authorization
 
