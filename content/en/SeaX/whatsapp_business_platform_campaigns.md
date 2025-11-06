@@ -29,7 +29,8 @@ The WhatsApp Business Platform Campaigns API empowers organizations to design an
 - Requires a verified business account.
 - Limited to contacts who have opted-in.
 
-After reading through this tutorial, try out the endpoints [here](./Docs/bulk-sms-api/)
+After reading through this tutorial, try out the endpoints
+[here](./Docs/seax-api/)
 
 ## Getting Started
 
@@ -107,7 +108,7 @@ Next, access your contact list that you wish to target with your WhatsApp campai
 **Example Request**:
 ```bash
 curl -X 'GET' \
-  'https://seax.seasalt.ai/api/v1/workspace/{workspace_id}/contacts?offset=0&limit=10' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/contacts?offset=0&limit=10' \
   -H 'accept: application/json' \
   -H 'X-API-Key: {YOUR_API_KEY}'
 ```
