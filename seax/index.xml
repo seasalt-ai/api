@@ -60,7 +60,8 @@ Explore the integration here:
 &lt;a href="https://zapier.com/apps/seasaltai/integrations">Seasalt.ai on Zapier&lt;/a>&lt;/p></description></item><item><title>Bulk SMS/MMS Campaigns</title><link>https://api.seasalt.ai/seax/bulk_sms_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/bulk_sms_tutorial/</guid><description>&lt;h1 id="bulk-smsmms-campaigns">Bulk SMS/MMS Campaigns&lt;a class="td-heading-self-link" href="#bulk-smsmms-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>The Bulk SMS/MMS Campaigns API enables you to send messages at scale to targeted contact lists. This comprehensive guide covers contact management, campaign creation, and monitoring. The API supports SMS, MMS, and WhatsApp Business Platform messages with advanced targeting, scheduling, and delivery tracking capabilities.&lt;/p>
-&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p>
+&lt;p>After reading through this tutorial, try out the endpoints
+&lt;a href="https://api.seasalt.ai/seax/docs/seax-api/">here&lt;/a>&lt;/p>
 &lt;h2 id="authorization">Authorization&lt;a class="td-heading-self-link" href="#authorization" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>You must provide your API key in the &lt;code>X-API-KEY&lt;/code> header.&lt;/p></description></item><item><title>WhatsApp Business Platform Campaigns</title><link>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</guid><description>&lt;h1 id="whatsapp-business-platform-campaigns">WhatsApp Business Platform Campaigns&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
@@ -83,7 +84,8 @@ Explore the integration here:
 &lt;li>Requires a verified business account.&lt;/li>
 &lt;li>Limited to contacts who have opted-in.&lt;/li>
 &lt;/ul>
-&lt;p>After reading through this tutorial, try out the endpoints &lt;a href="https://api.seasalt.ai/seax/docs/bulk-sms-api/">here&lt;/a>&lt;/p></description></item><item><title>WhatsApp Business Platform General Campaigns API Tutorial</title><link>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</guid><description>&lt;h1 id="whatsapp-business-platform-general-campaigns-api-tutorial">WhatsApp Business Platform General Campaigns API Tutorial&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-general-campaigns-api-tutorial" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;p>After reading through this tutorial, try out the endpoints
+&lt;a href="https://api.seasalt.ai/seax/docs/seax-api/">here&lt;/a>&lt;/p></description></item><item><title>WhatsApp Business Platform General Campaigns API Tutorial</title><link>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</guid><description>&lt;h1 id="whatsapp-business-platform-general-campaigns-api-tutorial">WhatsApp Business Platform General Campaigns API Tutorial&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-general-campaigns-api-tutorial" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>The &lt;code>/api/v1/workspace/{workspace_id}/general_campaigns/wabp&lt;/code> endpoint allows
 you to send WhatsApp Business Platform (WABP) template messages to multiple
@@ -100,4 +102,15 @@ templates&lt;/li>
 &lt;h2 id="prerequisites">Prerequisites&lt;a class="td-heading-self-link" href="#prerequisites" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>Before using this endpoint, ensure you have:&lt;/p></description></item><item><title>Auto-Dialer Voice Campaigns</title><link>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</guid><description>&lt;h1 id="auto-dialer-voice-campaigns">Auto-Dialer Voice Campaigns&lt;a class="td-heading-self-link" href="#auto-dialer-voice-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The Auto-Dialer Voice Campaigns endpoint enables automated placement of bulk outbound voice calls to selected contact lists, supporting both AI-powered conversational agents and pre-recorded voice drops. Through a structured configuration interface, users can define campaign parameters such as target groups, call scripts, scheduling windows, and fallback behaviors. The endpoint facilitates scalable voice outreach by handling call queuing, delivery tracking, and engagement logging. Each campaign instance generates detailed execution metrics and outcomes, enabling real-time monitoring and performance analysis. Secure access to campaign operations requires authentication via API key. Below we will cover the endpoints needed to customize, create, and monitor your own voice call campaigns. Note: in this tutorial we are assuming you have configured a phone number, contacts, and AI agents in your workspace.&lt;/p></description></item></channel></rss>
+&lt;p>The Auto-Dialer Voice Campaigns endpoint enables automated placement of bulk
+outbound voice calls to selected contact lists, supporting both AI-powered
+conversational agents and pre-recorded voice drops. Through a structured
+configuration interface, users can define campaign parameters such as target
+groups, call scripts, scheduling windows, and fallback behaviors. The endpoint
+facilitates scalable voice outreach by handling call queuing, delivery tracking,
+and engagement logging. Each campaign instance generates detailed execution
+metrics and outcomes, enabling real-time monitoring and performance analysis.
+Secure access to campaign operations requires authentication via API key. Below
+we will cover the endpoints needed to customize, create, and monitor your own
+voice call campaigns. Note: in this tutorial we are assuming you have configured
+a phone number, contacts, and AI agents in your workspace.&lt;/p></description></item></channel></rss>

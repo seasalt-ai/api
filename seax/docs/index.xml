@@ -15,7 +15,7 @@
 
 &lt;ul>
 &lt;li>🚀 &lt;a href="https://api.seasalt.ai/seax/docs/analytics-iframe/">Getting Started with the Analytics API&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Bulk Send Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/bulk-sms-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/bulk-sms-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
+&lt;/ul></description></item><item><title>Bulk Send Campaign API Swagger</title><link>https://api.seasalt.ai/seax/docs/seax-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/docs/seax-api/</guid><description>&lt;div id="docsy_swagger_ui">&lt;/div>
 &lt;script>
  window.onload = function () {
  const ui = SwaggerUIBundle({
