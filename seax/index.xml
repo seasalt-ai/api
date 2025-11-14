@@ -34,38 +34,37 @@
 &lt;li>&lt;strong>Conversation Threading&lt;/strong>: Unified conversation views across channels&lt;/li>
 &lt;/ul>
 &lt;h2 id="authentication">Authentication&lt;a class="td-heading-self-link" href="#authentication" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>SeaX API uses API key authentication. To obtain your API key:&lt;/p></description></item><item><title>Seasalt.ai Analytics API</title><link>https://api.seasalt.ai/seax/analytics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/analytics/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The Generate Metric Report endpoint provides a unified interface for retrieving
-multiple analytics metrics in a single request, streamlining the process of
-generating comprehensive reports for workspace performance analysis. Unlike
-individual metric endpoints, this bulk endpoint allows you to request multiple
-analytics types simultaneously, reducing API calls and improving efficiency for
-dashboard and reporting applications. The endpoint supports all available
-analytics metrics including conversation overviews, activity trends, label
-usage, communication volumes, and detailed breakdowns, making it ideal for
-creating unified analytics dashboards and comprehensive performance reports.&lt;/p></description></item><item><title>Seasalt.ai Webhook Notification API Tutorial</title><link>https://api.seasalt.ai/seax/webhook/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/webhook/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>A webhook-based notification system that lets your services receive real-time
-updates from Seasalt.ai products like SeaChat. Whether you want to track new
-conversations, missed calls, or contact changes, using the following endpoints
-ensures you stay informed the moment it happens. With support for multiple event
-types and delivery modes (immediate, delayed, batched), SeaX&amp;rsquo;s Webhook
-Notification are ideal for diverse automation and integration needs.&lt;/p>
-&lt;p>One powerful use case built on top of this webhook system is our Zapier
-integration. When an event is emitted via webhook, it can immediately trigger a
-Zap, allowing users to seamlessly connect Seasalt.ai products with tools like
-Google Sheets, Notion, Slack, and more. In this setup, webhooks act as the
-upstream event source, and Zapier serves as the downstream automation engine,
-consuming those events and turning them into custom workflows without any code.
-Explore the integration here:
-&lt;a href="https://zapier.com/apps/seasaltai/integrations">Seasalt.ai on Zapier&lt;/a>&lt;/p></description></item><item><title>Bulk SMS/MMS Campaigns</title><link>https://api.seasalt.ai/seax/bulk_sms_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/bulk_sms_tutorial/</guid><description>&lt;h1 id="bulk-smsmms-campaigns">Bulk SMS/MMS Campaigns&lt;a class="td-heading-self-link" href="#bulk-smsmms-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;p>SeaX API uses API key authentication. To obtain your API key:&lt;/p></description></item><item><title>Bulk SMS/MMS Campaigns</title><link>https://api.seasalt.ai/seax/bulk_sms_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/bulk_sms_tutorial/</guid><description>&lt;h1 id="bulk-smsmms-campaigns">Bulk SMS/MMS Campaigns&lt;a class="td-heading-self-link" href="#bulk-smsmms-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The Bulk SMS/MMS Campaigns API enables you to send messages at scale to targeted contact lists. This comprehensive guide covers contact management, campaign creation, and monitoring. The API supports SMS, MMS, and WhatsApp Business Platform messages with advanced targeting, scheduling, and delivery tracking capabilities.&lt;/p>
+&lt;p>The Bulk SMS/MMS Campaigns API enables you to send messages at scale to targeted
+contact lists. This comprehensive guide covers contact management, campaign
+creation, and monitoring. The API supports SMS, MMS, and WhatsApp Business
+Platform messages with advanced targeting, scheduling, and delivery tracking
+capabilities.&lt;/p>
 &lt;p>After reading through this tutorial, try out the endpoints
 &lt;a href="https://api.seasalt.ai/seax/docs/seax-api/">here&lt;/a>&lt;/p>
 &lt;h2 id="authorization">Authorization&lt;a class="td-heading-self-link" href="#authorization" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>You must provide your API key in the &lt;code>X-API-KEY&lt;/code> header.&lt;/p></description></item><item><title>WhatsApp Business Platform Campaigns</title><link>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</guid><description>&lt;h1 id="whatsapp-business-platform-campaigns">WhatsApp Business Platform Campaigns&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;p>You must provide your API key in the &lt;code>X-API-KEY&lt;/code> header.&lt;/p></description></item><item><title>WhatsApp Business Platform Campaigns</title><link>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</guid><description>&lt;h1 id="whatsapp-business-platform-general-campaigns-api-tutorial">WhatsApp Business Platform General Campaigns API Tutorial&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-general-campaigns-api-tutorial" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The WhatsApp Business Platform Campaigns API empowers organizations to design and implement effective messaging campaigns targeting contacts on WhatsApp. By leveraging this platform, businesses can engage their audience on a widely-used messaging app, increasing open rates and enhancing customer interactions.&lt;/p>
+&lt;p>The &lt;code>/api/v1/workspace/{workspace_id}/general_campaigns/wabp&lt;/code> endpoint allows
+you to send WhatsApp Business Platform (WABP) template messages to multiple
+destinations in a single API call. This is ideal for sending highly structured
+messages using approved WhatsApp templates with personalized parameters.&lt;/p>
+&lt;h3 id="key-features">Key Features&lt;a class="td-heading-self-link" href="#key-features" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Template-based Messaging&lt;/strong>: Send messages using pre-approved WhatsApp
+templates&lt;/li>
+&lt;li>&lt;strong>Multi-destination Support&lt;/strong>: Send to multiple recipients in one request&lt;/li>
+&lt;li>&lt;strong>Parameter Substitution&lt;/strong>: Personalize messages with dynamic parameters&lt;/li>
+&lt;li>&lt;strong>Language Support&lt;/strong>: Use templates in different languages&lt;/li>
+&lt;/ul>
+&lt;h2 id="prerequisites">Prerequisites&lt;a class="td-heading-self-link" href="#prerequisites" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Before using this endpoint, ensure you have:&lt;/p></description></item><item><title>WhatsApp Business Platform General Campaigns API Tutorial (Deprecated)</title><link>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/whatsapp_business_platform_campaigns/</guid><description>&lt;h1 id="whatsapp-business-platform-campaigns">WhatsApp Business Platform Campaigns&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The WhatsApp Business Platform Campaigns API empowers organizations to design
+and implement effective messaging campaigns targeting contacts on WhatsApp. By
+leveraging this platform, businesses can engage their audience on a widely-used
+messaging app, increasing open rates and enhancing customer interactions.&lt;/p>
 &lt;h3 id="key-benefits">Key Benefits&lt;a class="td-heading-self-link" href="#key-benefits" aria-label="Heading self-link">&lt;/a>&lt;/h3>
 &lt;ul>
 &lt;li>&lt;strong>Wider Reach&lt;/strong>: Connect with billions of users worldwide.&lt;/li>
@@ -85,22 +84,7 @@ Explore the integration here:
 &lt;li>Limited to contacts who have opted-in.&lt;/li>
 &lt;/ul>
 &lt;p>After reading through this tutorial, try out the endpoints
-&lt;a href="https://api.seasalt.ai/seax/docs/seax-api/">here&lt;/a>&lt;/p></description></item><item><title>WhatsApp Business Platform General Campaigns API Tutorial</title><link>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/wabp_general_campaigns_tutorial/</guid><description>&lt;h1 id="whatsapp-business-platform-general-campaigns-api-tutorial">WhatsApp Business Platform General Campaigns API Tutorial&lt;a class="td-heading-self-link" href="#whatsapp-business-platform-general-campaigns-api-tutorial" aria-label="Heading self-link">&lt;/a>&lt;/h1>
-&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>The &lt;code>/api/v1/workspace/{workspace_id}/general_campaigns/wabp&lt;/code> endpoint allows
-you to send WhatsApp Business Platform (WABP) template messages to multiple
-destinations in a single API call. This is ideal for sending highly structured
-messages using approved WhatsApp templates with personalized parameters.&lt;/p>
-&lt;h3 id="key-features">Key Features&lt;a class="td-heading-self-link" href="#key-features" aria-label="Heading self-link">&lt;/a>&lt;/h3>
-&lt;ul>
-&lt;li>&lt;strong>Template-based Messaging&lt;/strong>: Send messages using pre-approved WhatsApp
-templates&lt;/li>
-&lt;li>&lt;strong>Multi-destination Support&lt;/strong>: Send to multiple recipients in one request&lt;/li>
-&lt;li>&lt;strong>Parameter Substitution&lt;/strong>: Personalize messages with dynamic parameters&lt;/li>
-&lt;li>&lt;strong>Language Support&lt;/strong>: Use templates in different languages&lt;/li>
-&lt;/ul>
-&lt;h2 id="prerequisites">Prerequisites&lt;a class="td-heading-self-link" href="#prerequisites" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>Before using this endpoint, ensure you have:&lt;/p></description></item><item><title>Auto-Dialer Voice Campaigns</title><link>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</guid><description>&lt;h1 id="auto-dialer-voice-campaigns">Auto-Dialer Voice Campaigns&lt;a class="td-heading-self-link" href="#auto-dialer-voice-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;a href="https://api.seasalt.ai/seax/docs/seax-api/">here&lt;/a>&lt;/p></description></item><item><title>Auto-Dialer Voice Campaigns</title><link>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/auto_dialer_voice_campaigns/</guid><description>&lt;h1 id="auto-dialer-voice-campaigns">Auto-Dialer Voice Campaigns&lt;a class="td-heading-self-link" href="#auto-dialer-voice-campaigns" aria-label="Heading self-link">&lt;/a>&lt;/h1>
 &lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>The Auto-Dialer Voice Campaigns endpoint enables automated placement of bulk
 outbound voice calls to selected contact lists, supporting both AI-powered
@@ -113,4 +97,26 @@ metrics and outcomes, enabling real-time monitoring and performance analysis.
 Secure access to campaign operations requires authentication via API key. Below
 we will cover the endpoints needed to customize, create, and monitor your own
 voice call campaigns. Note: in this tutorial we are assuming you have configured
-a phone number, contacts, and AI agents in your workspace.&lt;/p></description></item></channel></rss>
+a phone number, contacts, and AI agents in your workspace.&lt;/p></description></item><item><title>Manage Contact Labels on Contacts</title><link>https://api.seasalt.ai/seax/contacts_and_labels/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/contacts_and_labels/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>This guide shows how to:&lt;/p>
+&lt;ul>
+&lt;li>Retrieve all contact labels in a workspace&lt;/li>
+&lt;li>Attach, detach, or replace labels on a specific contact&lt;/li>
+&lt;/ul>
+&lt;h2 id="authorization-api-key">Authorization: API Key&lt;a class="td-heading-self-link" href="#authorization-api-key" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Ensure the following are in place:&lt;/p>
+&lt;h3 id="1-generate-your-api-key">&lt;strong>1. Generate Your API Key&lt;/strong>&lt;a class="td-heading-self-link" href="#1-generate-your-api-key" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;p>All APIs require a valid API key issued from your workspace. All requests must
+include a valid API key in the request header (&lt;code>X-API-Key&lt;/code>).&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Go to &lt;strong>Workspace → API Key&lt;/strong> tab.&lt;/p></description></item><item><title>Seasalt.ai Analytics API</title><link>https://api.seasalt.ai/seax/analytics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/analytics/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>The Generate Metric Report endpoint provides a unified interface for retrieving
+multiple analytics metrics in a single request, streamlining the process of
+generating comprehensive reports for workspace performance analysis. Unlike
+individual metric endpoints, this bulk endpoint allows you to request multiple
+analytics types simultaneously, reducing API calls and improving efficiency for
+dashboard and reporting applications. The endpoint supports all available
+analytics metrics including conversation overviews, activity trends, label
+usage, communication volumes, and detailed breakdowns, making it ideal for
+creating unified analytics dashboards and comprehensive performance reports.&lt;/p></description></item></channel></rss>
