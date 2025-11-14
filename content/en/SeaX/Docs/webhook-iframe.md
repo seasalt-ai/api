@@ -1,7 +1,7 @@
 ---
 title: 'Event Notification API Redoc'
 type: docs
-weight: 7
+weight: 15
 description: Seasalt.ai Event Notification API Tutorial Redoc
 ---
 

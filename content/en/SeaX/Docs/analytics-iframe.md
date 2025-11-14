@@ -1,7 +1,7 @@
 ---
 title: 'Analytics API Redoc'
 type: docs
-weight: 7
+weight: 13
 description: Seasalt.ai Analytics API Tutorial Redoc
 ---
 

@@ -1,13 +1,13 @@
 ---
 title: Seasalt.ai Webhook Notification API Tutorial
-linkTitle: Workspace Event Notification
+linkTitle: Webhook Notification API
 description:
   Learn how to use Seasalt.ai's Webhook Notification API to receive real-time
   event updates for conversations, calls, and user actions. Ideal for
   integrations with Zapier and custom automation workflows.
 
 type: docs
-weight: 6
+weight: 10
 ---
 
 ## Overview
@@ -103,6 +103,8 @@ your application.
 - `message.new`
 - `conversation.label.added`
 - `conversation.label.deleted`
+- `contact.label.added`
+- `contact.label.deleted`
 - `conversation.ended`
 - `call.new`
 - `call.updated`
@@ -383,6 +385,14 @@ curl -X GET "https://seax.seasalt.ai/notify-api/v1/event_types" \
   {
     event_type: 'conversation.label.deleted',
     description: 'Triggered when a label is removed from a conversation',
+  },
+  {
+    event_type: 'contact.label.added',
+    description: 'Triggered when a label is added to a contact',
+  },
+  {
+    event_type: 'contact.label.deleted',
+    description: 'Triggered when a label is removed from a contact',
   },
   {
     event_type: 'call.new',
@@ -1299,6 +1309,308 @@ It includes details about which fields changed, who removed the label, and when.
 }
 ```
 
+#### contact.label.added
+
+This event is triggered when one or more labels are attached to a contact. It
+includes details about the updated fields, which labels were added, who
+performed the update, and when.
+
+**Payload Fields**
+
+| Field                  | Type              | Description                                      |
+| ---------------------- | ----------------- | ------------------------------------------------ |
+| `id`                   | `string`          | Unique identifier of the event                   |
+| `event_type`           | `string`          | Always `"contact.label.added"`                   |
+| `affect`               | `string`          | Always `"add"`                                   |
+| `version`              | `string`          | Event schema version, e.g., `"0.0.1"`            |
+| `timestamp`            | `string`          | When the event occurred, in ISO 8601 format      |
+| `workspace.id`         | `string`          | Workspace ID associated with the event           |
+| `workspace.name`       | `string`          | Workspace name                                   |
+| `data.contact_id`      | `string`          | ID of the contact                                |
+| `data.contact_name`    | `string`          | Name of the contact                              |
+| `data.updated_fields`  | `array of string` | List of updated fields (includes `labels`)       |
+| `data.previous.labels` | `array of object` | Labels before the update                         |
+| `data.current.labels`  | `array of object` | Labels after the update                          |
+| `data.labels`          | `array of object` | The label objects that were added in this change |
+| `data.updated_by`      | `object`          | The user or system who made the update           |
+| `data.updated_at`      | `string`          | Timestamp when the update happened               |
+
+**Sample Event Payload**
+
+```json
+{
+  "id": "9a6b0a1e-0d8e-4b3e-8c8a-6cd77c7e13b1",
+  "event_type": "contact.label.added",
+  "affect": "add",
+  "version": "0.0.1",
+  "timestamp": "2025-06-20T23:44:30.000000",
+  "workspace": { "id": "workspace-123", "name": "Zapier Workspace" },
+  "data": {
+    "contact_id": "c0b8f2e2-2d6d-49b5-8e8e-4b2b0c9b7f1a",
+    "contact_name": "Zapier Contact",
+    "updated_fields": ["labels"],
+    "previous": {
+      "labels": [
+        {
+          "id": "8d99e9b041f04447858cde7506cee4d5",
+          "name": "newUser",
+          "type": "CONTACT",
+          "color": "#565e9c",
+          "is_system": false,
+          "description": "this is a new user"
+        }
+      ]
+    },
+    "current": {
+      "labels": [
+        {
+          "id": "8d99e9b041f04447858cde7506cee4d5",
+          "name": "newUser",
+          "type": "CONTACT",
+          "color": "#565e9c",
+          "is_system": false,
+          "description": "this is a new user"
+        },
+        {
+          "id": "90c51757408941e2834f76392249b10f",
+          "name": "VIP",
+          "type": "CONTACT",
+          "color": "#a7927f",
+          "is_system": false,
+          "description": ""
+        }
+      ]
+    },
+    "labels": [
+      {
+        "id": "90c51757408941e2834f76392249b10f",
+        "name": "VIP",
+        "type": "CONTACT",
+        "color": "#a7927f",
+        "is_system": false,
+        "description": ""
+      }
+    ],
+    "updated_by": { "type": "USER", "id": "user-12345", "name": "Test User" },
+    "updated_at": "2025-06-20T23:44:30.000000"
+  },
+  "subscription_created_by": "Test_user",
+  "subscription_updated_by": "Test_user"
+}
+```
+
+#### contact.label.deleted
+
+This event is triggered when one or more labels are removed from a contact. It
+includes details about which labels were removed, who performed the update, and
+when.
+
+**Payload Fields**
+
+| Field                  | Type              | Description                                        |
+| ---------------------- | ----------------- | -------------------------------------------------- |
+| `id`                   | `string`          | Unique identifier of the event                     |
+| `event_type`           | `string`          | Always `"contact.label.deleted"`                   |
+| `affect`               | `string`          | Always `"delete"`                                  |
+| `version`              | `string`          | Event schema version, e.g., `"0.0.1"`              |
+| `timestamp`            | `string`          | When the event occurred, in ISO 8601 format        |
+| `workspace.id`         | `string`          | Workspace ID associated with the event             |
+| `workspace.name`       | `string`          | Workspace name                                     |
+| `data.contact_id`      | `string`          | ID of the contact                                  |
+| `data.contact_name`    | `string`          | Name of the contact                                |
+| `data.updated_fields`  | `array of string` | List of updated fields (includes `labels`)         |
+| `data.previous.labels` | `array of object` | Labels before the change                           |
+| `data.current.labels`  | `array of object` | Labels after the change                            |
+| `data.labels`          | `array of object` | The label objects that were removed in this change |
+| `data.updated_by`      | `object`          | The user or system who made the update             |
+| `data.updated_at`      | `string`          | Timestamp when the update happened                 |
+
+**Sample Event Payload**
+
+```json
+{
+  "id": "b1c6de8f-4d0b-44f0-97f1-1a2b3c4d5e6f",
+  "event_type": "contact.label.deleted",
+  "affect": "delete",
+  "version": "0.0.1",
+  "timestamp": "2025-06-20T23:44:30.000000",
+  "workspace": { "id": "workspace-123", "name": "Zapier Workspace" },
+  "data": {
+    "contact_id": "c0b8f2e2-2d6d-49b5-8e8e-4b2b0c9b7f1a",
+    "contact_name": "Zapier Contact",
+    "updated_fields": ["labels"],
+    "previous": {
+      "labels": [
+        {
+          "id": "8d99e9b041f04447858cde7506cee4d5",
+          "name": "newUser",
+          "type": "CONTACT",
+          "color": "#565e9c",
+          "is_system": false,
+          "description": "this is a new user"
+        },
+        {
+          "id": "90c51757408941e2834f76392249b10f",
+          "name": "VIP",
+          "type": "CONTACT",
+          "color": "#a7927f",
+          "is_system": false,
+          "description": ""
+        }
+      ]
+    },
+    "current": {
+      "labels": [
+        {
+          "id": "8d99e9b041f04447858cde7506cee4d5",
+          "name": "newUser",
+          "type": "CONTACT",
+          "color": "#565e9c",
+          "is_system": false,
+          "description": "this is a new user"
+        }
+      ]
+    },
+    "labels": [
+      {
+        "id": "90c51757408941e2834f76392249b10f",
+        "name": "VIP",
+        "type": "CONTACT",
+        "color": "#a7927f",
+        "is_system": false,
+        "description": ""
+      }
+    ],
+    "updated_by": { "type": "USER", "id": "user-12345", "name": "Test User" },
+    "updated_at": "2025-06-20T23:44:30.000000"
+  },
+  "subscription_created_by": "Test_user",
+  "subscription_updated_by": "Test_user"
+}
+```
+
+### Get a list of contact labels of your workspace
+
+Use this endpoint to list all contact labels in your workspace and resolve label
+IDs referenced in `contact.label.added` and `contact.label.deleted` webhook
+events.
+
+`GET https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/contact_labels`
+
+Parameters:
+
+| Field                      | Type              | Description                                                            | Allowed Values / Example               | Required |
+| -------------------------- | ----------------- | ---------------------------------------------------------------------- | -------------------------------------- | -------- |
+| `X-API-Key`                | `string (header)` | API key for authorization (see Authorization)                          | `<your_api_key>`                       |          |
+| `workspace_id`             | `string (path)`   | Workspace ID                                                           | `3fa85f64-5717-4562-b3fc-2c963f66afa6` | ✅       |
+| `keyword`                  | `string (query)`  | Optional, determine the keyword to search contact names and phones.    | `+18111222333`                         |          |
+| `offset`                   | `integer (query)` | Rows to skip                                                           | `0`                                    |          |
+| `limit`                    | `integer (query)` | Max rows to return (0 = all)                                           | `10`                                   |          |
+| `order_by`                 | `string (query)`  | Sort by comma-separated `<field>:<direction>` pairs                    | `name:desc` (default)                  |          |
+| `is_system`                | `boolean (query)` | Filter by system labels                                                | `true`/`false`                         |          |
+| `exclude_labels`           | `string (query)`  | Exclude labels (comma-separated names)                                 | `invalid number,unreachable`           |          |
+| `exclude_labels_for_count` | `string (query)`  | Exclude labels when calculating contact counts (comma-separated names) | `DNC,invalid number,unreachable`       |          |
+| `contact_counting`         | `boolean (query)` | Return contact count per label (default: true)                         | `true`/`false`                         |          |
+| `whatsapp_phone_only`      | `boolean (query)` | Only include contacts that have WhatsApp phone when counting           | `true`/`false`                         |          |
+| `phone_only`               | `boolean (query)` | Only include contacts that have a phone when counting                  | `true`/`false`                         |          |
+
+Request:
+
+```bash
+curl -X 'GET' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contact_labels?keyword=VIP&offset=0&limit=10&order_by=name:desc&contact_counting=true&phone_only=false&whatsapp_phone_only=false' \
+  -H 'accept: application/json' \
+  -H 'X-API-Key: <your_api_key>'
+```
+
+Response:
+
+```json
+{
+  "data": [
+    {
+      "id": "8d99e9b041f04447858cde7506cee4d5",
+      "name": "newUser",
+      "type": "CONTACT",
+      "color": "#565e9c",
+      "is_system": false,
+      "description": "this is a new user"
+    },
+    {
+      "id": "90c51757408941e2834f76392249b10f",
+      "name": "VIP",
+      "type": "CONTACT",
+      "color": "#a7927f",
+      "is_system": false,
+      "description": ""
+    }
+  ],
+  "total": 2,
+  "offset": 0,
+  "limit": 10
+}
+```
+
+### Get a list of contacts of your workspace
+
+Use this endpoint to list contacts and obtain `contact_id` values referenced by
+`contact.label.*` webhook payloads.
+
+`GET https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/contacts`
+
+Parameters:
+
+| Field                           | Type              | Description                                                                                  | Allowed Values / Example                                                    | Required |
+| ------------------------------- | ----------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------- |
+| `X-API-Key`                     | `string (header)` | Authorization with APIKey                                                                    | `<your_api_key>`                                                            |          |
+| `workspace_id`                  | `string (path)`   | Workspace ID                                                                                 | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                      | ✅       |
+| `offset`                        | `integer (query)` | Optional, number of rows to skip                                                             | `0`                                                                         |          |
+| `limit`                         | `integer (query)` | Optional, number of rows to return after offset (0 = all)                                    | `10`                                                                        |          |
+| `keyword`                       | `string (query)`  | Optional, keyword to search contact names and phones                                         | `+18111222333`                                                              |          |
+| `whatsapp_phone`                | `string (query)`  | Optional, search contacts by exact WhatsApp phone                                            | `+18111222333`                                                              |          |
+| `all_contact_label_ids`         | `string (query)`  | Optional, contacts must match all label IDs (comma-separated UUIDs)                          | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `any_contact_label_ids`         | `string (query)`  | Optional, contacts match any label IDs (comma-separated UUIDs)                               | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `exclude_contact_ids`           | `string (query)`  | Optional, exclude contacts by IDs (comma-separated UUIDs)                                    | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `exclude_any_contact_label_ids` | `string (query)`  | Optional, exclude contacts that match any of these label IDs (comma-separated UUIDs)         | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `exclude_all_contact_label_ids` | `string (query)`  | Optional, exclude contacts that match all of these label IDs (comma-separated UUIDs)         | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `addition_contact_ids`          | `string (query)`  | Optional, force-include these contacts in result (comma-separated UUIDs)                     | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `order_by`                      | `string (query)`  | Optional, comma-separated list of `<field>:<direction>` pairs (default: `created_time:desc`) | `phone:asc,created_time:desc,name:asc`                                      |          |
+| `exclude_labels`                | `string (query)`  | Optional, exclude by label names (comma-separated). Affects label-based filtering and counts | `DNC,invalid number,unreachable`                                            |          |
+| `whatsapp_phone_only`           | `boolean (query)` | Optional, only include contacts that match whatsapp_phone                                    | `false`                                                                     |          |
+| `phone_only`                    | `boolean (query)` | Optional, only include contacts that have a phone number                                     | `false`                                                                     |          |
+
+Request:
+
+```bash
+curl -X 'GET' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&keyword=%2B18111222333&any_contact_label_ids=11111111-2222-4444-3333-555555555555&exclude_labels=DNC,invalid%20number' \
+  -H 'accept: application/json' \
+  -H 'X-API-Key: <your_api_key>'
+```
+
+Response (truncated):
+
+```json
+{
+  "data": [
+    {
+      "id": "11111111-2222-4444-3333-555555555555",
+      "name": "John Doe",
+      "phone": "+12345678900",
+      "whatsapp_phone": "+12345678900",
+      "contact_labels": [
+        {
+          "id": "11111111-2222-4444-3333-555555555555",
+          "name": "vip_customers",
+          "is_system": false
+        }
+      ]
+    }
+  ],
+  "total": 1
+}
+```
+
 #### call.new
 
 This event is triggered when a new call is initiated. It includes information
@@ -1537,57 +1849,63 @@ availability, additional metadata, or corrections.
 
 #### meeting.ended
 
-This event is triggered when a meeting From SeaMeet ends. It contains comprehensive information about the meeting including transcriptions, summary, action items, participants, and analysis results. You can subscribe to this event if any of these apply:
+This event is triggered when a meeting From SeaMeet ends. It contains
+comprehensive information about the meeting including transcriptions, summary,
+action items, participants, and analysis results. You can subscribe to this
+event if any of these apply:
 
-1. You are a user of SeaMeet (https://seameet.ai), you want to register a webhook when your Google Meet, Microsoft Teams or Zoom meeting ends.
-2. You have an integration with SeaMeet through SeaX (https://seasalt.ai/en/seax), you use SeaMeet to analyze all your phone calls and want to register a webhook when a call ends.
+1. You are a user of SeaMeet (https://seameet.ai), you want to register a
+   webhook when your Google Meet, Microsoft Teams or Zoom meeting ends.
+2. You have an integration with SeaMeet through SeaX
+   (https://seasalt.ai/en/seax), you use SeaMeet to analyze all your phone calls
+   and want to register a webhook when a call ends.
 
 **Payload Fields**
 
-| Field                                          | Type                  | Description                                              |
-| ---------------------------------------------- | --------------------- | -------------------------------------------------------- |
-| `id`                                           | `string`              | Unique identifier of the event                           |
-| `event_type`                                   | `string`              | Always `"meeting.ended"`                                 |
-| `affect`                                       | `string`              | Always `"add"`                                           |
-| `version`                                      | `string`              | Event schema version, e.g., `"0.0.1"`                    |
-| `timestamp`                                    | `string`              | When the event occurred, in ISO 8601 format              |
-| `workspace.id`                                 | `string`              | Workspace ID associated with the event                   |
-| `workspace.name`                               | `string`              | Workspace name                                           |
-| `source.id`                                    | `string`              | ID of the event source                                   |
-| `source.type`                                  | `string`              | Channel type (always `"SEAMEET"`)                        |
-| `source.identifier`                            | `string`              | Identifier or name of the SeaMeet integration            |
-| `data.meeting_id`                              | `string`              | Unique identifier of the meeting                         |
-| `data.meeting_start_time`                      | `string`              | When the meeting started (ISO 8601 format)               |
-| `data.meeting_end_time`                        | `string`              | When the meeting ended (ISO 8601 format)                 |
-| `data.duration_seconds`                        | `integer`             | Duration of the meeting in seconds                       |
-| `data.transcriptions`                          | `array of object`     | Array of transcription segments                          |
-| `data.transcriptions[].id`                     | `string`              | Unique identifier of the transcription segment           |
-| `data.transcriptions[].transcription`          | `string`              | Transcribed text content                                 |
-| `data.transcriptions[].speaker`                | `string`              | Name of the speaker                                      |
-| `data.transcriptions[].anchor_start`           | `number`              | Start time of the segment in seconds                     |
-| `data.transcriptions[].duration`               | `number`              | Duration of the segment in seconds                       |
-| `data.summary`                                 | `string`              | AI-generated summary of the meeting                      |
-| `data.action_items`                            | `array of string`     | List of action items identified from the meeting         |
-| `data.participants`                            | `array of string`     | List of meeting participants                             |
-| `data.labels`                                  | `array of string`     | Labels associated with the meeting                       |
-| `data.custom_analysis_results`                 | `object`              | Custom analysis results                                  |
-| `data.custom_analysis_results.id`              | `string`              | Meeting UUID for analysis                                |
-| `data.custom_analysis_results.datetime_utc`    | `string`              | Meeting datetime in UTC                                  |
-| `data.custom_analysis_results.datetime_local`  | `string`              | Meeting datetime in local time                           |
-| `data.custom_analysis_results.timezone`        | `string`              | Timezone of the meeting                                  |
-| `data.custom_analysis_results.call_direction`  | `string`              | Direction of the call (Inbound/Outbound)                 |
-| `data.custom_analysis_results.call_duration`   | `integer`             | Call duration in seconds                                 |
-| `data.custom_analysis_results.agent_name`      | `string`              | Name of the agent                                        |
-| `data.custom_analysis_results.agent_phone`     | `string`              | Phone number of the agent                                |
-| `data.custom_analysis_results.customer_name`   | `string`              | Name of the customer                                     |
-| `data.custom_analysis_results.customer_phone`  | `string`              | Phone number of the customer                             |
-| `data.custom_analysis_results.topics`          | `string`              | Topics discussed in the meeting                          |
-| `data.custom_analysis_results.labels`          | `string`              | Analysis labels                                          |
-| `data.custom_analysis_results.summary`         | `string`              | Summary from analysis                                    |
-| `data.custom_analysis_results.analyses`        | `array of object`     | Array of analysis results                                |
-| `data.custom_analysis_results.analyses[].analysis_key`     | `string`  | Key for the analysis type                                |
-| `data.custom_analysis_results.analyses[].analysis_subkey`  | `string`  | Subkey for specific analysis aspect                      |
-| `data.custom_analysis_results.analyses[].analysis_value`   | `string`  | Value/result of the analysis                             |
+| Field                                                     | Type              | Description                                      |
+| --------------------------------------------------------- | ----------------- | ------------------------------------------------ |
+| `id`                                                      | `string`          | Unique identifier of the event                   |
+| `event_type`                                              | `string`          | Always `"meeting.ended"`                         |
+| `affect`                                                  | `string`          | Always `"add"`                                   |
+| `version`                                                 | `string`          | Event schema version, e.g., `"0.0.1"`            |
+| `timestamp`                                               | `string`          | When the event occurred, in ISO 8601 format      |
+| `workspace.id`                                            | `string`          | Workspace ID associated with the event           |
+| `workspace.name`                                          | `string`          | Workspace name                                   |
+| `source.id`                                               | `string`          | ID of the event source                           |
+| `source.type`                                             | `string`          | Channel type (always `"SEAMEET"`)                |
+| `source.identifier`                                       | `string`          | Identifier or name of the SeaMeet integration    |
+| `data.meeting_id`                                         | `string`          | Unique identifier of the meeting                 |
+| `data.meeting_start_time`                                 | `string`          | When the meeting started (ISO 8601 format)       |
+| `data.meeting_end_time`                                   | `string`          | When the meeting ended (ISO 8601 format)         |
+| `data.duration_seconds`                                   | `integer`         | Duration of the meeting in seconds               |
+| `data.transcriptions`                                     | `array of object` | Array of transcription segments                  |
+| `data.transcriptions[].id`                                | `string`          | Unique identifier of the transcription segment   |
+| `data.transcriptions[].transcription`                     | `string`          | Transcribed text content                         |
+| `data.transcriptions[].speaker`                           | `string`          | Name of the speaker                              |
+| `data.transcriptions[].anchor_start`                      | `number`          | Start time of the segment in seconds             |
+| `data.transcriptions[].duration`                          | `number`          | Duration of the segment in seconds               |
+| `data.summary`                                            | `string`          | AI-generated summary of the meeting              |
+| `data.action_items`                                       | `array of string` | List of action items identified from the meeting |
+| `data.participants`                                       | `array of string` | List of meeting participants                     |
+| `data.labels`                                             | `array of string` | Labels associated with the meeting               |
+| `data.custom_analysis_results`                            | `object`          | Custom analysis results                          |
+| `data.custom_analysis_results.id`                         | `string`          | Meeting UUID for analysis                        |
+| `data.custom_analysis_results.datetime_utc`               | `string`          | Meeting datetime in UTC                          |
+| `data.custom_analysis_results.datetime_local`             | `string`          | Meeting datetime in local time                   |
+| `data.custom_analysis_results.timezone`                   | `string`          | Timezone of the meeting                          |
+| `data.custom_analysis_results.call_direction`             | `string`          | Direction of the call (Inbound/Outbound)         |
+| `data.custom_analysis_results.call_duration`              | `integer`         | Call duration in seconds                         |
+| `data.custom_analysis_results.agent_name`                 | `string`          | Name of the agent                                |
+| `data.custom_analysis_results.agent_phone`                | `string`          | Phone number of the agent                        |
+| `data.custom_analysis_results.customer_name`              | `string`          | Name of the customer                             |
+| `data.custom_analysis_results.customer_phone`             | `string`          | Phone number of the customer                     |
+| `data.custom_analysis_results.topics`                     | `string`          | Topics discussed in the meeting                  |
+| `data.custom_analysis_results.labels`                     | `string`          | Analysis labels                                  |
+| `data.custom_analysis_results.summary`                    | `string`          | Summary from analysis                            |
+| `data.custom_analysis_results.analyses`                   | `array of object` | Array of analysis results                        |
+| `data.custom_analysis_results.analyses[].analysis_key`    | `string`          | Key for the analysis type                        |
+| `data.custom_analysis_results.analyses[].analysis_subkey` | `string`          | Subkey for specific analysis aspect              |
+| `data.custom_analysis_results.analyses[].analysis_value`  | `string`          | Value/result of the analysis                     |
 
 **Sample Event Payload**
 

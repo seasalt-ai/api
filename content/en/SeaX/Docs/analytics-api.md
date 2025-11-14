@@ -1,7 +1,7 @@
 ---
 title: 'Analytics API Swagger'
 type: swagger
-weight: 6
+weight: 12
 description: Seasalt.ai Analytics API Tutorial
 ---
 
