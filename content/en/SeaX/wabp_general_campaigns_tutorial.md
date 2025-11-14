@@ -53,7 +53,7 @@ Before using this endpoint, ensure you have:
 All requests must include your API Key in the `X-API-Key` header.
 
 ```bash
--H 'X-API-Key: {YOUR_API_KEY}'
+-H 'X-API-Key: <your-api-key>'
 ```
 
 #### Setting Up Your API Key
@@ -212,7 +212,7 @@ curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/general_campaigns/wabp' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'X-API-Key: {YOUR_API_KEY}' \
+  -H 'X-API-Key: <your-api-key>' \
   -d '{
   "sender_whatsapp_number": "+1123456789",
   "type": "whatsapp",
@@ -312,7 +312,7 @@ curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/general_campaigns/wabp' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'X-API-Key: {YOUR_API_KEY}' \
+  -H 'X-API-Key: <your-api-key>' \
   -d '{
   "sender_whatsapp_number": "+1123456789",
   "type": "whatsapp",
@@ -427,7 +427,7 @@ curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/general_campaigns/wabp' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'X-API-Key: {YOUR_API_KEY}' \
+  -H 'X-API-Key: <your-api-key>' \
   -d '{
   "sender_whatsapp_number": "+1123456789",
   "type": "whatsapp",
@@ -497,7 +497,7 @@ curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/general_campaigns/wabp' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'X-API-Key: {YOUR_API_KEY}' \
+  -H 'X-API-Key: <your-api-key>' \
   -d '{
   "sender_whatsapp_number": "+1123456789",
   "type": "whatsapp",

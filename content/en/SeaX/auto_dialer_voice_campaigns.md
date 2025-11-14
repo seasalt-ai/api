@@ -50,15 +50,15 @@ To set up your API Key
 First you must find the available phone numbers. You will need to collect the
 `id` of each number you would like to run the campaign from.
 
-| Field             | Type              | Description                                                                                          | Allowed Values / Example                                           | Required |
-| ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
-| `X-API-Key`       | `string (header)` | API key for authorization. Required in header. See [Authorization Guide](#authorization)             | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
-| `workspace_id`    | `string (path)`   | Unique identifier of the workspace                                                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
-| `offset`          | `integer (query)` | Number of results to skip before starting to return.<br>Minimum: 0<br>Default: 0                     | `0`                                                                |          |
-| `limit`           | `integer (query)` | Max number of results to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: 10 | `10`                                                               |          |
-| `is_owned`        | `boolean (query)` | Filter for owned records only.<br>Default: `false`                                                   | `true`, `false`                                                    |          |
-| `enabled`         | `boolean (query)` | Filter by whether the item is enabled.<br>Default: `true`                                            | `true`, `false`                                                    |          |
-| `voice_available` | `boolean (query)` | Filter by voice capability availability                                                              | `true`, `false`                                                    |          |
+| Field             | Type              | Description                                                                                          | Allowed Values / Example               | Required |
+| ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------- | -------- |
+| `X-API-Key`       | `string (header)` | API key for authorization. Required in header. See [Authorization Guide](#authorization)             | `<your_api_key>`                       | ✅       |
+| `workspace_id`    | `string (path)`   | Unique identifier of the workspace                                                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6` | ✅       |
+| `offset`          | `integer (query)` | Number of results to skip before starting to return.<br>Minimum: 0<br>Default: 0                     | `0`                                    |          |
+| `limit`           | `integer (query)` | Max number of results to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: 10 | `10`                                   |          |
+| `is_owned`        | `boolean (query)` | Filter for owned records only.<br>Default: `false`                                                   | `true`, `false`                        |          |
+| `enabled`         | `boolean (query)` | Filter by whether the item is enabled.<br>Default: `true`                                            | `true`, `false`                        |          |
+| `voice_available` | `boolean (query)` | Filter by voice capability availability                                                              | `true`, `false`                        |          |
 
 ###### Example
 
@@ -68,7 +68,7 @@ Request:
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/phones?offset=0&limit=10&is_owned=false&enabled=true&voice_available=true' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
+  -H 'X-API-Key: <your_api_key>'
 ```
 
 Response:
@@ -202,7 +202,7 @@ campaign.
 
 | Field                           | Type              | Description                                                                                             | Allowed Values / Example                                                    | Required |
 | ------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------- |
-| `X-API-Key`                     | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization)                                   | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`          | ✅       |
+| `X-API-Key`                     | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization)                                   | `<your_api_key>`                                                            | ✅       |
 | `workspace_id`                  | `string (path)`   | Unique identifier of the workspace                                                                      | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                      | ✅       |
 | `offset`                        | `integer (query)` | Number of rows to skip.<br>Minimum: 0<br>Default: `0`                                                   | `0`                                                                         |          |
 | `limit`                         | `integer (query)` | Number of rows to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: `10`         | `10`                                                                        |          |
@@ -226,7 +226,7 @@ Request:
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&keyword=%2B18111222333&whatsapp_phone=%2B18111222333&all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&addition_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&order_by=phone%3Aasc%2Ccreated_time%3Adesc%2Cname%3Aasc&exclude_labels=DNC%2Cinvalid%20number%2Cunreachable&whatsapp_phone_only=false' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
+  -H 'X-API-Key: <your_api_key>'
 ```
 
 Response:
@@ -271,14 +271,14 @@ Use this endpoint to get a list of available AI agents to use during the call.
 You’ll need the `conversation_config_id` in order to select a particular agent
 for the campaign creation.
 
-| Field          | Type              | Description                                                                                 | Allowed Values / Example                                           | Required |
-| -------------- | ----------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
-| `X-API-Key`    | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization)                       | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
-| `workspace_id` | `string (path)`   | Unique identifier of the workspace                                                          | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
-| `types`        | `string (query)`  | Optional filter for AI agent integration types (comma-separated).                           | `SEAX_CALL`, `SEAX_SMS`, `SEAX_WABP`                               |          |
-| `limit`        | `integer (query)` | Optional. Number of rows to return after offset. `0` returns all.                           | Default: `10` <br> Example: `10`                                   |          |
-| `offset`       | `integer (query)` | Optional. Number of rows to skip before returning results.                                  | Default: `0` <br> Example: `0`                                     |          |
-| `order_by`     | `string (query)`  | Optional. Order items by ascending/descending fields (`:` separated, comma-delimited list). | Default: `created_time:desc` <br> Example: `created_time:desc`     |          |
+| Field          | Type              | Description                                                                                 | Allowed Values / Example                                       | Required |
+| -------------- | ----------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | -------- |
+| `X-API-Key`    | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization)                       | `<your_api_key>`                                               | ✅       |
+| `workspace_id` | `string (path)`   | Unique identifier of the workspace                                                          | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                         | ✅       |
+| `types`        | `string (query)`  | Optional filter for AI agent integration types (comma-separated).                           | `SEAX_CALL`, `SEAX_SMS`, `SEAX_WABP`                           |          |
+| `limit`        | `integer (query)` | Optional. Number of rows to return after offset. `0` returns all.                           | Default: `10` <br> Example: `10`                               |          |
+| `offset`       | `integer (query)` | Optional. Number of rows to skip before returning results.                                  | Default: `0` <br> Example: `0`                                 |          |
+| `order_by`     | `string (query)`  | Optional. Order items by ascending/descending fields (`:` separated, comma-delimited list). | Default: `created_time:desc` <br> Example: `created_time:desc` |          |
 
 ###### Example
 
@@ -288,7 +288,7 @@ Request:
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/ai_agents?limit=10&offset=0&order_by=created_time%3Adesc' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
+  -H 'X-API-Key: <your_api_key>'
 ```
 
 Response:
@@ -329,7 +329,7 @@ Use this endpoint to trigger an outbound auto dialer voice campaign.
 
 | Field                                | Type                  | Description                                                           | Allowed Values / Example                                                                    | Required |
 | ------------------------------------ | --------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | -------- |
-| `X-API-Key`                          | `string (header)`     | Authorization with API key. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                          | ✅       |
+| `X-API-Key`                          | `string (header)`     | Authorization with API key. See [Authorization Guide](#authorization) | `<your_api_key>`                                                                            | ✅       |
 | `name`                               | `string`              | Campaign name                                                         | `Test`                                                                                      | ✅       |
 | `phone_ids`                          | `array[string]`       | Phone ID(s) to use for the campaign                                   | `["020086f5-fb0e-4a0c-920a-bbdd04f4381c"]`                                                  | ✅       |
 | `attach_contact_label_ids`           | `array[string]`       | Labels to attach to contacts after campaign                           | `[]`                                                                                        |          |
@@ -361,7 +361,7 @@ curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \
+  -H 'X-API-Key: <your_api_key>' \
   -d '{
   "name": "Test",
   "phone_ids": [
@@ -437,13 +437,13 @@ on various attributes such as campaign type, status, mode, and date range.
 
 Allowed query parameters.
 
-| Field                             | Type              | Description                                                        | Allowed Values / Example                                           | Required |
-| --------------------------------- | ----------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------ | -------- |
-| `X-API-Key`                       | `string (header)` | API key used for authenticating requests                           | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
-| `workspace_id`                    | `string (path)`   | Unique identifier of the workspace                                 | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
-| `types`                           | `string (query)`  | Filter by one or more auto dialer campaign types (comma-separated) | `VOICE_DROP`, `PROGRESSIVE_DIALER`, `AI_AGENT`                     |          |
-| `phone_numbers`                   | `string (query)`  | Filter by one or more phone numbers (comma-separated)              | `+15555550100,+15555550101`                                        |          |
-| `ai_agent_conversation_config_id` | `string (query)`  | Filter by AI agent conversation config ID                          | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`                             |          |
+| Field                             | Type              | Description                                                        | Allowed Values / Example                       | Required |
+| --------------------------------- | ----------------- | ------------------------------------------------------------------ | ---------------------------------------------- | -------- |
+| `X-API-Key`                       | `string (header)` | API key used for authenticating requests                           | `<your_api_key>`                               | ✅       |
+| `workspace_id`                    | `string (path)`   | Unique identifier of the workspace                                 | `3fa85f64-5717-4562-b3fc-2c963f66afa6`         | ✅       |
+| `types`                           | `string (query)`  | Filter by one or more auto dialer campaign types (comma-separated) | `VOICE_DROP`, `PROGRESSIVE_DIALER`, `AI_AGENT` |          |
+| `phone_numbers`                   | `string (query)`  | Filter by one or more phone numbers (comma-separated)              | `+15555550100,+15555550101`                    |          |
+| `ai_agent_conversation_config_id` | `string (query)`  | Filter by AI agent conversation config ID                          | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`         |          |
 
 ###### Example
 
@@ -453,7 +453,7 @@ Request:
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/auto_dialer_campaigns?stage=INSTANCE&limit=10&offset=0&order_by=created_time%3Adesc' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
+  -H 'X-API-Key: <your_api_key>'
 ```
 
 Response:
@@ -579,11 +579,11 @@ Response:
 Get the information of a campaign given the workspace_id and the desired
 campaign_id
 
-| Field                     | Type              | Description                                                           | Allowed Values / Example                                           | Required |
-| ------------------------- | ----------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
-| `X-API-Key`               | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
-| `workspace_id`            | `string (path)`   | Unique identifier of the workspace                                    | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
-| `auto_dialer_campaign_id` | `string (path)`   | Unique identifier of the auto dialer campaign                         | `01e14e9e-ddd8-4e63-bad2-e026d5aa5698`                             | ✅       |
+| Field                     | Type              | Description                                                           | Allowed Values / Example               | Required |
+| ------------------------- | ----------------- | --------------------------------------------------------------------- | -------------------------------------- | -------- |
+| `X-API-Key`               | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization) | `<your_api_key>`                       | ✅       |
+| `workspace_id`            | `string (path)`   | Unique identifier of the workspace                                    | `3fa85f64-5717-4562-b3fc-2c963f66afa6` | ✅       |
+| `auto_dialer_campaign_id` | `string (path)`   | Unique identifier of the auto dialer campaign                         | `01e14e9e-ddd8-4e63-bad2-e026d5aa5698` | ✅       |
 
 ###### Example
 
@@ -593,7 +593,7 @@ Request:
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns/448ea794-0368-4604-a56f-f2350229d9e5' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: 09a318b51673ce2e3b1c03387a7bfc8c2e9aa35f83e6295b4109402a0c65111c'
+  -H 'X-API-Key: <your_api_key>' \
 ```
 
 Response:
