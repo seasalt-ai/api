@@ -1,6 +1,6 @@
 ---
-title: WhatsApp Business Platform General Campaigns API Tutorial
-linkTitle: WABP General Campaigns Tutorial
+title: WhatsApp Business Platform Campaigns
+linkTitle: WhatsApp Business Platform Campaigns Tutorial
 description:
   Tutorial for using the /api/v1/workspace/{workspace_id}/general_campaigns/wabp
   endpoint to send WhatsApp template messages.
@@ -14,7 +14,7 @@ tags:
     highly structured messages,
   ]
 type: docs
-weight: 5
+weight: 4
 ---
 
 # WhatsApp Business Platform General Campaigns API Tutorial
