@@ -1,13 +1,11 @@
 ---
-title: WhatsApp Business Platform Campaigns
-linkTitle: WhatsApp Business Platform Campaigns
-description:
-  API endpoints for setting up and managing campaigns via the WhatsApp Business
-  Platform.
+title: WhatsApp Business Platform General Campaigns API Tutorial (Deprecated)
+linkTitle: WABP Campaigns (Deprecated)
+description: API endpoints for setting up and managing campaigns via the WhatsApp Business Platform.
 categories: [API, WhatsApp Campaign, Messaging, Campaign Management]
 tags: [whatsapp, business platform, campaign, messaging, contacts]
 type: docs
-weight: 4
+weight: 5
 ---
 
 # WhatsApp Business Platform Campaigns
