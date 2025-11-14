@@ -1,7 +1,7 @@
 ---
 title: 'Bulk Send Campaign API Swagger'
 type: swagger
-weight: 6
+weight: 11
 description: Seasalt.ai Bulk SMS Campaign API Tutorial
 ---
 

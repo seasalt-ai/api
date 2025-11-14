@@ -14,7 +14,7 @@ tags:
     highly structured messages,
   ]
 type: docs
-weight: 26
+weight: 5
 ---
 
 # WhatsApp Business Platform General Campaigns API Tutorial

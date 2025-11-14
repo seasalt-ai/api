@@ -1,18 +1,24 @@
 ---
 title: Bulk SMS/MMS Campaigns
 linkTitle: Bulk SMS/MMS Campaigns
-description: API endpoints for creating and managing bulk SMS/MMS campaigns with contact targeting and scheduling.
+description:
+  API endpoints for creating and managing bulk SMS/MMS campaigns with contact
+  targeting and scheduling.
 categories: [API, Bulk SMS Campaign, SMS Campaign, MMS Campaign]
 tags: [bulk sms, mms, campaign, messaging, contacts]
 type: docs
-weight: 20
+weight: 3
 ---
 
 # Bulk SMS/MMS Campaigns
 
 ## Overview
 
-The Bulk SMS/MMS Campaigns API enables you to send messages at scale to targeted contact lists. This comprehensive guide covers contact management, campaign creation, and monitoring. The API supports SMS, MMS, and WhatsApp Business Platform messages with advanced targeting, scheduling, and delivery tracking capabilities.
+The Bulk SMS/MMS Campaigns API enables you to send messages at scale to targeted
+contact lists. This comprehensive guide covers contact management, campaign
+creation, and monitoring. The API supports SMS, MMS, and WhatsApp Business
+Platform messages with advanced targeting, scheduling, and delivery tracking
+capabilities.
 
 After reading through this tutorial, try out the endpoints
 [here](./Docs/seax-api/)
@@ -25,7 +31,8 @@ To set up your API Key:
 
 - Go to **Account → API Key** tab.
 - Refresh the Key if needed
-- Copy the key and keep it safe. This key is required in the `X-API-KEY` header for **all requests**.
+- Copy the key and keep it safe. This key is required in the `X-API-KEY` header
+  for **all requests**.
 
 ## Step-by-Step Guide
 
@@ -35,18 +42,19 @@ To set up your API Key:
 
 First, retrieve available phone numbers for sending campaigns.
 
-| Field           | Type               | Description                                                                 | Allowed Values / Example                                                   | Required |
-|-----------------|--------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|---------|
-| `X-API-Key`     | `string (header)`  | API key for authorization. See [Authorization Guide](#authorization)     | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`        | ✅       |
-| `workspace_id`  | `string (path)`    | Unique identifier of the workspace                                        | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                   | ✅       |
-| `offset`        | `integer (query)`  | Number of results to skip before starting to return.<br>Default: 0       | `0`                                                                       |          |
-| `limit`         | `integer (query)`  | Max number of results to return.<br>Default: 10                          | `10`                                                                      |          |
-| `is_owned`      | `boolean (query)`  | Filter for owned records only.<br>Default: `false`                       | `true`, `false`                                                           |          |
-| `enabled`       | `boolean (query)`  | Filter by whether the item is enabled.<br>Default: `true`                | `true`, `false`                                                           |          |
+| Field          | Type              | Description                                                          | Allowed Values / Example                                           | Required |
+| -------------- | ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| `X-API-Key`    | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
+| `workspace_id` | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
+| `offset`       | `integer (query)` | Number of results to skip before starting to return.<br>Default: 0   | `0`                                                                |          |
+| `limit`        | `integer (query)` | Max number of results to return.<br>Default: 10                      | `10`                                                               |          |
+| `is_owned`     | `boolean (query)` | Filter for owned records only.<br>Default: `false`                   | `true`, `false`                                                    |          |
+| `enabled`      | `boolean (query)` | Filter by whether the item is enabled.<br>Default: `true`            | `true`, `false`                                                    |          |
 
 ###### Example
 
 Request:
+
 ```bash
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/phones?offset=0&limit=10&is_owned=false&enabled=true' \
@@ -55,6 +63,7 @@ curl -X 'GET' \
 ```
 
 Response:
+
 ```json
 {
   "data": [
@@ -87,30 +96,38 @@ Response:
 
 Retrieve and filter contacts to target in your campaign.
 
-| Field                          | Type               | Description                                                                 | Allowed Values / Example                                                   | Required |
-|-------------------------------|--------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|---------|
-| `X-API-Key`                   | `string (header)`  | API key for authorization. See [Authorization Guide](#authorization)     | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`        | ✅       |
-| `workspace_id`                | `string (path)`    | Unique identifier of the workspace                                        | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                   | ✅       |
-| `offset`                      | `integer (query)`  | Number of rows to skip.<br>Default: `0`                                  | `0`                                                                       |          |
-| `limit`                       | `integer (query)`  | Number of rows to return.<br>Default: `10`                               | `10`                                                                      |          |
-| `keyword`                     | `string (query)`   | Search keyword for contact names and phones                               | `+18111222333`                                                           |          |
-| `any_contact_label_ids`       | `string (query)`   | Include contacts with any of these label IDs.<br>Comma-separated UUIDs   | `11111111-2222-4444-3333-555555555555,22222222-3333-5555-4444-666666666666` |          |
-| `all_contact_label_ids`       | `string (query)`   | Include contacts with all of these label IDs.<br>Comma-separated UUIDs   | `11111111-2222-4444-3333-555555555555,22222222-3333-5555-4444-666666666666` |          |
-| `exclude_contact_ids`         | `string (query)`   | Exclude specific contact IDs.<br>Comma-separated UUIDs                   | `11111111-2222-4444-3333-555555555555,22222222-3333-5555-4444-666666666666` |          |
-| `exclude_labels`              | `string (query)`   | Exclude contacts with these label IDs.<br>Comma-separated values       | `f47ac10b-58cc-4372-a567-0e02b2c3d479,550e8400-e29b-41d4-a716-446655440000`                                         |          |
-| `order_by`                    | `string (query)`   | Sort order. Default: `created_time:desc`                                 | `phone:asc,created_time:desc,name:asc`                                   |          |
+| Field                           | Type              | Description                                                                                  | Allowed Values / Example                                                    | Required |
+| ------------------------------- | ----------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------- |
+| `X-API-Key`                     | `string (header)` | Authorization with APIKey                                                                    | `<your_api_key>`                                                            |          |
+| `workspace_id`                  | `string (path)`   | Workspace ID                                                                                 | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                      | ✅       |
+| `offset`                        | `integer (query)` | Optional, number of rows to skip                                                             | `0`                                                                         |          |
+| `limit`                         | `integer (query)` | Optional, number of rows to return after offset (0 = all)                                    | `10`                                                                        |          |
+| `keyword`                       | `string (query)`  | Optional, keyword to search contact names and phones                                         | `+18111222333`                                                              |          |
+| `whatsapp_phone`                | `string (query)`  | Optional, search contacts by exact WhatsApp phone                                            | `+18111222333`                                                              |          |
+| `all_contact_label_ids`         | `string (query)`  | Optional, contacts must match all label IDs (comma-separated UUIDs)                          | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `any_contact_label_ids`         | `string (query)`  | Optional, contacts match any label IDs (comma-separated UUIDs)                               | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `exclude_contact_ids`           | `string (query)`  | Optional, exclude contacts by IDs (comma-separated UUIDs)                                    | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `exclude_any_contact_label_ids` | `string (query)`  | Optional, exclude contacts that match any of these label IDs (comma-separated UUIDs)         | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `exclude_all_contact_label_ids` | `string (query)`  | Optional, exclude contacts that match all of these label IDs (comma-separated UUIDs)         | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `addition_contact_ids`          | `string (query)`  | Optional, force-include these contacts in result (comma-separated UUIDs)                     | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `order_by`                      | `string (query)`  | Optional, comma-separated list of `<field>:<direction>` pairs (default: `created_time:desc`) | `phone:asc,created_time:desc,name:asc`                                      |          |
+| `exclude_labels`                | `string (query)`  | Optional, exclude by label names (comma-separated). Affects label-based filtering and counts | `DNC,invalid number,unreachable`                                            |          |
+| `whatsapp_phone_only`           | `boolean (query)` | Optional, only include contacts that match whatsapp_phone                                    | `false`                                                                     |          |
+| `phone_only`                    | `boolean (query)` | Optional, only include contacts that have a phone number                                     | `false`                                                                     |          |
 
 ###### Example
 
 Request:
+
 ```bash
 curl -X 'GET' \
-  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&any_contact_label_ids=11111111-2222-4444-3333-555555555555&exclude_labels=47ac10b-58cc-4372-a567-0e02b2c3d479,550e8400-e29b-41d4-a716-446655440000' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&keyword=%2B18111222333&any_contact_label_ids=11111111-2222-4444-3333-555555555555&exclude_labels=DNC,invalid%20number' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
+  -H 'X-API-Key: <your_api_key>'
 ```
 
 Response:
+
 ```json
 {
   "data": [
@@ -148,17 +165,18 @@ Response:
 
 Import contacts from a CSV file if you need to add new contacts.
 
-| Field              | Type               | Description                                                                 | Allowed Values / Example                                                   | Required |
-|-------------------|--------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|---------|
-| `X-API-Key`       | `string (header)`  | API key for authorization. See [Authorization Guide](#authorization)     | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`        | ✅       |
-| `workspace_id`    | `string (path)`    | Unique identifier of the workspace                                        | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                   | ✅       |
-| `file`            | `file (form-data)` | CSV file containing contacts                                              | `contacts.csv`                                                           | ✅       |
-| `duplicate_strategy` | `string (query)`| How to handle duplicate contacts                                          | `mark`, `skip`, `update`                                                 |          |
-| `phone_country`   | `string (query)`   | Default country code for phone numbers                                   | `US`, `GB`, `CA`                                                         |          |
+| Field                | Type               | Description                                                          | Allowed Values / Example                                           | Required |
+| -------------------- | ------------------ | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| `X-API-Key`          | `string (header)`  | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
+| `workspace_id`       | `string (path)`    | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
+| `file`               | `file (form-data)` | CSV file containing contacts                                         | `contacts.csv`                                                     | ✅       |
+| `duplicate_strategy` | `string (query)`   | How to handle duplicate contacts                                     | `mark`, `skip`, `update`                                           |          |
+| `phone_country`      | `string (query)`   | Default country code for phone numbers                               | `US`, `GB`, `CA`                                                   |          |
 
 ###### Example
 
 Request:
+
 ```bash
 curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/import_contacts?duplicate_strategy=mark&phone_country=US' \
@@ -168,6 +186,7 @@ curl -X 'POST' \
 ```
 
 Response:
+
 ```json
 {
   "id": "job_12345678-abcd-efgh-ijkl-123456789012",
@@ -186,30 +205,32 @@ Response:
 
 `POST /api/v1/workspace/{workspace_id}/campaigns`
 
-**IMPORTANT**: This endpoint will immediately send the campaign to all selected contacts. Carefully select your target audience using contact labels.
+**IMPORTANT**: This endpoint will immediately send the campaign to all selected
+contacts. Carefully select your target audience using contact labels.
 
-| Field                          | Type                  | Description                                                                 | Allowed Values / Example                                                   | Required |
-|--------------------------------|-----------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------|---------|
-| `X-API-Key`                   | `string (header)`     | API key for authorization. See [Authorization Guide](#authorization)      | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`         | ✅       |
-| `workspace_id`                | `string (path)`       | Unique identifier of the workspace                                         | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                    | ✅       |
-| `name`                        | `string`              | Campaign name                                                              | `Spring Sale 2025`                                                         | ✅       |
-| `type`                        | `string`              | Campaign type                                                              | `SMS`, `MMS`, `AI_AGENT`, `WHATSAPP_BUSINESS_PLATFORM_MESSAGE`            | ✅       |
-| `message`                     | `string`              | Message content                                                            | `🌸 Spring Sale Alert! Get 25% off all items. Use code SPRING25. Valid until March 31st.` | ✅       |
-| `phone_ids`                   | `array[string]`       | Phone number IDs to send from                                             | `["020086f5-fb0e-4a0c-920a-bbdd04f4381c"]`                               | ✅       |
-| `any_contact_label_ids` | `array[string]` | Include contacts with any of these labels | `["11111111-2222-4444-3333-555555555555"]` | |
-| `all_contact_label_ids` | `array[string]` | Include contacts with all of these labels | `["22222222-3333-5555-4444-666666666666"]` | |
-| `exclude_contact_ids` | `array[string]` | Exclude specific contact IDs | `["11111111-2222-4444-3333-555555555555"]` | |
-| `exclude_any_contact_label_ids` | `array[string]` | Exclude contacts with any of these labels | `["33333333-4444-6666-5555-777777777777"]` | |
-| `media_urls`                  | `array[string]`       | Media URLs for MMS campaigns                                              | `["https://example.com/image.jpg"]`                                      |          |
-| `start_time`                  | `string ($date-time)` | Campaign start time (for scheduling)                                      | `2025-07-18T10:00:00+00:00`                                               |          |
-| `end_time`                    | `string ($date-time)` | Campaign end time (for scheduling)                                        | `2025-07-18T18:00:00+00:00`                                               |          |
-| `is_schedule`                 | `boolean`             | Whether the campaign is scheduled                                         | `true`, `false`                                                           |          |
-| `enable_link_shortening`      | `boolean`             | Enable automatic link shortening in messages                             | `true`, `false`                                                           |          |
-| `attach_contact_label_ids`    | `array[string]`       | Labels to attach to contacts after campaign                              | `["spring_campaign_2025"]`                                               |          |
+| Field                           | Type                  | Description                                                          | Allowed Values / Example                                                                  | Required |
+| ------------------------------- | --------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------- |
+| `X-API-Key`                     | `string (header)`     | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                        | ✅       |
+| `workspace_id`                  | `string (path)`       | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                    | ✅       |
+| `name`                          | `string`              | Campaign name                                                        | `Spring Sale 2025`                                                                        | ✅       |
+| `type`                          | `string`              | Campaign type                                                        | `SMS`, `MMS`, `AI_AGENT`, `WHATSAPP_BUSINESS_PLATFORM_MESSAGE`                            | ✅       |
+| `message`                       | `string`              | Message content                                                      | `🌸 Spring Sale Alert! Get 25% off all items. Use code SPRING25. Valid until March 31st.` | ✅       |
+| `phone_ids`                     | `array[string]`       | Phone number IDs to send from                                        | `["020086f5-fb0e-4a0c-920a-bbdd04f4381c"]`                                                | ✅       |
+| `any_contact_label_ids`         | `array[string]`       | Include contacts with any of these labels                            | `["11111111-2222-4444-3333-555555555555"]`                                                |          |
+| `all_contact_label_ids`         | `array[string]`       | Include contacts with all of these labels                            | `["22222222-3333-5555-4444-666666666666"]`                                                |          |
+| `exclude_contact_ids`           | `array[string]`       | Exclude specific contact IDs                                         | `["11111111-2222-4444-3333-555555555555"]`                                                |          |
+| `exclude_any_contact_label_ids` | `array[string]`       | Exclude contacts with any of these labels                            | `["33333333-4444-6666-5555-777777777777"]`                                                |          |
+| `media_urls`                    | `array[string]`       | Media URLs for MMS campaigns                                         | `["https://example.com/image.jpg"]`                                                       |          |
+| `start_time`                    | `string ($date-time)` | Campaign start time (for scheduling)                                 | `2025-07-18T10:00:00+00:00`                                                               |          |
+| `end_time`                      | `string ($date-time)` | Campaign end time (for scheduling)                                   | `2025-07-18T18:00:00+00:00`                                                               |          |
+| `is_schedule`                   | `boolean`             | Whether the campaign is scheduled                                    | `true`, `false`                                                                           |          |
+| `enable_link_shortening`        | `boolean`             | Enable automatic link shortening in messages                         | `true`, `false`                                                                           |          |
+| `attach_contact_label_ids`      | `array[string]`       | Labels to attach to contacts after campaign                          | `["spring_campaign_2025"]`                                                                |          |
 
 ###### Example: SMS Campaign
 
 Request:
+
 ```bash
 curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns' \
@@ -230,6 +251,7 @@ curl -X 'POST' \
 ```
 
 Response:
+
 ```json
 {
   "id": "campaign_12345678-abcd-efgh-ijkl-123456789012",
@@ -255,6 +277,7 @@ Response:
 ###### Example: MMS Campaign
 
 Request:
+
 ```bash
 curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns' \
@@ -278,15 +301,16 @@ curl -X 'POST' \
 
 Get detailed information about a specific campaign.
 
-| Field           | Type               | Description                                                                 | Allowed Values / Example                                                   | Required |
-|-----------------|--------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|---------|
-| `X-API-Key`     | `string (header)`  | API key for authorization. See [Authorization Guide](#authorization)     | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`        | ✅       |
-| `workspace_id`  | `string (path)`    | Unique identifier of the workspace                                        | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                   | ✅       |
-| `campaign_id`   | `string (path)`    | Unique identifier of the campaign                                         | `campaign_12345678-abcd-efgh-ijkl-123456789012`                          | ✅       |
+| Field          | Type              | Description                                                          | Allowed Values / Example                                           | Required |
+| -------------- | ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| `X-API-Key`    | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
+| `workspace_id` | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
+| `campaign_id`  | `string (path)`   | Unique identifier of the campaign                                    | `campaign_12345678-abcd-efgh-ijkl-123456789012`                    | ✅       |
 
 ###### Example
 
 Request:
+
 ```bash
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns/campaign_12345678-abcd-efgh-ijkl-123456789012' \
@@ -295,6 +319,7 @@ curl -X 'GET' \
 ```
 
 Response:
+
 ```json
 {
   "id": "campaign_12345678-abcd-efgh-ijkl-123456789012",
@@ -331,18 +356,19 @@ Response:
 
 Retrieve detailed logs for individual message deliveries.
 
-| Field                    | Type               | Description                                                                 | Allowed Values / Example                                                   | Required |
-|--------------------------|--------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|---------|
-| `X-API-Key`             | `string (header)`  | API key for authorization. See [Authorization Guide](#authorization)     | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`        | ✅       |
-| `workspace_id`          | `string (path)`    | Unique identifier of the workspace                                        | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                   | ✅       |
-| `campaign_id`           | `string (path)`    | Unique identifier of the campaign                                         | `campaign_12345678-abcd-efgh-ijkl-123456789012`                          | ✅       |
-| `message_statuses`      | `string (query)`   | Filter by message status                                                  | `sent,delivered,failed`                                                  |          |
-| `offset`                | `integer (query)`  | Number of rows to skip.<br>Default: `0`                                  | `0`                                                                       |          |
-| `limit`                 | `integer (query)`  | Number of rows to return.<br>Default: `10`                               | `10`                                                                      |          |
+| Field              | Type              | Description                                                          | Allowed Values / Example                                           | Required |
+| ------------------ | ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| `X-API-Key`        | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
+| `workspace_id`     | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
+| `campaign_id`      | `string (path)`   | Unique identifier of the campaign                                    | `campaign_12345678-abcd-efgh-ijkl-123456789012`                    | ✅       |
+| `message_statuses` | `string (query)`  | Filter by message status                                             | `sent,delivered,failed`                                            |          |
+| `offset`           | `integer (query)` | Number of rows to skip.<br>Default: `0`                              | `0`                                                                |          |
+| `limit`            | `integer (query)` | Number of rows to return.<br>Default: `10`                           | `10`                                                               |          |
 
 ###### Example
 
 Request:
+
 ```bash
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns/campaign_12345678-abcd-efgh-ijkl-123456789012/logs?offset=0&limit=10&message_statuses=delivered,failed' \
@@ -351,6 +377,7 @@ curl -X 'GET' \
 ```
 
 Response:
+
 ```json
 {
   "data": [
@@ -389,18 +416,19 @@ Response:
 
 For sending individual messages to specific contacts (not bulk campaigns).
 
-| Field              | Type               | Description                                                                 | Allowed Values / Example                                                   | Required |
-|-------------------|--------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|---------|
-| `X-API-Key`       | `string (header)`  | API key for authorization. See [Authorization Guide](#authorization)     | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`        | ✅       |
-| `workspace_id`    | `string (path)`    | Unique identifier of the workspace                                        | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                   | ✅       |
-| `phone_number`    | `string`           | Sender phone number                                                       | `+1234567890`                                                             | ✅       |
-| `to_phone_number` | `string`           | Recipient phone number                                                    | `+19876543210`                                                            | ✅       |
-| `content`         | `string`           | Message content                                                           | `Thank you for your recent purchase!`                                    | ✅       |
-| `media_urls`      | `array[string]`    | Media URLs for MMS messages                                               | `["https://example.com/receipt.jpg"]`                                   |          |
+| Field             | Type              | Description                                                          | Allowed Values / Example                                           | Required |
+| ----------------- | ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| `X-API-Key`       | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
+| `workspace_id`    | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
+| `phone_number`    | `string`          | Sender phone number                                                  | `+1234567890`                                                      | ✅       |
+| `to_phone_number` | `string`          | Recipient phone number                                               | `+19876543210`                                                     | ✅       |
+| `content`         | `string`          | Message content                                                      | `Thank you for your recent purchase!`                              | ✅       |
+| `media_urls`      | `array[string]`   | Media URLs for MMS messages                                          | `["https://example.com/receipt.jpg"]`                              |          |
 
 ###### Example
 
 Request:
+
 ```bash
 curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/send_message' \
@@ -415,6 +443,7 @@ curl -X 'POST' \
 ```
 
 Response:
+
 ```json
 {
   "id": "msg_12345678-abcd-efgh-ijkl-123456789012",
@@ -431,10 +460,14 @@ Response:
 
 ### Contact Targeting
 
-1. **Use Labels Effectively**: Organize contacts with meaningful labels like `vip_customers`, `new_subscribers`, `location_nyc`
-2. **Exclude DNC Lists**: Always exclude `DNC` (Do Not Contact) and `unsubscribed` labels
-3. **Test with Small Groups**: Test campaigns with a small subset before sending to large audiences
-4. **Segment by Engagement**: Use labels to track engagement levels and target accordingly
+1. **Use Labels Effectively**: Organize contacts with meaningful labels like
+   `vip_customers`, `new_subscribers`, `location_nyc`
+2. **Exclude DNC Lists**: Always exclude `DNC` (Do Not Contact) and
+   `unsubscribed` labels
+3. **Test with Small Groups**: Test campaigns with a small subset before sending
+   to large audiences
+4. **Segment by Engagement**: Use labels to track engagement levels and target
+   accordingly
 
 ### Message Content
 
@@ -455,6 +488,7 @@ Response:
 Common error responses and how to handle them:
 
 ### Authentication Errors
+
 ```json
 {
   "error": "Unauthorized",
@@ -464,6 +498,7 @@ Common error responses and how to handle them:
 ```
 
 ### Validation Errors
+
 ```json
 {
   "error": "Validation Error",
@@ -477,6 +512,7 @@ Common error responses and how to handle them:
 ```
 
 ### Rate Limit Errors
+
 ```json
 {
   "error": "Rate Limit Exceeded",
@@ -488,5 +524,7 @@ Common error responses and how to handle them:
 
 ## Conclusion
 
-The SeaX Bulk SMS/MMS API provides powerful tools for managing large-scale messaging campaigns. By following this guide, you can effectively target contacts, send campaigns, and monitor performance. Remember to always respect customer preferences and maintain compliance with messaging regulations.
-
+The SeaX Bulk SMS/MMS API provides powerful tools for managing large-scale
+messaging campaigns. By following this guide, you can effectively target
+contacts, send campaigns, and monitor performance. Remember to always respect
+customer preferences and maintain compliance with messaging regulations.

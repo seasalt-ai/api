@@ -1,11 +1,13 @@
 ---
 title: Auto-Dialer Voice Campaigns
 linkTitle: Auto-Dialer Voice Campaigns
-description: API endpoints for configuring and initiating bulk outbound voice call campaigns with AI agents.
+description:
+  API endpoints for configuring and initiating bulk outbound voice call
+  campaigns with AI agents.
 categories: [API, Auto-Dialer Campaign, AI Agent Campaign, Voice Campaigns]
 tags: [auto dialer, voice calls, ai agent, campaign, bulk calls]
 type: docs
-weight: 30
+weight: 6
 ---
 
 # Auto-Dialer Voice Campaigns
@@ -45,21 +47,23 @@ To set up your API Key
 
 `GET /api/v1/workspace/{workspace_id}/phones`
 
-First you must find the available phone numbers. You will need to collect the `id` of each number you would like to run the campaign from.
+First you must find the available phone numbers. You will need to collect the
+`id` of each number you would like to run the campaign from.
 
-| Field           | Type               | Description                                                                                                      | Allowed Values / Example                                                   | Required |
-|-----------------|--------------------|------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|----------|
-| `X-API-Key`     | `string (header)`   | API key for authorization. Required in header. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                           | ✅        |
-| `workspace_id`  | `string (path)`     | Unique identifier of the workspace                                                                               | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                        | ✅        |
-| `offset`        | `integer (query)`   | Number of results to skip before starting to return.<br>Minimum: 0<br>Default: 0                                 | `0`                                                                         |          |
-| `limit`         | `integer (query)`   | Max number of results to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: 10             | `10`                                                                        |          |
-| `is_owned`      | `boolean (query)`   | Filter for owned records only.<br>Default: `false`                                                               | `true`, `false`                                                             |          |
-| `enabled`       | `boolean (query)`   | Filter by whether the item is enabled.<br>Default: `true`                                                        | `true`, `false`                                                             |          |
-| `voice_available` | `boolean (query)` | Filter by voice capability availability                                                                          | `true`, `false`                                                             |          |
+| Field             | Type              | Description                                                                                          | Allowed Values / Example                                           | Required |
+| ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| `X-API-Key`       | `string (header)` | API key for authorization. Required in header. See [Authorization Guide](#authorization)             | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
+| `workspace_id`    | `string (path)`   | Unique identifier of the workspace                                                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
+| `offset`          | `integer (query)` | Number of results to skip before starting to return.<br>Minimum: 0<br>Default: 0                     | `0`                                                                |          |
+| `limit`           | `integer (query)` | Max number of results to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: 10 | `10`                                                               |          |
+| `is_owned`        | `boolean (query)` | Filter for owned records only.<br>Default: `false`                                                   | `true`, `false`                                                    |          |
+| `enabled`         | `boolean (query)` | Filter by whether the item is enabled.<br>Default: `true`                                            | `true`, `false`                                                    |          |
+| `voice_available` | `boolean (query)` | Filter by voice capability availability                                                              | `true`, `false`                                                    |          |
 
 ###### Example
 
 Request:
+
 ```
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/phones?offset=0&limit=10&is_owned=false&enabled=true&voice_available=true' \
@@ -68,6 +72,7 @@ curl -X 'GET' \
 ```
 
 Response:
+
 ```
 {
   "data": [
@@ -192,29 +197,31 @@ Response:
 
 `GET /api/v1/workspace/{workspace_id}/contacts`
 
-Use this endpoint to retrieve the set of contacts you’d like to call during the campaign.
+Use this endpoint to retrieve the set of contacts you’d like to call during the
+campaign.
 
-| Field                          | Type               | Description                                                                                                                     | Allowed Values / Example                                                                                             | Required |
-|-------------------------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|----------|
-| `X-API-Key`    | `string (header)`   | Authorization with API key. See [Authorization Guide](#authorization)  | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                   | ✅        |
-| `workspace_id`  | `string (path)`     | Unique identifier of the workspace                                                                               | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                        | ✅        |
-| `offset`                      | `integer (query)`   | Number of rows to skip.<br>Minimum: 0<br>Default: `0`                                                                            | `0`                                                                                                                    |          |
-| `limit`                       | `integer (query)`   | Number of rows to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: `10`                                 | `10`                                                                                                                   |          |
-| `keyword`                     | `string (query)`    | Optional search keyword for contact names and phones.<br>Default: *empty*                                                       | `+18111222333`                                                                                                        |          |
-| `whatsapp_phone`             | `string (query)`    | Optional search for contacts by WhatsApp phone.<br>Default: *empty*                                                             | `+18111222333`                                                                                                        |          |
-| `all_contact_label_ids`       | `string (query)`    | Search contacts that must match **all** specified label IDs.<br>Comma-separated UUIDs                                           | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666`                                           |          |
-| `any_contact_label_ids`       | `string (query)`    | Search contacts that match **any** of the specified label IDs.<br>Comma-separated UUIDs                                         | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666`                                           |          |
-| `exclude_contact_ids`         | `string (query)`    | Exclude contacts by contact IDs from the result.<br>Comma-separated UUIDs                                                       | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666`                                           |          |
-| `exclude_any_contact_label_ids`| `string (query)`   | Exclude contacts that match **any** of the specified label IDs.<br>Comma-separated UUIDs                                        | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666`                                           |          |
-| `exclude_all_contact_label_ids`| `string (query)`   | Exclude contacts that match **all** of the specified label IDs.<br>Comma-separated UUIDs                                        | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666`                                           |          |
-| `addition_contact_ids`        | `string (query)`    | Include contacts explicitly by contact IDs, in addition to label-based search.<br>Comma-separated UUIDs                        | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666`                                           |          |
-| `order_by`                    | `string (query)`    | Optional sorting. Comma-separated list of `field:direction` pairs.<br>Default: `created_time:desc`                              | `phone:asc,created_time:desc,name:asc`                                                                               |          |
-| `exclude_labels`              | `string (query)`    | Exclude contacts with one or more of these label **names** (not IDs).<br>Comma-separated values                                 | `DNC,invalid number,unreachable`                                                                                      |          |
-| `whatsapp_phone_only` | `boolean (query)`   | If true, filters to only return contacts with a WhatsApp phone number.<br>Default: `false` | `true`, `false` |
+| Field                           | Type              | Description                                                                                             | Allowed Values / Example                                                    | Required |
+| ------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------- |
+| `X-API-Key`                     | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization)                                   | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`          | ✅       |
+| `workspace_id`                  | `string (path)`   | Unique identifier of the workspace                                                                      | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                      | ✅       |
+| `offset`                        | `integer (query)` | Number of rows to skip.<br>Minimum: 0<br>Default: `0`                                                   | `0`                                                                         |          |
+| `limit`                         | `integer (query)` | Number of rows to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: `10`         | `10`                                                                        |          |
+| `keyword`                       | `string (query)`  | Optional search keyword for contact names and phones.<br>Default: _empty_                               | `+18111222333`                                                              |          |
+| `whatsapp_phone`                | `string (query)`  | Optional search for contacts by WhatsApp phone.<br>Default: _empty_                                     | `+18111222333`                                                              |          |
+| `all_contact_label_ids`         | `string (query)`  | Search contacts that must match **all** specified label IDs.<br>Comma-separated UUIDs                   | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `any_contact_label_ids`         | `string (query)`  | Search contacts that match **any** of the specified label IDs.<br>Comma-separated UUIDs                 | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `exclude_contact_ids`           | `string (query)`  | Exclude contacts by contact IDs from the result.<br>Comma-separated UUIDs                               | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `exclude_any_contact_label_ids` | `string (query)`  | Exclude contacts that match **any** of the specified label IDs.<br>Comma-separated UUIDs                | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `exclude_all_contact_label_ids` | `string (query)`  | Exclude contacts that match **all** of the specified label IDs.<br>Comma-separated UUIDs                | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `addition_contact_ids`          | `string (query)`  | Include contacts explicitly by contact IDs, in addition to label-based search.<br>Comma-separated UUIDs | `11111111-2222-4444-3333-555555555555,11111111-2222-4444-3333-666666666666` |          |
+| `order_by`                      | `string (query)`  | Optional sorting. Comma-separated list of `field:direction` pairs.<br>Default: `created_time:desc`      | `phone:asc,created_time:desc,name:asc`                                      |          |
+| `exclude_labels`                | `string (query)`  | Exclude contacts with one or more of these label **names** (not IDs).<br>Comma-separated values         | `DNC,invalid number,unreachable`                                            |          |
+| `whatsapp_phone_only`           | `boolean (query)` | If true, filters to only return contacts with a WhatsApp phone number.<br>Default: `false`              | `true`, `false`                                                             |
 
 ###### Example
 
 Request:
+
 ```
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts?offset=0&limit=10&keyword=%2B18111222333&whatsapp_phone=%2B18111222333&all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_any_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&exclude_all_contact_label_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&addition_contact_ids=11111111-2222-4444-3333-555555555555%2C11111111-2222-4444-3333-666666666666&order_by=phone%3Aasc%2Ccreated_time%3Adesc%2Cname%3Aasc&exclude_labels=DNC%2Cinvalid%20number%2Cunreachable&whatsapp_phone_only=false' \
@@ -223,6 +230,7 @@ curl -X 'GET' \
 ```
 
 Response:
+
 ```
 {
   "data": [
@@ -259,21 +267,23 @@ Response:
 
 GET /api/v1/workspace/{workspace_id}/ai_agents
 
-Use this endpoint to get a list of available AI agents to use during the call. You’ll need the `conversation_config_id` in order to select a particular agent for the campaign creation.
+Use this endpoint to get a list of available AI agents to use during the call.
+You’ll need the `conversation_config_id` in order to select a particular agent
+for the campaign creation.
 
-
-| Field        | Type               | Description                                                                                                     | Allowed Values / Example                                             | Required |
-|--------------|--------------------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|----------|
-| `X-API-Key`    | `string (header)`   | Authorization with API key.  See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                   | ✅        |
-| `workspace_id` | `string (path)`     | Unique identifier of the workspace                                                                             | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                   | ✅        |
-| `types`        | `string (query)`    | Optional filter for AI agent integration types (comma-separated).                                              | `SEAX_CALL`, `SEAX_SMS`, `SEAX_WABP`                                 |          |
-| `limit`        | `integer (query)`   | Optional. Number of rows to return after offset. `0` returns all.                                              | Default: `10` <br> Example: `10`                                     |          |
-| `offset`       | `integer (query)`   | Optional. Number of rows to skip before returning results.                                                     | Default: `0` <br> Example: `0`                                       |          |
-| `order_by`     | `string (query)`    | Optional. Order items by ascending/descending fields (`:` separated, comma-delimited list).                    | Default: `created_time:desc` <br> Example: `created_time:desc`       |          |
+| Field          | Type              | Description                                                                                 | Allowed Values / Example                                           | Required |
+| -------------- | ----------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| `X-API-Key`    | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization)                       | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
+| `workspace_id` | `string (path)`   | Unique identifier of the workspace                                                          | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
+| `types`        | `string (query)`  | Optional filter for AI agent integration types (comma-separated).                           | `SEAX_CALL`, `SEAX_SMS`, `SEAX_WABP`                               |          |
+| `limit`        | `integer (query)` | Optional. Number of rows to return after offset. `0` returns all.                           | Default: `10` <br> Example: `10`                                   |          |
+| `offset`       | `integer (query)` | Optional. Number of rows to skip before returning results.                                  | Default: `0` <br> Example: `0`                                     |          |
+| `order_by`     | `string (query)`  | Optional. Order items by ascending/descending fields (`:` separated, comma-delimited list). | Default: `created_time:desc` <br> Example: `created_time:desc`     |          |
 
 ###### Example
 
 Request:
+
 ```
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/ai_agents?limit=10&offset=0&order_by=created_time%3Adesc' \
@@ -282,6 +292,7 @@ curl -X 'GET' \
 ```
 
 Response:
+
 ```
 {
   "data": [
@@ -316,34 +327,35 @@ Response:
 
 Use this endpoint to trigger an outbound auto dialer voice campaign.
 
-| Field                          | Type                  | Description                                                                 | Allowed Values / Example                                                   | Required |
-|--------------------------------|-----------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------|----------|
-| `X-API-Key`    | `string (header)`   | Authorization with API key.  See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                   | ✅        |
-| `name`                         | `string`              | Campaign name                                                               | `Test`                                                                       | ✅        |
-| `phone_ids`                    | `array[string]`       | Phone ID(s) to use for the campaign                                         | `["020086f5-fb0e-4a0c-920a-bbdd04f4381c"]`                                   | ✅        |
-| `attach_contact_label_ids`     | `array[string]`       | Labels to attach to contacts after campaign                                 | `[]`                                                                         |          |
-| `start_time`                   | `string ($date-time)` | Campaign start timestamp                                                    | `2025-07-08T03:06:09+00:00`                                                  | ✅        |
-| `end_time`                     | `string ($date-time)` | Campaign end timestamp                                                      | `2025-07-08T03:15:00+00:00`                                                  | ✅        |
-| `is_schedule`                  | `boolean`             | Whether the campaign is scheduled                                           | `false`                                                                      |          |
-| `is_timezone_aware`           | `boolean`             | Whether the schedule is timezone aware                                      | `false`                                                                      |          |
-| `mode`                         | `string`              | Campaign execution mode                                                     | `WEB`                                                                        | ✅        |
-| `stage`                        | `string`              | Processing stage of the campaign                                            | `INSTANCE`                                                                   | ✅        |
-| `message`                      | `string`              | Message to be delivered (used by TTS or AI agent)                           | `Hi, do you have a few minutes to take our survey?`                                                  |          |
-| `tts_language`                 | `string`              | TTS language code                                                           | `""` (Recommended to leave as empty string to use the default configured in your workspace)                                                                 |          |
-| `tts_voice`                    | `string`              | TTS voice type                                                              | `default`                                                                    |          |
-| `audio_url`                    | `string`              | Optional audio URL (if not using TTS)                                       | `""` (Recommended to leave as empty string to use default configured on seachat)                                                              |          |
-| `type`                         | `string`              | Campaign type                                                               | `AI_AGENT`                                                                   | ✅        |
-| `capture_keypress`             | `boolean`             | Enable DTMF (keypress) capture                                              | `true`                                                                       |          |
-| `capture_stt`                  | `boolean`             | Enable speech-to-text (STT) capture                                         | `false`                                                                      |          |
-| `ai_agent_conversation_config_id` | `string`           | Conversation config ID used by the AI agent                                 | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`                                                            | ✅        |
-| `overwrite_phone_recipient.type`     | `string`         | The type of the recipient to overwrite with.                          | `AI_AGENT`                                                                   |          |
-| `overwrite_phone_recipient.receiver` | `string`         | The identifier for the new recipient.                                           | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`                                                            |          |
-| `exclude_contact_ids`          | `array[string]`       | Contact IDs to exclude                                                      | `["4667298e-8d5b-468e-8218-6a47925fe5f2","aa145964-6d17-488d-a9be-09a43191f329"]`                                                                         |          |
-| `any_contact_label_ids`        | `array[string]`       | Include contacts with any of these labels                                   | `["dd20f7cd-03fb-4c79-9f3e-998372d1bec6"]`                                   |          |
+| Field                                | Type                  | Description                                                           | Allowed Values / Example                                                                    | Required |
+| ------------------------------------ | --------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | -------- |
+| `X-API-Key`                          | `string (header)`     | Authorization with API key. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                          | ✅       |
+| `name`                               | `string`              | Campaign name                                                         | `Test`                                                                                      | ✅       |
+| `phone_ids`                          | `array[string]`       | Phone ID(s) to use for the campaign                                   | `["020086f5-fb0e-4a0c-920a-bbdd04f4381c"]`                                                  | ✅       |
+| `attach_contact_label_ids`           | `array[string]`       | Labels to attach to contacts after campaign                           | `[]`                                                                                        |          |
+| `start_time`                         | `string ($date-time)` | Campaign start timestamp                                              | `2025-07-08T03:06:09+00:00`                                                                 | ✅       |
+| `end_time`                           | `string ($date-time)` | Campaign end timestamp                                                | `2025-07-08T03:15:00+00:00`                                                                 | ✅       |
+| `is_schedule`                        | `boolean`             | Whether the campaign is scheduled                                     | `false`                                                                                     |          |
+| `is_timezone_aware`                  | `boolean`             | Whether the schedule is timezone aware                                | `false`                                                                                     |          |
+| `mode`                               | `string`              | Campaign execution mode                                               | `WEB`                                                                                       | ✅       |
+| `stage`                              | `string`              | Processing stage of the campaign                                      | `INSTANCE`                                                                                  | ✅       |
+| `message`                            | `string`              | Message to be delivered (used by TTS or AI agent)                     | `Hi, do you have a few minutes to take our survey?`                                         |          |
+| `tts_language`                       | `string`              | TTS language code                                                     | `""` (Recommended to leave as empty string to use the default configured in your workspace) |          |
+| `tts_voice`                          | `string`              | TTS voice type                                                        | `default`                                                                                   |          |
+| `audio_url`                          | `string`              | Optional audio URL (if not using TTS)                                 | `""` (Recommended to leave as empty string to use default configured on seachat)            |          |
+| `type`                               | `string`              | Campaign type                                                         | `AI_AGENT`                                                                                  | ✅       |
+| `capture_keypress`                   | `boolean`             | Enable DTMF (keypress) capture                                        | `true`                                                                                      |          |
+| `capture_stt`                        | `boolean`             | Enable speech-to-text (STT) capture                                   | `false`                                                                                     |          |
+| `ai_agent_conversation_config_id`    | `string`              | Conversation config ID used by the AI agent                           | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`                                                      | ✅       |
+| `overwrite_phone_recipient.type`     | `string`              | The type of the recipient to overwrite with.                          | `AI_AGENT`                                                                                  |          |
+| `overwrite_phone_recipient.receiver` | `string`              | The identifier for the new recipient.                                 | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`                                                      |          |
+| `exclude_contact_ids`                | `array[string]`       | Contact IDs to exclude                                                | `["4667298e-8d5b-468e-8218-6a47925fe5f2","aa145964-6d17-488d-a9be-09a43191f329"]`           |          |
+| `any_contact_label_ids`              | `array[string]`       | Include contacts with any of these labels                             | `["dd20f7cd-03fb-4c79-9f3e-998372d1bec6"]`                                                  |          |
 
 ###### Example
 
 Request:
+
 ```
 curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns' \
@@ -386,9 +398,14 @@ curl -X 'POST' \
 
 #### `overwrite_phone_recipient`
 
-This parameter is **only required if any of the `phone_ids` have a default recipient that does not match the campaign recipient**. It allows you to explicitly override the default recipient setting for those phone numbers. You must include the `type` (in this example AI_AGENT) and the `receiver` (in this example the conversation config of the ai agent)
+This parameter is **only required if any of the `phone_ids` have a default
+recipient that does not match the campaign recipient**. It allows you to
+explicitly override the default recipient setting for those phone numbers. You
+must include the `type` (in this example AI_AGENT) and the `receiver` (in this
+example the conversation config of the ai agent)
 
 ##### Format:
+
 ```
 "overwrite_phone_recipient": {
   "type": "AI_AGENT",
@@ -397,44 +414,50 @@ This parameter is **only required if any of the `phone_ids` have a default recip
 ```
 
 #### `any_contact_label_ids` and `exclude_contact_ids`
-By default, the campaign will call every contact that matches the label ids under `any_contact_label_ids`. To exclude contacts you must include the contact ids in the `exclude_contact_ids` list. 
+
+By default, the campaign will call every contact that matches the label ids
+under `any_contact_label_ids`. To exclude contacts you must include the contact
+ids in the `exclude_contact_ids` list.
 
 ##### Format:
+
 ```
   "exclude_contact_ids": [
       "4667298e-8d5b-468e-8218-6a47925fe5f2",
       "aa145964-6d17-488d-a9be-09a43191f329"
   ],
 ```
- 
 
 ### List Campaigns
 
 `GET /api/v1/workspace/{workspace_id}/auto_dialer_campaigns`
 
-Use this endpoint to gather information about past and current campaigns. Filter on various attributes such as campaign type, status, mode, and date range.
+Use this endpoint to gather information about past and current campaigns. Filter
+on various attributes such as campaign type, status, mode, and date range.
 
 Allowed query parameters.
 
-| Field                          | Type                | Description                                                                                      | Allowed Values / Example                                                                                      | Required |
-| ----------------------------- | ------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | -------- |
-| `X-API-Key`                   | `string (header)`    | API key used for authenticating requests                                                         | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                                                             | ✅       |
-| `workspace_id`                | `string (path)`      | Unique identifier of the workspace                                                              | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                                                                   | ✅       |
-| `types`                       | `string (query)`     | Filter by one or more auto dialer campaign types (comma-separated)                              | `VOICE_DROP`, `PROGRESSIVE_DIALER`, `AI_AGENT`                                                                |          |
-| `phone_numbers`               | `string (query)`     | Filter by one or more phone numbers (comma-separated)                                            | `+15555550100,+15555550101`                                                                                   |          |
-| `ai_agent_conversation_config_id` | `string (query)` | Filter by AI agent conversation config ID | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`| |
-
+| Field                             | Type              | Description                                                        | Allowed Values / Example                                           | Required |
+| --------------------------------- | ----------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------ | -------- |
+| `X-API-Key`                       | `string (header)` | API key used for authenticating requests                           | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
+| `workspace_id`                    | `string (path)`   | Unique identifier of the workspace                                 | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
+| `types`                           | `string (query)`  | Filter by one or more auto dialer campaign types (comma-separated) | `VOICE_DROP`, `PROGRESSIVE_DIALER`, `AI_AGENT`                     |          |
+| `phone_numbers`                   | `string (query)`  | Filter by one or more phone numbers (comma-separated)              | `+15555550100,+15555550101`                                        |          |
+| `ai_agent_conversation_config_id` | `string (query)`  | Filter by AI agent conversation config ID                          | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`                             |          |
 
 ###### Example
 
 Request:
+
 ```
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/auto_dialer_campaigns?stage=INSTANCE&limit=10&offset=0&order_by=created_time%3Adesc' \
   -H 'accept: application/json' \
   -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
 ```
+
 Response:
+
 ```
 {
   "data": [
@@ -549,22 +572,23 @@ Response:
 }
 ```
 
-
 ### Get Campaign Details
 
 `GET /api/v1/workspace/{workspace_id}/auto_dialer_campaigns/{auto_dialer_campaign_id}`
 
-Get the information of a campaign given the workspace_id and the desired campaign_id
+Get the information of a campaign given the workspace_id and the desired
+campaign_id
 
-| Field                    | Type             | Description                                                                                          | Allowed Values / Example                                           | Required |
-|--------------------------|------------------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|----------|
-| `X-API-Key`              | `string (header)`| Authorization with API key.  See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                                                  | ✅        |
-| `workspace_id`           | `string (path)`  | Unique identifier of the workspace                                                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                 | ✅        |
-| `auto_dialer_campaign_id`| `string (path)`  | Unique identifier of the auto dialer campaign                                                        | `01e14e9e-ddd8-4e63-bad2-e026d5aa5698`                                                  | ✅        |
+| Field                     | Type              | Description                                                           | Allowed Values / Example                                           | Required |
+| ------------------------- | ----------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| `X-API-Key`               | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
+| `workspace_id`            | `string (path)`   | Unique identifier of the workspace                                    | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
+| `auto_dialer_campaign_id` | `string (path)`   | Unique identifier of the auto dialer campaign                         | `01e14e9e-ddd8-4e63-bad2-e026d5aa5698`                             | ✅       |
 
 ###### Example
 
 Request:
+
 ```
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns/448ea794-0368-4604-a56f-f2350229d9e5' \
@@ -573,6 +597,7 @@ curl -X 'GET' \
 ```
 
 Response:
+
 ```
 {
   "start_time": "2025-07-08T03:19:39",
