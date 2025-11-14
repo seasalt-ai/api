@@ -42,14 +42,14 @@ To set up your API Key:
 
 First, retrieve available phone numbers for sending campaigns.
 
-| Field          | Type              | Description                                                          | Allowed Values / Example                                           | Required |
-| -------------- | ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
-| `X-API-Key`    | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
-| `workspace_id` | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
-| `offset`       | `integer (query)` | Number of results to skip before starting to return.<br>Default: 0   | `0`                                                                |          |
-| `limit`        | `integer (query)` | Max number of results to return.<br>Default: 10                      | `10`                                                               |          |
-| `is_owned`     | `boolean (query)` | Filter for owned records only.<br>Default: `false`                   | `true`, `false`                                                    |          |
-| `enabled`      | `boolean (query)` | Filter by whether the item is enabled.<br>Default: `true`            | `true`, `false`                                                    |          |
+| Field          | Type              | Description                                                          | Allowed Values / Example               | Required |
+| -------------- | ----------------- | -------------------------------------------------------------------- | -------------------------------------- | -------- |
+| `X-API-Key`    | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `<your_api_key>`                       | ✅       |
+| `workspace_id` | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6` | ✅       |
+| `offset`       | `integer (query)` | Number of results to skip before starting to return.<br>Default: 0   | `0`                                    |          |
+| `limit`        | `integer (query)` | Max number of results to return.<br>Default: 10                      | `10`                                   |          |
+| `is_owned`     | `boolean (query)` | Filter for owned records only.<br>Default: `false`                   | `true`, `false`                        |          |
+| `enabled`      | `boolean (query)` | Filter by whether the item is enabled.<br>Default: `true`            | `true`, `false`                        |          |
 
 ###### Example
 
@@ -59,7 +59,7 @@ Request:
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/phones?offset=0&limit=10&is_owned=false&enabled=true' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
+  -H 'X-API-Key: <your_api_key>'
 ```
 
 Response:
@@ -165,13 +165,13 @@ Response:
 
 Import contacts from a CSV file if you need to add new contacts.
 
-| Field                | Type               | Description                                                          | Allowed Values / Example                                           | Required |
-| -------------------- | ------------------ | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
-| `X-API-Key`          | `string (header)`  | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
-| `workspace_id`       | `string (path)`    | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
-| `file`               | `file (form-data)` | CSV file containing contacts                                         | `contacts.csv`                                                     | ✅       |
-| `duplicate_strategy` | `string (query)`   | How to handle duplicate contacts                                     | `mark`, `skip`, `update`                                           |          |
-| `phone_country`      | `string (query)`   | Default country code for phone numbers                               | `US`, `GB`, `CA`                                                   |          |
+| Field                | Type               | Description                                                          | Allowed Values / Example               | Required |
+| -------------------- | ------------------ | -------------------------------------------------------------------- | -------------------------------------- | -------- |
+| `X-API-Key`          | `string (header)`  | API key for authorization. See [Authorization Guide](#authorization) | `<your_api_key>`                       | ✅       |
+| `workspace_id`       | `string (path)`    | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6` | ✅       |
+| `file`               | `file (form-data)` | CSV file containing contacts                                         | `contacts.csv`                         | ✅       |
+| `duplicate_strategy` | `string (query)`   | How to handle duplicate contacts                                     | `mark`, `skip`, `update`               |          |
+| `phone_country`      | `string (query)`   | Default country code for phone numbers                               | `US`, `GB`, `CA`                       |          |
 
 ###### Example
 
@@ -181,7 +181,7 @@ Request:
 curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/import_contacts?duplicate_strategy=mark&phone_country=US' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \
+  -H 'X-API-Key: <your_api_key>' \
   -F 'file=@contacts.csv'
 ```
 
@@ -210,7 +210,7 @@ contacts. Carefully select your target audience using contact labels.
 
 | Field                           | Type                  | Description                                                          | Allowed Values / Example                                                                  | Required |
 | ------------------------------- | --------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------- |
-| `X-API-Key`                     | `string (header)`     | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28`                        | ✅       |
+| `X-API-Key`                     | `string (header)`     | API key for authorization. See [Authorization Guide](#authorization) | `<your_api_key>`                                                                          | ✅       |
 | `workspace_id`                  | `string (path)`       | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                                                    | ✅       |
 | `name`                          | `string`              | Campaign name                                                        | `Spring Sale 2025`                                                                        | ✅       |
 | `type`                          | `string`              | Campaign type                                                        | `SMS`, `MMS`, `AI_AGENT`, `WHATSAPP_BUSINESS_PLATFORM_MESSAGE`                            | ✅       |
@@ -236,7 +236,7 @@ curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \
+  -H 'X-API-Key: <your_api_key>' \
   -d '{
     "name": "Spring Sale 2025",
     "type": "SMS",
@@ -283,7 +283,7 @@ curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \
+  -H 'X-API-Key: <your_api_key>' \
   -d '{
     "name": "New Product Launch",
     "type": "MMS",
@@ -301,11 +301,11 @@ curl -X 'POST' \
 
 Get detailed information about a specific campaign.
 
-| Field          | Type              | Description                                                          | Allowed Values / Example                                           | Required |
-| -------------- | ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
-| `X-API-Key`    | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
-| `workspace_id` | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
-| `campaign_id`  | `string (path)`   | Unique identifier of the campaign                                    | `campaign_12345678-abcd-efgh-ijkl-123456789012`                    | ✅       |
+| Field          | Type              | Description                                                          | Allowed Values / Example                        | Required |
+| -------------- | ----------------- | -------------------------------------------------------------------- | ----------------------------------------------- | -------- |
+| `X-API-Key`    | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `<your_api_key>`                                | ✅       |
+| `workspace_id` | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`          | ✅       |
+| `campaign_id`  | `string (path)`   | Unique identifier of the campaign                                    | `campaign_12345678-abcd-efgh-ijkl-123456789012` | ✅       |
 
 ###### Example
 
@@ -315,7 +315,7 @@ Request:
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns/campaign_12345678-abcd-efgh-ijkl-123456789012' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
+  -H 'X-API-Key: <your_api_key>'
 ```
 
 Response:
@@ -356,14 +356,14 @@ Response:
 
 Retrieve detailed logs for individual message deliveries.
 
-| Field              | Type              | Description                                                          | Allowed Values / Example                                           | Required |
-| ------------------ | ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
-| `X-API-Key`        | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
-| `workspace_id`     | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
-| `campaign_id`      | `string (path)`   | Unique identifier of the campaign                                    | `campaign_12345678-abcd-efgh-ijkl-123456789012`                    | ✅       |
-| `message_statuses` | `string (query)`  | Filter by message status                                             | `sent,delivered,failed`                                            |          |
-| `offset`           | `integer (query)` | Number of rows to skip.<br>Default: `0`                              | `0`                                                                |          |
-| `limit`            | `integer (query)` | Number of rows to return.<br>Default: `10`                           | `10`                                                               |          |
+| Field              | Type              | Description                                                          | Allowed Values / Example                        | Required |
+| ------------------ | ----------------- | -------------------------------------------------------------------- | ----------------------------------------------- | -------- |
+| `X-API-Key`        | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `<your_api_key>`                                | ✅       |
+| `workspace_id`     | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`          | ✅       |
+| `campaign_id`      | `string (path)`   | Unique identifier of the campaign                                    | `campaign_12345678-abcd-efgh-ijkl-123456789012` | ✅       |
+| `message_statuses` | `string (query)`  | Filter by message status                                             | `sent,delivered,failed`                         |          |
+| `offset`           | `integer (query)` | Number of rows to skip.<br>Default: `0`                              | `0`                                             |          |
+| `limit`            | `integer (query)` | Number of rows to return.<br>Default: `10`                           | `10`                                            |          |
 
 ###### Example
 
@@ -373,7 +373,7 @@ Request:
 curl -X 'GET' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/campaigns/campaign_12345678-abcd-efgh-ijkl-123456789012/logs?offset=0&limit=10&message_statuses=delivered,failed' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28'
+  -H 'X-API-Key: <your_api_key>'
 ```
 
 Response:
@@ -416,14 +416,14 @@ Response:
 
 For sending individual messages to specific contacts (not bulk campaigns).
 
-| Field             | Type              | Description                                                          | Allowed Values / Example                                           | Required |
-| ----------------- | ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
-| `X-API-Key`       | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28` | ✅       |
-| `workspace_id`    | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6`                             | ✅       |
-| `phone_number`    | `string`          | Sender phone number                                                  | `+1234567890`                                                      | ✅       |
-| `to_phone_number` | `string`          | Recipient phone number                                               | `+19876543210`                                                     | ✅       |
-| `content`         | `string`          | Message content                                                      | `Thank you for your recent purchase!`                              | ✅       |
-| `media_urls`      | `array[string]`   | Media URLs for MMS messages                                          | `["https://example.com/receipt.jpg"]`                              |          |
+| Field             | Type              | Description                                                          | Allowed Values / Example               | Required |
+| ----------------- | ----------------- | -------------------------------------------------------------------- | -------------------------------------- | -------- |
+| `X-API-Key`       | `string (header)` | API key for authorization. See [Authorization Guide](#authorization) | `<your_api_key>`                       | ✅       |
+| `workspace_id`    | `string (path)`   | Unique identifier of the workspace                                   | `3fa85f64-5717-4562-b3fc-2c963f66afa6` | ✅       |
+| `phone_number`    | `string`          | Sender phone number                                                  | `+1234567890`                          | ✅       |
+| `to_phone_number` | `string`          | Recipient phone number                                               | `+19876543210`                         | ✅       |
+| `content`         | `string`          | Message content                                                      | `Thank you for your recent purchase!`  | ✅       |
+| `media_urls`      | `array[string]`   | Media URLs for MMS messages                                          | `["https://example.com/receipt.jpg"]`  |          |
 
 ###### Example
 
@@ -434,7 +434,7 @@ curl -X 'POST' \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/send_message' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'X-API-Key: e91772ccb5e6ce5f932d6417eacd9a1e031b957101cdb68be76d417defa7fd28' \
+  -H 'X-API-Key: <your_api_key>' \
   -d '{
     "phone_number": "+1234567890",
     "to_phone_number": "+19876543210",

@@ -160,7 +160,7 @@ Upload your contact list using either the CSV import endpoint or individual cont
 ```bash
 curl -X POST \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/import_contacts' \
-  -H 'X-API-Key: [your-api-key]' \
+  -H 'X-API-Key: <your-api-key>' \
   -F 'file=@contacts.csv' \
   -F 'label_ids=["label1", "label2"]'
 ```
@@ -171,7 +171,7 @@ Use the job ID returned from the import request to monitor progress. The import 
 ```bash
 curl -X GET \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/jobs/{job_id}' \
-  -H 'X-API-Key: [your-api-key]'
+  -H 'X-API-Key: <your-api-key>'
 ```
 
 **Step 4: Create and Launch Campaign**
@@ -180,7 +180,7 @@ Once contacts are imported, create a campaign specifying the message content, ta
 ```bash
 curl -X POST \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/campaigns' \
-  -H 'X-API-Key: [your-api-key]' \
+  -H 'X-API-Key: <your-api-key>' \
   -H 'Content-Type: application/json' \
   -d '{
     "name": "Welcome Campaign",
@@ -204,7 +204,7 @@ Retrieve the list of available phone numbers that can be used for sending messag
 ```bash
 curl -X GET \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/phones' \
-  -H 'X-API-Key: [your-api-key]'
+  -H 'X-API-Key: <your-api-key>'
 ```
 
 **Step 2: Send Message**
@@ -213,7 +213,7 @@ Send an SMS or MMS message directly to a specific recipient using one of your av
 ```bash
 curl -X POST \
   'https://seax.seasalt.ai/seax-api/api/v1/workspace/{workspace_id}/send_message' \
-  -H 'X-API-Key: [your-api-key]' \
+  -H 'X-API-Key: <your-api-key>' \
   -H 'Content-Type: application/json' \
   -d '{
     "phone_number": "+1234567890",
