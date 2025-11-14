@@ -6,7 +6,7 @@ description:
   endpoint, enabling bulk retrieval of multiple analytics metrics in a single
   request for efficient workspace performance monitoring and reporting.
 type: docs
-weight: 6
+weight: 8
 ---
 
 ## Overview

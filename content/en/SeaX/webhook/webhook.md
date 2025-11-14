@@ -7,7 +7,7 @@ description:
   integrations with Zapier and custom automation workflows.
 
 type: docs
-weight: 8
+weight: 10
 ---
 
 ## Overview
