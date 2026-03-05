@@ -49,7 +49,7 @@ Get meeting labels by `meeting_id` or time range. Requires an API key with the s
 | `start_time`   | `string (query)`  | Optional, start time of the range                                                | `2023-01-01T00:00:00`                  |          |
 | `end_time`     | `string (query)`  | Optional, end time of the range                                                  | `2023-01-31T23:59:59`                  |          |
 | `timezone`     | `string (query)`  | Optional, timezone for the time range (default: `UTC`)                           | `Asia/Taipei`                          |          |
-| `offset`       | `integer (query)` | Optional, determine the number of rows need be skipped (default: 0)              | `0`                                    |          |
+| `offset`       | `integer (query)` | Optional, the number of rows to skip (default: 0)                                | `0`                                    |          |
 | `limit`        | `integer (query)` | Optional, limit the number of returned meetings (default: 50, min: 1, max: 1000) | `50`                                   |          |
 
 ###### Example
