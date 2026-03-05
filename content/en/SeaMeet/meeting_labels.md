@@ -19,7 +19,7 @@ This guide shows how to:
 
 Ensure the following are in place:
 
-### **1\. Generate Your API Key**
+### 1. Generate Your API Key
 
 All APIs require a valid API key issued from your workspace. All requests must
 include a valid API key in the request header (`X-API-Key`). Currently the only UI to get an API key is through [SeaX](https://seax.seasalt.ai).
