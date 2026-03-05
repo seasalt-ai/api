@@ -58,18 +58,18 @@ Request by `meeting_id`:
 
 ```bash
 curl -X 'GET' \
-  'https://seameet.seasalt.ai/api/v1/public/meeting/3fa85f64-5717-4562-b3fc-2c963f66afa6/meeting_labels?meeting_id=2b342a6e177d4b139638bc16bd312291' \
+  'https://meet.seasalt.ai/seameet-api/api/v1/public/meeting/<workspace_id>/meeting_labels?meeting_id=<meeting_id>' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: <your_api_key>'
+  -H 'Authorization: Bearer <your_api_key>'
 ```
 
 Request by time range:
 
 ```bash
 curl -X 'GET' \
-  'https://seameet.seasalt.ai/api/v1/public/meeting/3fa85f64-5717-4562-b3fc-2c963f66afa6/meeting_labels?start_time=2023-01-01T00:00:00&end_time=2023-01-31T23:59:59&timezone=Asia/Taipei&offset=0&limit=50' \
+  'https://meet.seasalt.ai/seameet-api/api/v1/public/meeting/<workspace_id>/meeting_labels?start_time=2026-01-01T00:00:00&end_time=2026-03-31T23:59:59&timezone=Asia/Taipei&offset=0&limit=50' \
   -H 'accept: application/json' \
-  -H 'X-API-Key: <your_api_key>'
+  -H 'Authorization: Bearer <your_api_key>'
 ```
 
 Response:
