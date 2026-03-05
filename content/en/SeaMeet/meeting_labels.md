@@ -52,7 +52,7 @@ Get meeting labels by `meeting_id` or time range. Requires an API key with the s
 | `offset`       | `integer (query)` | Optional, the number of rows to skip (default: 0)                                | `0`                                    |          |
 | `limit`        | `integer (query)` | Optional, limit the number of returned meetings (default: 50, min: 1, max: 1000) | `50`                                   |          |
 
-###### Example
+#### Example
 
 Request by `meeting_id`:
 
