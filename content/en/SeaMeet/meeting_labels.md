@@ -19,7 +19,7 @@ This guide shows how to:
 
 Ensure the following are in place:
 
-### **1\. Generate Your API Key**
+### 1. Generate Your API Key
 
 All APIs require a valid API key issued from your workspace. All requests must
 include a valid API key in the request header (`X-API-Key`). Currently the only UI to get an API key is through [SeaX](https://seax.seasalt.ai).
@@ -33,7 +33,7 @@ include a valid API key in the request header (`X-API-Key`). Currently the only 
 
 ## API Specification
 
-### 1) Get Meeting Labels
+### 1. Get Meeting Labels
 
 `GET /api/v1/public/meeting/{workspace_id}/meeting_labels`
 
@@ -49,10 +49,10 @@ Get meeting labels by `meeting_id` or time range. Requires an API key with the s
 | `start_time`   | `string (query)`  | Optional, start time of the range                                                | `2023-01-01T00:00:00`                  |          |
 | `end_time`     | `string (query)`  | Optional, end time of the range                                                  | `2023-01-31T23:59:59`                  |          |
 | `timezone`     | `string (query)`  | Optional, timezone for the time range (default: `UTC`)                           | `Asia/Taipei`                          |          |
-| `offset`       | `integer (query)` | Optional, determine the number of rows need be skipped (default: 0)              | `0`                                    |          |
+| `offset`       | `integer (query)` | Optional, the number of rows to skip (default: 0)                                | `0`                                    |          |
 | `limit`        | `integer (query)` | Optional, limit the number of returned meetings (default: 50, min: 1, max: 1000) | `50`                                   |          |
 
-###### Example
+#### Example
 
 Request by `meeting_id`:
 
