@@ -33,7 +33,7 @@ include a valid API key in the request header (`X-API-Key`). Currently the only 
 
 ## API Specification
 
-### 1) Get Meeting Labels
+### 1. Get Meeting Labels
 
 `GET /api/v1/public/meeting/{workspace_id}/meeting_labels`
 
