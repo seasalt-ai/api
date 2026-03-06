@@ -268,7 +268,17 @@ a phone number, contacts, and AI agents in your workspace.&lt;/p></description><
 include a valid API key in the request header (&lt;code>X-API-Key&lt;/code>).&lt;/p>
 &lt;ul>
 &lt;li>
-&lt;p>Go to &lt;strong>Workspace → API Key&lt;/strong> tab.&lt;/p></description></item><item><title>Seasalt.ai Analytics API</title><link>https://api.seasalt.ai/seax/analytics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/analytics/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Go to &lt;strong>Workspace → API Key&lt;/strong> tab.&lt;/p></description></item><item><title>Get Meeting Labels</title><link>https://api.seasalt.ai/seameet/meeting_labels/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/meeting_labels/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>This guide shows how to:&lt;/p>
+&lt;ul>
+&lt;li>Retrieve meeting labels by a specific meeting ID.&lt;/li>
+&lt;li>Retrieve meeting labels within a specific time range.&lt;/li>
+&lt;/ul>
+&lt;h2 id="authorization-api-key">Authorization: API Key&lt;a class="td-heading-self-link" href="#authorization-api-key" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Ensure the following are in place:&lt;/p>
+&lt;h3 id="1-generate-your-api-key">1. Generate Your API Key&lt;a class="td-heading-self-link" href="#1-generate-your-api-key" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;p>All APIs require a valid API key issued from your workspace. All requests must
+include a valid API key in the request header (&lt;code>X-API-Key&lt;/code>). Currently the only UI to get an API key is through &lt;a href="https://seax.seasalt.ai">SeaX&lt;/a>.&lt;/p></description></item><item><title>Seasalt.ai Analytics API</title><link>https://api.seasalt.ai/seax/analytics/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/analytics/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>The Generate Metric Report endpoint provides a unified interface for retrieving
 multiple analytics metrics in a single request, streamlining the process of
 generating comprehensive reports for workspace performance analysis. Unlike
