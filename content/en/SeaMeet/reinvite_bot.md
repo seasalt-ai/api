@@ -28,7 +28,7 @@ multiple times while a dispatch is already in flight will return a conflict
 rather than spawning a second bot.
 
 This endpoint only supports **Google Meet** meetings. MS Teams and Zoom
-meetings will be rejected with `400 meeting_channel_not_supported`.
+meetings will be rejected with HTTP `400` (code `12102`).
 
 ## Authorization: API Key
 
@@ -64,13 +64,13 @@ Dispatch the SeaMeet bot for a meeting in your workspace.
 
 ### Behavior by meeting status
 
-| Current status     | `force_restart=false`                       | `force_restart=true`                            |
-| ------------------ | ------------------------------------------- | ----------------------------------------------- |
-| `INITIAL`          | `202` – bot dispatched                      | `202` – bot dispatched (no reset)               |
-| `LIVE`             | `409 meeting_live_bot_present`              | `409 meeting_live_use_stop_first`               |
-| `STOPPING`         | `409 meeting_in_cleanup`                    | `409 meeting_in_cleanup`                        |
-| `ANALYZING`        | `409 meeting_in_cleanup`                    | `409 meeting_in_cleanup`                        |
-| `OFFLINE`          | `409 meeting_offline_use_force_restart`     | `202` – meeting reset to `INITIAL` and bot dispatched |
+| Current status     | `force_restart=false`             | `force_restart=true`                            |
+| ------------------ | --------------------------------- | ----------------------------------------------- |
+| `INITIAL`          | `202` – bot dispatched            | `202` – bot dispatched (no reset)               |
+| `LIVE`             | `409` (code `12103`)              | `409` (code `12104`)                            |
+| `STOPPING`         | `409` (code `12105`)              | `409` (code `12105`)                            |
+| `ANALYZING`        | `409` (code `12105`)              | `409` (code `12105`)                            |
+| `OFFLINE`          | `409` (code `12106`)              | `202` – meeting reset to `INITIAL` and bot dispatched |
 
 The `force_restart=true` reset preserves the meeting’s configuration (language,
 participants, transcriptions, NLP results, etc.) and only flips the runtime
