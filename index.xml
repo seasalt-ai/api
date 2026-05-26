@@ -289,7 +289,22 @@ analytics metrics including conversation overviews, activity trends, label
 usage, communication volumes, and detailed breakdowns, making it ideal for
 creating unified analytics dashboards and comprehensive performance reports.&lt;/p></description></item><item><title>Contribution Guidelines</title><link>https://api.seasalt.ai/docs/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/contribution-guidelines/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>These basic sample guidelines assume that your Docsy site is deployed using Netlify and your files are stored in GitHub. You can use the guidelines &amp;ldquo;as is&amp;rdquo; or adapt them with your own instructions: for example, other deployment options, information about your doc project&amp;rsquo;s file structure, project-specific review guidelines, versioning guidelines, or any other information your users might find useful when updating your site. &lt;a href="https://github.com/kubeflow/website/blob/master/README.md">Kubeflow&lt;/a> has a great example.&lt;/p>
-&lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p></description></item><item><title>Seasalt.ai Webhook Notification API Tutorial</title><link>https://api.seasalt.ai/seax/webhook/webhook/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/webhook/webhook/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p></description></item><item><title>Re-invite Bot</title><link>https://api.seasalt.ai/seameet/reinvite_bot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/reinvite_bot/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Use this endpoint to ask the SeaMeet bot to join a meeting after the initial
+auto-join did not run, or after a meeting has already ended and you want a
+fresh recording session against the same Google Meet URL.&lt;/p>
+&lt;p>Typical use cases:&lt;/p>
+&lt;ul>
+&lt;li>A scheduled meeting started but no bot joined (e.g., the calendar event was
+created late or the original auto-dispatch was skipped). Call the endpoint
+to dispatch the bot right now.&lt;/li>
+&lt;li>A meeting has already finished (&lt;code>OFFLINE&lt;/code>) and you want to reuse the same
+meeting record for a follow-up recording on the same Meet URL. Call with
+&lt;code>force_restart=true&lt;/code> to reset it back to &lt;code>INITIAL&lt;/code> and dispatch the bot.&lt;/li>
+&lt;/ul>
+&lt;p>The endpoint enforces at most &lt;strong>one bot per (Meet URL, workspace)&lt;/strong>. Calling it
+multiple times while a dispatch is already in flight will return a conflict
+rather than spawning a second bot.&lt;/p></description></item><item><title>Seasalt.ai Webhook Notification API Tutorial</title><link>https://api.seasalt.ai/seax/webhook/webhook/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/webhook/webhook/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>A webhook-based notification system that lets your services receive real-time
 updates from Seasalt.ai products like SeaChat. Whether you want to track new
 conversations, missed calls, or contact changes, using the following endpoints

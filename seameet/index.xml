@@ -8,7 +8,22 @@
 &lt;p>Ensure the following are in place:&lt;/p>
 &lt;h3 id="1-generate-your-api-key">1. Generate Your API Key&lt;a class="td-heading-self-link" href="#1-generate-your-api-key" aria-label="Heading self-link">&lt;/a>&lt;/h3>
 &lt;p>All APIs require a valid API key issued from your workspace. All requests must
-include a valid API key in the request header (&lt;code>X-API-Key&lt;/code>). Currently the only UI to get an API key is through &lt;a href="https://seax.seasalt.ai">SeaX&lt;/a>.&lt;/p></description></item><item><title>Audio Upload</title><link>https://api.seasalt.ai/seameet/audio-upload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/audio-upload/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+include a valid API key in the request header (&lt;code>X-API-Key&lt;/code>). Currently the only UI to get an API key is through &lt;a href="https://seax.seasalt.ai">SeaX&lt;/a>.&lt;/p></description></item><item><title>Re-invite Bot</title><link>https://api.seasalt.ai/seameet/reinvite_bot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/reinvite_bot/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Use this endpoint to ask the SeaMeet bot to join a meeting after the initial
+auto-join did not run, or after a meeting has already ended and you want a
+fresh recording session against the same Google Meet URL.&lt;/p>
+&lt;p>Typical use cases:&lt;/p>
+&lt;ul>
+&lt;li>A scheduled meeting started but no bot joined (e.g., the calendar event was
+created late or the original auto-dispatch was skipped). Call the endpoint
+to dispatch the bot right now.&lt;/li>
+&lt;li>A meeting has already finished (&lt;code>OFFLINE&lt;/code>) and you want to reuse the same
+meeting record for a follow-up recording on the same Meet URL. Call with
+&lt;code>force_restart=true&lt;/code> to reset it back to &lt;code>INITIAL&lt;/code> and dispatch the bot.&lt;/li>
+&lt;/ul>
+&lt;p>The endpoint enforces at most &lt;strong>one bot per (Meet URL, workspace)&lt;/strong>. Calling it
+multiple times while a dispatch is already in flight will return a conflict
+rather than spawning a second bot.&lt;/p></description></item><item><title>Audio Upload</title><link>https://api.seasalt.ai/seameet/audio-upload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/audio-upload/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>Create a new meeting by analyzing audio recordings. The &lt;a href="https://api.seasalt.ai/seameet/audio-upload/#run-analysis">&lt;code>analyze_audio&lt;/code> endpoint&lt;/a> handles audio uploads, initiates processing, and returns a job ID for tracking analysis progress.&lt;/p>
 &lt;h2 id="quick-start">Quick Start&lt;a class="td-heading-self-link" href="#quick-start" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;h3 id="step-0-authentication-and-set-up">Step 0: Authentication and Set up&lt;a class="td-heading-self-link" href="#step-0-authentication-and-set-up" aria-label="Heading self-link">&lt;/a>&lt;/h3>
