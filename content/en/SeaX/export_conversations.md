@@ -77,8 +77,8 @@ Request Body: ExportConversationsRequest
 | -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | -------- |
 | `start_date`         | `string` | Start of the range (inclusive), `YYYY-MM-DD`. Cannot be in the future.                                                      | `"2026-02-01"`                           | ✅       |
 | `end_date`           | `string` | End of the range (inclusive), `YYYY-MM-DD`. Must be on or after `start_date`.                                               | `"2026-02-28"`                           | ✅       |
-| `channel_id`         | `string` | Channel/phone UUID. Provide either `channel_id` **or** `phone_number`.                                                       | `"e7190dee-1c64-454d-b785-6ec541a74d4e"` |          |
-| `phone_number`       | `string` | Channel phone number in E.164 format. Used to look up the channel in the workspace.                                         | `"+13867033591"`                         |          |
+| `channel_id`         | `string` | Channel/phone UUID. Provide either `channel_id` **or** `phone_number`.                                                       | `"a1b2c3d4-1111-2222-3333-444455556666"` |          |
+| `phone_number`       | `string` | Channel phone number in E.164 format. Used to look up the channel in the workspace.                                         | `"+12025550123"`                         |          |
 | `channel_type`       | `string` | Disambiguates a phone number shared by multiple channels (e.g. a WhatsApp and an SMS channel on the same number).           | `sms`, `whatsapp`, `messenger`, `instagram`, `line` |          |
 | `notification_email` | `string` | Email address to send the download link to when the export is ready.                                                        | `"agent@example.com"`                    |          |
 
@@ -119,7 +119,7 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -H 'X-API-Key: <your_api_key>' \
   -d '{
-    "channel_id": "e7190dee-1c64-454d-b785-6ec541a74d4e",
+    "channel_id": "a1b2c3d4-1111-2222-3333-444455556666",
     "start_date": "2026-02-01",
     "end_date": "2026-02-28",
     "notification_email": "agent@example.com"
@@ -135,7 +135,7 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -H 'X-API-Key: <your_api_key>' \
   -d '{
-    "phone_number": "+13867033591",
+    "phone_number": "+12025550123",
     "channel_type": "whatsapp",
     "start_date": "2026-02-01",
     "end_date": "2026-02-28",
@@ -163,14 +163,14 @@ A phone number that matches multiple channels (`409 Conflict`):
     "message": "Multiple channels match this phone number. Specify channel_type or channel_id.",
     "candidates": [
       {
-        "channel_id": "e7190dee-1c64-454d-b785-6ec541a74d4e",
+        "channel_id": "a1b2c3d4-1111-2222-3333-444455556666",
         "channel_type": "WHATSAPP_BUSINESS_PLATFORM",
-        "name": "SeaX Dev WABP"
+        "name": "WhatsApp Sales"
       },
       {
-        "channel_id": "d701f23b-e01b-4e65-9275-8c9dc463383f",
+        "channel_id": "b2c3d4e5-7777-8888-9999-000011112222",
         "channel_type": "LOCAL",
-        "name": "SeaX Dev Phone"
+        "name": "SMS Support"
       }
     ]
   }
@@ -233,7 +233,7 @@ Response (still running):
 {
   "export_job_id": "79f13adf-f7dc-4744-8ad9-a16b4913e52c",
   "workspace_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "channel_id": "d701f23b-e01b-4e65-9275-8c9dc463383f",
+  "channel_id": "b2c3d4e5-7777-8888-9999-000011112222",
   "start_date": "2026-06-01",
   "end_date": "2026-06-10",
   "status": "started",
@@ -250,11 +250,11 @@ Response (finished):
 {
   "export_job_id": "79f13adf-f7dc-4744-8ad9-a16b4913e52c",
   "workspace_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "channel_id": "d701f23b-e01b-4e65-9275-8c9dc463383f",
+  "channel_id": "b2c3d4e5-7777-8888-9999-000011112222",
   "start_date": "2026-06-01",
   "end_date": "2026-06-10",
   "status": "finished",
-  "presigned_url": "https://seax-bulksms.s3.amazonaws.com/conversation_exports/.../SeaX_Dev_Phone_2026-06_1c4639da.zip?AWSAccessKeyId=...&Signature=...&Expires=...",
+  "presigned_url": "https://seax-bulksms.s3.amazonaws.com/conversation_exports/.../SMS_Support_2026-06_1c4639da.zip?AWSAccessKeyId=...&Signature=...&Expires=...",
   "presigned_url_expires_at": "2026-06-12T06:50:47.847864",
   "error_message": null,
   "created_time": "2026-06-11T06:50:43.861185"
@@ -264,7 +264,7 @@ Response (finished):
 Download the ZIP from `presigned_url`:
 
 ```bash
-curl -o conversations.zip 'https://seax-bulksms.s3.amazonaws.com/conversation_exports/.../SeaX_Dev_Phone_2026-06_1c4639da.zip?...'
+curl -o conversations.zip 'https://seax-bulksms.s3.amazonaws.com/conversation_exports/.../SMS_Support_2026-06_1c4639da.zip?...'
 ```
 
 ## Export File Format
@@ -272,12 +272,12 @@ curl -o conversations.zip 'https://seax-bulksms.s3.amazonaws.com/conversation_ex
 The export is a ZIP archive containing one CSV file per conversation.
 
 **ZIP file name:** `<channel>_<YYYY-MM>_<id>.zip` — for example
-`SeaX_Dev_Phone_2026-06_1c4639da.zip`, where `<channel>` is the channel name (or
+`SMS_Support_2026-06_1c4639da.zip`, where `<channel>` is the channel name (or
 phone number), `<YYYY-MM>` is taken from the start date, and `<id>` is a short
 unique suffix.
 
 **CSV file name (per conversation):** `<contact>--<created_at>--<channel>.csv` —
-for example `Shao Ho--2026-04-08_032443--SeaX Dev Phone (+13867033591).csv`.
+for example `Jane Doe--2026-04-08_032443--SMS Support (+12025550123).csv`.
 
 **CSV columns:**
 
