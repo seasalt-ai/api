@@ -287,7 +287,18 @@ analytics types simultaneously, reducing API calls and improving efficiency for
 dashboard and reporting applications. The endpoint supports all available
 analytics metrics including conversation overviews, activity trends, label
 usage, communication volumes, and detailed breakdowns, making it ideal for
-creating unified analytics dashboards and comprehensive performance reports.&lt;/p></description></item><item><title>Contribution Guidelines</title><link>https://api.seasalt.ai/docs/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/contribution-guidelines/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+creating unified analytics dashboards and comprehensive performance reports.&lt;/p></description></item><item><title>Export Conversations</title><link>https://api.seasalt.ai/seax/export_conversations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/export_conversations/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>This guide shows how to export the conversations of a single channel over a date
+range. The export is &lt;strong>asynchronous&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You trigger an export and immediately receive an &lt;code>export_job_id&lt;/code>.&lt;/li>
+&lt;li>The job runs in the background, writing &lt;strong>one CSV per conversation&lt;/strong> and
+bundling them into a single &lt;strong>ZIP&lt;/strong> file.&lt;/li>
+&lt;li>You poll the job until it finishes to obtain a &lt;strong>presigned download URL&lt;/strong>
+(valid for 24 hours). If you provide a notification email, the link is also
+emailed to that address.&lt;/li>
+&lt;/ul>
+&lt;p>This guide covers:&lt;/p></description></item><item><title>Contribution Guidelines</title><link>https://api.seasalt.ai/docs/contribution-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/docs/contribution-guidelines/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>These basic sample guidelines assume that your Docsy site is deployed using Netlify and your files are stored in GitHub. You can use the guidelines &amp;ldquo;as is&amp;rdquo; or adapt them with your own instructions: for example, other deployment options, information about your doc project&amp;rsquo;s file structure, project-specific review guidelines, versioning guidelines, or any other information your users might find useful when updating your site. &lt;a href="https://github.com/kubeflow/website/blob/master/README.md">Kubeflow&lt;/a> has a great example.&lt;/p>
 &lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p></description></item><item><title>Re-invite Bot</title><link>https://api.seasalt.ai/seameet/reinvite_bot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seameet/reinvite_bot/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>Use this endpoint to ask the SeaMeet bot to join a meeting after the initial

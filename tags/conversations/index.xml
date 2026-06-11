@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Conversations on Seasalt.ai API Documentation</title><link>https://api.seasalt.ai/tags/conversations/</link><description>Recent content in Conversations on Seasalt.ai API Documentation</description><generator>Hugo</generator><language>en</language><atom:link href="https://api.seasalt.ai/tags/conversations/index.xml" rel="self" type="application/rss+xml"/><item><title>Export Conversations</title><link>https://api.seasalt.ai/seax/export_conversations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://api.seasalt.ai/seax/export_conversations/</guid><description>&lt;h2 id="overview">Overview&lt;a class="td-heading-self-link" href="#overview" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>This guide shows how to export the conversations of a single channel over a date
+range. The export is &lt;strong>asynchronous&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You trigger an export and immediately receive an &lt;code>export_job_id&lt;/code>.&lt;/li>
+&lt;li>The job runs in the background, writing &lt;strong>one CSV per conversation&lt;/strong> and
+bundling them into a single &lt;strong>ZIP&lt;/strong> file.&lt;/li>
+&lt;li>You poll the job until it finishes to obtain a &lt;strong>presigned download URL&lt;/strong>
+(valid for 24 hours). If you provide a notification email, the link is also
+emailed to that address.&lt;/li>
+&lt;/ul>
+&lt;p>This guide covers:&lt;/p></description></item></channel></rss>
