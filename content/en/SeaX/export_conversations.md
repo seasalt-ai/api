@@ -42,7 +42,7 @@ include a valid API key in the request header (`X-API-Key`).
 
 - Click **Add New Key** and check `Workspace Events Notification` as the scope.
 
-- Copy the key and keep it safe. This key is required in the `X-API-KEY` header
+- Copy the key and keep it safe. This key is required in the `X-API-Key` header
   for **all requests**.
 
 ## How It Works
@@ -89,6 +89,11 @@ Notes:
 - If a `phone_number` matches **more than one** channel, the request returns
   `409` with the list of matching channels — resend with `channel_type` (or with
   the exact `channel_id`) to disambiguate.
+- The `channel_type` you send in the request is a coarse category
+  (`sms`, `whatsapp`, `messenger`, `instagram`, `line`). In the `409` response,
+  each candidate's `channel_type` is the channel's underlying detailed type
+  (for example `LOCAL` maps to `sms`, and `WHATSAPP_BUSINESS_PLATFORM` maps to
+  `whatsapp`).
 - Only one active export per channel and date range is allowed at a time; a
   duplicate request while one is still running returns `409`.
 
@@ -164,6 +169,7 @@ A phone number that matches multiple channels (`409 Conflict`):
 | Status | Reason                                                                          |
 | ------ | ------------------------------------------------------------------------------- |
 | `400`  | `start_date` is in the future, or the date format is invalid.                   |
+| `401`  | Missing or invalid `X-API-Key`.                                                 |
 | `404`  | No channel found for the given `channel_id`, or no channel for the phone number. |
 | `409`  | The phone number matches multiple channels, or an export for this channel/date range is already in progress. |
 
@@ -173,7 +179,8 @@ A phone number that matches multiple channels (`409 Conflict`):
 
 Poll an export job. While the job is running, `status` is `queued` or `started`
 and `presigned_url` is `null`. When the job is `finished`, `presigned_url`
-contains a download link valid for 24 hours.
+contains a download link valid for 24 hours. If the job `status` is `failed`,
+`presigned_url` stays `null` and `error_message` contains the failure detail.
 
 Path / Header
 
