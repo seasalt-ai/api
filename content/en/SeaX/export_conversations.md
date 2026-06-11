@@ -82,20 +82,31 @@ Request Body: ExportConversationsRequest
 | `channel_type`       | `string` | Disambiguates a phone number shared by multiple channels (e.g. a WhatsApp and an SMS channel on the same number).           | `sms`, `whatsapp`, `messenger`, `instagram`, `line` |          |
 | `notification_email` | `string` | Email address to send the download link to when the export is ready.                                                        | `"agent@example.com"`                    |          |
 
-Notes:
+**Choosing the channel**
 
-- Provide exactly one of `channel_id` or `phone_number`. If both are omitted the
-  request is rejected.
-- If a `phone_number` matches **more than one** channel, the request returns
-  `409` with the list of matching channels — resend with `channel_type` (or with
-  the exact `channel_id`) to disambiguate.
-- The `channel_type` you send in the request is a coarse category
-  (`sms`, `whatsapp`, `messenger`, `instagram`, `line`). In the `409` response,
-  each candidate's `channel_type` is the channel's underlying detailed type
-  (for example `LOCAL` maps to `sms`, and `WHATSAPP_BUSINESS_PLATFORM` maps to
-  `whatsapp`).
-- Only one active export per channel and date range is allowed at a time; a
-  duplicate request while one is still running returns `409`.
+Identify the channel with **either** `channel_id` **or** `phone_number` —
+provide exactly one. Omitting both rejects the request.
+
+**When a phone number is shared by several channels**
+
+The same number can belong to more than one channel (for example a WhatsApp
+channel and an SMS channel that share a number). In that case `phone_number`
+alone is ambiguous and the request returns `409` with a `candidates` list. Retry
+with one of the following:
+
+- `channel_type` — the coarse category of the channel you want. Accepted values:
+  `sms`, `whatsapp`, `messenger`, `instagram`, `line`.
+- `channel_id` — the exact channel, which is unambiguous on its own.
+
+> The `channel_type` shown for each candidate in the `409` response is the
+> channel's detailed internal type (e.g. `LOCAL` or `WHATSAPP_BUSINESS_PLATFORM`),
+> which maps to the coarse value you send (`LOCAL` → `sms`,
+> `WHATSAPP_BUSINESS_PLATFORM` → `whatsapp`). You always send the coarse value.
+
+**One export at a time**
+
+Only one active export is allowed per channel and date range. Requesting another
+while one is still running returns `409`.
 
 ###### Example
 
