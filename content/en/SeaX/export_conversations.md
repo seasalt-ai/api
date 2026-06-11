@@ -85,7 +85,8 @@ Request Body: ExportConversationsRequest
 **Choosing the channel**
 
 Identify the channel with **either** `channel_id` **or** `phone_number` —
-provide exactly one. Omitting both rejects the request.
+provide exactly one. If you omit both, the request returns `422` with the
+message `either channel_id or phone_number must be provided`.
 
 **When a phone number is shared by several channels**
 
@@ -179,10 +180,11 @@ A phone number that matches multiple channels (`409 Conflict`):
 
 | Status | Reason                                                                          |
 | ------ | ------------------------------------------------------------------------------- |
-| `400`  | `start_date` is in the future, or the date format is invalid.                   |
+| `400`  | `start_date` is in the future.                                                  |
 | `401`  | Missing or invalid `X-API-Key`.                                                 |
 | `404`  | No channel found for the given `channel_id`, or no channel for the phone number. |
 | `409`  | The phone number matches multiple channels, or an export for this channel/date range is already in progress. |
+| `422`  | Request body validation failed — e.g. neither `channel_id` nor `phone_number` provided, an invalid date format, `end_date` before `start_date`, or an invalid `phone_number` / `channel_type`. |
 
 ### 2) Get Export Job Status
 
