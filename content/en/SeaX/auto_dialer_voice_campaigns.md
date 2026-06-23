@@ -317,6 +317,154 @@ Response:
 }
 ```
 
+## Personalizing the Call
+
+The AI agent's starting message can be personalized with **merge fields** —
+placeholders written in single curly braces, e.g. `{name}`. When a call is placed,
+every `{placeholder}` in the message is replaced _before_ the agent speaks.
+
+| Placeholder    | Where the value comes from                                                       | Example                    |
+| -------------- | -------------------------------------------------------------------------------- | -------------------------- |
+| `{name}`       | The contact's `name` (always)                                                    | `Mary`                     |
+| `{phone}`      | The contact's `phone` (always)                                                   | `+6591112222`              |
+| `{your_field}` | The campaign's `message_variables` **or** the contact's `contact_field_data`     | `{event_name}` → `Pilates` |
+
+You do **not** need to pre-define custom fields anywhere — any key you supply
+becomes available as `{key}`.
+
+### Two places to supply custom values
+
+|                     | Campaign-level — `message_variables`                                   | Per-contact — `contact_field_data`              |
+| ------------------- | ---------------------------------------------------------------------- | ----------------------------------------------- |
+| Where it's set      | On the **campaign** (one value for the whole campaign)                 | On each **contact**                             |
+| Use when            | The value is the **same for everyone** (e.g. the event being reminded) | The value **differs per person**                |
+| Touches contacts?   | No — contacts stay unchanged                                           | Yes — you store/update the value on each contact |
+
+You can use either or both. If the same key is set in both places,
+**`message_variables` wins**. `{name}` / `{phone}` always come from the contact
+and can never be overridden.
+
+> **⚠️ Outbound only.** Merge-field substitution applies to the **outbound**
+> starting message (the campaign `message`, or the agent's
+> `outbound_starting_message`). The **inbound** pick-up message
+> (`inbound_pick_up_message`) is **not** personalized with `contact_field_data` —
+> inbound calls are answered with the message exactly as configured.
+
+### Substitution rules
+
+- **Case-insensitive.** `{Event_Name}`, `{event_name}`, and `{EVENT_NAME}` all
+  match a `contact_field_data` key of `event_name`.
+- **Missing values are left as-is.** If a placeholder has no matching value for a
+  contact, the literal text (e.g. `{event_location}`) stays in the message — and
+  the agent will read it aloud. **Always provide every placeholder used in your
+  template for every contact you call.**
+- Values are inserted as plain text.
+
+For the common case — one event reminded to many people — follow Steps 1 → 2 → 3
+below. (Per-contact values are an optional add-on, Step 1b.)
+
+### Step 1 — Prepare your contacts
+
+Create your contacts with just `name` and `phone`. You only store custom values
+on the contact if they **differ per person** (see Step 1b).
+
+Single contact:
+
+```bash
+curl -X POST \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/contacts' \
+  -H 'Content-Type: application/json' \
+  -H 'X-API-Key: <your_api_key>' \
+  -d '{ "name": "Mary", "phone": "+6591112222" }'
+```
+
+The response includes the contact `id` — collect it to target the contact in the
+campaign via `addition_contact_ids`.
+
+Bulk (CSV import) — give everyone the same label so you can target them together:
+
+```bash
+# contacts.csv
+name,phone,whatsapp,labels
+Mary,+6591112222,,reminders_2026_06
+John,+6593334444,,reminders_2026_06
+```
+
+```bash
+curl -X POST \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/3fa85f64-5717-4562-b3fc-2c963f66afa6/import_contacts?duplicate_strategy=merge' \
+  -H 'X-API-Key: <your_api_key>' \
+  -F 'file=@contacts.csv;type=text/csv'
+```
+
+`name` and `labels` are required (plus `phone` for voice). Target imported
+contacts in the campaign with `any_contact_label_ids` (the value from the
+`labels` column). See [Contacts &amp; Labels](../contacts_and_labels/) for the full
+import reference.
+
+#### Step 1b (optional) — per-contact values
+
+Only when a value **differs per recipient**, store it on the contact:
+
+- On `POST`/`PATCH /contacts`, add a `contact_field_data` object, e.g.
+  `"contact_field_data": { "first_language": "English" }`.
+- Or in the CSV, add **extra columns** — any column beyond
+  `name,phone,whatsapp,labels` becomes a custom field automatically (with
+  `duplicate_strategy=merge`, values are merged into existing contacts):
+
+```bash
+# contacts.csv with a per-contact field
+name,phone,whatsapp,labels,first_language
+Mary,+6591112222,,reminders_2026_06,English
+John,+6593334444,,reminders_2026_06,Malay
+```
+
+### Step 2 — Write the message template
+
+Put the placeholders in the campaign `message` (or configure them once in the
+agent's `outbound_starting_message`):
+
+```
+Good morning {name}, a reminder about {event_name} coming up {event_time} at {event_location}. Will you be attending?
+```
+
+### Step 3 — Create the campaign with the event variables
+
+Send the event values **once** as `message_variables` on the campaign — they
+apply to every recipient, and you never touched the contacts. (See
+[Create Campaign](#create-campaign) for the full request and all fields.)
+
+```jsonc
+{
+  "name": "Pilates reminder",
+  "type": "AI_AGENT",
+  "phone_ids": ["<phone_id>"],
+  "ai_agent_conversation_config_id": "<conversation_config_id>",
+  "message": "Good morning {name}, a reminder about {event_name} coming up {event_time} at {event_location}. Will you be attending?",
+  "message_variables": {
+    "event_name": "Pilates",
+    "event_location": "Main Hall",
+    "event_time": "this afternoon at 5 PM"
+  },
+  "addition_contact_ids": ["<contact_id>"],
+  "mode": "WEB",
+  "stage": "INSTANCE"
+}
+```
+
+### Result
+
+Every recipient hears the same event details (from `message_variables`); only
+`{name}` differs per person (from each contact):
+
+| Contact               | Spoken opening message                                                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Mary (`+6591112222`)  | "Good morning **Mary**, a reminder about **Pilates** coming up **this afternoon at 5 PM** at **Main Hall**. Will you be attending?"     |
+| John (`+6593334444`)  | "Good morning **John**, a reminder about **Pilates** coming up **this afternoon at 5 PM** at **Main Hall**. Will you be attending?"     |
+
+If you instead need different values per person, omit `message_variables` and put
+the values in each contact's `contact_field_data` (Step 1b).
+
 ## Campaign Management
 
 ### Create Campaign
@@ -339,7 +487,7 @@ Use this endpoint to trigger an outbound auto dialer voice campaign.
 | `is_timezone_aware`                  | `boolean`             | Whether the schedule is timezone aware                                | `false`                                                                                     |          |
 | `mode`                               | `string`              | Campaign execution mode                                               | `WEB`                                                                                       | ✅       |
 | `stage`                              | `string`              | Processing stage of the campaign                                      | `INSTANCE`                                                                                  | ✅       |
-| `message`                            | `string`              | Message to be delivered (used by TTS or AI agent)                     | `Hi, do you have a few minutes to take our survey?`                                         |          |
+| `message`                            | `string`              | Starting message spoken by the AI agent (or read by TTS). Supports **merge fields** such as `{name}` and any custom `contact_field_data` key — see [Personalizing the Call with Contact Fields](#personalizing-the-call-with-contact-fields). If omitted, the agent's configured `outbound_starting_message` is used. | `Good morning {name}, this is a reminder about {event_name}.`                               |          |
 | `tts_language`                       | `string`              | TTS language code                                                     | `""` (Recommended to leave as empty string to use the default configured in your workspace) |          |
 | `tts_voice`                          | `string`              | TTS voice type                                                        | `default`                                                                                   |          |
 | `audio_url`                          | `string`              | Optional audio URL (if not using TTS)                                 | `""` (Recommended to leave as empty string to use default configured on seachat)            |          |
@@ -351,6 +499,8 @@ Use this endpoint to trigger an outbound auto dialer voice campaign.
 | `overwrite_phone_recipient.receiver` | `string`              | The identifier for the new recipient.                                 | `221316ae-8a9f-4f39-b7f8-f2e756b80a63`                                                      |          |
 | `exclude_contact_ids`                | `array[string]`       | Contact IDs to exclude                                                | `["4667298e-8d5b-468e-8218-6a47925fe5f2","aa145964-6d17-488d-a9be-09a43191f329"]`           |          |
 | `any_contact_label_ids`              | `array[string]`       | Include contacts with any of these labels                             | `["dd20f7cd-03fb-4c79-9f3e-998372d1bec6"]`                                                  |          |
+| `addition_contact_ids`               | `array[string]`       | Explicit contact IDs to call, in addition to any label-based selection. Use this to target a specific list of contacts you created or looked up. | `["9362acd4-0d83-4ce9-ab0d-31834ad8bc9c"]`                                                  |          |
+| `contact_field_ids`                  | `array[string]`       | Optional. IDs of workspace contact fields to associate with the campaign — for reporting/display only. **Not required** for merge-field substitution. | `[]`                                                                                        |          |
 
 ###### Example
 
