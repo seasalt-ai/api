@@ -344,6 +344,12 @@ You can use either or both. If the same key is set in both places,
 **`message_variables` wins**. `{name}` / `{phone}` always come from the contact
 and can never be overridden.
 
+> **Reserved keys.** `name`, `phone`, `whatsapp`, and `labels` are reserved and
+> **cannot** be used as merge variables in `message_variables`. `{name}` / `{phone}`
+> are always taken from the contact; `whatsapp` / `labels` are contact / CSV
+> columns, not message placeholders. If you include any of these keys in
+> `message_variables`, they are ignored (case-insensitively).
+
 > **⚠️ Outbound only.** Merge-field substitution applies to the **outbound**
 > starting message (the campaign `message`, or the agent's
 > `outbound_starting_message`). The **inbound** pick-up message
