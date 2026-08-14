@@ -472,6 +472,8 @@ provided. Below is an example response for the `conversation.new` event type:
   "data": {
     "conversation_id": "conv-789",
     "conversation_title": "Example Conversation",
+    "bot_id": "bot-001",
+    "conversation_config_id": "cfg-001",
     "channel": "WEBCHAT",
     "customer": {
       "id": "cust-001",
@@ -791,6 +793,8 @@ customer, and the latest messages exchanged.
 | `source.identifier`                       | `string` | Identifier or name of the bot or integration      |
 | `data.conversation_id`                    | `string` | ID of the new conversation                        |
 | `data.conversation_title`                 | `string` | Title of the conversation                         |
+| `data.bot_id`                             | `string` (optional) | ID of the bot handling the conversation, or `null` if none is assigned |
+| `data.conversation_config_id`             | `string` (optional) | ID of the conversation's configuration, or `null` if none |
 | `data.channel`                            | `string` | Channel where the conversation started            |
 | `data.customer.id`                        | `string` | Customer ID                                       |
 | `data.customer.name`                      | `string` | Customer name                                     |
@@ -830,6 +834,8 @@ customer, and the latest messages exchanged.
   "data": {
     "conversation_id": "conv-789",
     "conversation_title": "Test Example Conversation",
+    "bot_id": "bot-001",
+    "conversation_config_id": "cfg-001",
     "channel": "WEBCHAT",
     "customer": {
       "id": "fb0b4af0-ad6a-48a3-ad3c-d10b237b432c",
@@ -853,9 +859,9 @@ customer, and the latest messages exchanged.
       "type": "text",
       "created_at": "2025-06-20T23:44:30.000000"
     }
-  }
+  },
   "subscription_created_by": "Test_user",
-  "subscription_updated_by": "Test_user",
+  "subscription_updated_by": "Test_user"
 }
 
 ```
@@ -881,6 +887,8 @@ to customer info, title, or other metadata.
 | `source.identifier`       | `string`            | Identifier or name of the bot or integration      |
 | `data.conversation_id`    | `string`            | ID of the updated conversation                    |
 | `data.conversation_title` | `string`            | Title of the conversation                         |
+| `data.bot_id`             | `string` (optional) | ID of the bot handling the conversation, or `null` if none is assigned |
+| `data.conversation_config_id` | `string` (optional) | ID of the conversation's configuration, or `null` if none |
 | `data.channel`            | `string`            | Channel where the conversation takes place        |
 | `data.customer.id`        | `string`            | Customer ID                                       |
 | `data.customer.name`      | `string`            | Customer name                                     |
@@ -917,6 +925,8 @@ to customer info, title, or other metadata.
   "data": {
     "conversation_id": "conv-789",
     "conversation_title": "Test Example Conversation",
+    "bot_id": "bot-001",
+    "conversation_config_id": "cfg-001",
     "channel": "WEBCHAT",
     "customer": {
       "id": "fb0b4af0-ad6a-48a3-ad3c-d10b237b432c",
@@ -941,7 +951,7 @@ to customer info, title, or other metadata.
     "updated_at": "2025-06-20T23:44:59.000000"
   },
   "subscription_created_by": "Test_user",
-  "subscription_updated_by": "Test_user",
+  "subscription_updated_by": "Test_user"
 }
 ```
 
@@ -966,6 +976,8 @@ same structure as conversation.updated, with the affect field set to "delete".
 | `source.identifier`       | `string`            | Identifier or name of the bot or integration                   |
 | `data.conversation_id`    | `string`            | ID of the ended conversation                                   |
 | `data.conversation_title` | `string`            | Title of the conversation                                      |
+| `data.bot_id`             | `string` (optional) | ID of the bot handling the conversation, or `null` if none is assigned |
+| `data.conversation_config_id` | `string` (optional) | ID of the conversation's configuration, or `null` if none  |
 | `data.channel`            | `string`            | Channel where the conversation took place                      |
 | `data.customer.id`        | `string`            | Customer ID                                                    |
 | `data.customer.name`      | `string`            | Customer name                                                  |
@@ -1002,6 +1014,8 @@ same structure as conversation.updated, with the affect field set to "delete".
   "data": {
     "conversation_id": "conv-789",
     "conversation_title": "Test Example Conversation",
+    "bot_id": "bot-001",
+    "conversation_config_id": "cfg-001",
     "channel": "WEBCHAT",
     "customer": {
       "id": "fb0b4af0-ad6a-48a3-ad3c-d10b237b432c",
@@ -1012,13 +1026,13 @@ same structure as conversation.updated, with the affect field set to "delete".
       "channel": "WEBCHAT"
     },
     "updated_fields": ["CSAT_SUBMISSION"],
-    "previous": "null",
+    "previous": null,
     "current": {"rating": 5, "comment": "Quick and accurate response. Nice experience!"},
     "updated_by": {"type": "USER", "id": "user-abc-123", "name": "Test User"},
     "updated_at": "2025-06-20T23:44:59.000000"
   },
   "subscription_created_by": "Test_user",
-  "subscription_updated_by": "Test_user",
+  "subscription_updated_by": "Test_user"
 }
 ```
 
@@ -1043,6 +1057,8 @@ includes detailed metadata about the message content, sender, and direction.
 | `source.identifier`       | `string`            | Identifier or name of the bot or integration                  |
 | `data.conversation_id`    | `string`            | ID of the conversation the message belongs to                 |
 | `data.conversation_title` | `string`            | Title of the conversation                                     |
+| `data.bot_id`             | `string` (optional) | ID of the bot handling the conversation, or `null` if none is assigned |
+| `data.conversation_config_id` | `string` (optional) | ID of the conversation's configuration, or `null` if none |
 | `data.message_id`         | `string`            | Unique identifier of the message                              |
 | `data.direction`          | `string`            | Message direction (`INBOUND` or `OUTBOUND`)                   |
 | `data.created_at`         | `string`            | When the message was created (ISO 8601 format)                |
@@ -1074,6 +1090,8 @@ includes detailed metadata about the message content, sender, and direction.
   "data": {
     "conversation_id": "conv-789",
     "conversation_title": "Test Example Conversation",
+    "bot_id": "bot-001",
+    "conversation_config_id": "cfg-001",
     "message_id": "msg-789",
     "direction": "INBOUND",
     "created_at": "2025-06-20T23:45:59.000000",
@@ -1089,7 +1107,7 @@ includes detailed metadata about the message content, sender, and direction.
     }
   },
   "subscription_created_by": "Test_user",
-  "subscription_updated_by": "Test_user",
+  "subscription_updated_by": "Test_user"
 }
 ```
 
@@ -1632,6 +1650,8 @@ about the caller, callee, call direction, channel, and metadata.
 | `source.identifier`       | `string`            | Identifier or name of the bot or integration            |
 | `data.conversation_id`    | `string`            | ID of the associated conversation                       |
 | `data.conversation_title` | `string`            | Title of the conversation                               |
+| `data.bot_id`             | `string` (optional) | ID of the bot handling the call, or `null` if none is assigned |
+| `data.conversation_config_id` | `string` (optional) | ID of the conversation's configuration, or `null` if none |
 | `data.channel`            | `string`            | Channel where the call took place                       |
 | `data.direction`          | `string`            | `INBOUND` or `OUTBOUND`                                 |
 | `data.call_from`          | `object`            | Entity initiating the call (type, id, name, address)    |
@@ -1660,17 +1680,18 @@ about the caller, callee, call direction, channel, and metadata.
   "data": {
     "conversation_id": "conv-call-001",
     "conversation_title": "+11234567890",
+    "bot_id": "bot-001",
+    "conversation_config_id": "cfg-001",
     "channel": "SEAX_CALL",
     "direction": "INBOUND",
     "started_at": "2025-06-21T09:00:00.000000",
     "call_from": {
-      "id": "cust-001",
       "id": "+123456789",
       "name": "Zapier AI Agent",
       "type": "AGENT",
       "address": "+123456789",
       "conversation_id": "123",
-      "conversation_title": "+123456789",
+      "conversation_title": "+123456789"
     },
     "call_to": {
       "id": "agent-001",
@@ -1678,16 +1699,15 @@ about the caller, callee, call direction, channel, and metadata.
       "type": "CUSTOMER",
       "address": "+123456789",
       "conversation_id": "123",
-      "conversation_title": "+123456789",
+      "conversation_title": "+123456789"
     },
-    "started_at": "2025-06-21T09:00:00.000000",
     "metadata": {
       "sip_session_id": "abc123",
       "recording_enabled": true
     }
   },
   "subscription_created_by": "Test_user",
-  "subscription_updated_by": "Test_user",
+  "subscription_updated_by": "Test_user"
 }
 
 ```
@@ -1713,6 +1733,8 @@ duration, reason for ending, and optional recording information.
 | `source.identifier`        | `string`            | Identifier or name of the bot or integration                     |
 | `data.conversation_id`     | `string`            | ID of the associated conversation                                |
 | `data.conversation_title`  | `string`            | Title of the conversation                                        |
+| `data.bot_id`              | `string` (optional) | ID of the bot handling the call, or `null` if none is assigned   |
+| `data.conversation_config_id` | `string` (optional) | ID of the conversation's configuration, or `null` if none    |
 | `data.channel`             | `string`            | Channel where the call took place                                |
 | `data.direction`           | `string`            | `INBOUND` or `OUTBOUND`                                          |
 | `data.duration_seconds`    | `integer`           | Duration of the call in seconds                                  |
@@ -1745,18 +1767,19 @@ duration, reason for ending, and optional recording information.
   "data": {
     "conversation_id": "conv-call-001",
     "conversation_title": "+11234567890",
+    "bot_id": "bot-001",
+    "conversation_config_id": "cfg-001",
     "channel": "SEAX_CALL",
     "direction": "INBOUND",
     "duration_seconds": 300,
     "finish_reason": "completed",
     "call_from": {
-      "id": "cust-001",
       "id": "+123456789",
       "name": "Zapier AI Agent",
       "type": "AGENT",
       "address": "+123456789",
       "conversation_id": "123",
-      "conversation_title": "+123456789",
+      "conversation_title": "+123456789"
     },
     "call_to": {
       "id": "agent-001",
@@ -1764,7 +1787,7 @@ duration, reason for ending, and optional recording information.
       "type": "CUSTOMER",
       "address": "+123456789",
       "conversation_id": "123",
-      "conversation_title": "+123456789",
+      "conversation_title": "+123456789"
     },
     "finished_at": "2025-06-21T09:15:00.000000",
     "finished_by": "2025-06-21T09:15:00.000000",
@@ -1772,7 +1795,7 @@ duration, reason for ending, and optional recording information.
     "recording_url": "https://recordings.example.com/recording1234.mp3"
   },
   "subscription_created_by": "Test_user",
-  "subscription_updated_by": "Test_user",
+  "subscription_updated_by": "Test_user"
 }
 ```
 
@@ -1798,6 +1821,8 @@ availability, additional metadata, or corrections.
 | `source.identifier`       | `string`            | Identifier or name of the bot or integration                |
 | `data.conversation_id`    | `string`            | ID of the associated conversation                           |
 | `data.conversation_title` | `string`            | Title of the conversation                                   |
+| `data.bot_id`             | `string` (optional) | ID of the bot handling the call, or `null` if none is assigned |
+| `data.conversation_config_id` | `string` (optional) | ID of the conversation's configuration, or `null` if none |
 | `data.call_id`            | `string` (optional) | ID of the call being updated                                |
 | `data.update_reason`      | `string` (optional) | Description of why the call was updated                     |
 | `data.previous`           | `object` (optional) | Previous values of updated fields                           |
@@ -1826,12 +1851,13 @@ availability, additional metadata, or corrections.
   "data": {
     "conversation_id": "conv-call-001",
     "conversation_title": "+11234567890",
+    "bot_id": "bot-001",
+    "conversation_config_id": "cfg-001",
     "call_id": "call-abc-123",
-    "update_reason": "Transcription completed",
+    "update_reason": "recording_ready",
     "previous": {
       "recording_url": null
     },
-    "update_reason": "recording_ready",
     "current": {
       "recording_url": "https://recordings.example.com/recording1234.mp3"
     },
@@ -1839,11 +1865,11 @@ availability, additional metadata, or corrections.
     "resources": {
       "session_id": "789456123",
       "channel_type": "SEAX_CALL",
-      "conversation_id": "123456",
-}
+      "conversation_id": "123456"
+    }
   },
   "subscription_created_by": "Test_user",
-  "subscription_updated_by": "Test_user",
+  "subscription_updated_by": "Test_user"
 }
 ```
 
