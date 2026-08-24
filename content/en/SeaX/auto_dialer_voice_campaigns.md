@@ -863,3 +863,109 @@ Response:
   "relative_time_config": null
 }
 ```
+
+### Get Campaign Results
+
+`GET /api/v1/workspace/{workspace_id}/auto_dialer_campaigns/{auto_dialer_campaign_id}/results`
+
+Get campaign call results in a structured format, one entry per call attempt
+(job) in the campaign — summary, extraction, disposition, key presses, and
+labels.
+
+> **Breaking change.** The old `labels` field on each result is **removed**
+> and replaced by two separate fields, split by the level the label applies
+> to:
+>
+> - `session_labels`: labels scoped to a single phone call. A campaign job
+>   can have more than one call attempt (e.g. a transfer or callback creates
+>   another one), so this is a per-call breakdown — one `{session_id, labels}`
+>   entry per call attempt. In practice a campaign only dials each contact
+>   once, so this array usually holds a single entry.
+> - `conversation_labels`: labels scoped to the whole conversation, which can
+>   span multiple phone calls over time.
+>
+> Any client reading the old `labels` field must switch to one (or both) of
+> these.
+
+| Field                     | Type              | Description                                                                                                   | Allowed Values / Example               | Required |
+| -------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------- | -------- |
+| `X-API-Key`                | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization)                                            | `<your_api_key>`                       | ✅       |
+| `workspace_id`              | `string (path)`   | Unique identifier of the workspace                                                                               | `3fa85f64-5717-4562-b3fc-2c963f66afa6` | ✅       |
+| `auto_dialer_campaign_id`   | `string (path)`   | Unique identifier of the auto dialer campaign                                                                    | `01e14e9e-ddd8-4e63-bad2-e026d5aa5698` | ✅       |
+| `statuses`                 | `string (query)`  | Optional, filter by one or more job statuses (comma-separated)                                                    | `PENDING`, `STARTED`, `PAUSED`, `FINISHED`, `FAILED`, `PROCESSING`, `TERMINATED`, `CANCELED` |          |
+| `offset`                   | `integer (query)` | Number of results to skip before starting to return.<br>Minimum: 0<br>Default: 0                                | `0`                                     |          |
+| `limit`                     | `integer (query)` | Max number of results to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: 10            | `10`                                    |          |
+
+###### Example
+
+Request:
+
+```
+curl -X 'GET' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/11111111-2222-4333-8444-555555555555/auto_dialer_campaigns/aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee/results?limit=10&offset=0' \
+  -H 'accept: application/json' \
+  -H 'X-API-Key: <your_api_key>'
+```
+
+Response:
+
+```
+{
+  "campaign_id": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee",
+  "campaign_name": "test",
+  "campaign_status": "FINISHED",
+  "ai_agent_id": "22222222-3333-4444-8555-666666666666",
+  "ai_agent_name": "Test Agent",
+  "campaign_results": [
+    {
+      "seax_call_id": "77777777-8888-4999-8aaa-bbbbbbbbbbbb",
+      "twilio_call_sid": "CA00000000000000000000000000000000",
+      "sender_number": "+15555550123",
+      "contact_name": "Test User 1",
+      "contact_number": "+15555550199",
+      "key_press": ["1"],
+      "session_labels": [
+        {
+          "session_id": "cccccccc-dddd-4eee-8fff-000000000000",
+          "labels": [
+            {
+              "id": "10101010-2020-4030-8040-505050505050",
+              "name": "Emergency",
+              "color": "#e53935",
+              "description": "Needs immediate follow-up",
+              "workspace_id": "11111111-2222-4333-8444-555555555555"
+            }
+          ]
+        }
+      ],
+      "conversation_labels": [
+        {
+          "id": "b0b0b0b0-c0c0-4d0d-8e0e-f0f0f0f0f0f0",
+          "name": "VIP",
+          "color": "#0cb3c3",
+          "description": "High-priority contact",
+          "workspace_id": "11111111-2222-4333-8444-555555555555"
+        }
+      ],
+      "call_send_time": "2025-07-08T03:19:45",
+      "call_duration": 42.5,
+      "call_status": "completed",
+      "call_summary": "Customer confirmed the appointment.",
+      "call_extraction": [
+        {
+          "field_name": "confirmed",
+          "description": "Whether the customer confirmed",
+          "content": "yes"
+        }
+      ],
+      "need_redial": false,
+      "need_human_followup": true,
+      "need_human_followup_reason": "Customer requested a callback",
+      "disposition": "answered",
+      "call_outcome_category": "appointment_confirmed",
+      "call_outcome_detail": "Confirmed for 2026-08-25",
+      "hung_up_reason": "customer_hangup"
+    }
+  ]
+}
+```
