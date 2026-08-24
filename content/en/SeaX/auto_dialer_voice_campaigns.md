@@ -900,7 +900,7 @@ Request:
 
 ```
 curl -X 'GET' \
-  'https://seax.seasalt.ai/seax-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns/448ea794-0368-4604-a56f-f2350229d9e5/results?limit=10&offset=0' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/11111111-2222-4333-8444-555555555555/auto_dialer_campaigns/aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee/results?limit=10&offset=0' \
   -H 'accept: application/json' \
   -H 'X-API-Key: <your_api_key>'
 ```
@@ -909,44 +909,44 @@ Response:
 
 ```
 {
-  "campaign_id": "448ea794-0368-4604-a56f-f2350229d9e5",
+  "campaign_id": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee",
   "campaign_name": "test",
   "campaign_status": "FINISHED",
-  "ai_agent_id": "51fefba9-c3ee-40e8-a392-8bc14c639719",
+  "ai_agent_id": "22222222-3333-4444-8555-666666666666",
   "ai_agent_name": "Test Agent",
   "campaign_results": [
     {
-      "seax_call_id": "6e612221-594d-4c22-a305-ffe193b3c51f",
-      "twilio_call_sid": "CA1234567890abcdef1234567890abcdef",
-      "sender_number": "+19987654321",
+      "seax_call_id": "77777777-8888-4999-8aaa-bbbbbbbbbbbb",
+      "twilio_call_sid": "CA00000000000000000000000000000000",
+      "sender_number": "+15555550123",
       "contact_name": "Test User 1",
-      "contact_number": "+11234567890",
+      "contact_number": "+15555550199",
       "key_press": ["1"],
       "session_labels": [
         {
-          "session_id": "a43b4e5d-edc7-4264-be19-2d39ab99d52e",
+          "session_id": "cccccccc-dddd-4eee-8fff-000000000000",
           "labels": [
             {
-              "id": "7082ae15-43ae-472f-a83c-ee6462a0af83",
+              "id": "10101010-2020-4030-8040-505050505050",
               "name": "Emergency",
               "color": "#e53935",
               "description": "Needs immediate follow-up",
-              "workspace_id": "ffffffff-abcd-4000-0000-000000000000"
+              "workspace_id": "11111111-2222-4333-8444-555555555555"
             }
           ]
         },
         {
-          "session_id": "c0c9965b-1809-45e2-bcb6-1e1484a79abb",
+          "session_id": "60606060-7070-4080-8090-a0a0a0a0a0a0",
           "labels": []
         }
       ],
       "conversation_labels": [
         {
-          "id": "dd20f7cd-03fb-4c79-9f3e-998372d1bec6",
+          "id": "b0b0b0b0-c0c0-4d0d-8e0e-f0f0f0f0f0f0",
           "name": "VIP",
           "color": "#0cb3c3",
           "description": "High-priority contact",
-          "workspace_id": "ffffffff-abcd-4000-0000-000000000000"
+          "workspace_id": "11111111-2222-4333-8444-555555555555"
         }
       ],
       "call_send_time": "2025-07-08T03:19:45",
