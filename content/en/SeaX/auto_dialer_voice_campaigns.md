@@ -879,7 +879,8 @@ labels.
 > - `session_labels`: labels scoped to a single phone call. A campaign job
 >   can have more than one call attempt (e.g. a transfer or callback creates
 >   another one), so this is a per-call breakdown — one `{session_id, labels}`
->   entry per call attempt.
+>   entry per call attempt. In practice a campaign only dials each contact
+>   once, so this array usually holds a single entry.
 > - `conversation_labels`: labels scoped to the whole conversation, which can
 >   span multiple phone calls over time.
 >
@@ -935,10 +936,6 @@ Response:
               "workspace_id": "11111111-2222-4333-8444-555555555555"
             }
           ]
-        },
-        {
-          "session_id": "60606060-7070-4080-8090-a0a0a0a0a0a0",
-          "labels": []
         }
       ],
       "conversation_labels": [
