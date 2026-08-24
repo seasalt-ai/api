@@ -873,14 +873,15 @@ Get campaign call results in a structured format, one entry per call attempt
 labels.
 
 > **Breaking change.** The old `labels` field on each result is **removed**
-> and replaced by two separate fields:
+> and replaced by two separate fields, split by the level the label applies
+> to:
 >
-> - `session_labels`: a per-call-attempt breakdown of the labels applied by
->   AI auto labeling to each session belonging to this call (a call can have
->   more than one session — e.g. a transfer or callback creates another one).
->   Each entry is `{session_id, labels}`.
-> - `conversation_labels`: manually applied conversation-level labels,
->   unrelated to the session-level ones above.
+> - `session_labels`: labels scoped to a single phone call. A campaign job
+>   can have more than one call attempt (e.g. a transfer or callback creates
+>   another one), so this is a per-call breakdown — one `{session_id, labels}`
+>   entry per call attempt.
+> - `conversation_labels`: labels scoped to the whole conversation, which can
+>   span multiple phone calls over time.
 >
 > Any client reading the old `labels` field must switch to one (or both) of
 > these.
