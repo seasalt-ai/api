@@ -875,12 +875,12 @@ labels.
 > **Breaking change.** The old `labels` field on each result is **removed**
 > and replaced by two separate fields:
 >
-> - `session_labels`: a per-call-attempt breakdown of the labels applied in
->   ngChat/SeaChat to each session belonging to this call (a call can have
+> - `session_labels`: a per-call-attempt breakdown of the labels applied by
+>   AI auto labeling to each session belonging to this call (a call can have
 >   more than one session — e.g. a transfer or callback creates another one).
 >   Each entry is `{session_id, labels}`.
-> - `conversation_labels`: SeaX's own conversation-level labels, unrelated to
->   the session-level ones above.
+> - `conversation_labels`: manually applied conversation-level labels,
+>   unrelated to the session-level ones above.
 >
 > Any client reading the old `labels` field must switch to one (or both) of
 > these.
