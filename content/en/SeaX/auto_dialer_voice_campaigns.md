@@ -863,3 +863,111 @@ Response:
   "relative_time_config": null
 }
 ```
+
+### Get Campaign Results
+
+`GET /api/v1/workspace/{workspace_id}/auto_dialer_campaigns/{auto_dialer_campaign_id}/results`
+
+Get campaign call results in a structured format, one entry per call attempt
+(job) in the campaign — summary, extraction, disposition, key presses, and
+labels.
+
+> **Breaking change.** The old `labels` field on each result is **removed**
+> and replaced by two separate fields:
+>
+> - `session_labels`: a per-call-attempt breakdown of the labels applied in
+>   ngChat/SeaChat to each session belonging to this call (a call can have
+>   more than one session — e.g. a transfer or callback creates another one).
+>   Each entry is `{session_id, labels}`.
+> - `conversation_labels`: SeaX's own conversation-level labels, unrelated to
+>   the session-level ones above.
+>
+> Any client reading the old `labels` field must switch to one (or both) of
+> these.
+
+| Field                     | Type              | Description                                                                                                   | Allowed Values / Example               | Required |
+| -------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------- | -------- |
+| `X-API-Key`                | `string (header)` | Authorization with API key. See [Authorization Guide](#authorization)                                            | `<your_api_key>`                       | ✅       |
+| `workspace_id`              | `string (path)`   | Unique identifier of the workspace                                                                               | `3fa85f64-5717-4562-b3fc-2c963f66afa6` | ✅       |
+| `auto_dialer_campaign_id`   | `string (path)`   | Unique identifier of the auto dialer campaign                                                                    | `01e14e9e-ddd8-4e63-bad2-e026d5aa5698` | ✅       |
+| `statuses`                 | `string (query)`  | Optional, filter by one or more job statuses (comma-separated)                                                    | `PENDING`, `STARTED`, `PAUSED`, `FINISHED`, `FAILED`, `PROCESSING`, `TERMINATED`, `CANCELED` |          |
+| `offset`                   | `integer (query)` | Number of results to skip before starting to return.<br>Minimum: 0<br>Default: 0                                | `0`                                     |          |
+| `limit`                     | `integer (query)` | Max number of results to return after skipped offset. If 0, return all.<br>Minimum: 0<br>Default: 10            | `10`                                    |          |
+
+###### Example
+
+Request:
+
+```
+curl -X 'GET' \
+  'https://seax.seasalt.ai/seax-api/api/v1/workspace/ffffffff-abcd-4000-0000-000000000000/auto_dialer_campaigns/448ea794-0368-4604-a56f-f2350229d9e5/results?limit=10&offset=0' \
+  -H 'accept: application/json' \
+  -H 'X-API-Key: <your_api_key>'
+```
+
+Response:
+
+```
+{
+  "campaign_id": "448ea794-0368-4604-a56f-f2350229d9e5",
+  "campaign_name": "test",
+  "campaign_status": "FINISHED",
+  "ai_agent_id": "51fefba9-c3ee-40e8-a392-8bc14c639719",
+  "ai_agent_name": "Test Agent",
+  "campaign_results": [
+    {
+      "seax_call_id": "6e612221-594d-4c22-a305-ffe193b3c51f",
+      "twilio_call_sid": "CA1234567890abcdef1234567890abcdef",
+      "sender_number": "+19987654321",
+      "contact_name": "Test User 1",
+      "contact_number": "+11234567890",
+      "key_press": ["1"],
+      "session_labels": [
+        {
+          "session_id": "a43b4e5d-edc7-4264-be19-2d39ab99d52e",
+          "labels": [
+            {
+              "id": "7082ae15-43ae-472f-a83c-ee6462a0af83",
+              "name": "Emergency",
+              "color": "#e53935",
+              "description": "Needs immediate follow-up",
+              "workspace_id": "ffffffff-abcd-4000-0000-000000000000"
+            }
+          ]
+        },
+        {
+          "session_id": "c0c9965b-1809-45e2-bcb6-1e1484a79abb",
+          "labels": []
+        }
+      ],
+      "conversation_labels": [
+        {
+          "id": "dd20f7cd-03fb-4c79-9f3e-998372d1bec6",
+          "name": "VIP",
+          "color": "#0cb3c3",
+          "description": "High-priority contact",
+          "workspace_id": "ffffffff-abcd-4000-0000-000000000000"
+        }
+      ],
+      "call_send_time": "2025-07-08T03:19:45",
+      "call_duration": 42.5,
+      "call_status": "completed",
+      "call_summary": "Customer confirmed the appointment.",
+      "call_extraction": [
+        {
+          "field_name": "confirmed",
+          "description": "Whether the customer confirmed",
+          "content": "yes"
+        }
+      ],
+      "need_redial": false,
+      "need_human_followup": true,
+      "need_human_followup_reason": "Customer requested a callback",
+      "disposition": "answered",
+      "call_outcome_category": "appointment_confirmed",
+      "call_outcome_detail": "Confirmed for 2026-08-25",
+      "hung_up_reason": "customer_hangup"
+    }
+  ]
+}
+```
