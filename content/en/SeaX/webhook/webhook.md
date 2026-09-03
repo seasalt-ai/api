@@ -56,6 +56,19 @@ Your server must:
 
 - Handle **application/json** payloads
 
+- Verify the `Seasalt-Signature` header on every request, before trusting the
+  payload:
+
+  ```python
+  # Start in log-only mode (see "Rollout" below) before you ship this rejection.
+  if not verify_seasalt_signature(raw_body, request.headers["Seasalt-Signature"], secret):
+      return Response(status_code=401)
+  ```
+
+  Full verification code (Python and Node), a known-answer test vector, and
+  the exact-bytes rule that trips up most integrations are in
+  [Verifying Webhook Signatures](#verifying-webhook-signatures).
+
 ---
 
 ## Subscription APIs
@@ -137,9 +150,19 @@ curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/su
   ],
   "created_by": "user_12345",
   "is_enabled": true,
-  "type": "SEASALT"
+  "type": "SEASALT",
+  "id": "sub_12345",
+  "created_at": "2024-03-10T15:30:00Z",
+  "updated_at": "2024-03-10T15:30:00Z",
+  "updated_by": "user_12345",
+  "signing_secret": "whsec_1a2b3c4d5e6f7890a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2beef"
 }
 ```
+
+`signing_secret` is returned **only here and on secret rotation** — save it
+now. `GET` and list responses never include it (they return
+`signing_secret_last_four` instead), and there is no way to retrieve it again
+later. See [Verifying Webhook Signatures](#verifying-webhook-signatures).
 
 ### **Retrieve a Subscription**
 
@@ -313,6 +336,121 @@ curl -X PATCH "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/s
 
 ```
 
+### **Rotate the Signing Secret**
+
+Generate a new signing secret for a subscription without any delivery
+downtime. The previous secret keeps signing — and verifying — for an overlap
+window you choose, so in-flight deliveries and a receiver that hasn't
+redeployed yet both keep working while you roll the new secret out.
+
+#### Endpoint
+
+`POST https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}/rotate-secret`
+
+#### Authorization
+
+You must provide your API key in the `X-API-KEY` header.
+
+#### Request Body
+
+| Field           | Type      | Required | Description                                                                                                          |
+| --------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `overlap_hours` | `integer` |          | How many hours the previous secret keeps signing (and verifying) after rotation. Default `24`, max `168` (7 days). |
+
+**Sample Request**
+
+```bash
+curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}/rotate-secret" \
+  -H "X-API-KEY: <your_api_key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "overlap_hours": 24
+  }'
+```
+
+**Sample Successful Response**
+
+```bash
+{
+  "webhook_url": "https://api.example.com/webhook",
+  "event_types": [
+    "conversation.new",
+    "message.new"
+  ],
+  "created_by": "user_12345",
+  "is_enabled": true,
+  "type": "SEASALT",
+  "id": "sub_12345",
+  "created_at": "2024-03-10T15:30:00Z",
+  "updated_at": "2024-03-10T15:30:00Z",
+  "updated_by": "user_12345",
+  "signing_secret_last_four": "beef",
+  "secret_updated_at": "2024-06-01T09:00:00Z",
+  "rotation_overlap_expires_in_hours": 24,
+  "signing_secret": "whsec_9f8e7d6c5b4a3928170615243342515061708090a1b2c3d4e5f6a7b8c9d0beef"
+}
+```
+
+Just like the create response, `signing_secret` here is the full new secret
+and is returned **only this once** — store it now. While
+`rotation_overlap_expires_in_hours` counts down, deliveries carry two `v1=`
+signatures (one per secret) in `Seasalt-Signature`, and a receiver that
+accepts a match against either keeps working without any code change. See
+[Verifying Webhook Signatures](#verifying-webhook-signatures) for the full
+rotation semantics and receiver-side handling.
+
+### **Confirm Secret Rotation**
+
+Immediately retire the previous signing secret instead of waiting for the
+overlap window to expire. Call this once you've deployed the new secret to
+your receiver — or right away, if you rotated because the old secret may have
+been compromised.
+
+#### Endpoint
+
+`POST https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}/confirm-rotation`
+
+#### Authorization
+
+You must provide your API key in the `X-API-KEY` header.
+
+This endpoint takes no request body. Calling it when no rotation is in flight
+is a no-op success, not an error — safe to call defensively.
+
+**Sample Request**
+
+```bash
+curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}/confirm-rotation" \
+  -H "X-API-KEY: <your_api_key>"
+```
+
+**Sample Successful Response**
+
+```bash
+{
+  "webhook_url": "https://api.example.com/webhook",
+  "event_types": [
+    "conversation.new",
+    "message.new"
+  ],
+  "created_by": "user_12345",
+  "is_enabled": true,
+  "type": "SEASALT",
+  "id": "sub_12345",
+  "created_at": "2024-03-10T15:30:00Z",
+  "updated_at": "2024-03-10T15:30:00Z",
+  "updated_by": "user_12345",
+  "signing_secret_last_four": "beef",
+  "secret_updated_at": "2024-06-01T09:00:00Z",
+  "rotation_overlap_expires_in_hours": null
+}
+```
+
+`rotation_overlap_expires_in_hours` returns to `null` once confirmed — the
+previous secret is retired for good and only the current one verifies. This
+response never includes `signing_secret`; if you need the full value again,
+rotate.
+
 ### **Remove a Subscription**
 
 Delete an existing webhook subscription from your workspace. This action
@@ -431,10 +569,11 @@ This endpoint requires an API key passed in the `X-API-KEY` header.
 
 #### Request Body
 
-| Name        | Type   | Required | Description                                             |
-| ----------- | ------ | -------- | ------------------------------------------------------- |
-| event_type  | string | Yes      | The type of event to simulate (e.g. `conversation.new`) |
-| webhook_url | string | Yes      | The URL to which the test payload will be sent          |
+| Name             | Type   | Required | Description                                                                                                                                                                          |
+| ---------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| event_type       | string | Yes      | The type of event to simulate (e.g. `conversation.new`)                                                                                                                             |
+| webhook_url      | string | Yes      | The URL to which the test payload will be sent                                                                                                                                      |
+| subscription_id  | string | No       | If supplied, the test delivery is signed exactly like a real webhook event, using that subscription's active signing secret(s), and the response includes `signature_debug`. Omit for the original, unsigned behavior. |
 
 **Sample Request**
 
@@ -444,7 +583,8 @@ curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/te
   -H "Content-Type: application/json" \
   -d '{
     "event_type": "conversation.new",
-    "webhook_url": "https://api.example.com/test-webhook"
+    "webhook_url": "https://api.example.com/test-webhook",
+    "subscription_id": "sub_12345"
   }'
 ```
 
@@ -504,6 +644,49 @@ provided. Below is an example response for the `conversation.new` event type:
 
 
 ```
+
+#### Debugging a failing verification with `signature_debug`
+
+When the request includes `subscription_id`, the response is extended with a
+`signature_debug` object describing exactly what SeaNotify signed and sent —
+so you can diff it against your own computation instead of guessing:
+
+```bash
+{
+  "status": "success",
+  "status_code": 200,
+  "response_body": { ... },
+  "signature_debug": {
+    "signed_body": "{\"event_type\": \"conversation.new\", ...}",
+    "timestamp": 1788375146,
+    "expected_signature": "t=1788375146,v1=5257a869e7ec...",
+    "secrets_used": ["beef"]
+  }
+}
+```
+
+| Field                 | Type              | Description                                                                                                       |
+| --------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `signed_body`         | string            | The exact raw bytes (as text) that were signed and sent as the request body. Diff this against what your own code hashes to catch a "verifying the parsed body instead of raw bytes" mismatch. |
+| `timestamp`           | integer           | The Unix epoch timestamp used in the signature (the `t=` field of `Seasalt-Signature`). Compare against your own clock to rule out skew. |
+| `expected_signature`  | string            | The exact `Seasalt-Signature` header value this test delivery computed and sent.                                  |
+| `secrets_used`        | array of string   | The last four characters of each secret that contributed a `v1=` value — two entries while a rotation overlap is active, one otherwise. The full secret is never included. |
+
+`signature_debug` is omitted entirely (not sent as `null`) when the request
+didn't include `subscription_id`.
+
+If your receiver is rejecting signatures and you can't tell why, use this
+table to narrow it down:
+
+| Symptom                                            | Likely cause                                                                 |
+| --------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Every delivery fails                                | Verifying the parsed/re-serialized body instead of the raw bytes             |
+| Intermittent failures                               | Receiver clock skew beyond the 300-second tolerance                          |
+| Started failing suddenly, was fine before            | Rotation overlap expired — deploy the new secret                             |
+| Fails only for some event types                    | Body contains non-ASCII characters and the receiver re-encoded it            |
+
+See [Verifying Webhook Signatures](#verifying-webhook-signatures) for the full
+verification code and the rules behind each of these.
 
 ## **Delivery Logs**
 
@@ -762,6 +945,234 @@ file once the export is complete.
 
 This is an asynchronous export. Processing time varies depending on the data
 volume.
+
+## Verifying Webhook Signatures
+
+_This section is paired with the [API reference](https://api-dev.seasalt.ai/redoc/notify#section/Verifying-Webhook-Signatures)'s equivalent section (`app/openapi.md` in the SeaNotify repo). The two describe the same rules for two different audiences — update both together._
+
+Every outbound webhook — including `/test` deliveries made with a
+`subscription_id` — is signed with HMAC-SHA256 so you can confirm it really
+came from SeaNotify and was not modified in transit. Verification happens
+entirely on your side; nothing below is required to receive events, only to
+trust them. Your signing secret comes from the `signing_secret` field in the
+`POST https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription`
+response — shown once, at creation (and again on rotation — see
+[Rotate the Signing Secret](#rotate-the-signing-secret)).
+
+**Headers added to every delivery:**
+
+| Header | Example | Meaning |
+| --- | --- | --- |
+| `Seasalt-Signature` | `t=1788375146,v1=5257a869e7ec...` | Comma-separated: `t` is the Unix timestamp (UTC seconds) at signing time, `v1` is the hex-encoded HMAC-SHA256 signature. May carry more than one `v1=` during a secret rotation — see "Rotating your signing secret" below. |
+| `Seasalt-Event-Id` | `9b1d2e3f-...` | The delivery's unique event ID. Use it to deduplicate retried or replayed deliveries. |
+| `Seasalt-Event-Type` | `message.new` | Convenience copy of the event type already present in the body. |
+| `Seasalt-Subscription-Id` | `sub_...` | Identifies which subscription's secret to verify against. |
+
+These headers are unprefixed (`Seasalt-Signature`, not `X-Seasalt-Signature`)
+to match the convention used by most webhook providers today (RFC 6648
+deprecated the `X-` prefix in 2012). The existing `X-API-Key` header keeps its
+established name — both shapes exist in this API by design.
+
+**The signing key is the full secret string as displayed, including the
+`whsec_` prefix.** Stripping the prefix before using it as the HMAC key is a
+common mistake and will produce a signature that never matches.
+
+Copy-paste verification code for Python and Node is below.
+
+### Verify in Python
+
+```python
+import hashlib
+import hmac
+import time
+
+TOLERANCE_SECONDS = 300
+
+
+def verify_seasalt_signature(raw_body: bytes, header: str, secret: str) -> bool:
+    """Verify a SeaNotify webhook signature.
+
+    raw_body MUST be the raw request bytes, read BEFORE any JSON parsing.
+    secret is the full value shown at creation, including the `whsec_` prefix.
+    """
+    timestamp = None
+    signatures = []
+    for part in header.split(","):
+        key, _, value = part.strip().partition("=")
+        if key == "t":
+            timestamp = value
+        elif key == "v1":
+            signatures.append(value)
+
+    if timestamp is None or not signatures:
+        return False
+    try:
+        timestamp = int(timestamp)
+    except ValueError:
+        return False
+
+    # Reject replays and badly-skewed clocks.
+    if abs(time.time() - timestamp) > TOLERANCE_SECONDS:
+        return False
+
+    signed_payload = f"{timestamp}.".encode("utf-8") + raw_body
+    expected = hmac.new(secret.encode("utf-8"), signed_payload, hashlib.sha256).hexdigest()
+
+    # During a secret rotation we send several v1= values. Accept if ANY matches.
+    return any(hmac.compare_digest(expected, sig) for sig in signatures)
+
+
+# Rollout: run this in log-only mode first --- compare and log, but still return 200.
+# Switch to rejecting on False only once your logs are clean.
+```
+
+### Verify in Node
+
+```javascript
+const crypto = require("crypto");
+
+const TOLERANCE_SECONDS = 300;
+
+// Rollout: run this in log-only mode first --- compare and log, but still return 200.
+// Switch to rejecting on false only once your logs are clean.
+function verifySeasaltSignature(rawBody, header, secret) {
+  // rawBody MUST be a Buffer of the raw request body, captured before JSON parsing.
+  let timestamp = null;
+  const signatures = [];
+  for (const part of header.split(",")) {
+    const idx = part.indexOf("=");
+    if (idx === -1) continue;
+    const key = part.slice(0, idx).trim();
+    const value = part.slice(idx + 1).trim();
+    if (key === "t") timestamp = value;
+    else if (key === "v1") signatures.push(value);
+  }
+  if (timestamp === null || signatures.length === 0) return false;
+  if (!/^\d+$/.test(timestamp)) return false;
+
+  if (Math.abs(Date.now() / 1000 - Number(timestamp)) > TOLERANCE_SECONDS) return false;
+
+  const signedPayload = Buffer.concat([Buffer.from(`${timestamp}.`, "utf8"), rawBody]);
+  const expected = crypto.createHmac("sha256", secret).update(signedPayload).digest("hex");
+  const expectedBuf = Buffer.from(expected, "utf8");
+
+  return signatures.some((sig) => {
+    const sigBuf = Buffer.from(sig, "utf8");
+    // timingSafeEqual THROWS on length mismatch --- guard before calling it.
+    return sigBuf.length === expectedBuf.length && crypto.timingSafeEqual(expectedBuf, sigBuf);
+  });
+}
+```
+
+Express's `express.json()` consumes the body and leaves no raw bytes to
+verify against — the single most common Node integration failure. Mount
+`express.raw({ type: "application/json" })` on your webhook route (or
+capture the raw body with a `verify:` callback) before this function ever
+runs.
+
+### Known-answer test vector
+
+Run both snippets against this vector before going live — they should
+produce this exact signature.
+
+```
+secret     = whsec_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+timestamp  = 1788375146
+raw_body   = {"event_type": "message.new", "conversation_id": "conv_123", "timestamp": "2026-09-02T10:52:26"}
+signature  = 8df798f4a26149ecf04ffa3b91f7f3529c8e04f589808d2d3126407e8e430a65
+header     = Seasalt-Signature: t=1788375146,v1=8df798f4a26149ecf04ffa3b91f7f3529c8e04f589808d2d3126407e8e430a65
+```
+
+Note the spaces after `:` and `,` in `raw_body` — that is not a typo. It is
+the default output of `json.dumps`, which is exactly what SeaNotify transmits.
+If your test vector doesn't match, check whether your code is re-serializing
+the body before comparing.
+
+### The exact-bytes rule
+
+**Always verify against the raw request body, before any JSON parsing.**
+Compute the signature over the exact bytes you received on the wire — not
+over `json.dumps(json.loads(raw_body))`, not over a re-formatted or
+pretty-printed copy. Re-serializing changes key order, whitespace, and
+unicode escaping, all of which change the bytes and therefore the signature,
+even though the parsed object is identical. This is the single most common
+webhook-signature bug across every provider, not just SeaNotify's.
+
+### Constant-time comparison
+
+Compare signatures with a constant-time function — `hmac.compare_digest` in
+Python, `crypto.timingSafeEqual` in Node — never `==` or `===`. A naive
+comparison short-circuits on the first mismatched byte, and the resulting
+timing difference is enough to let an attacker recover a valid signature one
+byte at a time. Both snippets above already do this correctly; keep it that
+way if you adapt them.
+
+One landmine specific to Node: `crypto.timingSafeEqual` **throws** if the two
+buffers have different lengths, instead of returning `false`. An unguarded
+call turns a forged (wrong-length) signature into an unhandled exception — a
+500 — rather than a clean rejection. The Node snippet above guards this with
+a length check before calling it; keep that guard if you adapt it.
+
+### Rotating your signing secret
+
+Call
+`POST https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}/rotate-secret`
+(optional body: `{"overlap_hours": 24}`, max `168`) to generate a new
+secret. The previous secret keeps signing — and verifying — for the overlap
+window, so in-flight deliveries never break mid-rotation. During that window
+`Seasalt-Signature` carries two `v1=` values, one per secret; the
+verification code above already accepts a delivery if **any** `v1` matches,
+so no receiver-side change is needed to survive a rotation. See
+[Rotate the Signing Secret](#rotate-the-signing-secret) for the full request
+and response shape.
+
+Once you've deployed the new secret, call
+`POST https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}/confirm-rotation`
+(no body) to immediately retire the previous one rather than waiting for the
+overlap window to expire. This is also the right call if the old secret may
+have been compromised — closing the window early beats waiting it out.
+`GET https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/subscription/{subscription_id}`
+reports `rotation_overlap_expires_in_hours` at any time so you can see whether a
+rotation is in flight and how much time is left; it is `null` when none is.
+See [Confirm Secret Rotation](#confirm-secret-rotation) for details.
+
+There is no endpoint to retrieve a lost secret — `GET` and list responses
+only ever return `signing_secret_last_four`. If you've lost it, rotate.
+
+### Replay protection and idempotency
+
+Reject any delivery whose `t` is more than **300 seconds** from your own
+clock — SeaNotify does not enforce this itself, so pick this tolerance
+consistently on your side. Deduplicate on `Seasalt-Event-Id` so a
+legitimately retried or replayed delivery is only processed once.
+
+### Rollout: log-only, then enforce
+
+Don't let turning on enforcement be how you discover your verification code
+is wrong — that failure mode drops live production events. Roll out in two
+phases, exactly as noted in the comment carried in both snippets above:
+
+1. **Log only.** Compute the signature, log whether it matched, and still
+   return `200` regardless of the result. Run until your logs are clean.
+2. **Enforce.** Once you trust the logs, start rejecting on a mismatch.
+
+### Debugging a failing verification
+
+If your receiver is rejecting signatures and you can't tell why, call
+`POST https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/test`
+with a `subscription_id` in the body. The response includes a
+`signature_debug` object — the exact body that was signed, the timestamp
+used, and the `Seasalt-Signature` value SeaNotify computed and sent — so you
+can diff it against your own computation instead of guessing. See
+[Test Your Webhook and Know What Will Be Sent](#test-your-webhook-and-know-what-will-be-sent)
+for the full response shape.
+
+| Symptom | Likely cause |
+| --- | --- |
+| Every delivery fails | Verifying the parsed/re-serialized body instead of the raw bytes |
+| Intermittent failures | Receiver clock skew beyond the 300-second tolerance |
+| Started failing suddenly, was fine before | Rotation overlap expired — deploy the new secret |
+| Fails only for some event types | Body contains non-ASCII characters and the receiver re-encoded it |
 
 ## Event Payload Schema Reference
 
