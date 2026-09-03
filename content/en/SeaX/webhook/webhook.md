@@ -965,7 +965,16 @@ volume.
 
 ## Verifying Webhook Signatures
 
-_This section is paired with the [API reference](https://api-dev.seasalt.ai/redoc/notify#section/Verifying-Webhook-Signatures)'s equivalent section (`app/openapi.md` in the SeaNotify repo). The two describe the same rules for two different audiences — update both together._
+<!--
+  MAINTAINERS: this section is paired with the equivalent one in
+  `app/openapi.md` in the SeaNotify repo. The two describe the same rules for
+  two different audiences and must not drift — update both together.
+
+  The Python and Node snippets below are verbatim from that repo's design spec
+  §7.3 and are executed against eight cases before publication. Do not edit
+  them here; change the spec, re-run them, then copy them out again.
+-->
+
 
 Every outbound webhook — including `/test` deliveries made with a
 `subscription_id` — is signed with HMAC-SHA256 so you can confirm it really
