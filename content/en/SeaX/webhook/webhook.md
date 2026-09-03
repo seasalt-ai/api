@@ -155,9 +155,16 @@ curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/su
   "created_at": "2024-03-10T15:30:00Z",
   "updated_at": "2024-03-10T15:30:00Z",
   "updated_by": "user_12345",
+  "signing_secret_last_four": "beef",
+  "secret_updated_at": null,
+  "rotation_overlap_expires_in_hours": null,
   "signing_secret": "whsec_1a2b3c4d5e6f7890a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2beef"
 }
 ```
+
+`secret_updated_at` and `rotation_overlap_expires_in_hours` are `null` here
+because no rotation has happened yet — see
+[Rotate the Signing Secret](#rotate-the-signing-secret).
 
 `signing_secret` is returned **only here and on secret rotation** — save it
 now. `GET` and list responses never include it (they return
@@ -195,9 +202,19 @@ curl -X GET "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/sub
   ],
   "created_by": "user_12345",
   "is_enabled": true,
-  "type": "SEASALT"
+  "type": "SEASALT",
+  "id": "sub_12345",
+  "created_at": "2024-03-10T15:30:00Z",
+  "updated_at": "2024-03-10T15:30:00Z",
+  "updated_by": "user_12345",
+  "signing_secret_last_four": "beef",
+  "secret_updated_at": null,
+  "rotation_overlap_expires_in_hours": null
 }
 ```
+
+This endpoint never returns `signing_secret` — only `signing_secret_last_four`.
+If you need the full secret again, [rotate it](#rotate-the-signing-secret).
 
 ### Retrieve a List of Subscriptions based on criterion
 
@@ -355,7 +372,7 @@ You must provide your API key in the `X-API-KEY` header.
 
 | Field           | Type      | Required | Description                                                                                                          |
 | --------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `overlap_hours` | `integer` |          | How many hours the previous secret keeps signing (and verifying) after rotation. Default `24`, max `168` (7 days). |
+| `overlap_hours` | `integer` |          | How many hours the previous secret keeps signing (and verifying) after rotation. Default `24`, min `1`, max `168` (7 days). Values outside this range return the standard error envelope. |
 
 **Sample Request**
 
@@ -670,7 +687,7 @@ so you can diff it against your own computation instead of guessing:
 | `signed_body`         | string            | The exact raw bytes (as text) that were signed and sent as the request body. Diff this against what your own code hashes to catch a "verifying the parsed body instead of raw bytes" mismatch. |
 | `timestamp`           | integer           | The Unix epoch timestamp used in the signature (the `t=` field of `Seasalt-Signature`). Compare against your own clock to rule out skew. |
 | `expected_signature`  | string            | The exact `Seasalt-Signature` header value this test delivery computed and sent.                                  |
-| `secrets_used`        | array of string   | The last four characters of each secret that contributed a `v1=` value — two entries while a rotation overlap is active, one otherwise. The full secret is never included. |
+| `secrets_used`        | array of string   | The last four characters of each secret that contributed a `v1=` value, **in the same order as `expected_signature` (current secret first)** — two entries while a rotation overlap is active, one otherwise. The full secret is never included. |
 
 `signature_debug` is omitted entirely (not sent as `null`) when the request
 didn't include `subscription_id`.
