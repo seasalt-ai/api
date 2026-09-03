@@ -158,7 +158,7 @@ curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/su
   "signing_secret_last_four": "beef",
   "secret_updated_at": null,
   "rotation_overlap_expires_in_hours": null,
-  "signing_secret": "whsec_1a2b3c4d5e6f7890a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2beef"
+  "signing_secret": "seasalt_whsec_1a2b3c4d5e6f7890a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2beef"
 }
 ```
 
@@ -404,7 +404,7 @@ curl -X POST "https://seax.seasalt.ai/notify-api/v1/workspaces/{workspace_id}/su
   "signing_secret_last_four": "beef",
   "secret_updated_at": "2024-06-01T09:00:00Z",
   "rotation_overlap_expires_in_hours": 24,
-  "signing_secret": "whsec_9f8e7d6c5b4a3928170615243342515061708090a1b2c3d4e5f6a7b8c9d0beef"
+  "signing_secret": "seasalt_whsec_9f8e7d6c5b4a3928170615243342515061708090a1b2c3d4e5f6a7b8c9d0beef"
 }
 ```
 
@@ -997,7 +997,7 @@ deprecated the `X-` prefix in 2012). The existing `X-API-Key` header keeps its
 established name — both shapes exist in this API by design.
 
 **The signing key is the full secret string as displayed, including the
-`whsec_` prefix.** Stripping the prefix before using it as the HMAC key is a
+`seasalt_whsec_` prefix.** Stripping the prefix before using it as the HMAC key is a
 common mistake and will produce a signature that never matches.
 
 Copy-paste verification code for Python and Node is below.
@@ -1016,7 +1016,7 @@ def verify_seasalt_signature(raw_body: bytes, header: str, secret: str) -> bool:
     """Verify a SeaNotify webhook signature.
 
     raw_body MUST be the raw request bytes, read BEFORE any JSON parsing.
-    secret is the full value shown at creation, including the `whsec_` prefix.
+    secret is the full value shown at creation, including the `seasalt_whsec_` prefix.
     """
     timestamp = None
     signatures = []
@@ -1105,11 +1105,11 @@ Run both snippets against this vector before going live — they should
 produce this exact signature.
 
 ```
-secret     = whsec_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+secret     = seasalt_whsec_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
 timestamp  = 1788375146
 raw_body   = {"event_type": "message.new", "conversation_id": "conv_123", "timestamp": "2026-09-02T10:52:26"}
-signature  = 8df798f4a26149ecf04ffa3b91f7f3529c8e04f589808d2d3126407e8e430a65
-header     = Seasalt-Signature: t=1788375146,v1=8df798f4a26149ecf04ffa3b91f7f3529c8e04f589808d2d3126407e8e430a65
+signature  = bc171327eb40c058d2d73d6028c9636a9a1e74c858f3c468c15c1a8149ebf247
+header     = Seasalt-Signature: t=1788375146,v1=bc171327eb40c058d2d73d6028c9636a9a1e74c858f3c468c15c1a8149ebf247
 ```
 
 Note the spaces after `:` and `,` in `raw_body` — that is not a typo. It is
