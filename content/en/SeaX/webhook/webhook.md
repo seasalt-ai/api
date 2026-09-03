@@ -981,9 +981,15 @@ response — shown once, at creation (and again on rotation — see
 | Header | Example | Meaning |
 | --- | --- | --- |
 | `Seasalt-Signature` | `t=1788375146,v1=5257a869e7ec...` | Comma-separated: `t` is the Unix timestamp (UTC seconds) at signing time, `v1` is the hex-encoded HMAC-SHA256 signature. May carry more than one `v1=` during a secret rotation — see "Rotating your signing secret" below. |
-| `Seasalt-Event-Id` | `9b1d2e3f-...` | The delivery's unique event ID. Use it to deduplicate retried or replayed deliveries. |
-| `Seasalt-Event-Type` | `message.new` | Convenience copy of the event type already present in the body. |
-| `Seasalt-Subscription-Id` | `sub_...` | Identifies which subscription's secret to verify against. |
+| `Seasalt-Event-Id` | `9b1d2e3f-...` | The event's ID, generated once per **event** — every subscription notified for the same event receives the *same* value (useful for correlating a fan-out). Convenience metadata; **not covered by the signature.** |
+| `Seasalt-Event-Type` | `message.new` | Convenience copy of the event type already present in the body. **Not covered by the signature.** |
+| `Seasalt-Subscription-Id` | `sub_...` | Identifies which subscription's secret to verify against. **Not covered by the signature.** |
+
+**Only `t` and the request body are covered by `Seasalt-Signature`.** The
+other three headers are attached to the request after signing and are not
+authenticated — do not treat any of them as the sole basis of a security
+decision. See "Replay protection and idempotency" below for what this means
+in practice.
 
 These headers are unprefixed (`Seasalt-Signature`, not `X-Seasalt-Signature`)
 to match the convention used by most webhook providers today (RFC 6648
@@ -1028,15 +1034,21 @@ def verify_seasalt_signature(raw_body: bytes, header: str, secret: str) -> bool:
     except ValueError:
         return False
 
-    # Reject replays and badly-skewed clocks.
-    if abs(time.time() - timestamp) > TOLERANCE_SECONDS:
+    # Reject replays and badly-skewed clocks. Compare two ints, never a float:
+    # an attacker-sized `t` (thousands of digits) parses fine as a Python int,
+    # but time.time() is a float, and float(huge_int) raises OverflowError ---
+    # turning a forged header into a 500 instead of False.
+    if abs(int(time.time()) - timestamp) > TOLERANCE_SECONDS:
         return False
 
     signed_payload = f"{timestamp}.".encode("utf-8") + raw_body
     expected = hmac.new(secret.encode("utf-8"), signed_payload, hashlib.sha256).hexdigest()
 
+    # Compare as bytes, not str: hmac.compare_digest raises TypeError if a str
+    # argument contains non-ASCII characters, and v1= is attacker-controlled.
     # During a secret rotation we send several v1= values. Accept if ANY matches.
-    return any(hmac.compare_digest(expected, sig) for sig in signatures)
+    expected_bytes = expected.encode("utf-8")
+    return any(hmac.compare_digest(expected_bytes, sig.encode("utf-8")) for sig in signatures)
 
 
 # Rollout: run this in log-only mode first --- compare and log, but still return 200.
@@ -1160,8 +1172,21 @@ only ever return `signing_secret_last_four`. If you've lost it, rotate.
 
 Reject any delivery whose `t` is more than **300 seconds** from your own
 clock — SeaNotify does not enforce this itself, so pick this tolerance
-consistently on your side. Deduplicate on `Seasalt-Event-Id` so a
-legitimately retried or replayed delivery is only processed once.
+consistently on your side. This tolerance check, against the signed
+timestamp, is your actual replay defense.
+
+**`Seasalt-Event-Id` is convenience metadata, not a security control.** It is
+added to the request after signing and is not covered by `Seasalt-Signature`,
+so it is fully attacker-controlled on a replayed request: someone who
+captures one valid delivery can replay the identical signed body and
+signature inside the 300-second window with any `Seasalt-Event-Id` they
+like, and it will still verify. Deduplicating on `Seasalt-Event-Id` alone
+does not stop this. Use it for what it is actually good for — recognizing a
+genuine (non-malicious) retry, and correlating a single event's fan-out
+across your subscriptions, since every subscription notified for the same
+event receives the same `event_id` by design — but keep your replay defense
+on the signed timestamp above, applied to content you have independently
+verified.
 
 ### Rollout: log-only, then enforce
 
